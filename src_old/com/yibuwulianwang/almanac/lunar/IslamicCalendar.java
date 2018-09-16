@@ -1,4 +1,7 @@
 package com.yibuwulianwang.almanac.lunar;
+
+import com.yibuwulianwang.almanac.lunar.LunarDate;
+
 /***
  * 伊斯兰教的历法，又称希吉来历，在我国也叫回回历或回历
  */

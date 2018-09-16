@@ -12,6 +12,9 @@ import com.yibuwulianwang.almanac.lunar.Annals;
 import com.yibuwulianwang.almanac.lunar.AstronomyArithmetic;
 import com.yibuwulianwang.almanac.lunar.Common;
 import com.yibuwulianwang.almanac.lunar.FestivalAndHoliday;
+import com.yibuwulianwang.almanac.lunar.IslamicCalendar;
+import com.yibuwulianwang.almanac.lunar.JulianCalendar;
+import com.yibuwulianwang.almanac.lunar.LunarDate;
 import com.yibuwulianwang.almanac.lunar.QiShuo;
 
 public class LunarCalendar {

@@ -1,4 +1,7 @@
-package com.yibuwulianwang.almanac.lunar;
+package com.almanac.lunar;
+
+import com.almanac.lunar.Common;
+
 /***
  * 天文算法
  * @author Administrator

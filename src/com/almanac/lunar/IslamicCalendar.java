@@ -1,4 +1,7 @@
-package com.yibuwulianwang.almanac.lunar;
+package com.almanac.lunar;
+
+import com.almanac.lunar.LunarDate;
+
 /***
  * 伊斯兰教的历法，又称希吉来历，在我国也叫回回历或回历
  */
@@ -23,4 +26,5 @@ public class IslamicCalendar {
 		date.setIslamic_Month(m + 1);
 		date.setIslamic_Day(d + 1);
 	}
+
 }
