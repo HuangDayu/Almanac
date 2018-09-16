@@ -1,4 +1,10 @@
 package com.yibuwulianwang.almanac.lunar;
+
+import com.yibuwulianwang.almanac.lunar.Annals;
+import com.yibuwulianwang.almanac.lunar.AstronomyArithmetic;
+import com.yibuwulianwang.almanac.lunar.Common;
+import com.yibuwulianwang.almanac.lunar.LunarDate;
+
 /***
  * 纪年表类,由init初始化
  *

@@ -1,4 +1,4 @@
-package com.yibuwulianwang.almanac.lunar;
+package com.almanac.lunar;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class TimeUtil {
 	
-	public static String timeStr = "yyyyÄêMMÔÂddÈÕ  HHÊ±mm·ÖssÃë Ê±Çø:Z ĞÇÆÚÖĞµÄÌìÊı:E ÄêÖĞµÄÖÜÊı:w ÔÂ·İÖĞµÄÖÜÊı:W ÄêÖĞµÄÌìÊı:D ÔÂ·İÖĞµÄÌìÊı:d ÔÂ·İÖĞµÄĞÇÆÚ:F ";
+	public static String timeStr = "yyyyå¹´MMæœˆddæ—¥  HHæ—¶mmåˆ†ssç§’ æ—¶åŒº:Z æ˜ŸæœŸä¸­çš„å¤©æ•°:E å¹´ä¸­çš„å‘¨æ•°:w æœˆä»½ä¸­çš„å‘¨æ•°:W å¹´ä¸­çš„å¤©æ•°:D æœˆä»½ä¸­çš„å¤©æ•°:d æœˆä»½ä¸­çš„æ˜ŸæœŸ:F ";
 
 	public static Calendar dateToCalendar(Date date) {
 		//System.out.println(dateFormat(date,timeStr));
@@ -42,7 +42,7 @@ public class TimeUtil {
 	 * new Date().toInstant()
 	 * 
 	 * @param instant
-	 *            ¸ñÊ½2018-09-07T08:16:03.206Z
+	 *            æ ¼å¼2018-09-07T08:16:03.206Z
 	 * @return
 	 */
 	public static Calendar instantToCalendar(String instant) {
@@ -70,7 +70,7 @@ public class TimeUtil {
 	}
 
 	/***
-	 * ÀÏÍâÓÃ0-11£¬11¾ÍÏàµ±ÓÚ12ÔÂ
+	 * è€å¤–ç”¨0-11ï¼Œ11å°±ç›¸å½“äº12æœˆ
 	 * 
 	 * @param year
 	 * @param month
@@ -99,7 +99,7 @@ public class TimeUtil {
 	}
 
 	/***
-	 * Ê±¼ä¸ñÊ½´¦Àí
+	 * æ—¶é—´æ ¼å¼å¤„ç†
 	 * 
 	 * @param date
 	 * @param format
@@ -130,8 +130,8 @@ public class TimeUtil {
 		if (str.contains(".") || str.contains("T") || str.contains("Z")) {
 			str = str.replace("T", " ").replaceAll("Z", "");
 			format = "yyyy-MM-dd HH:mm:ss.SS";
-		} else if (str.contains("Äê")) {
-			format = "yyyyÄêMMÔÂddÈÕ HH:mm:ss";
+		} else if (str.contains("å¹´")) {
+			format = "yyyyå¹´MMæœˆddæ—¥ HH:mm:ss";
 		} else {
 			format = "yyyy-MM-dd HH:mm:ss";
 		}
@@ -146,7 +146,7 @@ public class TimeUtil {
 	}
 
 	/***
-	 * Ö¸¶¨DateÀàÊ±¼ä 3¸ö²ÎÊı http://blog.sina.com.cn/s/blog_4550f3ca0101t042.html
+	 * æŒ‡å®šDateç±»æ—¶é—´ 3ä¸ªå‚æ•° http://blog.sina.com.cn/s/blog_4550f3ca0101t042.html
 	 */
 	public static Date getDate(int y, int M, int d, int h, int m) {
 		String str = y + "-" + M + "-" + d + " " + h + ":" + m;
@@ -161,9 +161,9 @@ public class TimeUtil {
 	}
 
 	/***
-	 * Ö¸¶¨DateÀàÊ±¼ä 6¸ö²ÎÊı
+	 * æŒ‡å®šDateç±»æ—¶é—´ 6ä¸ªå‚æ•°
 	 * 
-	 * @return Date¶ÔÏó
+	 * @return Dateå¯¹è±¡
 	 */
 	public static Date getDate(int y, int M, int d, int h, int m, int s) {
 		String str = y + "-" + M + "-" + d + " " + h + ":" + m + ":" + s;

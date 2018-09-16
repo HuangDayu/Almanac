@@ -1,7 +1,9 @@
-package com.yibuwulianwang.almanac.lunar;
+package com.almanac.lunar;
 
 import java.math.BigDecimal;
 import java.util.regex.Pattern;
+
+import com.almanac.lunar.Common;
 /****
  * 公用数据类
  * @author Administrator

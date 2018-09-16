@@ -1,10 +1,13 @@
-package com.yibuwulianwang.almanac.lunar;
+package com.almanac.lunar;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+
+import com.almanac.lunar.GetPort;
+import com.almanac.lunar.SunAndMoon;
 
 /***
  * 获取港口信息类

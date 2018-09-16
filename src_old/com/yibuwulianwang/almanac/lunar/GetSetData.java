@@ -1,4 +1,7 @@
 package com.yibuwulianwang.almanac.lunar;
+
+import com.yibuwulianwang.almanac.lunar.GetSetData;
+
 /***
  * 日落日出数据类
  * @author Administrator

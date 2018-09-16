@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import com.yibuwulianwang.almanac.lunar.GetPort;
+import com.yibuwulianwang.almanac.lunar.SunAndMoon;
+
 /***
  * 获取港口信息类
  * @author Administrator

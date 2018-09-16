@@ -7,6 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import com.yibuwulianwang.almanac.lunar.CalendarTime;
+import com.yibuwulianwang.almanac.lunar.GetSetData;
+import com.yibuwulianwang.almanac.lunar.JulianCalendar;
+import com.yibuwulianwang.almanac.lunar.SunAndMoon;
+
 public class SunAndMoon {
 	
 	static GetSetData getSetData;

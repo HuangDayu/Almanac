@@ -1,4 +1,9 @@
-package com.yibuwulianwang.almanac.lunar;
+package com.almanac.lunar;
+
+import com.almanac.lunar.Annals;
+import com.almanac.lunar.AstronomyArithmetic;
+import com.almanac.lunar.Common;
+
 /***
  * 气朔计算和参数数据表类
  * @author Administrator
