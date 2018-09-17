@@ -671,6 +671,10 @@ public class LunarDate {
 	public String getChinaLuanrDate_String() {
 		return getLunarYearString_Obj()+"年"+getLunarMonthString_Obj()+"月"+getLunarDayString_Obj()+"日";
 	}
+
+	public String[] getSolarTerm() {
+		return lunarCalendar.getAllSolarTerm();
+	}
 	
 	
 }

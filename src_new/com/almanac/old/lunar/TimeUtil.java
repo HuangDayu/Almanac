@@ -1,4 +1,4 @@
-package com.almanac.lunar;
+package com.almanac.old.lunar;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -8,11 +8,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class TimeUtil {
-
+	
 	public static String timeStr = "yyyy年MM月dd日  HH时mm分ss秒 时区:Z 星期中的天数:E 年中的周数:w 月份中的周数:W 年中的天数:D 月份中的天数:d 月份中的星期:F ";
 
 	public static Calendar dateToCalendar(Date date) {
-		// System.out.println(dateFormat(date,timeStr));
+		//System.out.println(dateFormat(date,timeStr));
 		return timeInMillisToCalendar(date.getTime());
 	}
 
@@ -98,10 +98,6 @@ public class TimeUtil {
 		return date.toInstant().toString();
 	}
 
-	public static String dateFormat(Calendar calendar, String format) {
-		return dateFormat(calendarToDate(calendar), format);
-	}
-
 	/***
 	 * 时间格式处理
 	 * 
@@ -179,117 +175,5 @@ public class TimeUtil {
 			e.printStackTrace();
 		}
 		return date;
-	}
-
-	/***
-	 * 时间24小时化
-	 * 
-	 * @param str
-	 * @return
-	 */
-	public static String getFormattingTime(String str) {
-		String newStr = "";
-		if (str.contains(":") && !str.contains("年") && !str.contains("-") && !str.contains("月")) {
-			String[] strsArea = str.split(":");
-			for (int i = 0; i < strsArea.length; i++) {
-				if (Integer.valueOf(strsArea[i]) < 10) {
-					strsArea[i] = "0" + strsArea[i];
-				}
-			}
-			newStr = strsArea[0] + ":" + strsArea[1] + ":" + strsArea[2];
-		} else {
-			newStr = str;
-		}
-		return newStr;
-	}
-
-	public static int getTimZoneInt(Calendar calendar) {
-		return getTimZoneInt(calendarToDate(calendar));
-	};
-
-	public static int getTimZoneInt(Date date) {
-		String strDateFormat = formatDateByFormat(date, "Z");// +0800
-		String str2 = strDateFormat.substring(1, 3);
-		int j = Integer.valueOf(str2.substring(0));
-		int timeZoneInt = 0;
-		if (j > 0) {
-			timeZoneInt = Integer.valueOf(str2);
-		} else {
-			timeZoneInt = Integer.valueOf(str2.substring(1));
-		}
-		return timeZoneInt;
-	}
-
-	public static String formatDateByFormat(Calendar calendar, String format) {
-		return formatDateByFormat(calendarToDate(calendar), format);
-	}
-
-	/***
-	 * 时间格式处理
-	 * 
-	 * @param date
-	 * @param format
-	 *            yyyyMMddHHmmssZZZ
-	 * @return
-	 */
-	public static String formatDateByFormat(Date date, String format) {
-		String result = "";
-		if (date != null) {
-			try {
-				SimpleDateFormat sdf = new SimpleDateFormat(format);
-				result = sdf.format(date);
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-		}
-		return result;
-	}
-
-	/***
-	 * Calendar 转成 Date
-	 * 
-	 * @param c
-	 * @return
-	 */
-	public static Date calendarToDate(Calendar calendar) {
-		DataBean dataBean = new DataBean(calendar);
-		String str = dataBean.getYear() + "-" + dataBean.getMonth() + "-" + dataBean.getDay() + " " + dataBean.getHour()
-				+ ":" + dataBean.getMinute() + ":" + dataBean.getSecond();
-		DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date date = null;
-		try {
-			date = dateFormat1.parse(str);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return date;
-	}
-	
-	public static void main(String[] args) {
-		Calendar calendar = Calendar.getInstance();
-		System.out.println(calendarToDate(calendar));
-	}
-
-	public static String getWeek(Calendar calendar) {
-		int y = calendar.get(Calendar.YEAR);
-		int m = calendar.get(Calendar.MONTH) + 1;
-		int d = calendar.get(Calendar.DAY_OF_MONTH);
-		String week[] = new String[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
-		// String week[] = new String[] { "日", "一", "二", "三", "四", "五", "六" };
-		// String week[] = new String[] { "周日", "周一", "周二", "周三", "周四", "周五", "周六" };
-		if (m < 3) {
-			m += 12;
-			--y;
-		}
-		int w = (d + 1 + 2 * m + 3 * (m + 1) / 5 + y + (y >> 2) - y / 100 + y / 400) % 7;
-
-		return week[w];
-	}
-	
-	public static String getTime(double d) {
-		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
-		Date currentTime = new Date((long) d);
-		String dateString = formatter.format(currentTime);
-		return dateString;
 	}
 }

@@ -1,4 +1,4 @@
-package com.almanac.lunar;
+package com.almanac.old.lunar;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-import com.almanac.lunar.CalendarTime;
+import com.almanac.old.lunar.CalendarTime;
 
 /***
  * 时间格式转换和处理类 时间时区类 获取系统默认时区：TimeZone.getDefault()

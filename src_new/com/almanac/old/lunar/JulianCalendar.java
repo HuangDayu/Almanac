@@ -1,8 +1,8 @@
-package com.almanac.lunar;
+package com.almanac.old.lunar;
 
-import com.almanac.lunar.Common;
-import java.util.Calendar;
-import com.almanac.lunar.JulianCalendar;
+import com.almanac.old.lunar.CalendarTime;
+import com.almanac.old.lunar.Common;
+import com.almanac.old.lunar.JulianCalendar;
 
 /******
  * 儒略历（Julian calendar）是由罗马共和国独裁官儒略·恺撒（即盖乌斯·尤里乌斯·凯撒）采纳数学家兼天文学家索西琴尼的计算后，
@@ -39,8 +39,7 @@ public class JulianCalendar {
 		this.second = second;
 	}
 
-	public JulianCalendar() {
-	}
+	public JulianCalendar() {}
 
 	public int getYear() {
 		return year;
@@ -89,7 +88,8 @@ public class JulianCalendar {
 	public void setSecond(double second) {
 		this.second = second;
 	}
-
+	
+	
 	/***
 	 * 输入年，月，日算出儒略日 http://www.ilovematlab.cn/thread-19002-1-1.html
 	 * 
@@ -106,14 +106,13 @@ public class JulianCalendar {
 				- 3 * ((I + 4900 + (J - 14) / 12) / 100) / 4;
 		return jl;
 	}
-
-	public static int getJuLian(Calendar calendar) {
-		int y = calendar.get(Calendar.YEAR);
-		int m = calendar.get(Calendar.MONTH) + 1;
-		int d = calendar.get(Calendar.DAY_OF_MONTH);
-		return getJuLian(y, m, d);
+	
+	public static  int getJuLian(CalendarTime time) {
+		return  getJuLian(time.getYear(),time.getMonth(), time.getDay());
 	}
-
+	
+	
+	
 	/***
 	 * 取某世纪年的1月1日的儒略日数，如1900,1800,2000,2100
 	 * 
@@ -121,47 +120,46 @@ public class JulianCalendar {
 	 *            公元1百年
 	 * @return 1757583
 	 */
-	public static int getJuLian_INT(int year) {
-		int quZhen = year / 100;
-		int quYu = year % 100;
+	public static int getJuLian_INT(int year) {		
+		int quZhen = year/100;
+		int quYu = year%100;
 		String Str;
-
-		if (0 == quYu && quZhen > 0 && year != 0) {// 整除100时取整减1 ：如果是1000年，则算出900年的儒略日
-			Str = String.valueOf(quZhen - 1) + "00";
-		} else {
-			Str = String.valueOf(quZhen) + "00";
+		
+		if(0==quYu&&quZhen>0&& year!=0 ) {//整除100时取整减1 ：如果是1000年，则算出900年的儒略日
+			Str = String.valueOf(quZhen-1)+ "00";
+		}else {
+			Str = String.valueOf(quZhen)+ "00";
 		}
-
-		if (year <= 0) {
-			Str = String.valueOf((-year - 1) / 100 - 1) + "00";
+		
+		if(year<=0) {
+			Str = String.valueOf((-year-1)/100-1)+ "00";
 		}
-
-		// System.out.println(Str);
+		
+		//System.out.println(Str);
 		return getJuLian(Integer.valueOf(Str), 1, 1);
 	}
-
+	
 	/***
 	 * 输入2017 返回1900
-	 * 
 	 * @param year
 	 * @return
 	 */
 	public static int getYear_INT(int year) {
-
-		int quZhen = year / 100;
-		int quYu = year % 100;
+		
+		int quZhen = year/100;
+		int quYu = year%100;
 		String Str;
-
-		if (quZhen > 0 && year != 0) {// 整除100时取整减1 ：如果是1000年，则算出900年的儒略日
-			Str = String.valueOf(quZhen - 1) + "00";
-		} else {
-			Str = String.valueOf(quZhen) + "00";
+		
+		if(quZhen>0&& year!=0 ) {//整除100时取整减1 ：如果是1000年，则算出900年的儒略日
+			Str = String.valueOf(quZhen-1)+ "00";
+		}else {
+			Str = String.valueOf(quZhen)+ "00";
 		}
-
-		if (year <= 0) {
-			Str = String.valueOf((-year - 1) / 100 - 1) + "00";
+		
+		if(year<=0) {
+			Str = String.valueOf((-year-1)/100-1)+ "00";
 		}
-
+		
 		return Integer.valueOf(Str);
 	}
 
@@ -175,7 +173,8 @@ public class JulianCalendar {
 	 */
 	private double setJulianDayNumber(int year, int month, double day) {
 		int n = 0, G = 0;
-		if (year * 372 + month * 31 + Math.floor(day) >= 588829) {
+		if (year * 372 + month * 31 + Math.floor(day) >= 588829)
+		 {
 			G = 1; // 判断是否为格里高利历日1582*372+10*31+15
 		}
 		if (month <= 2) {
@@ -188,6 +187,7 @@ public class JulianCalendar {
 		}
 		return Math.floor(365.25 * (year + 4716)) + Math.floor(30.6001 * (month + 1)) + day + n - 1524.5;
 	}
+	
 
 	/****
 	 * 儒略日数转公历
@@ -285,8 +285,7 @@ public class JulianCalendar {
 	 * @return
 	 */
 	protected double getJulianDayNumber() {
-		return this.setJulianDayNumber(this.year, this.month,
-				this.day + ((this.second / 60 + this.minute) / 60 + this.hour) / 24);
+		return this.setJulianDayNumber(this.year, this.month, this.day + ((this.second / 60 + this.minute) / 60 + this.hour) / 24);
 	}
 
 	/****
@@ -356,7 +355,8 @@ public class JulianCalendar {
 		double w0 = (jd + 1 + 7000000) % 7; // 月首的星期
 		int r = (int) (jd - w0 + 7 * n + week);
 		// jd-w0+7*n是和n个星期0,起算下本月第一行的星期日(可能落在上一月)。加w后为第n个星期w
-		if (week >= w0) {
+		if (week >= w0)
+		 {
 			r -= 7; // 第1个星期w可能落在上个月,造成多算1周,所以考虑减1周
 		}
 		if (n == 5) {
@@ -365,7 +365,8 @@ public class JulianCalendar {
 				month = 1;
 				year++;
 			} // 下个月
-			if (r >= this.setJulianDayNumber(year, month, 1.5)) {
+			if (r >= this.setJulianDayNumber(year, month, 1.5))
+			 {
 				r -= 7; // r跑到下个月则减1周
 			}
 		}

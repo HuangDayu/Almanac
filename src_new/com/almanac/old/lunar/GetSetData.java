@@ -1,6 +1,6 @@
-package com.almanac.lunar;
+package com.almanac.old.lunar;
 
-import com.almanac.lunar.GetSetData;
+import com.almanac.old.lunar.GetSetData;
 
 /***
  * 日落日出数据类

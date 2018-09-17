@@ -1,15 +1,15 @@
-package com.almanac.lunar;
+package com.almanac.old.lunar;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.almanac.lunar.CalendarTime;
-import com.almanac.lunar.GetPort;
-import com.almanac.lunar.GetSetData;
-import com.almanac.lunar.JulianCalendar;
-import com.almanac.lunar.LunarCalendar;
-import com.almanac.lunar.LunarDate;
-import com.almanac.lunar.SunAndMoon;
+import com.almanac.old.lunar.CalendarTime;
+import com.almanac.old.lunar.GetPort;
+import com.almanac.old.lunar.GetSetData;
+import com.almanac.old.lunar.JulianCalendar;
+import com.almanac.old.lunar.LunarCalendar;
+import com.almanac.old.lunar.LunarDate;
+import com.almanac.old.lunar.SunAndMoon;
 
 /***
  * 

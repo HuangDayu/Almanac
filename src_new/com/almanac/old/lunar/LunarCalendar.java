@@ -1,4 +1,4 @@
-package com.almanac.lunar;
+package com.almanac.old.lunar;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -8,14 +8,14 @@ import java.util.Date;
 
 import javax.swing.plaf.synth.SynthSeparatorUI;
 
-import com.almanac.lunar.Annals;
-import com.almanac.lunar.AstronomyArithmetic;
-import com.almanac.lunar.Common;
-import com.almanac.lunar.FestivalAndHoliday;
-import com.almanac.lunar.QiShuo;
-import com.almanac.lunar.IslamicCalendar;
-import com.almanac.lunar.JulianCalendar;
-import com.almanac.lunar.LunarDate;
+import com.almanac.old.lunar.Annals;
+import com.almanac.old.lunar.AstronomyArithmetic;
+import com.almanac.old.lunar.Common;
+import com.almanac.old.lunar.FestivalAndHoliday;
+import com.almanac.old.lunar.IslamicCalendar;
+import com.almanac.old.lunar.JulianCalendar;
+import com.almanac.old.lunar.LunarDate;
+import com.almanac.old.lunar.QiShuo;
 
 public class LunarCalendar {
 
@@ -31,15 +31,16 @@ public class LunarCalendar {
 	/** 本月第一天的星期 */
 	private int lc_WeekFirst_Fo_Month;
 
+	public LunarCalendar() {
+		this(new Date());
+	}
+
 	public LunarCalendar(Date date) {
 		this(date.getTime());
 	}
-	
-	public LunarCalendar(Calendar calendar) {
-		this(calendar.getTimeInMillis());
-	}
-	
+
 	private LunarCalendar(long TimeInMillis) {
+
 		calendar.setTimeInMillis(TimeInMillis);// 初始化实例，给定时间
 		lunarCalendarCalc(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1,
 				calendar.get(Calendar.HOUR_OF_DAY));
@@ -365,16 +366,6 @@ public class LunarCalendar {
 			}
 		}
 		return null;
-	}
-	
-	public String[] getAllSolarTerm() {
-		int nowYear = calendar.get(Calendar.YEAR);
-		return getAllSolarTerm(nowYear);
-	}
-	
-	public String[] getSolarTerm() {
-		int nowYear = calendar.get(Calendar.YEAR);
-		return getAllSolarTerm(nowYear);
 	}
 
 	/***

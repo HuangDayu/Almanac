@@ -1,19 +1,20 @@
-package com.almanac.lunar;
+package com.almanac.old.lunar;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import com.almanac.lunar.SunAndMoonBean;
-import com.almanac.lunar.JulianCalendar;
-import com.almanac.lunar.SunAndMoon;
+
+import com.almanac.old.lunar.CalendarTime;
+import com.almanac.old.lunar.GetSetData;
+import com.almanac.old.lunar.JulianCalendar;
+import com.almanac.old.lunar.SunAndMoon;
 
 public class SunAndMoon {
-
-	private SunAndMoonBean sunAndMoonBean = new SunAndMoonBean();
+	
+	static GetSetData getSetData;
 
 	public static Properties propt;
 
@@ -22,7 +23,7 @@ public class SunAndMoon {
 	private static double midDayTime;
 
 	private static double dawnTime;
-
+	
 	private double moonRise;
 
 	private double moonSet;
@@ -36,22 +37,12 @@ public class SunAndMoon {
 	 * 经度
 	 */
 	private static double longitude;
-
-	public SunAndMoon(String address, Calendar calendar) {
-		dailytime(address, calendar);
-		getMoonTime(calendar);
-	}
 	
-	public SunAndMoon(DataBean dataBean) {
-		this(dataBean.getAddress(),dataBean.getCalendar());
-	}
+	
 
-	public SunAndMoonBean getSunAndMoonBean() {
-		return sunAndMoonBean;
-	}
-
-	public void setSunAndMoonBean(SunAndMoonBean sunAndMoonBean) {
-		this.sunAndMoonBean = sunAndMoonBean;
+	public SunAndMoon(String address, CalendarTime time) {
+		dailytime( address, time);
+		getMoonTime(time);
 	}
 
 	/***
@@ -84,9 +75,8 @@ public class SunAndMoon {
 		// 经度（正：东经 负：西经）
 		// 纬度（正：北纬 负：南纬）
 		BigDecimal big = new BigDecimal(itude);
-		// String str0 = String.valueOf(big.setScale(4,
-		// BigDecimal.ROUND_HALF_UP).doubleValue());// 转成字符串
-		String str0 = String.valueOf(roundByScale(itude, 4));// 转成字符串
+		//String str0 = String.valueOf(big.setScale(4, BigDecimal.ROUND_HALF_UP).doubleValue());// 转成字符串
+		String str0 = String.valueOf(roundByScale(itude,4));// 转成字符串
 		int leng = str0.length();// 获取长度
 		String str1 = str0.substring(0, leng - 5);
 		String str2 = str0.substring(leng - 4, leng - 2);
@@ -94,29 +84,28 @@ public class SunAndMoon {
 		String str4 = setItude(itude, boo) + str1 + "°" + str2 + "'" + str3 + "\"";
 		return str4;
 	}
-
-	/**
-	 * 将double格式化为指定小数位的String，不足小数位用0补全
-	 * 
-	 * @param v
-	 *            需要格式化的数字
-	 * @param scale
-	 *            小数点后保留几位
-	 * @return
-	 */
-	public static String roundByScale(double v, int scale) {
-		if (scale < 0) {
-			throw new IllegalArgumentException("The   scale   must   be   a   positive   integer   or   zero");
-		}
-		if (scale == 0) {
-			return new DecimalFormat("0").format(v);
-		}
-		String formatStr = "0.";
-		for (int i = 0; i < scale; i++) {
-			formatStr = formatStr + "0";
-		}
-		return new DecimalFormat(formatStr).format(v);
-	}
+	
+	/** 
+     * 将double格式化为指定小数位的String，不足小数位用0补全 
+     * 
+     * @param v     需要格式化的数字 
+     * @param scale 小数点后保留几位 
+     * @return 
+     */  
+    public static String roundByScale(double v, int scale) {  
+        if (scale < 0) {  
+            throw new IllegalArgumentException(  
+                    "The   scale   must   be   a   positive   integer   or   zero");  
+        }  
+        if(scale == 0){  
+            return new DecimalFormat("0").format(v);  
+        }  
+        String formatStr = "0.";  
+        for(int i=0;i<scale;i++){  
+            formatStr = formatStr + "0";  
+        }  
+        return new DecimalFormat(formatStr).format(v);  
+    }
 
 	/***
 	 * 保留两个小数点方法包装
@@ -148,8 +137,7 @@ public class SunAndMoon {
 	static {
 		propt = new Properties();
 		try {
-			propt.load(SunAndMoon.class.getClassLoader()
-					.getResourceAsStream("config/Administrative_region_of_China.properties"));
+			propt.load(SunAndMoon.class.getClassLoader().getResourceAsStream("config/Administrative_region_of_China.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -176,15 +164,15 @@ public class SunAndMoon {
 	 *            时区
 	 * @return 返回泛型的日出日落时间
 	 */
-	public void dailytime(String area, Calendar calendar) {
+	public static void dailytime(String area,CalendarTime time) {
 
-		double tz = TimeUtil.getTimZoneInt(calendar);
-		int year = calendar.get(Calendar.YEAR);
-		int month = calendar.get(Calendar.MONTH) + 1;
-		int day = calendar.get(Calendar.DAY_OF_MONTH);
-		int hour = calendar.get(Calendar.HOUR_OF_DAY);
-		int min = calendar.get(Calendar.MINUTE);
-		int sec = calendar.get(Calendar.SECOND);
+		double tz = time.getTimZoneInt();
+		int year = time.getYear();
+		int month = time.getMonth();
+		int day = time.getDay();
+		int hour = time.getHour();
+		int min = time.getMinute();
+		int sec = time.getSecond(); 
 
 		String jwd = decodeJWD(area);
 
@@ -196,41 +184,41 @@ public class SunAndMoon {
 		 * 经度
 		 */
 		longitude = (Double.parseDouble(jwd.substring(4, 7)) + Double.parseDouble(jwd.substring(7)) / 60);
-
 		/***
 		 * 设置经度
 		 */
-		sunAndMoonBean.setLongitude(setStringPointDouble(longitude, true));
+		getSetData.setLongitude(setStringPointDouble(longitude, true));
 		/***
 		 * 设置纬度
 		 */
-		sunAndMoonBean.setLatitude(setStringPointDouble(latitude, false));
-
+		getSetData.setLatitude(setStringPointDouble(latitude, false));
+		
 		Double wd = latitude / 180 * Math.PI;
 		Double jd = -longitude / 180 * Math.PI;
 
+
 		double richu = getJuLian_old(year, month, day, hour, min, sec) - JulianCalendar.getJuLian_INT(year);// 2451545
-		// 2451544.5
+																										// 2451544.5
 
 		for (int i = 0; i < 10; i++) {
 			richu = sunRiseTime(richu, jd, wd, tz / 24);// 逐步逼近法算10次
 		}
 
 		// 日出
-		sunAndMoonBean.setSunRise(doubleToStr(richu));
+		getSetData.setSunRise(doubleToStr(richu));
 		// 日落
-		sunAndMoonBean.setSunSet(doubleToStr(midDayTime + midDayTime - richu));
+		getSetData.setSunSet(doubleToStr(midDayTime + midDayTime - richu));
 		// 中天
-		sunAndMoonBean.setMidTime(doubleToStr(midDayTime));
+		getSetData.setMidTime(doubleToStr(midDayTime));
 		// 天亮
-		sunAndMoonBean.setDawnTime(doubleToStr(dawnTime));
+		getSetData.setDawnTime(doubleToStr(dawnTime));
 		// 天黑
-		sunAndMoonBean.setNightTime(doubleToStr(midDayTime + midDayTime - dawnTime));
+		getSetData.setNightTime(doubleToStr(midDayTime + midDayTime - dawnTime));
 		// 昼长 = 日落-日出
-		sunAndMoonBean.setDayTime(doubleToStr((midDayTime - richu) * 2 - 0.5));
+		getSetData.setDayTime(doubleToStr((midDayTime - richu) * 2 - 0.5));
 		// 夜长
-		sunAndMoonBean.setEveningTime(doubleToStr(24 - ((midDayTime - richu) * 2 - 0.5)));
-
+		getSetData.setEveningTime(doubleToStr(24 - ((midDayTime - richu) * 2 - 0.5)));
+		
 	}
 
 	/****
@@ -387,7 +375,8 @@ public class SunAndMoon {
 	 */
 	private static double getJuLian_new(int year, int month, double day) {
 		int n = 0, G = 0;
-		if (year * 372 + month * 31 + Math.floor(day) >= 588829) {
+		if (year * 372 + month * 31 + Math.floor(day) >= 588829)
+		 {
 			G = 1; // 判断是否为格里高利历日1582*372+10*31+15
 		}
 		if (month <= 2) {
@@ -417,14 +406,12 @@ public class SunAndMoon {
 		int s = (int) t;
 		return h + ":" + m + ":" + s;
 	}
-
 	/***
 	 * 格式化时间
-	 * 
 	 * @param sum
 	 * @return
 	 */
-	public static String timeToStr(double sum) {
+	public static String timeToStr(double  sum) {
 		if (sum < 0) {
 			return "--:--:--";
 		}
@@ -433,6 +420,7 @@ public class SunAndMoon {
 		int ss = (int) ((((sum - hh) * 60) - mm) * 60);
 		return hh + ":" + mm + ":" + ss;
 	}
+	
 
 	/***
 	 * 
@@ -451,14 +439,15 @@ public class SunAndMoon {
 	 * @param pTime
 	 *            PTime对象
 	 */
-	public void getMoonTime(Calendar calendar) {
+	public void getMoonTime(CalendarTime calendarTime) {
 		double dbLon = getDoubleLongitude();
 		double dbLat = getDoubleLatitude();
-		int year = calendar.get(Calendar.YEAR);
-		int month = calendar.get(Calendar.MONTH) + 1;
-		int day = calendar.get(Calendar.DAY_OF_MONTH);
+		int year = calendarTime.getYear();
+		int month = calendarTime.getMonth();
+		int day = calendarTime.getDay();
+		double TimeZone = calendarTime.getTimZoneInt();
 		double mjdd = mjd(day, month, year, 0);
-		find_moonrise_set(mjdd, TimeUtil.getTimZoneInt(calendar), dbLon, dbLat, 0, 0);
+		find_moonrise_set(mjdd, TimeZone, dbLon, dbLat, 0, 0);
 	}
 
 	private void find_moonrise_set(double mjd, double tz, double glong, double glat, int dls, int ST) {
@@ -543,20 +532,19 @@ public class SunAndMoon {
 		 * 
 		 * @return
 		 */
-		sunAndMoonBean.setMoonRise(timeToStr(moonRise));
+		getSetData.setMoonRise(timeToStr(moonRise));
 		/***
 		 * 月落时间
 		 * 
 		 * @return
 		 */
-		sunAndMoonBean.setMoonSet(timeToStr(moonSet));
+		getSetData.setMoonSet(timeToStr(moonSet));
 		/***
 		 * 月中时间
-		 * 
 		 * @return
 		 */
-		sunAndMoonBean.setMoonMiddleTime(timeToStr((this.moonSet + this.moonRise) / 2));
-
+		getSetData.setMoonMiddleTime(timeToStr((this.moonSet + this.moonRise) / 2));
+		
 	}
 
 	private static double lmst(double mjd, double glong) {
