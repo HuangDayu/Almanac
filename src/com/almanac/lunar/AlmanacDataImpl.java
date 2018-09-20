@@ -28,7 +28,7 @@ public class AlmanacDataImpl implements AlmanacData {
 
 	@Override
 	public String getTime() {
-		return TimeUtil.dateFormat(calendar, "HH时mm分ss秒");
+		return TimeUtil.dateFormat(calendar, "HH时mm分ss秒SS毫秒");
 	}
 
 	@Override

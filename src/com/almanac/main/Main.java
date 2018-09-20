@@ -1,6 +1,7 @@
 package com.almanac.main;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class Main {
 
 		// DataBean dataBean = new DataBean(System.currentTimeMillis());
 
-		// DataBean dataBean = new DataBean(new Date().toInstant());
+		 //DataBean dataBean = new DataBean("广东省徐闻县",new Date().toInstant());
 
 		// DataBean dataBean = new DataBean("2018-09-07T18:40:54.063Z");
 
@@ -46,12 +47,18 @@ public class Main {
 
 		// DataBean dataBean = new DataBean("2018年09月07日 18:24:54");
 
-		// DataBean dataBean = new DataBean("2018-09-07 18:24:54");
+		 //DataBean dataBean = new DataBean("广东省徐闻县","2018-09-20 18:24:54");
+		
+		//DataBean dataBean = new DataBean("广东省徐闻县","2018-09-20 18:24");
+		
+		DataBean dataBean = new DataBean("广东省广州市","2018年09月20日 14:12");
+		
+		//DataBean dataBean = new DataBean("广东省徐闻县","2018-09-20 18:24:54.46");
 
 		// DataBean dataBean = new DataBean("广东省", "徐闻","2018-09-07
 		// 18:24:54");
 
-		DataBean dataBean = new DataBean("广东省广州市白云区", 1995, 8, 12, 11, 22, 33, 44);
+		//DataBean dataBean = new DataBean("广东省广州市白云区", 1995, 8, 12, 11, 22, 33, 44);
 
 		AlmanacData almanacData = new AlmanacDataImpl(dataBean);
 		pakMap(almanacData).forEach((K, V) -> {
@@ -66,8 +73,8 @@ public class Main {
 		map.put("星期", almanacData.getWeek());
 		map.put("年号", almanacData.getYearNumber());
 		map.put("农历", almanacData.getLunar());
-		map.put("黄历", almanacData.getHuangLi());
 		map.put("时辰", almanacData.getLunarTime());
+		map.put("黄历", almanacData.getHuangLi());
 		map.put("天干", almanacData.getTianGan());
 		map.put("地支", almanacData.getDiZhi());
 		map.put("八字", almanacData.getBaZi());

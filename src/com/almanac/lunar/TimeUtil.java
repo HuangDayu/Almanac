@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 public class TimeUtil {
 
@@ -54,13 +56,7 @@ public class TimeUtil {
 	}
 
 	public static Calendar strToCalendar(String str) {
-		return dateToCalendar(getDate(str));
-	}
-
-	public static Calendar intToCalendar(int year, int month, int day, int hourOfDay, int minute, int second) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(year, month - 1, day, hourOfDay, minute, second);
-		return calendar;
+		return dateToCalendar(toDate(str));
 	}
 
 	public static Calendar intToCalendar(int year, int month, int day, int hourOfDay, int minute) {
@@ -69,23 +65,17 @@ public class TimeUtil {
 		return calendar;
 	}
 
-	/***
-	 * 老外用0-11，11就相当于12月
-	 * 
-	 * @param year
-	 * @param month
-	 * @param day
-	 * @param hourOfDay
-	 * @param minute
-	 * @param second
-	 * @param millisecond
-	 * @return
-	 */
+	public static Calendar intToCalendar(int year, int month, int day, int hourOfDay, int minute, int second) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(year, month - 1, day, hourOfDay, minute, second);
+		return calendar;
+	}
+
 	public static Calendar intToCalendar(int year, int month, int day, int hourOfDay, int minute, int second,
 			int millisecond) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.YEAR, year);
-		calendar.set(Calendar.MONTH, month - 1);
+		calendar.set(Calendar.MONTH, month - 1);// 老外用0-11，11就相当于12月
 		calendar.set(Calendar.DAY_OF_MONTH, day);
 		calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
 		calendar.set(Calendar.MINUTE, minute);
@@ -124,18 +114,22 @@ public class TimeUtil {
 	}
 
 	/**
-	 * 2018-09-07T09:24:05.350Z
+	 * 2018-09-07T09:24:05.350Z http://blog.sina.com.cn/s/blog_4550f3ca0101t042.html
 	 * 
 	 * @param instant
-	 * @return
+	 * @return date
 	 */
-	public static Date getDate(String str) {
+	public static Date toDate(String str) {
 		String format = null;
 		if (str.contains(".") || str.contains("T") || str.contains("Z")) {
 			str = str.replace("T", " ").replaceAll("Z", "");
 			format = "yyyy-MM-dd HH:mm:ss.SS";
+		} else if (str.contains("年") && 2 == str.split(":").length) {
+			format = "yyyy年MM月dd日 HH:mm";
 		} else if (str.contains("年")) {
 			format = "yyyy年MM月dd日 HH:mm:ss";
+		} else if (2 == str.split(":").length) {
+			format = "yyyy-MM-dd HH:mm";
 		} else {
 			format = "yyyy-MM-dd HH:mm:ss";
 		}
@@ -149,36 +143,19 @@ public class TimeUtil {
 		return date;
 	}
 
-	/***
-	 * 指定Date类时间 3个参数 http://blog.sina.com.cn/s/blog_4550f3ca0101t042.html
-	 */
-	public static Date getDate(int y, int M, int d, int h, int m) {
+	public static Date toDate(int y, int M, int d, int h, int m) {
 		String str = y + "-" + M + "-" + d + " " + h + ":" + m;
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		Date date = null;
-		try {
-			date = dateFormat.parse(str);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return date;
+		return toDate(str);
 	}
 
-	/***
-	 * 指定Date类时间 6个参数
-	 * 
-	 * @return Date对象
-	 */
-	public static Date getDate(int y, int M, int d, int h, int m, int s) {
+	public static Date toDate(int y, int M, int d, int h, int m, int s) {
 		String str = y + "-" + M + "-" + d + " " + h + ":" + m + ":" + s;
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date date = null;
-		try {
-			date = dateFormat.parse(str);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return date;
+		return toDate(str);
+	}
+
+	public static Date toDate(int y, int M, int d, int h, int m, int s, int ss) {
+		String str = y + "-" + M + "-" + d + " " + h + ":" + m + ":" + s + "." + ss;
+		return toDate(str);
 	}
 
 	/***
@@ -252,19 +229,17 @@ public class TimeUtil {
 	 * @return
 	 */
 	public static Date calendarToDate(Calendar calendar) {
-		DataBean dataBean = new DataBean(calendar);
-		String str = dataBean.getYear() + "-" + dataBean.getMonth() + "-" + dataBean.getDay() + " " + dataBean.getHour()
-				+ ":" + dataBean.getMinute() + ":" + dataBean.getSecond();
-		DateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date date = null;
-		try {
-			date = dateFormat1.parse(str);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return date;
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH) + 1;
+		int day = calendar.get(Calendar.DAY_OF_MONTH);
+		int week = calendar.get(Calendar.DAY_OF_WEEK);
+		int hour = calendar.get(Calendar.HOUR_OF_DAY);
+		int minute = calendar.get(Calendar.MINUTE);
+		int second = calendar.get(Calendar.SECOND);
+		int millisecond = calendar.get(Calendar.MILLISECOND);
+		return toDate(year, month, day, hour, minute, second, millisecond);
 	}
-	
+
 	public static void main(String[] args) {
 		Calendar calendar = Calendar.getInstance();
 		System.out.println(calendarToDate(calendar));
@@ -285,11 +260,58 @@ public class TimeUtil {
 
 		return week[w];
 	}
-	
+
 	public static String getTime(double d) {
 		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
 		Date currentTime = new Date((long) d);
 		String dateString = formatter.format(currentTime);
 		return dateString;
+	}
+
+	private static GregorianCalendar utcCal = null;
+
+	/**
+	 * 创建GregorianCalendar对象
+	 * 
+	 */
+	private static synchronized void makeUTCCalendar() {
+		if (TimeUtil.utcCal == null) {
+			TimeUtil.utcCal = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+		}
+	}
+
+	/***
+	 * 返回全球标准时间 (UTC) (或 GMT) 的 1970 年 1 月 1 日到所指定日期之间所间隔的毫秒数
+	 * 
+	 * @param y
+	 * @param m
+	 * @param d
+	 * @param hh
+	 * @param mm
+	 * @param ss
+	 * @return
+	 */
+	public static synchronized long UTC(int y, int m, int d, int hh, int mm, int ss) {
+		TimeUtil.makeUTCCalendar();
+		synchronized (utcCal) {
+			utcCal.clear();
+			utcCal.set(y, m, d, hh, mm, ss);
+			return utcCal.getTimeInMillis();
+		}
+	}
+
+	/***
+	 * 取 Date 对象中用全球标准时间 (UTC) 表示的日期
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public static synchronized int getUTCDay(Date date) {
+		TimeUtil.makeUTCCalendar();
+		synchronized (utcCal) {
+			utcCal.clear();
+			utcCal.setTimeInMillis(date.getTime());
+			return utcCal.get(Calendar.DAY_OF_MONTH);
+		}
 	}
 }
