@@ -619,6 +619,10 @@ public class LunarDate {
 	public String getMoon_PhaseName_Obj() {
 		return lunarDate.moon_PhaseName;
 	}
+	
+	public String getMoon_PhaseTime_Obj() {
+		return lunarDate.moon_PhaseTimeStr;
+	}
 
 	public int getLunar_king_Years_Obj() {
 		return lunarDate.lunar_king_Years;

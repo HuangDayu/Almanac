@@ -27,7 +27,7 @@ public class Main {
 
 		// DataBean dataBean = new DataBean(2018, 9, 7, 17, 36, 33,1001);
 
-		// DataBean dataBean = new DataBean(Calendar.getInstance());
+		 DataBean dataBean = new DataBean("广东省徐闻县",Calendar.getInstance());
 
 		// DataBean dataBean = new DataBean(new Date());
 
@@ -51,7 +51,7 @@ public class Main {
 		
 		//DataBean dataBean = new DataBean("广东省徐闻县","2018-09-20 18:24");
 		
-		DataBean dataBean = new DataBean("广东省广州市","2018年09月20日 14:12");
+		//DataBean dataBean = new DataBean("广东省广州市","2018年09月10日 14:12");
 		
 		//DataBean dataBean = new DataBean("广东省徐闻县","2018-09-20 18:24:54.46");
 
@@ -60,8 +60,7 @@ public class Main {
 
 		//DataBean dataBean = new DataBean("广东省广州市白云区", 1995, 8, 12, 11, 22, 33, 44);
 
-		AlmanacData almanacData = new AlmanacDataImpl(dataBean);
-		pakMap(almanacData).forEach((K, V) -> {
+		pakMap(new AlmanacDataImpl(dataBean)).forEach((K, V) -> {
 			System.out.println(K + ":" + V);
 		});
 	}
@@ -82,7 +81,6 @@ public class Main {
 		map.put("儒略日", almanacData.getJulianDay());
 		map.put("黄帝纪年", almanacData.getChronology());
 		map.put("生肖", almanacData.getZodiac());
-		map.put("节气", almanacData.getNextSolarTerm());
 		map.put("地点", almanacData.getPosition());
 		map.put("节假日", almanacData.getHolidayVacations());
 		map.put("经度", almanacData.getLongitude());

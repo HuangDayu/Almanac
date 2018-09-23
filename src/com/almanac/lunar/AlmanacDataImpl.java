@@ -342,7 +342,7 @@ public class AlmanacDataImpl implements AlmanacData {
 		} else if (str == null) {
 			return "无";
 		} else {
-			return str;
+			return str +" "+lunarDate.getMoon_PhaseTime_Obj();
 		}
 	}
 

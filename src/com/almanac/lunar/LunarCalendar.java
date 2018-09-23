@@ -317,7 +317,7 @@ public class LunarCalendar {
 			// + Obb.jqmc[(i - 18 >= 0 ? i - 18 : i + 6) % 24]; //日期转为字串
 			String solarTerm = new JulianCalendar()
 					.JD2str(T * 36525 + Common.Julian_for_2000 + (double) 8 / 24 - Common.dt_T(T * 36525))
-					+ Annals.JIEQI[(i - 18 >= 0 ? i - 18 : i + 6) % 24]; // 日期转为字串
+					+" "+ Annals.JIEQI[(i - 18 >= 0 ? i - 18 : i + 6) % 24]; // 日期转为字串
 			solarTerms[index] = solarTerm.trim();
 			// if (i % 2 == 0) s2 += " 视黄经" + (i * 15) + "\n";
 			// else s2 += " "; if (i % 50 == 0) {
