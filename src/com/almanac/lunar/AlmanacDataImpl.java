@@ -361,4 +361,9 @@ public class AlmanacDataImpl implements AlmanacData {
 		return lunarDate.getSolarTerm();
 	}
 
+	@Override
+	public String getSolarTermDoc(String solarTerm) {
+		return SolarTermUtil.solarTermsMap.get(solarTerm);
+	}
+
 }

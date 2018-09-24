@@ -342,4 +342,11 @@ public interface AlmanacData {
 	 * @return
 	 */
 	public String[] getAllSolarTerm();
+	
+	/**
+	 * 获取节气的详细说明
+	 * @param solarTerm
+	 * @return 节气说明
+	 */
+	public String getSolarTermDoc(String solarTerm);
 }
