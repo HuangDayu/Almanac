@@ -3,13 +3,13 @@
 __本项目类似寿星天文历和日梭万年历__  
 __我只是代码的搬运工！如有侵权，联系删除。联系邮箱：1161946342@qq.com__
 
-### 部分代码源于：  
+### 感谢：  
 [wangpeng047](http://blog.csdn.net/wangpeng047/article/details/38559591)  
 [lxslove](http://blog.csdn.net/lxslove/article/details/6083396<br>)  
 [moodlxs](http://www.cnblogs.com/moodlxs/archive/2010/12/18/2345392.html)  
 [hanoi](http://www.cnblogs.com/hanoi/archive/2012/07/04/2576325.html)  
 
-### 类介绍
+### 类介绍：
 1. Annals.java：纪年表类(农历，节假日，纪年表等数据表)
 1. AstronomyArithmetic.java：天文算法类
 1. CalendarTime.java:时区，时间格式转换，类型转换和处理类
@@ -24,6 +24,9 @@ __我只是代码的搬运工！如有侵权，联系删除。联系邮箱：116
 1. LunarDate.java 农历数据类（注意是否属于对象
 1. QiShuo.java 气朔计算和参数数据表类
 1. SunAndMoon.java 日出日落时间计算类（根据配置文件的中经纬度和公历时间）
+
+### 说明：
+`src_new`	,`src_old`,	`src_test` 这3个源码包是旧版本的，由于改动比较大，所以没有删掉。请忽略。
 
 ### bug：
 1. 时间无法进入公元前
@@ -74,3 +77,12 @@ __我只是代码的搬运工！如有侵权，联系删除。联系邮箱：116
 | 夏至 | 2018-06-21 18:07:12  | 1995-06-22 04:34:22  | 1-06-25 04:53:32  |
 | 秋分 | 2018-09-23 09:54:01  | 1995-09-23 20:13:00  | 1-09-25 15:39:49  |
 | 冬至 | 2018-12-22 06:22:38  | 1995-12-22 16:16:47  | 1-12-23 08:19:28  |
+
+### 编译：
+```shell
+javac ./com/almanac/main/Main.java 
+```
+### 运行：
+```shell
+java com.almanac.main.Main
+```
