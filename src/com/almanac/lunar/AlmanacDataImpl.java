@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class AlmanacDataImpl implements AlmanacData {
 	private LunarDate lunarDate = null;
+	private LunarCalendar lunarCalendar;
 	private SunAndMoon sumAndMoon = null;
 	private SunAndMoonBean sunAndMoonBean = null;
 	private String[] areas = null;
@@ -15,8 +16,8 @@ public class AlmanacDataImpl implements AlmanacData {
 	public AlmanacDataImpl(DataBean dataBean) {
 		this.calendar = dataBean.getCalendar();
 		this.dataBean = dataBean;
-		LunarCalendar lunarCalendar = new LunarCalendar(this.calendar);
-		lunarDate = new LunarDate(lunarCalendar.getLunarDateClassObj(), lunarCalendar);
+		lunarCalendar = new LunarCalendar(this.calendar);
+		lunarDate = lunarCalendar.getLunarDateClassObj();
 		sumAndMoon = new SunAndMoon(dataBean);
 		sunAndMoonBean = sumAndMoon.getSunAndMoonBean();
 	};
@@ -265,10 +266,10 @@ public class AlmanacDataImpl implements AlmanacData {
 
 	@Override
 	public String isLeapYear() {
-		if (!lunarDate.isLeapYearBool_Obj()) {
-			return "否";
-		} else {
+		if (lunarCalendar.getQiShuoClassObj().leap > 0) {
 			return "是";
+		} else {
+			return "否";
 		}
 	}
 
@@ -348,17 +349,17 @@ public class AlmanacDataImpl implements AlmanacData {
 
 	@Override
 	public String getNextSolarTerm() {
-		return lunarDate.getNowOrNext24SolarTerm();
+		return lunarCalendar.getNextSolarTerm();
 	}
 
 	@Override
 	public String getSolarTerm(String solarTerm) {
-		return lunarDate.getSolarTermDate(solarTerm);
+		return lunarCalendar.getSolarTermDate(solarTerm);
 	}
 
 	@Override
 	public String[] getAllSolarTerm() {
-		return lunarDate.getSolarTerm();
+		return lunarCalendar.getAllSolarTerm();
 	}
 
 	@Override

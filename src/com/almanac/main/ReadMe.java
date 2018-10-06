@@ -58,7 +58,7 @@ public class ReadMe {
 
 		DataBean dataBean2 = new DataBean("广东省徐闻县","1995-08-12 11:10:10");
 
-		DataBean dataBean3 = new DataBean("广东省徐闻县","1-1-2 11:10:10");
+		DataBean dataBean3 = new DataBean("广东省徐闻县","1-1-1 11:10:10");
 
 		pakMap(new AlmanacDataImpl(dataBean1),new AlmanacDataImpl(dataBean2),new AlmanacDataImpl(dataBean3)).forEach((K, V) -> {
 			System.out.println("| "+K  + V + " |");

@@ -27,7 +27,7 @@ public class Main {
 
 		// DataBean dataBean = new DataBean(2018, 9, 7, 17, 36, 33,1001);
 
-		 DataBean dataBean = new DataBean("广东省徐闻县",Calendar.getInstance());
+		// DataBean dataBean = new DataBean("广东省徐闻县",Calendar.getInstance());
 
 		// DataBean dataBean = new DataBean(new Date());
 
@@ -41,7 +41,7 @@ public class Main {
 
 		// DataBean dataBean = new DataBean(2018, 9, 7, 17, 36, 33,1001);
 
-		// DataBean dataBean = new DataBean(2018, 9, 7, 17, 36, 33);
+		 DataBean dataBean = new DataBean("广东省徐闻县",1,1,1, 17, 36, 33);
 
 		// DataBean dataBean = new DataBean();
 

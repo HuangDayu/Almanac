@@ -1,21 +1,9 @@
 package com.almanac.lunar;
 
-import com.almanac.lunar.LunarCalendar;
 import com.almanac.lunar.LunarDate;
 
 public class LunarDate {
-
-	LunarDate lunarDate;
-	LunarCalendar lunarCalendar;
-
-	LunarDate() {
-	}
-
-	public LunarDate(LunarDate lunarDate, LunarCalendar lunarCalendar) {
-		this.lunarDate = lunarDate;
-		this.lunarCalendar = lunarCalendar;
-	}
-
+	
 	/** 2000.0起算儒略日,北京时12:00 */
 	private int julian_Days;
 	/** 所在公历月内日序数 */
@@ -103,11 +91,13 @@ public class LunarDate {
 	/** r.Fjia 放假日子(可用于日期数字置红) */
 	private int holiday_INT;
 	/** 该年对应的生肖 */
-	private static String lunarDate_Animal_Year;
+	private String lunarDate_Animal_Year;
 	/** 干支纪年 */
-	private static String LunarDate_China_Era_Year;
+	private String LunarDate_China_Era_Year;
 	/** 年号纪年 */
-	private static String LunarDate_China_Era_Year_Number;
+	private String LunarDate_China_Era_Year_Number;
+
+
 
 	public int getJulian_Days() {
 		return julian_Days;
@@ -123,34 +113,6 @@ public class LunarDate {
 
 	public void setGregorian_DayIndexForMonth(int gregorian_DayIndexForMonth) {
 		this.gregorian_DayIndexForMonth = gregorian_DayIndexForMonth;
-	}
-
-	public int getGregorian_DaysOfMonth() {
-		return gregorian_DaysOfMonth;
-	}
-
-	public int getIslamic_Year() {
-		return islamic_Year;
-	}
-
-	public int getIslamic_Month() {
-		return islamic_Month;
-	}
-
-	public int getIslamic_Day() {
-		return islamic_Day;
-	}
-
-	public String getConstellation() {
-		return constellation;
-	}
-
-	public String getMoon_PhaseName() {
-		return moon_PhaseName;
-	}
-
-	public int getLunar_king_Years() {
-		return lunar_king_Years;
 	}
 
 	public int getGregorian_Year() {
@@ -175,6 +137,10 @@ public class LunarDate {
 
 	public void setGregorian_Day(int gregorian_Day) {
 		this.gregorian_Day = gregorian_Day;
+	}
+
+	public int getGregorian_DaysOfMonth() {
+		return gregorian_DaysOfMonth;
 	}
 
 	public void setGregorian_DaysOfMonth(int gregorian_DaysOfMonth) {
@@ -213,12 +179,24 @@ public class LunarDate {
 		this.gregorian_WeeksOfMonth = gregorian_WeeksOfMonth;
 	}
 
+	public int getIslamic_Year() {
+		return islamic_Year;
+	}
+
 	public void setIslamic_Year(int islamic_Year) {
 		this.islamic_Year = islamic_Year;
 	}
 
+	public int getIslamic_Month() {
+		return islamic_Month;
+	}
+
 	public void setIslamic_Month(int islamic_Month) {
 		this.islamic_Month = islamic_Month;
+	}
+
+	public int getIslamic_Day() {
+		return islamic_Day;
 	}
 
 	public void setIslamic_Day(int islamic_Day) {
@@ -353,6 +331,10 @@ public class LunarDate {
 		this.chineseEra_Time = chineseEra_Time;
 	}
 
+	public String getConstellation() {
+		return constellation;
+	}
+
 	public void setConstellation(String constellation) {
 		this.constellation = constellation;
 	}
@@ -371,6 +353,10 @@ public class LunarDate {
 
 	public void setLunar_Period_Of_Months(int lunar_Period_Of_Months) {
 		this.lunar_Period_Of_Months = lunar_Period_Of_Months;
+	}
+
+	public String getMoon_PhaseName() {
+		return moon_PhaseName;
 	}
 
 	public void setMoon_PhaseName(String moon_PhaseName) {
@@ -417,6 +403,10 @@ public class LunarDate {
 		this.lunar_SolarTerm_Time_Str = lunar_SolarTerm_Time_Str;
 	}
 
+	public int getLunar_king_Years() {
+		return lunar_king_Years;
+	}
+
 	public void setLunar_king_Years(int lunar_king_Years) {
 		this.lunar_king_Years = lunar_king_Years;
 	}
@@ -453,12 +443,12 @@ public class LunarDate {
 		this.holiday_INT = holiday_INT;
 	}
 
-	public String getLunarDate_China_Era_Year_Number() {
-		return LunarDate_China_Era_Year_Number;
+	public String getLunarDate_Animal_Year() {
+		return lunarDate_Animal_Year;
 	}
 
-	public void setLunarDate_China_Era_Year_Number(String lunarDate_China_Era_Year_Number) {
-		LunarDate_China_Era_Year_Number = lunarDate_China_Era_Year_Number;
+	public void setLunarDate_Animal_Year(String lunarDate_Animal_Year) {
+		this.lunarDate_Animal_Year = lunarDate_Animal_Year;
 	}
 
 	public String getLunarDate_China_Era_Year() {
@@ -469,12 +459,12 @@ public class LunarDate {
 		LunarDate_China_Era_Year = lunarDate_China_Era_Year;
 	}
 
-	public String getLunarDate_Animal_Year() {
-		return lunarDate_Animal_Year;
+	public String getLunarDate_China_Era_Year_Number() {
+		return LunarDate_China_Era_Year_Number;
 	}
 
-	public void setLunarDate_Animal_Year(String lunarDate_Animal_Year) {
-		this.lunarDate_Animal_Year = lunarDate_Animal_Year;
+	public void setLunarDate_China_Era_Year_Number(String lunarDate_China_Era_Year_Number) {
+		LunarDate_China_Era_Year_Number = lunarDate_China_Era_Year_Number;
 	}
 
 	/***
@@ -483,8 +473,8 @@ public class LunarDate {
 	 * @return
 	 */
 	public String getChinaGanZhiDate_BaZi() {
-		return lunarDate.getChineseEra_Year()  + lunarDate.getChineseEra_Month() 
-				+ lunarDate.getChineseEra_Day()  + lunarDate.getChineseEra_Time();
+		return getChineseEra_Year()  + getChineseEra_Month() 
+				+ getChineseEra_Day()  + getChineseEra_Time();
 	}
 	
 	/***
@@ -494,25 +484,25 @@ public class LunarDate {
 	 */
 	public String getChinaGanZhiDate_HuangLi() {
 		return 
-				lunarDate.getChineseEra_Year() +"年" + 
-				lunarDate.getChineseEra_Month() +"月"+ 
-				lunarDate.getChineseEra_Day()+ "日" + 
-				lunarDate.getChineseEra_Time()+"时";
+				getChineseEra_Year() +"年" + 
+				getChineseEra_Month() +"月"+ 
+				getChineseEra_Day()+ "日" + 
+				getChineseEra_Time()+"时";
 	}
 	
 	public String getChineseEra_Year_Obj() {
-		return lunarDate.getChineseEra_Year() ;
+		return getChineseEra_Year() ;
 	}
 	
 	public String getChineseEra_Month_Obj() {
-		return  lunarDate.getChineseEra_Month();
+		return  getChineseEra_Month();
 	}
 	
 	public String getChineseEra_Day_Obj() {
-		return lunarDate.getChineseEra_Day() ;
+		return getChineseEra_Day() ;
 	}
 	public String getChineseEra_Time_Obj() {
-		return  lunarDate.getChineseEra_Time();
+		return  getChineseEra_Time();
 	}
 
 	/***
@@ -521,7 +511,7 @@ public class LunarDate {
 	 * @return
 	 */
 	public int getLunarDayInt_Obj() {
-		return lunarDate.getLunar_MonthOffset() + 1;
+		return getLunar_MonthOffset() + 1;
 	}
 
 	/***
@@ -530,7 +520,7 @@ public class LunarDate {
 	 * @return
 	 */
 	public String getLunarDayString_Obj() {
-		return lunarDate.getLunar_DayName();
+		return getLunar_DayName();
 	}
 
 	/***
@@ -539,7 +529,7 @@ public class LunarDate {
 	 * @return
 	 */
 	public int getLunarDaySumInMonth_Obj() {
-		return lunarDate.getLunar_Days_OfMonth();
+		return getLunar_Days_OfMonth();
 	}
 
 	/***
@@ -548,7 +538,7 @@ public class LunarDate {
 	 * @return
 	 */
 	public String getLunarMonthString_Obj() {
-		return lunarDate.getLunar_MonthName();
+		return getLunar_MonthName();
 	}
 
 	/***
@@ -566,7 +556,7 @@ public class LunarDate {
 	 * @return
 	 */
 	public String getLunarYearString_Obj() {
-		return lunarDate.getChineseEra_Year();
+		return getChineseEra_Year();
 	}
 
 	/***
@@ -575,7 +565,7 @@ public class LunarDate {
 	 * @return
 	 */
 	public boolean isBigLunarMonthBool_Obj() {
-		return lunarDate.getLunar_Days_OfMonth() > 29;
+		return getLunar_Days_OfMonth() > 29;
 	}
 
 	/***
@@ -584,59 +574,47 @@ public class LunarDate {
 	 * @return
 	 */
 	public boolean isLeapMonthBool_Obj() {
-		return "闰".equals(lunarDate.getLunar_Lunar_isLeap());
+		return "闰".equals(getLunar_Lunar_isLeap());
 	}
 
-	/**
-	 * 是否是闰年
-	 * 
-	 * @return
-	 */
-	public boolean isLeapYearBool_Obj() {
-		return lunarCalendar.getQiShuoClassObj().leap > 0;
-	}
 
 	public int getIslamic_Year_Obj() {
-		return lunarDate.islamic_Year;
+		return islamic_Year;
 	}
 
 	public int getIslamic_Month_Obj() {
-		return lunarDate.islamic_Month;
+		return islamic_Month;
 	}
 
 	public int getIslamic_Day_Obj() {
-		return lunarDate.islamic_Day;
+		return islamic_Day;
 	}
 
 	public int getGregorian_DaysOfMonth_Obj() {
-		return lunarDate.gregorian_DaysOfMonth;
+		return gregorian_DaysOfMonth;
 	}
 
 	public String getConstellation_Obj() {
-		return lunarDate.constellation;
+		return constellation;
 	}
 
 	public String getMoon_PhaseName_Obj() {
-		return lunarDate.moon_PhaseName;
+		return moon_PhaseName;
 	}
 	
 	public String getMoon_PhaseTime_Obj() {
-		return lunarDate.moon_PhaseTimeStr;
+		return moon_PhaseTimeStr;
 	}
 
 	public int getLunar_king_Years_Obj() {
-		return lunarDate.lunar_king_Years;
+		return lunar_king_Years;
 	}
 
 	public String getAllDay_Name_Obj() {
-		return lunarDate.allDay_Name;
+		return allDay_Name;
 	}
-	public String getNowOrNext24SolarTerm() {
-		return lunarCalendar.getNextSolarTerm();
-	}
-	public String getSolarTermDate(String sola) {
-		return lunarCalendar.getSolarTermDate(sola);
-	}
+
+	
 	/***
 	 * 天干
 	 * @return
@@ -675,10 +653,5 @@ public class LunarDate {
 	public String getChinaLuanrDate_String() {
 		return getLunarYearString_Obj()+"年"+getLunarMonthString_Obj()+"月"+getLunarDayString_Obj()+"日";
 	}
-
-	public String[] getSolarTerm() {
-		return lunarCalendar.getAllSolarTerm();
-	}
-	
 	
 }
