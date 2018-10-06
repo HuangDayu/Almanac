@@ -384,7 +384,7 @@ public class LunarCalendar {
 			int cha = solartermDays - nowDays;
 			if (nowDays <= solartermDays) {
 				if (cha < 15 || cha == 0) {
-					return getSloarDate(str_1);
+					return str_1;
 				} else {
 					for (String str_4 : getAllSolarTerm((year - 1))) {
 						String[] strs_5 = str_4.split(" ");
@@ -396,7 +396,7 @@ public class LunarCalendar {
 						int cha1 = solartermDays1 - nowDays;
 						if (nowDays <= solartermDays1) {
 							if (cha1 < 15 || cha1 == 0) {
-								return getSloarDate(str_4);
+								return str_4;
 							}
 						}
 					}
