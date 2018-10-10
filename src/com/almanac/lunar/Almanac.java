@@ -101,6 +101,7 @@ public interface Almanac {
 
 	/***
 	 * 月出时间
+	 * 
 	 * @return
 	 */
 	public String getMoonOutTime();
@@ -261,6 +262,7 @@ public interface Almanac {
 
 	/***
 	 * 回历(伊斯兰历)
+	 * 
 	 * @return
 	 */
 	public String getIslamic();
@@ -342,9 +344,10 @@ public interface Almanac {
 	 * @return
 	 */
 	public String[] getAllSolarTerm();
-	
+
 	/**
 	 * 获取节气的详细说明
+	 * 
 	 * @param solarTerm
 	 * @return 节气说明
 	 */

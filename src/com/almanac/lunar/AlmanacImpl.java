@@ -19,7 +19,7 @@ public class AlmanacImpl implements Almanac {
 		this.port = new Port(Propt.getLatportProperties(), Propt.getLoogportProperties());
 		lunarCalendar = new LunarCalendar(this.calendar);
 		bean = lunarCalendar.getLunarDateClassObj();
-		sumAndMoon = new SunAndMoon(dataBean,bean);
+		sumAndMoon = new SunAndMoon(dataBean, bean);
 	};
 
 	@Override
@@ -157,7 +157,7 @@ public class AlmanacImpl implements Almanac {
 
 	@Override
 	public String getChronology() {
-		return bean.getLunar_king_Years() + "年";
+		return "开元"+bean.getLunar_king_Years() + "年";
 	}
 
 	@Override
@@ -300,37 +300,34 @@ public class AlmanacImpl implements Almanac {
 
 	@Override
 	public String getTianGan() {
-		String tiangan=getBaZi();
-		char c1=tiangan.charAt(0);
-		char c2=tiangan.charAt(2);
-		char c3=tiangan.charAt(4);
-		char c4=tiangan.charAt(6);
-		return String.valueOf(c1)+c2+c3+c4;
+		String tiangan = getBaZi();
+		char c1 = tiangan.charAt(0);
+		char c2 = tiangan.charAt(2);
+		char c3 = tiangan.charAt(4);
+		char c4 = tiangan.charAt(6);
+		return String.valueOf(c1) + c2 + c3 + c4;
 	}
 
 	@Override
 	public String getDiZhi() {
-		String tiangan=getBaZi();
-		char c1=tiangan.charAt(1);
-		char c2=tiangan.charAt(3);
-		char c3=tiangan.charAt(5);
-		char c4=tiangan.charAt(7);
-		return String.valueOf(c1)+c2+c3+c4;
+		String tiangan = getBaZi();
+		char c1 = tiangan.charAt(1);
+		char c2 = tiangan.charAt(3);
+		char c3 = tiangan.charAt(5);
+		char c4 = tiangan.charAt(7);
+		return String.valueOf(c1) + c2 + c3 + c4;
 	}
 
 	@Override
 	public String getBaZi() {
-		return bean.getChineseEra_Year()  + bean.getChineseEra_Month() 
-		+ bean.getChineseEra_Day()  + bean.getChineseEra_Time();
+		return bean.getChineseEra_Year() + bean.getChineseEra_Month() + bean.getChineseEra_Day()
+				+ bean.getChineseEra_Time();
 	}
 
 	@Override
 	public String getHuangLi() {
-		return 
-				bean.getChineseEra_Year() +"年" + 
-				bean.getChineseEra_Month() +"月"+ 
-				bean.getChineseEra_Day()+ "日" + 
-				bean.getChineseEra_Time()+"时";
+		return bean.getChineseEra_Year() + "年" + bean.getChineseEra_Month() + "月" + bean.getChineseEra_Day() + "日"
+				+ bean.getChineseEra_Time() + "时";
 	}
 
 	@Override
