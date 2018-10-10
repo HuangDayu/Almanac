@@ -3,6 +3,22 @@
 __本项目类似寿星天文历和日梭万年历__  
 __我只是代码的搬运工！如有侵权，联系删除。联系邮箱：1161946342@qq.com__
 
+1. 西历 公历 阳历
+2. 农历 阴阳历 黄历
+3. 伊斯兰历 回历 阴历
+4. 儒略历 格里历
+5. 天文历
+
+- [寿星天文历](http://www.nongli.net/sxwnl/)
+- [日梭万年历](http://www.nongli114.com/rili/2017.html)
+- [紫金天文台](http://www.pmo.ac.cn/)
+- [中华农历网](http://www.nongli.net/)
+- [时间科普](http://www.time.ac.cn/serve/down.htm)
+- [中国科学院国家授时中心](http://www.ntsc.ac.cn/)
+- [中国科学院紫金天文台](http://almanac.pmo.ac.cn/)
+- [电子天文历表](http://almanac.pmo.ac.cn/dianzili.htm)
+- [天之文](http://www.astron.ac.cn/index.htm)
+
 ### 感谢： 
  
 [wangpeng047](http://blog.csdn.net/wangpeng047/article/details/38559591)  
