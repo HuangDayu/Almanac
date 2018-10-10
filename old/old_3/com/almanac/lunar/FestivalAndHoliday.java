@@ -1,7 +1,7 @@
 package com.almanac.lunar;
 
 import com.almanac.lunar.Common;
-import com.almanac.lunar.AlmanacBean;
+import com.almanac.lunar.LunarDate;
 
 /***
  * 节假日计算类
@@ -53,7 +53,7 @@ public class FestivalAndHoliday {
 	 * @param date
 	 * @param dateTwo
 	 */
-	public static void getDayName(AlmanacBean date, AlmanacBean dateTwo) {
+	public static void getDayName(LunarDate date, LunarDate dateTwo) {
 		String impHappyName = dateTwo.getHappyDay_Name() == null ? "" : dateTwo.getHappyDay_Name();
 		String impName = dateTwo.getMajorDay_Name() == null ? "" : dateTwo.getMajorDay_Name();
 		String allName = dateTwo.getAllDay_Name() == null ? "" : dateTwo.getAllDay_Name();

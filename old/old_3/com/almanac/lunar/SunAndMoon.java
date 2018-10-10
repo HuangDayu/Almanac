@@ -6,12 +6,16 @@ import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
+import com.almanac.lunar.SunAndMoonBean;
 import com.almanac.lunar.JulianCalendar;
 import com.almanac.lunar.SunAndMoon;
 
 public class SunAndMoon {
 
-	private AlmanacBean bean;
+	private SunAndMoonBean sunAndMoonBean = new SunAndMoonBean();
+
+	public static Properties propt;
 
 	private static double RAD = 180.0 * 3600 / Math.PI;
 
@@ -33,14 +37,21 @@ public class SunAndMoon {
 	 */
 	private static double longitude;
 
-	public SunAndMoon(String address, Calendar calendar,AlmanacBean bean) {
-		this.bean = bean;
+	public SunAndMoon(String address, Calendar calendar) {
 		dailytime(address, calendar);
 		getMoonTime(calendar);
 	}
 	
-	public SunAndMoon(DataBean dataBean,AlmanacBean bean) {
-		this(dataBean.getAddress(),dataBean.getCalendar(), bean);
+	public SunAndMoon(DataBean dataBean) {
+		this(dataBean.getAddress(),dataBean.getCalendar());
+	}
+
+	public SunAndMoonBean getSunAndMoonBean() {
+		return sunAndMoonBean;
+	}
+
+	public void setSunAndMoonBean(SunAndMoonBean sunAndMoonBean) {
+		this.sunAndMoonBean = sunAndMoonBean;
 	}
 
 	/***
@@ -134,6 +145,15 @@ public class SunAndMoon {
 		return getTwoPointDouble(latitude);
 	}
 
+	static {
+		propt = new Properties();
+		try {
+			propt.load(SunAndMoon.class.getClassLoader()
+					.getResourceAsStream("config/Administrative_region_of_China.properties"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/****
 	 * 算出日出日落方法
@@ -180,11 +200,11 @@ public class SunAndMoon {
 		/***
 		 * 设置经度
 		 */
-		bean.setLongitude(setStringPointDouble(longitude, true));
+		sunAndMoonBean.setLongitude(setStringPointDouble(longitude, true));
 		/***
 		 * 设置纬度
 		 */
-		bean.setLatitude(setStringPointDouble(latitude, false));
+		sunAndMoonBean.setLatitude(setStringPointDouble(latitude, false));
 
 		Double wd = latitude / 180 * Math.PI;
 		Double jd = -longitude / 180 * Math.PI;
@@ -197,19 +217,19 @@ public class SunAndMoon {
 		}
 
 		// 日出
-		bean.setSunRise(doubleToStr(richu));
+		sunAndMoonBean.setSunRise(doubleToStr(richu));
 		// 日落
-		bean.setSunSet(doubleToStr(midDayTime + midDayTime - richu));
+		sunAndMoonBean.setSunSet(doubleToStr(midDayTime + midDayTime - richu));
 		// 中天
-		bean.setMidTime(doubleToStr(midDayTime));
+		sunAndMoonBean.setMidTime(doubleToStr(midDayTime));
 		// 天亮
-		bean.setDawnTime(doubleToStr(dawnTime));
+		sunAndMoonBean.setDawnTime(doubleToStr(dawnTime));
 		// 天黑
-		bean.setNightTime(doubleToStr(midDayTime + midDayTime - dawnTime));
+		sunAndMoonBean.setNightTime(doubleToStr(midDayTime + midDayTime - dawnTime));
 		// 昼长 = 日落-日出
-		bean.setDayTime(doubleToStr((midDayTime - richu) * 2 - 0.5));
+		sunAndMoonBean.setDayTime(doubleToStr((midDayTime - richu) * 2 - 0.5));
 		// 夜长
-		bean.setEveningTime(doubleToStr(24 - ((midDayTime - richu) * 2 - 0.5)));
+		sunAndMoonBean.setEveningTime(doubleToStr(24 - ((midDayTime - richu) * 2 - 0.5)));
 
 	}
 
@@ -523,19 +543,19 @@ public class SunAndMoon {
 		 * 
 		 * @return
 		 */
-		bean.setMoonRise(timeToStr(moonRise));
+		sunAndMoonBean.setMoonRise(timeToStr(moonRise));
 		/***
 		 * 月落时间
 		 * 
 		 * @return
 		 */
-		bean.setMoonSet(timeToStr(moonSet));
+		sunAndMoonBean.setMoonSet(timeToStr(moonSet));
 		/***
 		 * 月中时间
 		 * 
 		 * @return
 		 */
-		bean.setMoonMiddleTime(timeToStr((this.moonSet + this.moonRise) / 2));
+		sunAndMoonBean.setMoonMiddleTime(timeToStr((this.moonSet + this.moonRise) / 2));
 
 	}
 

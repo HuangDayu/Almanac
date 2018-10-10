@@ -1,6 +1,6 @@
 package com.almanac.lunar;
 
-import com.almanac.lunar.AlmanacBean;
+import com.almanac.lunar.LunarDate;
 
 /***
  * 伊斯兰教的历法，又称希吉来历，在我国也叫回回历或回历
@@ -11,7 +11,7 @@ public class IslamicCalendar {
 	 * @param julianDays
 	 * @param date
 	 */
-	public static void setIslamicCalendar(int julianDays, AlmanacBean date) {
+	public static void setIslamicCalendar(int julianDays, LunarDate date) {
 		// 以下算法使用Excel测试得到,测试时主要关心年临界与月临界
 		int z, y, m, d;
 		d = julianDays + 503105;

@@ -18,7 +18,7 @@ public class AreaUtil {
 				"SH", "山东", "SD", "四川", "SC", "湖南", "HN", "黑龙", "HL", "北京", "BJ", "内蒙", "NM", "海南", "HI" };
 		for (int i = 0; i < province.length; i++) {
 			if (prov.contains(province[i])) {
-				strsArea = Propt.getAdministrativeProperties().getProperty(province[i + 1]).split(" ");// 根据给定正则表达式的匹配拆分此字符串。
+				strsArea = SunAndMoon.propt.getProperty(province[i + 1]).split(" ");// 根据给定正则表达式的匹配拆分此字符串。
 				Str_1 = strsArea[0];
 				break;
 			}

@@ -5,21 +5,21 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class AlmanacDataImpl implements AlmanacData {
-	private AlmanacBean bean = null;
+	private LunarDate lunarDate = null;
 	private LunarCalendar lunarCalendar;
 	private SunAndMoon sumAndMoon = null;
+	private SunAndMoonBean sunAndMoonBean = null;
 	private String[] areas = null;
 	private Calendar calendar = null;
 	private DataBean dataBean = null;
-	private Port port = null;
 
 	public AlmanacDataImpl(DataBean dataBean) {
-		this.dataBean = dataBean;
 		this.calendar = dataBean.getCalendar();
-		this.port = new Port(Propt.getLatportProperties(), Propt.getLoogportProperties());
+		this.dataBean = dataBean;
 		lunarCalendar = new LunarCalendar(this.calendar);
-		bean = lunarCalendar.getLunarDateClassObj();
-		sumAndMoon = new SunAndMoon(dataBean,bean);
+		lunarDate = lunarCalendar.getLunarDateClassObj();
+		sumAndMoon = new SunAndMoon(dataBean);
+		sunAndMoonBean = sumAndMoon.getSunAndMoonBean();
 	};
 
 	@Override
@@ -45,12 +45,12 @@ public class AlmanacDataImpl implements AlmanacData {
 
 	@Override
 	public String getLongitude() {
-		return bean.getLongitude();
+		return sunAndMoonBean.getLongitude();
 	}
 
 	@Override
 	public String getLatitude() {
-		return bean.getLatitude();
+		return sunAndMoonBean.getLatitude();
 	}
 
 	@Override
@@ -77,57 +77,57 @@ public class AlmanacDataImpl implements AlmanacData {
 
 	@Override
 	public String getDiurnalTime() {
-		return TimeUtil.getFormattingTime(bean.getDayTime());
+		return sunAndMoonBean.getDayTime();
 	}
 
 	@Override
 	public String getNightTime() {
-		return TimeUtil.getFormattingTime(bean.getEveningTime());
+		return sunAndMoonBean.getEveningTime();
 	}
 
 	@Override
 	public String getDawnTime() {
-		return TimeUtil.getFormattingTime(bean.getDawnTime());
+		return sunAndMoonBean.getDawnTime();
 	}
 
 	@Override
 	public String getSunriseTime() {
-		return TimeUtil.getFormattingTime(bean.getSunRise());
+		return sunAndMoonBean.getSunRise();
 	}
 
 	@Override
 	public String getMidDayTime() {
-		return TimeUtil.getFormattingTime(bean.getMidTime());
+		return sunAndMoonBean.getMidTime();
 	}
 
 	@Override
 	public String getSunsetTime() {
-		return TimeUtil.getFormattingTime(bean.getSunSet());
+		return sunAndMoonBean.getSunSet();
 	}
 
 	@Override
 	public String getDarkTime() {
-		return TimeUtil.getFormattingTime(bean.getNightTime());
+		return sunAndMoonBean.getNightTime();
 	}
 
 	@Override
 	public String getMoonOutTime() {
-		return TimeUtil.getFormattingTime(bean.getMoonRise());
+		return sunAndMoonBean.getMoonRise();
 	}
 
 	@Override
 	public String getMidMoonTime() {
-		return TimeUtil.getFormattingTime(bean.getMoonMiddleTime());
+		return sunAndMoonBean.getMoonMiddleTime();
 	}
 
 	@Override
 	public String getMoonDownTime() {
-		return TimeUtil.getFormattingTime(bean.getMoonSet());
+		return sunAndMoonBean.getMoonSet();
 	}
 
 	@Override
 	public String getPortName() {
-		return port.getProtName(sumAndMoon);
+		return GetPort.getProtName(sumAndMoon);
 	}
 
 	@Override
@@ -137,47 +137,47 @@ public class AlmanacDataImpl implements AlmanacData {
 
 	@Override
 	public String getChineseEraYear() {
-		return bean.getChineseEra_Year();
+		return lunarDate.getChineseEra_Year();
 	}
 
 	@Override
 	public String getChineseEraMonth() {
-		return bean.getChineseEra_Month();
+		return lunarDate.getChineseEra_Month();
 	}
 
 	@Override
 	public String getChineseEraDay() {
-		return bean.getChineseEra_Day();
+		return lunarDate.getChineseEra_Day();
 	}
 
 	@Override
 	public String getChineseEraTime() {
-		return bean.getChineseEra_Time();
+		return lunarDate.getChineseEra_Time();
 	}
 
 	@Override
 	public String getChronology() {
-		return bean.getLunar_king_Years() + "年";
+		return lunarDate.getLunar_king_Years_Obj() + "年";
 	}
 
 	@Override
 	public String getZodiac() {
-		return bean.getLunarDate_Animal_Year();
+		return lunarDate.getLunarDate_Animal_Year();
 	}
 
 	@Override
 	public String getLunarYear() {
-		return bean.getChineseEra_Year();
+		return lunarDate.getLunarYearString_Obj();
 	}
 
 	@Override
 	public String getLunarMonth() {
-		return bean.getLunar_MonthName() + "月";
+		return lunarDate.getLunarMonthString_Obj() + "月";
 	}
 
 	@Override
 	public String getLunarDay() {
-		return bean.getLunar_DayName();
+		return lunarDate.getLunarDayString_Obj();
 	}
 
 	@Override
@@ -243,12 +243,12 @@ public class AlmanacDataImpl implements AlmanacData {
 
 	@Override
 	public String getLunarDays() {
-		return bean.getLunar_Days_OfMonth() + "天";
+		return lunarDate.getLunarDaySumInMonth_Obj() + "天";
 	}
 
 	@Override
 	public String isLunarBigMonth() {
-		if (!(bean.getLunar_Days_OfMonth() > 29)) {
+		if (!lunarDate.isBigLunarMonthBool_Obj()) {
 			return "否";
 		} else {
 			return "是";
@@ -257,7 +257,7 @@ public class AlmanacDataImpl implements AlmanacData {
 
 	@Override
 	public String isLeapMonth() {
-		if (!"闰".equals(bean.getLunar_Lunar_isLeap())) {
+		if (!lunarDate.isLeapMonthBool_Obj()) {
 			return "否";
 		} else {
 			return "是";
@@ -275,17 +275,17 @@ public class AlmanacDataImpl implements AlmanacData {
 
 	@Override
 	public int getIslamicYear() {
-		return bean.getIslamic_Year();
+		return lunarDate.getIslamic_Year_Obj();
 	}
 
 	@Override
 	public int getIslamicMonth() {
-		return bean.getIslamic_Month();
+		return lunarDate.getIslamic_Month_Obj();
 	}
 
 	@Override
 	public int getIslamicDay() {
-		return bean.getIslamic_Day();
+		return lunarDate.getIslamic_Day_Obj();
 	}
 
 	@Override
@@ -295,52 +295,37 @@ public class AlmanacDataImpl implements AlmanacData {
 
 	@Override
 	public String getConstellation() {
-		return bean.getConstellation();
+		return lunarDate.getConstellation_Obj();
 	}
 
 	@Override
 	public String getTianGan() {
-		String tiangan=getBaZi();
-		char c1=tiangan.charAt(0);
-		char c2=tiangan.charAt(2);
-		char c3=tiangan.charAt(4);
-		char c4=tiangan.charAt(6);
-		return String.valueOf(c1)+c2+c3+c4;
+		return lunarDate.getChinaEra_TianGan_String();
 	}
 
 	@Override
 	public String getDiZhi() {
-		String tiangan=getBaZi();
-		char c1=tiangan.charAt(1);
-		char c2=tiangan.charAt(3);
-		char c3=tiangan.charAt(5);
-		char c4=tiangan.charAt(7);
-		return String.valueOf(c1)+c2+c3+c4;
+		return lunarDate.getChinaEra_DiZhi_String();
 	}
 
 	@Override
 	public String getBaZi() {
-		return bean.getChineseEra_Year()  + bean.getChineseEra_Month() 
-		+ bean.getChineseEra_Day()  + bean.getChineseEra_Time();
+		return lunarDate.getChinaGanZhiDate_BaZi();
 	}
 
 	@Override
 	public String getHuangLi() {
-		return 
-				bean.getChineseEra_Year() +"年" + 
-				bean.getChineseEra_Month() +"月"+ 
-				bean.getChineseEra_Day()+ "日" + 
-				bean.getChineseEra_Time()+"时";
+		return lunarDate.getChinaGanZhiDate_HuangLi();
 	}
 
 	@Override
 	public String getYearNumber() {
-		return bean.getLunarDate_China_Era_Year_Number();
+		return lunarDate.getLunarDate_China_Era_Year_Number();
 	}
 
 	@Override
 	public String getHolidayVacations() {
-		String str = bean.getAllDay_Name();
+		String str = lunarDate.getAllDay_Name_Obj();
 		if (str == "") {
 			return "无";
 		} else if (str == null) {
@@ -352,13 +337,13 @@ public class AlmanacDataImpl implements AlmanacData {
 
 	@Override
 	public String getMoonPhase() {
-		String str = bean.getMoon_PhaseName();
+		String str = lunarDate.getMoon_PhaseName_Obj();
 		if (str == "") {
 			return "无";
 		} else if (str == null) {
 			return "无";
 		} else {
-			return str + " " + bean.getMoon_PhaseTime();
+			return str +" "+lunarDate.getMoon_PhaseTime_Obj();
 		}
 	}
 
