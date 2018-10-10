@@ -29,7 +29,7 @@ __我只是代码的搬运工！如有侵权，联系删除。联系邮箱：116
 
 ### 类介绍： 
 
-- [`AlmanacBean.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/)：实体类
+- [`AlmanacBean.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/AlmanacBean.java)：实体类
 - [`Almanac.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/Almanac.java)：接口
 - [`AlmanacImpl.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/AlmanacImpl.java)：实现类
 - [`Annals.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/Annals.java)：纪年表类(农历，节假日，纪年表等数据表)
