@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.almanac.lunar.AlmanacData;
-import com.almanac.lunar.AlmanacDataImpl;
+import com.almanac.lunar.Almanac;
+import com.almanac.lunar.AlmanacImpl;
 import com.almanac.lunar.DataBean;
 
 public class ReadMe {
@@ -60,12 +60,12 @@ public class ReadMe {
 
 		DataBean dataBean3 = new DataBean("广东省徐闻县","1-1-1 11:10:10");
 
-		pakMap(new AlmanacDataImpl(dataBean1),new AlmanacDataImpl(dataBean2),new AlmanacDataImpl(dataBean3)).forEach((K, V) -> {
-			System.out.println("| "+K  + V + " |");
+		pakMap(new AlmanacImpl(dataBean1),new AlmanacImpl(dataBean2),new AlmanacImpl(dataBean3)).forEach((K, V) -> {
+			System.out.println("| `" + K + "`" + V + " |");
 		});
 	}
 
-	public static Map<String, String> pakMap(AlmanacData almanacData,AlmanacData almanacData2,AlmanacData almanacData3) {
+	public static Map<String, String> pakMap(Almanac almanacData,Almanac almanacData2,Almanac almanacData3) {
 		Map<String, String> map = new LinkedHashMap<String, String>();
 		map.put("日期", " | "+almanacData.getDate()+" | "+almanacData2.getDate()+" | "+almanacData3.getDate());
 		map.put("时间", " | "+almanacData.getTime()+" | "+almanacData2.getTime()+" | "+almanacData3.getTime());

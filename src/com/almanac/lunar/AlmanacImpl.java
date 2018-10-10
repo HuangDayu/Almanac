@@ -4,7 +4,7 @@ import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 
-public class AlmanacDataImpl implements AlmanacData {
+public class AlmanacImpl implements Almanac {
 	private AlmanacBean bean = null;
 	private LunarCalendar lunarCalendar;
 	private SunAndMoon sumAndMoon = null;
@@ -13,7 +13,7 @@ public class AlmanacDataImpl implements AlmanacData {
 	private DataBean dataBean = null;
 	private Port port = null;
 
-	public AlmanacDataImpl(DataBean dataBean) {
+	public AlmanacImpl(DataBean dataBean) {
 		this.dataBean = dataBean;
 		this.calendar = dataBean.getCalendar();
 		this.port = new Port(Propt.getLatportProperties(), Propt.getLoogportProperties());

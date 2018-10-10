@@ -1,6 +1,6 @@
 package com.almanac.lunar;
 
-public interface AlmanacData {
+public interface Almanac {
 	/**
 	 * 日期
 	 * 
