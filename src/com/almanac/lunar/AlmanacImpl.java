@@ -355,7 +355,7 @@ public class AlmanacImpl implements Almanac {
 		} else if (str == null) {
 			return "无";
 		} else {
-			return str + " " + bean.getMoon_PhaseTime();
+			return str + " " + bean.getMoon_PhaseTimeStr();
 		}
 	}
 

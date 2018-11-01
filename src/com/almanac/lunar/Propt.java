@@ -11,7 +11,7 @@ public class Propt {
 	public static Properties getAdministrativeProperties() {
 		Properties propt = new Properties();
 		try {
-			propt.load(SunAndMoon.class.getClassLoader()
+			propt.load(Propt.class.getClassLoader()
 					.getResourceAsStream("config/administrative.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -25,7 +25,7 @@ public class Propt {
 	public static Properties getLatportProperties() {
 		Properties propt_lat = new Properties();
 		try {
-			propt_lat.load(Port.class.getClassLoader().getResourceAsStream("config/latport.properties"));
+			propt_lat.load(Propt.class.getClassLoader().getResourceAsStream("config/latport.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -39,7 +39,7 @@ public class Propt {
 	public static Properties getLoogportProperties() {
 		Properties propt_loog = new Properties();
 		try {
-			propt_loog.load(Port.class.getClassLoader().getResourceAsStream("config/loogport.properties"));
+			propt_loog.load(Propt.class.getClassLoader().getResourceAsStream("config/loogport.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
