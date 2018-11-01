@@ -26,10 +26,20 @@ public class AlmanacImpl implements Almanac {
 	public String getDate() {
 		return TimeUtil.dateFormat(calendar, "yyyy年MM月dd日");
 	}
+	
+	@Override
+	public String getDateFormer() {
+		return TimeUtil.dateFormat(calendar, "yyyy-MM-dd");
+	}
 
 	@Override
 	public String getTime() {
 		return TimeUtil.dateFormat(calendar, "HH时mm分ss秒SS毫秒");
+	}
+	
+	@Override
+	public String getTimeFormer() {
+		return TimeUtil.dateFormat(calendar, "HH:mm:ss.SS");
 	}
 
 	@Override

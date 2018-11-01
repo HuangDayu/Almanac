@@ -7,6 +7,12 @@ public interface Almanac {
 	 * @return
 	 */
 	public String getDate();
+	
+	/***
+	 * 原格式日期
+	 * @return
+	 */
+	public String getDateFormer();
 
 	/***
 	 * 时间
@@ -14,6 +20,12 @@ public interface Almanac {
 	 * @return
 	 */
 	public String getTime();
+	
+	/**
+	 * 原格式时间
+	 * @return
+	 */
+	public String getTimeFormer();
 
 	/**
 	 * 星期几,周几
