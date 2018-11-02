@@ -221,6 +221,10 @@ public class TimeUtil {
 		}
 		return result;
 	}
+	
+	public static String getFormatDate(String str) {
+		return new SimpleDateFormat(str).format(new Date()).toString();
+	}
 
 	/***
 	 * Calendar 转成 Date

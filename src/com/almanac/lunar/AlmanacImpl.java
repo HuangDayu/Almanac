@@ -13,13 +13,13 @@ public class AlmanacImpl implements Almanac {
 	private TimeBean dataBean = null;
 	private Port port = null;
 
-	public AlmanacImpl(TimeBean dataBean) {
-		this.dataBean = dataBean;
-		this.calendar = dataBean.getCalendar();
+	public AlmanacImpl(TimeBean timeBean) {
+		this.dataBean = timeBean;
+		this.calendar = timeBean.getCalendar();
 		this.port = new Port(Propt.getLatportProperties(), Propt.getLoogportProperties());
 		lunarCalendar = new LunarCalendar(this.calendar);
 		bean = lunarCalendar.getLunarDateClassObj();
-		sumAndMoon = new SunAndMoon(dataBean, bean);
+		sumAndMoon = new SunAndMoon(timeBean, bean);
 	};
 
 	@Override
