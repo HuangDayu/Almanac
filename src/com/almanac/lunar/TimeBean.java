@@ -72,7 +72,7 @@ public class TimeBean {
 			int millisecond) {
 		this(address, TimeUtil.intToCalendar(year, month, day, hourOfDay, minute, second, millisecond));
 	}
-	
+
 	public TimeBean(String... str) {
 		this(str[0], str[1], TimeUtil.strToCalendar(str[2] + " " + str[3]));
 	};
@@ -111,6 +111,9 @@ public class TimeBean {
 				this.area = address1.split("省|市|县")[2];
 			} else if (address1.contains("市") && address1.contains("区")) {
 				this.area = address1.split("省|市|区")[2];
+			} else if (address1.contains(" ")) {
+				this.province = address1.split(" ")[0];
+				this.area = address1.split(" ")[1];
 			}
 		}
 		this.address = AreaUtil.judgeArea(this.province, this.area)[1];

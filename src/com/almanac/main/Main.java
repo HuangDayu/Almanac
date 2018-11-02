@@ -56,7 +56,9 @@ public class Main {
 
 		 //TimeBean timeBean = new TimeBean("广东省", "徐闻县","2018-09-07 18:24:54");
 		 
-		 TimeBean timeBean = new TimeBean("广东省徐闻县", Calendar.getInstance());
+		 //TimeBean timeBean = new TimeBean("广东省徐闻县", Calendar.getInstance());
+		 
+		 TimeBean timeBean = new TimeBean("广东 徐闻", Calendar.getInstance());
 
 		//TimeBean timeBean = new TimeBean("广东省广州市白云区", 1995, 8, 12, 11, 22, 33, 44);
 
