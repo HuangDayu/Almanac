@@ -76,6 +76,10 @@ public class TimeBean {
 	public TimeBean(String... str) {
 		this(str[0], str[1], TimeUtil.strToCalendar(str[2] + " " + str[3]));
 	};
+	
+	public TimeBean(String[]... strs ) {
+		this(strs[0][0], strs[0][1], TimeUtil.strToCalendar(strs[0][2] + " " + strs[0][3]));
+	}
 
 	public TimeBean(String province, String area, Calendar calendar) {
 		this(calendar, province, area);

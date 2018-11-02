@@ -30,7 +30,7 @@ public class Main {
 
 		// TimeBean timeBean = new TimeBean(System.currentTimeMillis());
 
-		 //TimeBean timeBean = new TimeBean("广东省徐闻县",new Date().toInstant());
+		// TimeBean timeBean = new TimeBean("广东省徐闻县",new Date().toInstant());
 
 		// TimeBean timeBean = new TimeBean("广东省徐闻县","2018-09-07T18:40:54.063Z");
 
@@ -38,29 +38,35 @@ public class Main {
 
 		// TimeBean timeBean = new TimeBean("广东省徐闻县",2018, 9, 7, 17, 36, 33,1001);
 
-		 //TimeBean timeBean = new TimeBean("广东省徐闻县",1,1,1, 17, 36, 33);
-		
-		//TimeBean timeBean = new TimeBean("广东","徐闻","2018-09-07","09:24:54.666");
+		// TimeBean timeBean = new TimeBean("广东省徐闻县",1,1,1, 17, 36, 33);
+
+		// TimeBean timeBean = new TimeBean("广东","徐闻","2018-09-07","09:24:54.666");
 
 		// TimeBean timeBean = new TimeBean();
 
 		// TimeBean timeBean = new TimeBean("2018年09月07日 18:24:54");
 
-		 //TimeBean timeBean = new TimeBean("广东省徐闻县","2018-09-20 18:24:54");
-		
-		//TimeBean timeBean = new TimeBean("广东省徐闻县","2018-09-20 18:24");
-		
-		//TimeBean timeBean = new TimeBean("广东省广州市","2018年09月10日 14:12");
-		
-		//TimeBean timeBean = new TimeBean("广东省徐闻县","2018-09-20 18:24:54.46");
+		// TimeBean timeBean = new TimeBean("广东省徐闻县","2018-09-20 18:24:54");
 
-		 //TimeBean timeBean = new TimeBean("广东省", "徐闻县","2018-09-07 18:24:54");
-		 
-		 //TimeBean timeBean = new TimeBean("广东省徐闻县", Calendar.getInstance());
-		 
-		 TimeBean timeBean = new TimeBean("广东 徐闻", Calendar.getInstance());
+		// TimeBean timeBean = new TimeBean("广东省徐闻县","2018-09-20 18:24");
 
-		//TimeBean timeBean = new TimeBean("广东省广州市白云区", 1995, 8, 12, 11, 22, 33, 44);
+		// TimeBean timeBean = new TimeBean("广东省广州市","2018年09月10日 14:12");
+
+		// TimeBean timeBean = new TimeBean("广东省徐闻县","2018-09-20 18:24:54.46");
+
+		// TimeBean timeBean = new TimeBean("广东省", "徐闻县","2018-09-07","18:24:54");
+
+		// String[] strs = {"广东省", "徐闻县","2018-09-07","18:24:54"};
+		// TimeBean timeBean = new TimeBean(strs);
+
+		String[][] strs = { { "广东省", "徐闻县", "2018-09-07", "18:24:54" }, };
+		TimeBean timeBean = new TimeBean(strs);
+
+		// TimeBean timeBean = new TimeBean("广东省徐闻县", Calendar.getInstance());
+
+		// TimeBean timeBean = new TimeBean("广东 徐闻", Calendar.getInstance());
+
+		// TimeBean timeBean = new TimeBean("广东省广州市白云区", 1995, 8, 12, 11, 22, 33, 44);
 
 		pakMap(new AlmanacImpl(timeBean)).forEach((K, V) -> {
 			System.out.println(K + ":" + V);
