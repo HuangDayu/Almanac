@@ -108,9 +108,9 @@ __我只是代码的搬运工！如有侵权，联系删除。联系邮箱：116
 ### Almanac APP 演示
 
 <div align="center">
-<img src="https://github.com/HuangDayu/AlmanacApp/blob/master/ezgif.com-video-to-gif-1.gif" height="500px" width="250px" alt="设置日期" >
-<img src="https://github.com/HuangDayu/AlmanacApp/blob/master//ezgif.com-video-to-gif-2.gif" height="500px" width="250px" alt="设置时间" >
-<img src="https://github.com/HuangDayu/AlmanacApp/blob/master//ezgif.com-video-to-gif-3.gif" height="500px" width="250px" alt="设置位置" >
+<img src="https://github.com/HuangDayu/AlmanacApp/blob/master/ezgif.com-video-to-gif-1.gif" height="500px" width="300px" alt="设置日期" >
+<img src="https://github.com/HuangDayu/AlmanacApp/blob/master//ezgif.com-video-to-gif-2.gif" height="500px" width="300px" alt="设置时间" >
+<img src="https://github.com/HuangDayu/AlmanacApp/blob/master//ezgif.com-video-to-gif-3.gif" height="500px" width="300px" alt="设置位置" >
 </div>
 
 ### Almanac APP 下载
