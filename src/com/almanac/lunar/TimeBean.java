@@ -4,7 +4,7 @@ import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DataBean {
+public class TimeBean {
 	private int year;
 	private int month;
 	private int day;
@@ -19,57 +19,73 @@ public class DataBean {
 	private String address;// 位置结果
 	private Calendar calendar;
 
-	public DataBean(String province, String area, Instant instant) {
+	public TimeBean(String province, String area, Instant instant) {
 		this(province, area, TimeUtil.instantToCalendar(instant));
 	};
 
-	public DataBean(String province, String area, String str) {
+	public TimeBean(String province, String area, String str) {
 		this(province, area, TimeUtil.strToCalendar(str));
 	};
 
-	public DataBean(String province, String area, Date date) {
+	public TimeBean(String province, String area, String date, String time) {
+		this(province, area, TimeUtil.strToCalendar(date + " " + time));
+	}
+
+	public TimeBean(String province, String area, Date date) {
 		this(province, area, TimeUtil.dateToCalendar(date));
 	}
 
-	public DataBean(String province, String area, long currentTimeMillis) {
+	public TimeBean(String province, String area, long currentTimeMillis) {
 		this(province, area, TimeUtil.timeInMillisToCalendar(currentTimeMillis));
 	}
 
-	public DataBean(String province, String area, int year, int month, int day, int hourOfDay, int minute, int second) {
+	public TimeBean(String province, String area, int year, int month, int day, int hourOfDay, int minute, int second) {
 		this(province, area, TimeUtil.intToCalendar(year, month, day, hourOfDay, minute, second));
 	}
 
-	public DataBean(String province, String area, int year, int month, int day, int hourOfDay, int minute, int second,
+	public TimeBean(String province, String area, int year, int month, int day, int hourOfDay, int minute, int second,
 			int millisecond) {
 		this(province, area, TimeUtil.intToCalendar(year, month, day, hourOfDay, minute, second, millisecond));
 	}
 
-	public DataBean(String address, Instant instant) {
+	public TimeBean(String address, Instant instant) {
 		this(address, TimeUtil.instantToCalendar(instant));
 	};
 
-	public DataBean(String address, String str) {
+	public TimeBean(String address, String str) {
 		this(address, TimeUtil.strToCalendar(str));
 	};
 
-	public DataBean(String address, Date date) {
+	public TimeBean(String address, Date date) {
 		this(address, TimeUtil.dateToCalendar(date));
 	}
 
-	public DataBean(String address, long currentTimeMillis) {
+	public TimeBean(String address, long currentTimeMillis) {
 		this(address, TimeUtil.timeInMillisToCalendar(currentTimeMillis));
 	}
 
-	public DataBean(String address, int year, int month, int day, int hourOfDay, int minute, int second) {
+	public TimeBean(String address, int year, int month, int day, int hourOfDay, int minute, int second) {
 		this(address, TimeUtil.intToCalendar(year, month, day, hourOfDay, minute, second));
 	}
 
-	public DataBean(String address, int year, int month, int day, int hourOfDay, int minute, int second,
+	public TimeBean(String address, int year, int month, int day, int hourOfDay, int minute, int second,
 			int millisecond) {
 		this(address, TimeUtil.intToCalendar(year, month, day, hourOfDay, minute, second, millisecond));
 	}
+	
+	public TimeBean(String... str) {
+		this(str[0], str[1], TimeUtil.strToCalendar(str[2] + " " + str[3]));
+	};
 
-	public DataBean(String province, String area, Calendar calendar) {
+	public TimeBean(String province, String area, Calendar calendar) {
+		this(calendar, province, area);
+	}
+
+	public TimeBean(String address, Calendar calendar) {
+		this(calendar, address);
+	}
+
+	public TimeBean(Calendar calendar, String... name) {
 		this.year = calendar.get(Calendar.YEAR);
 		this.month = calendar.get(Calendar.MONTH) + 1;
 		this.day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -78,48 +94,26 @@ public class DataBean {
 		this.minute = calendar.get(Calendar.MINUTE);
 		this.second = calendar.get(Calendar.SECOND);
 		this.millisecond = calendar.get(Calendar.MILLISECOND);
-		this.province = province;
-		this.area = area;
-		this.address = AreaUtil.judgeArea(this.province, this.area)[1];
 		this.calendar = calendar;
-	}
-
-	public DataBean(String address, Calendar calendar) {
-		this.province = address.split("省")[0];
-		this.area = null;
-		if (address.contains("县") && !address.contains("市") && !address.contains("区")) {
-			this.area = address.split("省|县")[1];
-		} else if (address.contains("区") && !address.contains("市") && !address.contains("县")) {
-			this.area = address.split("省|区")[1];
-		} else if (address.contains("市") && !address.contains("区") && !address.contains("县")) {
-			this.area = address.split("省|市")[1];
-		} else if (address.contains("市") && address.contains("县")) {
-			this.area = address.split("省|市|县")[2];
-		} else if (address.contains("市") && address.contains("区")) {
-			this.area = address.split("省|市|区")[2];
+		if (name.length == 2) {
+			this.province = name[0];
+			this.area = name[1];
+		} else if (name.length == 1) {
+			String address1 = name[0];
+			this.province = address1.split("省")[0];
+			if (address1.contains("县") && !address1.contains("市") && !address1.contains("区")) {
+				this.area = address1.split("省|县")[1];
+			} else if (address1.contains("区") && !address1.contains("市") && !address1.contains("县")) {
+				this.area = address1.split("省|区")[1];
+			} else if (address1.contains("市") && !address1.contains("区") && !address1.contains("县")) {
+				this.area = address1.split("省|市")[1];
+			} else if (address1.contains("市") && address1.contains("县")) {
+				this.area = address1.split("省|市|县")[2];
+			} else if (address1.contains("市") && address1.contains("区")) {
+				this.area = address1.split("省|市|区")[2];
+			}
 		}
-		this.year = calendar.get(Calendar.YEAR);
-		this.month = calendar.get(Calendar.MONTH) + 1;
-		this.day = calendar.get(Calendar.DAY_OF_MONTH);
-		this.week = calendar.get(Calendar.DAY_OF_WEEK);
-		this.hour = calendar.get(Calendar.HOUR_OF_DAY);
-		this.minute = calendar.get(Calendar.MINUTE);
-		this.second = calendar.get(Calendar.SECOND);
-		this.millisecond = calendar.get(Calendar.MILLISECOND);
 		this.address = AreaUtil.judgeArea(this.province, this.area)[1];
-		this.calendar = calendar;
-	}
-
-	public DataBean(Calendar calendar) {
-		this.year = calendar.get(Calendar.YEAR);
-		this.month = calendar.get(Calendar.MONTH) + 1;
-		this.day = calendar.get(Calendar.DAY_OF_MONTH);
-		this.week = calendar.get(Calendar.DAY_OF_WEEK);
-		this.hour = calendar.get(Calendar.HOUR_OF_DAY);
-		this.minute = calendar.get(Calendar.MINUTE);
-		this.second = calendar.get(Calendar.SECOND);
-		this.millisecond = calendar.get(Calendar.MILLISECOND);
-		this.calendar = calendar;
 	}
 
 	public int getYear() {
@@ -225,5 +219,5 @@ public class DataBean {
 	public void setCalendar(Calendar calendar) {
 		this.calendar = calendar;
 	}
-	
+
 }

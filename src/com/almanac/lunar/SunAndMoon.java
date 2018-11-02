@@ -39,7 +39,7 @@ public class SunAndMoon {
 		getMoonTime(calendar);
 	}
 	
-	public SunAndMoon(DataBean dataBean,AlmanacBean bean) {
+	public SunAndMoon(TimeBean dataBean,AlmanacBean bean) {
 		this(dataBean.getAddress(),dataBean.getCalendar(), bean);
 	}
 

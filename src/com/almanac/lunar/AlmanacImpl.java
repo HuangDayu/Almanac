@@ -10,10 +10,10 @@ public class AlmanacImpl implements Almanac {
 	private SunAndMoon sumAndMoon = null;
 	private String[] areas = null;
 	private Calendar calendar = null;
-	private DataBean dataBean = null;
+	private TimeBean dataBean = null;
 	private Port port = null;
 
-	public AlmanacImpl(DataBean dataBean) {
+	public AlmanacImpl(TimeBean dataBean) {
 		this.dataBean = dataBean;
 		this.calendar = dataBean.getCalendar();
 		this.port = new Port(Propt.getLatportProperties(), Propt.getLoogportProperties());
@@ -50,7 +50,9 @@ public class AlmanacImpl implements Almanac {
 	@Override
 	public String getPosition() {
 		// return areas[0] + " " + areas[1].substring(4, areas[1].length());
-		return dataBean.getProvince() + " " + dataBean.getArea();
+		String prov = dataBean.getProvince().replaceAll("省", "");// 字符替代
+		String area = dataBean.getArea().replaceAll("市", "").replaceAll("区", "").replaceAll("县", "").replaceAll("镇", "").replaceAll("乡", "");
+		return  prov+ " " + area;
 	}
 
 	@Override

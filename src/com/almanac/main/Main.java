@@ -1,14 +1,10 @@
 package com.almanac.main;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
 import com.almanac.lunar.Almanac;
 import com.almanac.lunar.AlmanacImpl;
-import com.almanac.lunar.DataBean;
+import com.almanac.lunar.TimeBean;
 
 public class Main {
 	String[] key_DayTimeType = { "日期", "时间", "星期", "地点", "经度", "纬度", "时区", "昼长", "夜长", "天亮", "日出", "中天", "日落", "天黑",
@@ -18,49 +14,50 @@ public class Main {
 			"立冬", "小雪", "大雪", "冬至", "小寒", "大寒" };
 
 	public static void main(String[] args) {
-		// DataBean dataBean = new DataBean(1995,8, 12, 11, 22, 33, 44);
-		// DataBean dataBean = new DataBean(-101, 1, 1, 11, 22, 33, 44);
-		// DataBean dataBean = new DataBean(558, 1, 1, 11, 22, 33, 44);
-		// DataBean dataBean = new DataBean(1583, 1, 1, 11, 22, 33, 44);
-		// DataBean dataBean = new DataBean(5582, 1, 1, 11, 22, 33, 44);
-		// DataBean dataBean = new DataBean(1, 1, 1, 11, 22, 33, 44);
+		// TimeBean timeBean = new TimeBean(1995,8, 12, 11, 22, 33, 44);
+		// TimeBean timeBean = new TimeBean(-101, 1, 1, 11, 22, 33, 44);
+		// TimeBean timeBean = new TimeBean(558, 1, 1, 11, 22, 33, 44);
+		// TimeBean timeBean = new TimeBean(1583, 1, 1, 11, 22, 33, 44);
+		// TimeBean timeBean = new TimeBean(5582, 1, 1, 11, 22, 33, 44);
+		// TimeBean timeBean = new TimeBean(1, 1, 1, 11, 22, 33, 44);
 
-		// DataBean dataBean = new DataBean(2018, 9, 7, 17, 36, 33,1001);
+		// TimeBean timeBean = new TimeBean(2018, 9, 7, 17, 36, 33,1001);
 
-		// DataBean dataBean = new DataBean("广东省徐闻县",Calendar.getInstance());
+		// TimeBean timeBean = new TimeBean("广东省徐闻县",Calendar.getInstance());
 
-		// DataBean dataBean = new DataBean(new Date());
+		// TimeBean timeBean = new TimeBean(new Date());
 
-		// DataBean dataBean = new DataBean(System.currentTimeMillis());
+		// TimeBean timeBean = new TimeBean(System.currentTimeMillis());
 
-		 //DataBean dataBean = new DataBean("广东省徐闻县",new Date().toInstant());
+		 //TimeBean timeBean = new TimeBean("广东省徐闻县",new Date().toInstant());
 
-		// DataBean dataBean = new DataBean("2018-09-07T18:40:54.063Z");
+		// TimeBean timeBean = new TimeBean("广东省徐闻县","2018-09-07T18:40:54.063Z");
 
-		// DataBean dataBean = new DataBean("2018-09-07 09:24:54.666");
+		// TimeBean timeBean = new TimeBean("广东省徐闻县","2018-09-07 09:24:54.666");
 
-		// DataBean dataBean = new DataBean(2018, 9, 7, 17, 36, 33,1001);
+		// TimeBean timeBean = new TimeBean("广东省徐闻县",2018, 9, 7, 17, 36, 33,1001);
 
-		 DataBean dataBean = new DataBean("广东省徐闻县",1,1,1, 17, 36, 33);
-
-		// DataBean dataBean = new DataBean();
-
-		// DataBean dataBean = new DataBean("2018年09月07日 18:24:54");
-
-		 //DataBean dataBean = new DataBean("广东省徐闻县","2018-09-20 18:24:54");
+		 //TimeBean timeBean = new TimeBean("广东省徐闻县",1,1,1, 17, 36, 33);
 		
-		//DataBean dataBean = new DataBean("广东省徐闻县","2018-09-20 18:24");
+		//TimeBean timeBean = new TimeBean("广东","徐闻","2018-09-07","09:24:54.666");
+
+		// TimeBean timeBean = new TimeBean();
+
+		// TimeBean timeBean = new TimeBean("2018年09月07日 18:24:54");
+
+		 //TimeBean timeBean = new TimeBean("广东省徐闻县","2018-09-20 18:24:54");
 		
-		//DataBean dataBean = new DataBean("广东省广州市","2018年09月10日 14:12");
+		//TimeBean timeBean = new TimeBean("广东省徐闻县","2018-09-20 18:24");
 		
-		//DataBean dataBean = new DataBean("广东省徐闻县","2018-09-20 18:24:54.46");
+		//TimeBean timeBean = new TimeBean("广东省广州市","2018年09月10日 14:12");
+		
+		//TimeBean timeBean = new TimeBean("广东省徐闻县","2018-09-20 18:24:54.46");
 
-		// DataBean dataBean = new DataBean("广东省", "徐闻","2018-09-07
-		// 18:24:54");
+		 TimeBean timeBean = new TimeBean("广东省", "徐闻县","2018-09-07 18:24:54");
 
-		//DataBean dataBean = new DataBean("广东省广州市白云区", 1995, 8, 12, 11, 22, 33, 44);
+		//TimeBean timeBean = new TimeBean("广东省广州市白云区", 1995, 8, 12, 11, 22, 33, 44);
 
-		pakMap(new AlmanacImpl(dataBean)).forEach((K, V) -> {
+		pakMap(new AlmanacImpl(timeBean)).forEach((K, V) -> {
 			System.out.println(K + ":" + V);
 		});
 	}
