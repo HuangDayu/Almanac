@@ -105,6 +105,18 @@ __我只是代码的搬运工！如有侵权，联系删除。联系邮箱：116
 | `秋分` | 2018-09-23 09:54:01  | 1995-09-23 20:13:00  | 1-09-25 15:39:49  |
 | `冬至` | 2018-12-22 06:22:38  | 1995-12-22 16:16:47  | 1-12-23 08:19:28  |
 
+### Almanac APP 演示
+
+<div align="center">
+<img src="https://github.com/HuangDayu/AlmanacApp/blob/master/ezgif.com-video-to-gif-1.gif" height="500px" width="250px" alt="设置日期" >
+<img src="https://github.com/HuangDayu/AlmanacApp/blob/master//ezgif.com-video-to-gif-2.gif" height="500px" width="250px" alt="设置时间" >
+<img src="https://github.com/HuangDayu/AlmanacApp/blob/master//ezgif.com-video-to-gif-3.gif" height="500px" width="250px" alt="设置位置" >
+</div>
+
+### Almanac APP 下载
+
+[点击下载](https://github.com/HuangDayu/AlmanacApp/raw/master/AlmanacApp.apk)
+
 
 ### 编译
 ```shell
