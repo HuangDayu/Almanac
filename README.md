@@ -51,7 +51,7 @@ __我只是代码的搬运工！如有侵权，联系删除。联系邮箱：116
 
 `old`文件夹下4个源码包是旧版本的，由于改动比较大，所以没有删掉。请忽略。
 
-# bug
+# BUG
 
 - 时间无法进入公元前
 
@@ -122,10 +122,12 @@ __我只是代码的搬运工！如有侵权，联系删除。联系邮箱：116
 [AlmanacApp](https://github.com/HuangDayu/AlmanacApp)  
 
 # 编译
+
 ```shell
 javac ./com/almanac/main/Main.java 
 ```
 # 运行
+
 ```shell
 java com.almanac.main.Main
 ```
