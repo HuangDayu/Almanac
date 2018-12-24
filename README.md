@@ -19,14 +19,14 @@ __我只是代码的搬运工！如有侵权，联系删除。联系邮箱：116
 - [电子天文历表](http://almanac.pmo.ac.cn/dianzili.htm)
 - [天之文](http://www.astron.ac.cn/index.htm)
 
-### 感谢
+# 感谢
  
 [wangpeng047](http://blog.csdn.net/wangpeng047/article/details/38559591)  
 [lxslove](http://blog.csdn.net/lxslove/article/details/6083396)  
 [moodlxs](http://www.cnblogs.com/moodlxs/archive/2010/12/18/2345392.html)  
 [hanoi](http://www.cnblogs.com/hanoi/archive/2012/07/04/2576325.html)  
 
-### 类介绍 
+# 类介绍 
 
 - [`AlmanacBean.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/AlmanacBean.java)：实体类
 - [`Almanac.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/Almanac.java)：接口
@@ -47,19 +47,19 @@ __我只是代码的搬运工！如有侵权，联系删除。联系邮箱：116
 - [`SunAndMoon.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/SunAndMoon.java)：日出日落时间计算类（根据配置文件的中经纬度和公历时间）
 - [`TimeUtil.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/TimeUtil.java)：时间工具类（格式，类型转换等）
 
-### 说明
+# 说明
 
 `old`文件夹下4个源码包是旧版本的，由于改动比较大，所以没有删掉。请忽略。
 
-### bug
+# bug
 
 - 时间无法进入公元前
 
-### 不足
+# 不足
 
 - 天文历信息不足：方位、赤纬、时角、黄经、黄纬，潮汐，太阳高度角，地球直射位置，地球远日点，地球近日点，日食月食等
 
-### 程序运行效果展示
+# 程序运行效果展示
 
 | key | value | value | value |
 | :--------: | :-------- | :-------- | :-------- | 
@@ -105,7 +105,7 @@ __我只是代码的搬运工！如有侵权，联系删除。联系邮箱：116
 | `秋分` | 2018-09-23 09:54:01  | 1995-09-23 20:13:00  | 1-09-25 15:39:49  |
 | `冬至` | 2018-12-22 06:22:38  | 1995-12-22 16:16:47  | 1-12-23 08:19:28  |
 
-### Almanac APP 演示
+# Almanac APP 演示
 
 <div align="center">
 <img src="https://github.com/HuangDayu/AlmanacApp/blob/master/ezgif.com-video-to-gif-1.gif" height="450px" width="250px" alt="设置日期" >
@@ -113,16 +113,19 @@ __我只是代码的搬运工！如有侵权，联系删除。联系邮箱：116
 <img src="https://github.com/HuangDayu/AlmanacApp/blob/master//ezgif.com-video-to-gif-3.gif" height="450px" width="250px" alt="设置位置" >
 </div>
 
-### Almanac APP 下载
+# Almanac APP 下载
 
 [点击下载](https://github.com/HuangDayu/AlmanacApp/raw/master/AlmanacApp.apk)
 
+# Almanac APP 源码
 
-### 编译
+[AlmanacApp](https://github.com/HuangDayu/AlmanacApp)  
+
+# 编译
 ```shell
 javac ./com/almanac/main/Main.java 
 ```
-### 运行
+# 运行
 ```shell
 java com.almanac.main.Main
 ```
