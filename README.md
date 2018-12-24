@@ -21,10 +21,10 @@ __我只是代码的搬运工！如有侵权，联系删除。联系邮箱：116
 
 # 感谢
  
-[wangpeng047](http://blog.csdn.net/wangpeng047/article/details/38559591)  
-[lxslove](http://blog.csdn.net/lxslove/article/details/6083396)  
-[moodlxs](http://www.cnblogs.com/moodlxs/archive/2010/12/18/2345392.html)  
-[hanoi](http://www.cnblogs.com/hanoi/archive/2012/07/04/2576325.html)  
+- [wangpeng047](http://blog.csdn.net/wangpeng047/article/details/38559591)  
+- [lxslove](http://blog.csdn.net/lxslove/article/details/6083396)  
+- [moodlxs](http://www.cnblogs.com/moodlxs/archive/2010/12/18/2345392.html)  
+- [hanoi](http://www.cnblogs.com/hanoi/archive/2012/07/04/2576325.html)  
 
 # 类介绍 
 
@@ -49,7 +49,7 @@ __我只是代码的搬运工！如有侵权，联系删除。联系邮箱：116
 
 # 说明
 
-`old`文件夹下4个源码包是旧版本的，由于改动比较大，所以没有删掉。请忽略。
+- `old`文件夹下4个源码包是旧版本的，由于改动比较大，所以没有删掉。请忽略。
 
 # BUG
 
@@ -115,11 +115,11 @@ __我只是代码的搬运工！如有侵权，联系删除。联系邮箱：116
 
 # Almanac APP 下载
 
-[点击下载](https://github.com/HuangDayu/AlmanacApp/raw/master/AlmanacApp.apk)
+- [点击下载](https://github.com/HuangDayu/AlmanacApp/raw/master/AlmanacApp.apk)
 
 # Almanac APP 源码
 
-[AlmanacApp](https://github.com/HuangDayu/AlmanacApp)  
+- [AlmanacAPP](https://github.com/HuangDayu/AlmanacApp)  
 
 # 编译
 
