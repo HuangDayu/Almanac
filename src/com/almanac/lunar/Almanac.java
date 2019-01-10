@@ -6,341 +6,355 @@ public interface Almanac {
 	 * 
 	 * @return
 	 */
-	public String getDate();
-	
+	String getDate();
+
 	/***
 	 * 原格式日期
+	 * 
 	 * @return
 	 */
-	public String getDateFormer();
+	String getDateFormer();
 
 	/***
 	 * 时间
 	 * 
 	 * @return
 	 */
-	public String getTime();
-	
+	String getTime();
+
 	/**
 	 * 原格式时间
+	 * 
 	 * @return
 	 */
-	public String getTimeFormer();
+	String getTimeFormer();
 
 	/**
 	 * 星期几,周几
 	 * 
 	 * @return
 	 */
-	public String getWeek();
+	String getWeek();
+	
+	/***
+	 * 西历
+	 * @return
+	 */
+	String getWesternCalendar();
+	
+	/***
+	 * 西历中文版
+	 * @return
+	 */
+	String getWesternCalendarCN();
 
 	/**
 	 * 位置
 	 * 
 	 * @return
 	 */
-	public String getPosition();
+	String getPosition();
 
 	/**
 	 * 经度
 	 * 
 	 * @return
 	 */
-	public String getLongitude();
+	String getLongitude();
 
 	/**
 	 * 纬度
 	 * 
 	 * @return
 	 */
-	public String getLatitude();
+	String getLatitude();
 
 	/**
 	 * 时区
 	 * 
 	 * @return
 	 */
-	public String getTimeZone();
+	String getTimeZone();
 
 	/**
 	 * 昼长
 	 * 
 	 * @return
 	 */
-	public String getDiurnalTime();
+	String getDiurnalTime();
 
 	/**
 	 * 夜长
 	 * 
 	 * @return
 	 */
-	public String getNightTime();
+	String getNightTime();
 
 	/**
 	 * 天亮时间
 	 * 
 	 * @return
 	 */
-	public String getDawnTime();
+	String getDawnTime();
 
 	/**
 	 * 日出时间
 	 * 
 	 * @return
 	 */
-	public String getSunriseTime();
+	String getSunriseTime();
 
 	/***
 	 * 中天时间
 	 * 
 	 * @return
 	 */
-	public String getMidDayTime();
+	String getMidDayTime();
 
 	/**
 	 * 日落时间
 	 * 
 	 * @return
 	 */
-	public String getSunsetTime();
+	String getSunsetTime();
 
 	/**
 	 * 天黑时间
 	 * 
 	 * @return
 	 */
-	public String getDarkTime();
+	String getDarkTime();
 
 	/***
 	 * 月出时间
 	 * 
 	 * @return
 	 */
-	public String getMoonOutTime();
+	String getMoonOutTime();
 
 	/**
 	 * 月中时间
 	 * 
 	 * @return
 	 */
-	public String getMidMoonTime();
+	String getMidMoonTime();
 
 	/**
 	 * 月落时间
 	 * 
 	 * @return
 	 */
-	public String getMoonDownTime();
+	String getMoonDownTime();
 
 	/**
 	 * 港口
 	 * 
 	 * @return
 	 */
-	public String getPortName();
+	String getPortName();
 
 	/**
 	 * 儒略日
 	 * 
 	 * @return
 	 */
-	public String getJulianDay();
+	String getJulianDay();
 
 	/**
 	 * 天干地支 年
 	 * 
 	 * @return
 	 */
-	public String getChineseEraYear();
+	String getChineseEraYear();
 
 	/**
 	 * 天干地支 月
 	 * 
 	 * @return
 	 */
-	public String getChineseEraMonth();
+	String getChineseEraMonth();
 
 	/**
 	 * 天干地支 日
 	 * 
 	 * @return
 	 */
-	public String getChineseEraDay();
+	String getChineseEraDay();
 
 	/**
 	 * 天干地支 时
 	 * 
 	 * @return
 	 */
-	public String getChineseEraTime();
+	String getChineseEraTime();
 
 	/**
 	 * 皇帝纪年
 	 * 
 	 * @return
 	 */
-	public String getChronology();
+	String getChronology();
 
 	/**
 	 * 生肖
 	 * 
 	 * @return
 	 */
-	public String getZodiac();
+	String getZodiac();
 
 	/**
 	 * 农历 年
 	 * 
 	 * @return
 	 */
-	public String getLunarYear();
+	String getLunarYear();
 
 	/**
 	 * 农历 月
 	 * 
 	 * @return
 	 */
-	public String getLunarMonth();
+	String getLunarMonth();
 
 	/**
 	 * 农历 日
 	 * 
 	 * @return
 	 */
-	public String getLunarDay();
+	String getLunarDay();
 
 	/**
 	 * 农历 时[更]刻
 	 * 
 	 * @return
 	 */
-	public String getLunarTime();
+	String getLunarTime();
 
 	/**
 	 * 农历(年，月，日，时[更]，刻)
 	 * 
 	 * @return
 	 */
-	public String getLunar();
+	String getLunar();
 
 	/**
 	 * 农历 月天数
 	 * 
 	 * @return
 	 */
-	public String getLunarDays();
+	String getLunarDays();
 
 	/**
 	 * 是否是农历大月
 	 * 
 	 * @return
 	 */
-	public String isLunarBigMonth();
+	String isLunarBigMonth();
 
 	/**
 	 * 是否是农历闰月
 	 * 
 	 * @return
 	 */
-	public String isLeapMonth();
+	String isLeapMonth();
 
 	/**
 	 * 是否是农历闰年
 	 * 
 	 * @return
 	 */
-	public String isLeapYear();
+	String isLeapYear();
 
 	/**
 	 * 回历 年
 	 * 
 	 * @return
 	 */
-	public int getIslamicYear();
+	int getIslamicYear();
 
 	/**
 	 * 回历 月
 	 * 
 	 * @return
 	 */
-	public int getIslamicMonth();
+	int getIslamicMonth();
 
 	/**
 	 * 回历 日
 	 * 
 	 * @return
 	 */
-	public int getIslamicDay();
+	int getIslamicDay();
 
 	/***
 	 * 回历(伊斯兰历)
 	 * 
 	 * @return
 	 */
-	public String getIslamic();
+	String getIslamic();
 
 	/**
 	 * 星座
 	 * 
 	 * @return
 	 */
-	public String getConstellation();
+	String getConstellation();
 
 	/**
 	 * 天干
 	 * 
 	 * @return
 	 */
-	public String getTianGan();
+	String getTianGan();
 
 	/**
 	 * 地支
 	 * 
 	 * @return
 	 */
-	public String getDiZhi();
+	String getDiZhi();
 
 	/**
 	 * 八字
 	 * 
 	 * @return
 	 */
-	public String getBaZi();
+	String getBaZi();
 
 	/**
 	 * 黄历
 	 * 
 	 * @return 戊戌年辛酉月辛亥日乙未时
 	 */
-	public String getHuangLi();
+	String getHuangLi();
 
 	/**
 	 * 年号
 	 * 
 	 * @return
 	 */
-	public String getYearNumber();
+	String getYearNumber();
 
 	/**
 	 * 节假日
 	 * 
 	 * @return
 	 */
-	public String getHolidayVacations();
+	String getHolidayVacations();
 
 	/**
 	 * 月相
 	 * 
 	 * @return
 	 */
-	public String getMoonPhase();
+	String getMoonPhase();
 
 	/**
 	 * 下一个节气
 	 * 
 	 * @return
 	 */
-	public String getNextSolarTerm();
+	String getNextSolarTerm();
 
 	/**
 	 * 获取指定节气的日期
@@ -348,14 +362,14 @@ public interface Almanac {
 	 * @param solarTerm
 	 * @return
 	 */
-	public String getSolarTerm(String solarTerm);
+	String getSolarTerm(String solarTerm);
 
 	/**
 	 * 获取所有节气
 	 * 
 	 * @return
 	 */
-	public String[] getAllSolarTerm();
+	String[] getAllSolarTerm();
 
 	/**
 	 * 获取节气的详细说明
@@ -363,5 +377,5 @@ public interface Almanac {
 	 * @param solarTerm
 	 * @return 节气说明
 	 */
-	public String getSolarTermDoc(String solarTerm);
+	String getSolarTermDoc(String solarTerm);
 }

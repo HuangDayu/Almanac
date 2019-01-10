@@ -59,10 +59,10 @@ public class Main {
 		// String[] strs = {"广东省", "徐闻县","2018-09-07","18:24:54"};
 		// TimeBean timeBean = new TimeBean(strs);
 
-		String[][] strs = { { "广东省", "徐闻县", "2018-09-07", "18:24:54" }, };
-		TimeBean timeBean = new TimeBean(strs);
+		//String[][] strs = { { "广东省", "徐闻县", "2018-09-07", "18:24:54" }, };
+		//TimeBean timeBean = new TimeBean(strs);
 
-		// TimeBean timeBean = new TimeBean("广东省徐闻县", Calendar.getInstance());
+		 TimeBean timeBean = new TimeBean("广东省徐闻县", Calendar.getInstance());
 
 		// TimeBean timeBean = new TimeBean("广东 徐闻", Calendar.getInstance());
 
@@ -78,6 +78,8 @@ public class Main {
 		map.put("日期", almanacData.getDate());
 		map.put("时间", almanacData.getTime());
 		map.put("星期", almanacData.getWeek());
+		map.put("西历", almanacData.getWesternCalendar());
+		map.put("公历", almanacData.getWesternCalendarCN());
 		map.put("年号", almanacData.getYearNumber());
 		map.put("农历", almanacData.getLunar());
 		map.put("时辰", almanacData.getLunarTime());

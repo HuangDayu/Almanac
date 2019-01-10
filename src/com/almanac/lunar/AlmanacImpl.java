@@ -26,7 +26,7 @@ public class AlmanacImpl implements Almanac {
 	public String getDate() {
 		return TimeUtil.dateFormat(calendar, "yyyy年MM月dd日");
 	}
-	
+
 	@Override
 	public String getDateFormer() {
 		return TimeUtil.dateFormat(calendar, "yyyy-MM-dd");
@@ -36,11 +36,27 @@ public class AlmanacImpl implements Almanac {
 	public String getTime() {
 		return TimeUtil.dateFormat(calendar, "HH时mm分ss秒SS毫秒");
 	}
-	
+
 	@Override
 	public String getTimeFormer() {
 		return TimeUtil.dateFormat(calendar, "HH:mm:ss.SS");
 	}
+
+	@Override
+	public String getWesternCalendar() {
+		return TimeUtil.dateFormat(calendar, "yyyy-MM-dd HH:mm:ss.SS");
+	};
+
+	@Override
+	public String getWesternCalendarCN() {
+		/***
+		 * G 年代标志符   y 年   M 月   d 日   h 时 在上午或下午 (1~12)   H 时 在一天中 (0~23)   m 分   s 秒  
+		 * S 毫秒   E 星期   D 一年中的第几天   F 一月中第几个星期几   w 一年中第几个星期   W 一月中第几个星期   a 上午 / 下午
+		 * 标记符   k 时 在一天中 (1~24)   K 时 在上午或下午 (0~11)   z 时区
+		 */
+		String timeStr = "G yyyy年MM月dd日 HH时mm分ss秒SSS毫秒 Eak时 Z时区 yyyy年第w周第D天 M月第W周第d天";
+		return TimeUtil.dateFormat(calendar, timeStr);
+	};
 
 	@Override
 	public String getWeek() {
@@ -51,8 +67,9 @@ public class AlmanacImpl implements Almanac {
 	public String getPosition() {
 		// return areas[0] + " " + areas[1].substring(4, areas[1].length());
 		String prov = dataBean.getProvince().replaceAll("省", "");// 字符替代
-		String area = dataBean.getArea().replaceAll("市", "").replaceAll("区", "").replaceAll("县", "").replaceAll("镇", "").replaceAll("乡", "");
-		return  prov+ " " + area;
+		String area = dataBean.getArea().replaceAll("市", "").replaceAll("区", "").replaceAll("县", "").replaceAll("镇", "")
+				.replaceAll("乡", "");
+		return prov + " " + area;
 	}
 
 	@Override
@@ -169,7 +186,7 @@ public class AlmanacImpl implements Almanac {
 
 	@Override
 	public String getChronology() {
-		return "开元"+bean.getLunar_king_Years() + "年";
+		return "开元" + bean.getLunar_king_Years() + "年";
 	}
 
 	@Override

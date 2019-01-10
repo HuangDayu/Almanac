@@ -1,6 +1,6 @@
 package com.almanac.lunar;
 
-public class JNNH {
+public class HistoricalYear {
 	/***
 	 * 纪年数据 1.起始公元,2.在位年数,3.已用年数,4.朝代,5.朝号,6.皇帝,7.年号
 	 */
@@ -536,7 +536,7 @@ public class JNNH {
 			"1949、9999、1948、当代、新中国、、公历纪元",
 	};
 	
-	public static String getJNNH(int year) {
+	public static String getHY(int year) {
 		int j;
 		String s = "", c;
 		for(String str:JNNH) {
@@ -546,7 +546,7 @@ public class JNNH {
 				continue;
 			}
 			c = strs[6] + (year - j + 1 + Integer.parseInt(strs[2])) + "年"; // 年号及年次
-			s += (s != "" ? ";\n" : "") + "朝代：" + strs[3] + " 朝号：" + strs[4] + " 皇帝：" + strs[5] +  " 在位" + strs[1] +"年 年号：" + c;// i为年号元年,i+3朝代,i+4朝号,i+5皇帝,i+6年号
+			s += (s != "" ? ";\n" : "") + "朝代：" + strs[3] + "、朝号：" + strs[4] + "、皇帝：" + strs[5] +  "、在位" + strs[1] +"年、年号：" + c;// i为年号元年,i+3朝代,i+4朝号,i+5皇帝,i+6年号
 			//1.起始公元,2.在位年数,3.已用年数,4.朝代,5.朝号,6.皇帝,7.年号
 		}
 		return s;
@@ -567,7 +567,7 @@ public class JNNH {
 		}
 	}
 	public static void main(String[] args) {
-		System.out.println(getJNNH(518));
+		System.out.println(getHY(-518));
 	}
 
 }
