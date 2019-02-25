@@ -131,3 +131,7 @@ javac ./com/almanac/main/Main.java
 ```shell
 java com.almanac.main.Main
 ```
+
+# 开源协议
+
+[**CC BY-NC-SA**](https://creativecommons.org/licenses/by-nc-sa/3.0/cn/)  
