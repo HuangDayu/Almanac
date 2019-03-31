@@ -19,7 +19,7 @@ __我只是代码的搬运工！如有侵权，联系删除。联系邮箱：hua
 - [电子天文历表](http://almanac.pmo.ac.cn/dianzili.htm)
 - [天之文](http://www.astron.ac.cn/index.htm)
 
-# 感谢
+# 特别感谢
  
 - [wangpeng047](http://blog.csdn.net/wangpeng047/article/details/38559591)  
 - [lxslove](http://blog.csdn.net/lxslove/article/details/6083396)  
@@ -132,6 +132,13 @@ javac ./com/almanac/main/Main.java
 java com.almanac.main.Main
 ```
 
-# 开源协议
+# 参考文献
+
+[寿星天文历Java封装整理版](https://blog.csdn.net/wangpeng047/article/details/38559591)  
+[寿星万年历---java算法实现-csdn](https://blog.csdn.net/lxslove/article/details/6083396)  
+[寿星万年历---java算法实现-cnblogs](http://www.cnblogs.com/moodlxs/archive/2010/12/18/2345392.html)  
+[根据经纬度计算日出、日落、中天、天亮、天黑和昼长时间](http://www.cnblogs.com/hanoi/archive/2012/07/04/2576325.html)  
+
+# 许可协议
 
 [**CC BY-NC-SA**](https://creativecommons.org/licenses/by-nc-sa/3.0/cn/)  
