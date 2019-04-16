@@ -9,7 +9,13 @@
 
 <!-- [![GitHub license](https://img.shields.io/github/license/HuangDayu/Almanac.svg)](https://github.com/HuangDayu/Almanac) -->
 
-**本项目类似[寿星天文历](http://www.nongli.net/sxwnl/)和[日梭万年历](https://www.nongli114.com/rili/)，但是数据还不是很全。另外，我只是代码的搬运工！如有侵权，联系删除。联系邮箱：[huangdayuemail@qq.com](mailto:huangdayuemail@qq.com)**
+# 说明
+
+**本项目类似[寿星天文历](http://www.nongli.net/sxwnl/)和[日梭万年历](https://www.nongli114.com/rili/)，但是数据还不是很全，算法有待校验。**
+
+# 声明
+
+**我只是代码的搬运工！如有侵权，联系删除。联系邮箱：[huangdayuemail@qq.com](mailto:huangdayuemail@qq.com)**
 
 # 特别感谢
  
