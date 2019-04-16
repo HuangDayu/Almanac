@@ -9,11 +9,6 @@
 
 <!-- [![GitHub license](https://img.shields.io/github/license/HuangDayu/Almanac.svg)](https://github.com/HuangDayu/Almanac) -->
 
-<iframe src="https://ghbtns.com/github-btn.html?user=huangdayu&repo=Almanac&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
-<iframe src="https://ghbtns.com/github-btn.html?user=huangdayu&repo=Almanac&type=watch&count=true&v=2" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
-<iframe src="https://ghbtns.com/github-btn.html?user=huangdayu&repo=Almanac&type=fork&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
-<iframe src="https://ghbtns.com/github-btn.html?user=huangdayu&type=follow&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
-
 # 说明
 
 **本项目类似[寿星天文历](http://www.nongli.net/sxwnl/)和[日梭万年历](https://www.nongli114.com/rili/)，但是数据还不是很全，算法有待校验。**
