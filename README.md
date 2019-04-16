@@ -1,5 +1,13 @@
 # Almanac
 
+[![GitHub watch](https://img.shields.io/github/watchers/HuangDayu/Almanac.svg)](https://github.com/HuangDayu/Almanac/watchers)
+[![GitHub issues](https://img.shields.io/github/issues/HuangDayu/Almanac.svg)](https://github.com/HuangDayu/Almanac/issues)
+[![GitHub forks](https://img.shields.io/github/forks/HuangDayu/Almanac.svg)](https://github.com/HuangDayu/Almanac/network)
+[![GitHub stars](https://img.shields.io/github/stars/HuangDayu/Almanac.svg)](https://github.com/HuangDayu/Almanac/stargazers)
+[![GitHub license](https://img.shields.io/github/license/HuangDayu/Almanac.svg)](https://github.com/HuangDayu/Almanac)
+[![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
+[![Badge](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu/#/zh_CN)
+
 __本项目类似寿星天文历和日梭万年历__  
 __我只是代码的搬运工！如有侵权，联系删除。联系邮箱：huangdayuemail@qq.com__
 
@@ -138,8 +146,3 @@ java com.almanac.main.Main
 [寿星万年历---java算法实现-csdn](https://blog.csdn.net/lxslove/article/details/6083396)  
 [寿星万年历---java算法实现-cnblogs](http://www.cnblogs.com/moodlxs/archive/2010/12/18/2345392.html)  
 [根据经纬度计算日出、日落、中天、天亮、天黑和昼长时间](http://www.cnblogs.com/hanoi/archive/2012/07/04/2576325.html)  
-
-# 许可协议
-
-[![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
-[![Badge](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu/#/zh_CN)
