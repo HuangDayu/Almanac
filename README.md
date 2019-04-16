@@ -4,9 +4,10 @@
 [![GitHub issues](https://img.shields.io/github/issues/HuangDayu/Almanac.svg)](https://github.com/HuangDayu/Almanac/issues)
 [![GitHub forks](https://img.shields.io/github/forks/HuangDayu/Almanac.svg)](https://github.com/HuangDayu/Almanac/network)
 [![GitHub stars](https://img.shields.io/github/stars/HuangDayu/Almanac.svg)](https://github.com/HuangDayu/Almanac/stargazers)
-[![GitHub license](https://img.shields.io/github/license/HuangDayu/Almanac.svg)](https://github.com/HuangDayu/Almanac)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 [![Badge](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu/#/zh_CN)
+
+<!-- [![GitHub license](https://img.shields.io/github/license/HuangDayu/Almanac.svg)](https://github.com/HuangDayu/Almanac) -->
 
 __本项目类似寿星天文历和日梭万年历__  
 __我只是代码的搬运工！如有侵权，联系删除。联系邮箱：huangdayuemail@qq.com__
