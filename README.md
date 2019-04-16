@@ -63,10 +63,6 @@
 - [`SunAndMoon.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/SunAndMoon.java)：日出日落时间计算类（根据配置文件的中经纬度和公历时间）
 - [`TimeUtil.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/TimeUtil.java)：时间工具类（格式，类型转换等）
 
-# 说明
-
-- `old`文件夹下4个源码包是旧版本的，由于改动比较大，所以没有删掉。请忽略。
-
 # BUG
 
 - 时间无法进入公元前
