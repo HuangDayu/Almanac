@@ -9,16 +9,38 @@
 
 <!-- [![GitHub license](https://img.shields.io/github/license/HuangDayu/Almanac.svg)](https://github.com/HuangDayu/Almanac) -->
 
+# 使用示例
+
+```java
+
+/**
+ * 日历
+ *
+ * @param timeZoneDTO
+ * @return
+ */
+AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省徐闻县", Calendar.getInstance()));
+
+/**
+ * 月历
+ *
+ * @param timeZoneDTO
+ * @return
+ */
+AlmanacUtils.monthCalendar(new TimeZoneDTO("广东省徐闻县", Calendar.getInstance()));
+
+```
+
 # 说明
 
 **本项目类似[寿星天文历](http://www.nongli.net/sxwnl/)和[日梭万年历](https://www.nongli114.com/rili/)，但是数据还不是很全，算法有待校验。**
 
-# 声明
+# 申明
 
-**我只是代码的搬运工！如有侵权，联系删除。联系邮箱：[huangdayuemail@qq.com](mailto:huangdayuemail@qq.com)**
+**我只是代码的搬运工！如有侵权，联系删除！**
 
 # 特别感谢
- 
+
 - [wangpeng047](http://blog.csdn.net/wangpeng047/article/details/38559591)  
 - [lxslove](http://blog.csdn.net/lxslove/article/details/6083396)  
 - [moodlxs](http://www.cnblogs.com/moodlxs/archive/2010/12/18/2345392.html)  
@@ -42,27 +64,6 @@
 - [电子天文历表](http://almanac.pmo.ac.cn/dianzili.htm)
 - [天之文](http://www.astron.ac.cn/index.htm)
 
-# 类介绍 
-
-- [`AlmanacBean.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/AlmanacBean.java)：实体类
-- [`Almanac.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/Almanac.java)：接口
-- [`AlmanacImpl.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/AlmanacImpl.java)：实现类
-- [`Annals.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/Annals.java)：纪年表类(农历，节假日，纪年表等数据表)
-- [`AreaUtil.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/AreaUtil.java)：地址工具类
-- [`AstronomyArithmetic.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/AstronomyArithmetic.java)：天文算法类
-- [`Common.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/Common.java)：公用天文数据类
-- [`DataBean.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/DataBean.java)：时间位置实体类
-- [`FestivalAndHoliday.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/FestivalAndHoliday.java)：节假日计算类
-- [`IslamicCalendar.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/IslamicCalendar.java)：伊斯兰历（回历）算法类
-- [`JulianCalendar.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/JulianCalendar.java)：儒略日计算类
-- [`LunarCalendar.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/LunarCalendar.java)：农历数据类
-- [`Port.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/Port.java)：港口计算类
-- [`Propt.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/Propt.java)：配置文件加载类
-- [`QiShuo.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/QiShuo.java)：气朔计算和参数数据表类
-- [`SolarTermUtil.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/SolarTermUtil.java)：24节气工具类
-- [`SunAndMoon.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/SunAndMoon.java)：日出日落时间计算类（根据配置文件的中经纬度和公历时间）
-- [`TimeUtil.java`](https://github.com/HuangDayu/Almanac/blob/master/src/com/almanac/lunar/TimeUtil.java)：时间工具类（格式，类型转换等）
-
 # BUG
 
 - 时间无法进入公元前
@@ -74,7 +75,7 @@
 # 程序运行效果展示
 
 | key | value | value | value |
-| :--------: | :-------- | :-------- | :-------- | 
+| :--------: | :-------- | :-------- | :-------- |
 | `日期` | 2018年11月01日 | 1995年08月12日 | 0001年01月01日 |
 | `时间` | 11时06分48秒667毫秒 | 11时10分10秒00毫秒 | 11时10分10秒00毫秒 |
 | `星期` | 星期四 | 星期六 | 星期一 |
@@ -141,7 +142,7 @@ javac ./com/almanac/main/Main.java
 # 运行
 
 ```shell
-java com.almanac.main.Main
+java com.almanac.AlmanacApplication
 ```
 
 # 参考文献
