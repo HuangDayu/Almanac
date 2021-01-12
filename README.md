@@ -9,6 +9,8 @@
 
 <!-- [![GitHub license](https://img.shields.io/github/license/HuangDayu/Almanac.svg)](https://github.com/HuangDayu/Almanac) -->
 
+**历**：包括万年历、皇历、日出月落、农历、黄历、节气、经纬度、节假日、伊斯兰历、儒略历、西历。
+
 # 引入依赖
 
 ```xml
