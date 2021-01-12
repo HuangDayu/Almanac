@@ -9,6 +9,16 @@
 
 <!-- [![GitHub license](https://img.shields.io/github/license/HuangDayu/Almanac.svg)](https://github.com/HuangDayu/Almanac) -->
 
+# 引入依赖
+
+```xml
+<dependency>
+  <groupId>cn.huangdayu</groupId>
+  <artifactId>almanac</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
+
 # 使用示例
 
 ```java
@@ -132,18 +142,7 @@ AlmanacUtils.monthCalendar(new TimeZoneDTO("广东省徐闻县", Calendar.getIns
 
 # Almanac APP 源码
 
-- [AlmanacAPP](https://github.com/HuangDayu/AlmanacApp)  
-
-# 编译
-
-```shell
-javac ./com/almanac/main/Main.java 
-```
-# 运行
-
-```shell
-java AlmanacApplication
-```
+- [AlmanacAPP](https://github.com/HuangDayu/AlmanacApp)
 
 # 参考文献
 
