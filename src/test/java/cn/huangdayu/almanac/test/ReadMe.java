@@ -10,7 +10,7 @@ import cn.huangdayu.almanac.utils.AlmanacUtils;
 
 public class ReadMe {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args)  {
 
         TimeZoneDTO timeZoneDTO1 = new TimeZoneDTO("广东省徐闻县", Calendar.getInstance());
 

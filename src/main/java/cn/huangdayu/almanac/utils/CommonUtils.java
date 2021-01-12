@@ -1,5 +1,7 @@
 package cn.huangdayu.almanac.utils;
 
+import cn.huangdayu.almanac.exception.AlmanacException;
+
 import java.math.BigDecimal;
 import java.util.regex.Pattern;
 
@@ -2408,9 +2410,9 @@ public class CommonUtils {
 	 * 传入普通纪年或天文纪年，传回天文纪年
 	 * @param c
 	 * @return
-	 * @throws RuntimeException
+	 * @throws AlmanacException
 	 */
-	public static int year2Ayear(String c) throws RuntimeException {
+	public static int year2Ayear(String c) {
 		Pattern pattern = Pattern.compile("[^0-9Bb*-]");
 		String y = pattern.matcher(c).replaceAll("");
 		pattern = Pattern.compile("[Bb*-]{2,}");
@@ -2420,16 +2422,16 @@ public class CommonUtils {
 		if (q.equals("B") || q.equals("b") || q.equals("*")) { // 通用纪年法(公元前)
 			year = 1 - Integer.parseInt(CommonUtils.subString(y, 1));
 			if (year > 0) {
-				throw new RuntimeException("通用纪法的公元前纪法从B.C.1年开始。并且没有公元0年");
+				throw new AlmanacException("通用纪法的公元前纪法从B.C.1年开始。并且没有公元0年");
 			}
 		} else {
 			year = Integer.parseInt(y);
 		}
 		if (year < -4712) {
-			throw new RuntimeException("超过B.C. 4713不准");
+			throw new AlmanacException("超过B.C. 4713不准");
 		}
 		if (year > 9999) {
-			throw new RuntimeException("超过9999年的农历计算很不准。");
+			throw new AlmanacException("超过9999年的农历计算很不准。");
 		}
 		return year;
 	}
