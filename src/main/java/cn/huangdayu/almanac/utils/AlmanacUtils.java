@@ -18,6 +18,7 @@ public class AlmanacUtils {
      * 日历
      *
      * @param timeZoneDTO
+     * @throws cn.huangdayu.almanac.exception.AlmanacException
      * @return
      */
     public static AlmanacDTO dayCalendar(TimeZoneDTO timeZoneDTO) {
@@ -30,11 +31,12 @@ public class AlmanacUtils {
      * 月历
      *
      * @param timeZoneDTO
+     * @throws cn.huangdayu.almanac.exception.AlmanacException
      * @return
      */
     public static AlmanacDTO[] monthCalendar(TimeZoneDTO timeZoneDTO) {
         /** 初始化经纬度信息 */
-        PortUtils.init(PropertiesUtils.getLatportProperties(), PropertiesUtils.getLoogportProperties());
+        PortUtils.init(PropertiesUtils.getLatitudeProperties(), PropertiesUtils.getLongitudeProperties());
 
         int chineseEraYear, julianDaysForMonthFirst, julianDaysForMonth, julianDay;
 

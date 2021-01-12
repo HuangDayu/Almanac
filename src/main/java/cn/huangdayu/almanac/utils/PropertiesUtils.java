@@ -1,5 +1,7 @@
 package cn.huangdayu.almanac.utils;
 
+import cn.huangdayu.almanac.exception.AlmanacException;
+
 import java.io.IOException;
 import java.util.Properties;
 
@@ -10,19 +12,24 @@ import java.util.Properties;
  * @update 2020-03-15
  */
 public class PropertiesUtils {
+
+    public static Properties getProperties(String name) {
+        Properties properties = new Properties();
+        try {
+            properties.load(PropertiesUtils.class.getClassLoader().getResourceAsStream(name));
+        } catch (IOException e) {
+            throw new AlmanacException("获取配置文件异常", e);
+        }
+        return properties;
+    }
+
     /**
      * 中国行政区
      *
      * @return
      */
     public static Properties getAdministrativeProperties() {
-        Properties properties = new Properties();
-        try {
-            properties.load(PropertiesUtils.class.getClassLoader().getResourceAsStream("administrative.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return properties;
+        return getProperties("administrative.properties");
     }
 
     /**
@@ -30,14 +37,8 @@ public class PropertiesUtils {
      *
      * @return
      */
-    public static Properties getLatportProperties() {
-        Properties propt_lat = new Properties();
-        try {
-            propt_lat.load(PropertiesUtils.class.getClassLoader().getResourceAsStream("latport.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return propt_lat;
+    public static Properties getLatitudeProperties() {
+        return getProperties("latport.properties");
     }
 
     /**
@@ -45,14 +46,8 @@ public class PropertiesUtils {
      *
      * @return
      */
-    public static Properties getLoogportProperties() {
-        Properties propt_loog = new Properties();
-        try {
-            propt_loog.load(PropertiesUtils.class.getClassLoader().getResourceAsStream("loogport.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return propt_loog;
+    public static Properties getLongitudeProperties() {
+        return getProperties("loogport.properties");
     }
 
 }

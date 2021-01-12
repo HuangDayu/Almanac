@@ -32,79 +32,79 @@ public class TimeZoneDTO {
     public TimeZoneDTO() {
     }
 
-    public TimeZoneDTO(String province, String area, Instant instant) throws Exception {
+    public TimeZoneDTO(String province, String area, Instant instant) {
         this(province, area, DateTimeUtils.instantToCalendar(instant));
     }
 
-    public TimeZoneDTO(String province, String area, String str) throws Exception {
+    public TimeZoneDTO(String province, String area, String str) {
         this(province, area, DateTimeUtils.strToCalendar(str));
     }
 
-    public TimeZoneDTO(String province, String area, String date, String time) throws Exception {
+    public TimeZoneDTO(String province, String area, String date, String time) {
         this(province, area, DateTimeUtils.strToCalendar(date + " " + time));
     }
 
-    public TimeZoneDTO(String province, String area, Date date) throws Exception {
+    public TimeZoneDTO(String province, String area, Date date) {
         this(province, area, DateTimeUtils.dateToCalendar(date));
     }
 
-    public TimeZoneDTO(String province, String area, long currentTimeMillis) throws Exception {
+    public TimeZoneDTO(String province, String area, long currentTimeMillis) {
         this(province, area, DateTimeUtils.timeInMillisToCalendar(currentTimeMillis));
     }
 
-    public TimeZoneDTO(String province, String area, int year, int month, int day, int hourOfDay, int minute, int second) throws Exception {
+    public TimeZoneDTO(String province, String area, int year, int month, int day, int hourOfDay, int minute, int second) {
         this(province, area, DateTimeUtils.intToCalendar(year, month, day, hourOfDay, minute, second));
     }
 
     public TimeZoneDTO(String province, String area, int year, int month, int day, int hourOfDay, int minute, int second,
-                       int millisecond) throws Exception {
+                       int millisecond) {
         this(province, area, DateTimeUtils.intToCalendar(year, month, day, hourOfDay, minute, second, millisecond));
     }
 
-    public TimeZoneDTO(String address, Instant instant) throws Exception {
+    public TimeZoneDTO(String address, Instant instant) {
         this(address, DateTimeUtils.instantToCalendar(instant));
     }
 
 
-    public TimeZoneDTO(String address, String str) throws Exception {
+    public TimeZoneDTO(String address, String str) {
         this(address, DateTimeUtils.strToCalendar(str));
     }
 
 
-    public TimeZoneDTO(String address, Date date) throws Exception {
+    public TimeZoneDTO(String address, Date date) {
         this(address, DateTimeUtils.dateToCalendar(date));
     }
 
-    public TimeZoneDTO(String address, long currentTimeMillis) throws Exception {
+    public TimeZoneDTO(String address, long currentTimeMillis) {
         this(address, DateTimeUtils.timeInMillisToCalendar(currentTimeMillis));
     }
 
-    public TimeZoneDTO(String address, int year, int month, int day, int hourOfDay, int minute, int second) throws Exception {
+    public TimeZoneDTO(String address, int year, int month, int day, int hourOfDay, int minute, int second) {
         this(address, DateTimeUtils.intToCalendar(year, month, day, hourOfDay, minute, second));
     }
 
     public TimeZoneDTO(String address, int year, int month, int day, int hourOfDay, int minute, int second,
-                       int millisecond) throws Exception {
+                       int millisecond) {
         this(address, DateTimeUtils.intToCalendar(year, month, day, hourOfDay, minute, second, millisecond));
     }
 
-    public TimeZoneDTO(String... str) throws Exception {
+    public TimeZoneDTO(String... str) {
         this(str[0], str[1], DateTimeUtils.strToCalendar(str[2] + " " + str[3]));
     }
 
-    public TimeZoneDTO(String[]... strs) throws Exception {
+    public TimeZoneDTO(String[]... strs) {
         this(strs[0][0], strs[0][1], DateTimeUtils.strToCalendar(strs[0][2] + " " + strs[0][3]));
     }
 
-    public TimeZoneDTO(String province, String area, Calendar calendar) throws Exception {
+    public TimeZoneDTO(String province, String area, Calendar calendar) {
         this(calendar, province, area);
     }
 
-    public TimeZoneDTO(String address, Calendar calendar) throws Exception {
+    public TimeZoneDTO(String address, Calendar calendar) {
         this(calendar, address);
     }
 
-    public TimeZoneDTO(Calendar calendar, String... names) throws Exception {
+    public TimeZoneDTO(Calendar calendar, String... names) {
         this.year = calendar.get(Calendar.YEAR);
         this.month = calendar.get(Calendar.MONTH) + 1;
         this.day = calendar.get(Calendar.DAY_OF_MONTH);
