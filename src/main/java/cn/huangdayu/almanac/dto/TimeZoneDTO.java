@@ -1,5 +1,6 @@
 package cn.huangdayu.almanac.dto;
 
+import cn.huangdayu.almanac.exception.AlmanacException;
 import cn.huangdayu.almanac.utils.AreaUtils;
 import cn.huangdayu.almanac.utils.DateTimeUtils;
 
@@ -105,33 +106,37 @@ public class TimeZoneDTO {
     }
 
     public TimeZoneDTO(Calendar calendar, String... names) {
-        this.year = calendar.get(Calendar.YEAR);
-        this.month = calendar.get(Calendar.MONTH) + 1;
-        this.day = calendar.get(Calendar.DAY_OF_MONTH);
-        this.week = calendar.get(Calendar.DAY_OF_WEEK);
-        this.hour = calendar.get(Calendar.HOUR_OF_DAY);
-        this.minute = calendar.get(Calendar.MINUTE);
-        this.second = calendar.get(Calendar.SECOND);
-        this.millisecond = calendar.get(Calendar.MILLISECOND);
-        this.calendar = calendar;
-        if (names.length == 2) {
-            this.province = names[0];
-            this.area = names[1];
-        } else if (names.length == 1) {
-            String name = names[0];
-            String[] nameList = name.trim().split("省|市|区|县|镇");
-            if (nameList.length < 2) {
-                this.province = "广东";
-                this.area = "徐闻";
-            } else if (nameList.length == 2) {
-                this.province = nameList[0];
-                this.area = nameList[1];
-            } else {
-                this.province = nameList[0];
-                this.area = nameList[2];
+        try {
+            this.year = calendar.get(Calendar.YEAR);
+            this.month = calendar.get(Calendar.MONTH) + 1;
+            this.day = calendar.get(Calendar.DAY_OF_MONTH);
+            this.week = calendar.get(Calendar.DAY_OF_WEEK);
+            this.hour = calendar.get(Calendar.HOUR_OF_DAY);
+            this.minute = calendar.get(Calendar.MINUTE);
+            this.second = calendar.get(Calendar.SECOND);
+            this.millisecond = calendar.get(Calendar.MILLISECOND);
+            this.calendar = calendar;
+            if (names.length == 2) {
+                this.province = names[0];
+                this.area = names[1];
+            } else if (names.length == 1) {
+                String name = names[0];
+                String[] nameList = name.trim().split("省|市|区|县|镇");
+                if (nameList.length < 2) {
+                    this.province = "广东";
+                    this.area = "徐闻";
+                } else if (nameList.length == 2) {
+                    this.province = nameList[0];
+                    this.area = nameList[1];
+                } else {
+                    this.province = nameList[0];
+                    this.area = nameList[2];
+                }
             }
+            this.address = AreaUtils.judgeArea(this.province, this.area)[1];
+        } catch (Exception e) {
+            throw new AlmanacException("时间与地址构造异常", e);
         }
-        this.address = AreaUtils.judgeArea(this.province, this.area)[1];
     }
 
     public int getYear() {
