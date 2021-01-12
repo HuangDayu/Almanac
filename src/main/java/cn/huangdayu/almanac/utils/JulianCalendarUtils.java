@@ -1,6 +1,6 @@
-package com.almanac.utils;
+package cn.huangdayu.almanac.utils;
 
-import com.almanac.dto.TimeZoneDTO;
+import cn.huangdayu.almanac.dto.TimeZoneDTO;
 
 import java.util.Calendar;
 

@@ -1,4 +1,4 @@
-package com.almanac.dto;
+package cn.huangdayu.almanac.dto;
 
 /**
  * @author huangdayu

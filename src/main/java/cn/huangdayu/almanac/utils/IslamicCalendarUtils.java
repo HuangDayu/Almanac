@@ -1,6 +1,6 @@
-package com.almanac.utils;
+package cn.huangdayu.almanac.utils;
 
-import com.almanac.dto.AlmanacDTO;
+import cn.huangdayu.almanac.dto.AlmanacDTO;
 
 
 /**

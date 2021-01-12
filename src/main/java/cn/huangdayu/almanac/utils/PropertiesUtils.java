@@ -1,4 +1,4 @@
-package com.almanac.utils;
+package cn.huangdayu.almanac.utils;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -16,17 +16,14 @@ public class PropertiesUtils {
      * @return
      */
     public static Properties getAdministrativeProperties() {
-        Properties propt = new Properties();
+        Properties properties = new Properties();
         try {
-            propt.load(PropertiesUtils.class.getClassLoader()
-                    .getResourceAsStream("config/administrative.properties"));
+            properties.load(PropertiesUtils.class.getClassLoader().getResourceAsStream("administrative.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return propt;
+        return properties;
     }
-
-    ;
 
     /**
      * 纬度
@@ -36,14 +33,12 @@ public class PropertiesUtils {
     public static Properties getLatportProperties() {
         Properties propt_lat = new Properties();
         try {
-            propt_lat.load(PropertiesUtils.class.getClassLoader().getResourceAsStream("config/latport.properties"));
+            propt_lat.load(PropertiesUtils.class.getClassLoader().getResourceAsStream("latport.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
         return propt_lat;
     }
-
-    ;
 
     /**
      * 经度
@@ -53,13 +48,11 @@ public class PropertiesUtils {
     public static Properties getLoogportProperties() {
         Properties propt_loog = new Properties();
         try {
-            propt_loog.load(PropertiesUtils.class.getClassLoader().getResourceAsStream("config/loogport.properties"));
+            propt_loog.load(PropertiesUtils.class.getClassLoader().getResourceAsStream("loogport.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
         return propt_loog;
     }
-
-    ;
 
 }

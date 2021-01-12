@@ -1,8 +1,8 @@
-package com.almanac.entity;
+package cn.huangdayu.almanac.entity;
 
-import com.almanac.utils.AnnalsUtils;
-import com.almanac.utils.AstronomyArithmeticUtils;
-import com.almanac.utils.CommonUtils;
+import cn.huangdayu.almanac.utils.AstronomyArithmeticUtils;
+import cn.huangdayu.almanac.utils.AnnalsUtils;
+import cn.huangdayu.almanac.utils.CommonUtils;
 
 /***
  * 气朔计算和参数数据表类

@@ -1,12 +1,12 @@
-package com.almanac;
+package cn.huangdayu.almanac.test;
 
 import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.almanac.dto.AlmanacDTO;
-import com.almanac.dto.TimeZoneDTO;
-import com.almanac.utils.AlmanacUtils;
+import cn.huangdayu.almanac.dto.AlmanacDTO;
+import cn.huangdayu.almanac.dto.TimeZoneDTO;
+import cn.huangdayu.almanac.utils.AlmanacUtils;
 
 public class AlmanacApplication {
     String[] key_DayTimeType = {"日期", "时间", "星期", "地点", "经度", "纬度", "时区", "昼长", "夜长", "天亮", "日出", "中天", "日落", "天黑",

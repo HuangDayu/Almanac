@@ -142,7 +142,7 @@ javac ./com/almanac/main/Main.java
 # 运行
 
 ```shell
-java com.almanac.AlmanacApplication
+java AlmanacApplication
 ```
 
 # 参考文献

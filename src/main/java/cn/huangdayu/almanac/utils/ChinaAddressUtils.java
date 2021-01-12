@@ -1,11 +1,9 @@
-package com.almanac.utils;
+package cn.huangdayu.almanac.utils;
 
-import com.almanac.dto.ChinaAddressDTO;
+import cn.huangdayu.almanac.dto.ChinaAddressDTO;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
