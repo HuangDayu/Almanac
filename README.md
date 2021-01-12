@@ -15,9 +15,9 @@
 
 ```xml
 <dependency>
-  <groupId>cn.huangdayu</groupId>
-  <artifactId>almanac</artifactId>
-  <version>1.0.0</version>
+    <groupId>cn.huangdayu</groupId>
+    <artifactId>almanac</artifactId>
+    <version>[1+,)</version>
 </dependency>
 ```
 
