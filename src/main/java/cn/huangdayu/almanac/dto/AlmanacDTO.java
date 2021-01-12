@@ -1,8 +1,8 @@
-package com.almanac.dto;
+package cn.huangdayu.almanac.dto;
 
-import com.almanac.utils.*;
-
-import java.util.Calendar;
+import cn.huangdayu.almanac.utils.DateTimeUtils;
+import cn.huangdayu.almanac.utils.PortUtils;
+import cn.huangdayu.almanac.utils.SolarTermUtils;
 
 /**
  * 历模型类

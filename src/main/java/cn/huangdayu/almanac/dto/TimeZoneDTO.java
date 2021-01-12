@@ -1,7 +1,7 @@
-package com.almanac.dto;
+package cn.huangdayu.almanac.dto;
 
-import com.almanac.utils.AreaUtils;
-import com.almanac.utils.DateTimeUtils;
+import cn.huangdayu.almanac.utils.AreaUtils;
+import cn.huangdayu.almanac.utils.DateTimeUtils;
 
 import java.time.Instant;
 import java.util.Calendar;

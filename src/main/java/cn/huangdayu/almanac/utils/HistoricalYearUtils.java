@@ -1,4 +1,4 @@
-package com.almanac.utils;
+package cn.huangdayu.almanac.utils;
 
 /**
  * 纪年数据工具类

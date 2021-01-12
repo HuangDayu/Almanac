@@ -1,6 +1,6 @@
-package com.almanac.utils;
+package cn.huangdayu.almanac.utils;
 
-import com.almanac.dto.AlmanacDTO;
+import cn.huangdayu.almanac.dto.AlmanacDTO;
 
 import java.util.*;
 
@@ -97,6 +97,12 @@ public class SolarTermUtils {
     }
 
 
+    /**
+     * 获取下一个节气
+     *
+     * @param almanacDTO
+     * @return
+     */
     public static String getNextSolarTerm(AlmanacDTO almanacDTO) {
         Map<Integer, String> treeMap = new TreeMap<>(new Comparator<Integer>() {
             @Override
@@ -104,24 +110,19 @@ public class SolarTermUtils {
                 return o2 - o1;  //倒序.这里说明一下，如果返回负值，则o1先输出，反之则o2
             }
         });
-        int year = almanacDTO.getGregorianYear();
-        int month = almanacDTO.getGregorianMonth();
-        int day = almanacDTO.getGregorianDay();
-        int nowDays = JulianCalendarUtils.getJuLian(year, month, day);
-        for (String str_1 : getAllSolarTerm(year)) {
-            String[] strs_2 = str_1.split(" ");
-            String[] strs_3 = strs_2[0].split("-");
-            int y = Integer.valueOf(strs_3[0]);// 年
-            int m = Integer.valueOf(strs_3[1]);// 月
-            int d = Integer.valueOf(strs_3[2]);// 日
-            int solartermDays = JulianCalendarUtils.getJuLian(y, m, d);
-            treeMap.put(solartermDays, str_1);
+        int nowDays = JulianCalendarUtils.getJuLian(almanacDTO.getGregorianYear(), almanacDTO.getGregorianMonth(), almanacDTO.getGregorianDay());
+        // 由于节气是跨西历年份的，所以取去年，今年的节气
+        for (int i = almanacDTO.getGregorianYear() - 1; i <= almanacDTO.getGregorianYear(); i++) {
+            for (String solarTerm : getAllSolarTerm(i)) {
+                String[] date = solarTerm.split(" ")[0].split("-");
+                treeMap.put(JulianCalendarUtils.getJuLian(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2])), solarTerm);
+            }
         }
         List<String> result = new ArrayList<>();
-        treeMap.forEach((K, V) -> {
-            int cha = K - nowDays;
+        treeMap.forEach((k, v) -> {
+            int cha = k - nowDays;
             if ((cha > 0 && cha <= 15) || cha == 0) {
-                result.add(V);
+                result.add(v);
             }
         });
         return result.get(0);

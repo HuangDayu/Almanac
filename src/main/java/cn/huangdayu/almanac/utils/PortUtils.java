@@ -1,4 +1,4 @@
-package com.almanac.utils;
+package cn.huangdayu.almanac.utils;
 
 import java.text.DecimalFormat;
 import java.util.Properties;

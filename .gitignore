@@ -1,4 +1,72 @@
-/bin/
-/old/
-.classpath
+/classes/
+/test-classes/
+/target/
+/.mvn/
+
+**/target/**
+
+package/
+logs/
+work/
+
+rebel.xml
+.rebel.xml.bak
+.rebel-remote.xml.bak
+
+*/rebel-remote.xml
+*/rebel.xml
+*/rebel.xml.bak
+*/rebel-remote.xml.bak
+
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+*.iml
+**/*.iml
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# maven ignore
+
+*.class
+*.jar
+*.war
+!.mvn/wrapper/*
+*.zip
+*.ear
+*.tar
+*.rar
+*.tar.gz
+*.lst
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# eclipse ignore
+.settings/
 .project
+.classpath
+
+# idea ignore
+.idea/
+*.ipr
+*.iml
+*.iws
+
+# temp ignore
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+
+# system ignore
+.DS_Store
+Thumbs.db

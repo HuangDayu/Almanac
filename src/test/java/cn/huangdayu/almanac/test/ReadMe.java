@@ -1,12 +1,12 @@
-package com.almanac;
+package cn.huangdayu.almanac.test;
 
 import java.util.Calendar;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.almanac.dto.AlmanacDTO;
-import com.almanac.dto.TimeZoneDTO;
-import com.almanac.utils.AlmanacUtils;
+import cn.huangdayu.almanac.dto.AlmanacDTO;
+import cn.huangdayu.almanac.dto.TimeZoneDTO;
+import cn.huangdayu.almanac.utils.AlmanacUtils;
 
 public class ReadMe {
 

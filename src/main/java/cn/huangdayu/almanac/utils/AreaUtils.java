@@ -1,4 +1,4 @@
-package com.almanac.utils;
+package cn.huangdayu.almanac.utils;
 
 /**
  * 处理地址工具类

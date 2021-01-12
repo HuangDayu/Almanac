@@ -1,11 +1,11 @@
-package com.almanac.utils;
+package cn.huangdayu.almanac.utils;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 
-import com.almanac.dto.AlmanacDTO;
-import com.almanac.dto.TimeZoneDTO;
+import cn.huangdayu.almanac.dto.AlmanacDTO;
+import cn.huangdayu.almanac.dto.TimeZoneDTO;
 
 /**
  * 日出月落工具类

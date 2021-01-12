@@ -1,10 +1,10 @@
-package com.almanac.utils;
+package cn.huangdayu.almanac.utils;
 
 import java.util.Calendar;
 
-import com.almanac.dto.AlmanacDTO;
-import com.almanac.dto.TimeZoneDTO;
-import com.almanac.entity.QiShuoDO;
+import cn.huangdayu.almanac.entity.QiShuoDO;
+import cn.huangdayu.almanac.dto.AlmanacDTO;
+import cn.huangdayu.almanac.dto.TimeZoneDTO;
 
 /**
  * 历计算工具类
