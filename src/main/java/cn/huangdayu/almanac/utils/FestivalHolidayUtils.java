@@ -1,6 +1,8 @@
 package cn.huangdayu.almanac.utils;
 
 import cn.huangdayu.almanac.dto.AlmanacDTO;
+import cn.huangdayu.almanac.dto.GregorianDTO;
+import cn.huangdayu.almanac.dto.HolidayDTO;
 
 
 /**
@@ -51,53 +53,53 @@ public class FestivalHolidayUtils {
 
 	/**
 	 * 取某日节日
-	 * 
-	 * @param date
-	 * @param dateTwo
+	 *
+	 * @param gregorianDTO
+	 * @param holidayDTO
 	 */
-	public static void getDayName(AlmanacDTO date, AlmanacDTO dateTwo) {
-		String impHappyName = dateTwo.getHappyDayName() == null ? "" : dateTwo.getHappyDayName();
-		String impName = dateTwo.getMajorDayName() == null ? "" : dateTwo.getMajorDayName();
-		String allName = dateTwo.getAllDayName() == null ? "" : dateTwo.getAllDayName();
+	public static void getDayName(GregorianDTO gregorianDTO, HolidayDTO holidayDTO) {
+		String impHappyName =  holidayDTO.getHappyDay();
+		String impName =  holidayDTO.getMajorDay();
+		String allName =  holidayDTO.getAllDay();
 		/****************
-		 * 节日名称生成 传入日物件u 返回某日节日信息 
-		 * r.A 重要喜庆日子名称(可将日子名称置红) 
+		 * 节日名称生成 传入日物件u 返回某日节日信息
+		 * r.A 重要喜庆日子名称(可将日子名称置红)
 		 * r.B 重要日子名称
 		 * r.C 各种日子名称(连成一大串)
 		 * r.Fjia 放假日子(可用于日期数字置红)
 		 *****************/
-		String m0 = (date.getGregorianMonth() < 10 ? "0" : "") + date.getGregorianMonth();
-		String d0 = (date.getGregorianDay() < 10 ? "0" : "") + date.getGregorianDay();
+		String m0 = (gregorianDTO.getMonth() < 10 ? "0" : "") + gregorianDTO.getMonth();
+		String d0 = (gregorianDTO.getDay() < 10 ? "0" : "") + gregorianDTO.getDay();
 		String s, s2, type;
 
-		if (date.getGregorianWeek() == 0 || date.getGregorianWeek() == 6)
+		if (gregorianDTO.getWeek() == 0 || gregorianDTO.getWeek() == 6)
 		 {
-			dateTwo.setHolidayDayIndex(1); // 星期日或星期六放假
+			holidayDTO.setHolidayDay(1); // 星期日或星期六放假
 		}
 
 		// 按公历日期查找
-		for (int i = 0; i < sFtv[date.getGregorianMonth() - 1].length; i++) { // 公历节日或纪念日,遍历本月节日表
-			s = sFtv[date.getGregorianMonth() - 1][i];
+		for (int i = 0; i < sFtv[gregorianDTO.getMonth() - 1].length; i++) { // 公历节日或纪念日,遍历本月节日表
+			s = sFtv[gregorianDTO.getMonth() - 1][i];
 			if (!CommonUtils.subString(s, 0, 2).equals(d0)) {
 				continue;
 			}
 			s = CommonUtils.subString(s, 2);
 			type = CommonUtils.subString(s, 0, 1);
 			if (CommonUtils.subString(s, 5, 6).equals("-")) { // 有年限的
-				if (date.getGregorianYear() < Integer.parseInt(CommonUtils.subString(s, 1, 5))
-						|| date.getGregorianYear() > Integer.parseInt(CommonUtils.subString(s, 6, 10))) {
+				if (gregorianDTO.getYear() < Integer.parseInt(CommonUtils.subString(s, 1, 5))
+						|| gregorianDTO.getYear() > Integer.parseInt(CommonUtils.subString(s, 6, 10))) {
 					continue;
 				}
 				s = CommonUtils.subString(s, 10);
 			} else {
-				if (date.getGregorianYear() < 1850) {
+				if (gregorianDTO.getYear() < 1850) {
 					continue;
 				}
 				s = CommonUtils.subString(s, 1);
 			}
 			if (type.equals("#")) {
 				impHappyName += s + " ";
-				dateTwo.setHolidayDayIndex(1); // 放假的节日
+				holidayDTO.setHolidayDay(1); // 放假的节日
 			}
 			if (type.equals("I"))
 			 {
@@ -110,17 +112,17 @@ public class FestivalHolidayUtils {
 		}
 
 		// 按周查找
-		int w = date.getGregorianWeekIndexForMonth();
-		if (date.getGregorianWeek() >= date.getGregorianWeekFirstForMonth()) {
+		int w = gregorianDTO.getWeekIndexForMonth();
+		if (gregorianDTO.getWeek() >= gregorianDTO.getWeekFirstForMonth()) {
 			w += 1;
 		}
 		int w2 = w;
-		if (date.getGregorianWeekIndexForMonth() == date.getGregorianWeeksOfMonth() - 1) {
+		if (gregorianDTO.getWeekIndexForMonth() == gregorianDTO.getWeeksOfMonth() - 1) {
 			w2 = 5;
 		}
 
-		String wStr = m0 + w + date.getGregorianWeek(); // d日在本月的第几个星期某
-		String w2Str = m0 + w2 + date.getGregorianWeek();
+		String wStr = m0 + w + gregorianDTO.getWeek(); // d日在本月的第几个星期某
+		String w2Str = m0 + w2 + gregorianDTO.getWeek();
 
 		for (int i = 0; i < wFtv.length; i++) {
 			s = wFtv[i];
@@ -132,7 +134,7 @@ public class FestivalHolidayUtils {
 			s = CommonUtils.subString(s, 5);
 			if (type.equals("#")) {
 				impHappyName += s + " ";
-				dateTwo.setHolidayDayIndex(1);
+				holidayDTO.setHolidayDay(1);
 			}
 			if (type.equals("I")) {
 				impName += s + " ";
@@ -142,9 +144,9 @@ public class FestivalHolidayUtils {
 			}
 		}
 
-		dateTwo.setHappyDayName(impHappyName);
-		dateTwo.setMajorDayName(impName);
-		dateTwo.setAllDayName(allName);
+		holidayDTO.setHappyDay(impHappyName);
+		holidayDTO.setMajorDay(impName);
+		holidayDTO.setAllDay(allName);
 	}
 
 }

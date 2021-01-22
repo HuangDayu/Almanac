@@ -2,7 +2,9 @@ package cn.huangdayu.almanac.dto;
 
 import cn.huangdayu.almanac.exception.AlmanacException;
 import cn.huangdayu.almanac.utils.AreaUtils;
+import cn.huangdayu.almanac.utils.ConstantsUtils;
 import cn.huangdayu.almanac.utils.DateTimeUtils;
+import cn.huangdayu.almanac.utils.JulianCalendarUtils;
 
 import java.time.Instant;
 import java.util.Calendar;
@@ -24,13 +26,25 @@ public class TimeZoneDTO {
     private int second;
     private int millisecond;
     private int week;
-    private int timeZone;
-    private String province;// 省份
-    private String area;// 市/县/区
-    private String address;// 位置结果
+    private String timeZone;
+    /**
+     * 省份
+     */
+    private String province;
+    /**
+     * 市/县/区
+     */
+    private String area;
+    /**
+     * 位置
+     */
+    private String address;
     private Calendar calendar;
+    private Integer julianDay;
+    private String position;
+    private String weekName;
 
-    public TimeZoneDTO() {
+    private TimeZoneDTO() {
     }
 
     public TimeZoneDTO(String province, String area, Instant instant) {
@@ -89,12 +103,9 @@ public class TimeZoneDTO {
         this(address, DateTimeUtils.intToCalendar(year, month, day, hourOfDay, minute, second, millisecond));
     }
 
-    public TimeZoneDTO(String... str) {
-        this(str[0], str[1], DateTimeUtils.strToCalendar(str[2] + " " + str[3]));
-    }
-
-    public TimeZoneDTO(String[]... strs) {
-        this(strs[0][0], strs[0][1], DateTimeUtils.strToCalendar(strs[0][2] + " " + strs[0][3]));
+    public TimeZoneDTO(int year, int month, int day, int hourOfDay, int minute, int second,
+                       int millisecond) {
+        this(DateTimeUtils.intToCalendar(year, month, day, hourOfDay, minute, second, millisecond));
     }
 
     public TimeZoneDTO(String province, String area, Calendar calendar) {
@@ -103,6 +114,24 @@ public class TimeZoneDTO {
 
     public TimeZoneDTO(String address, Calendar calendar) {
         this(calendar, address);
+    }
+
+    public TimeZoneDTO(TimeZoneDTO timeZoneDTO, int day,int julianDay) {
+        this.calendar = DateTimeUtils.intToCalendar(timeZoneDTO.getYear(), timeZoneDTO.getMonth(), day, timeZoneDTO.getHour(), timeZoneDTO.getMinute(), timeZoneDTO.getSecond(), timeZoneDTO.getMillisecond());
+        this.year = this.calendar.get(Calendar.YEAR);
+        this.month = this.calendar.get(Calendar.MONTH) + 1;
+        this.day = this.calendar.get(Calendar.DAY_OF_MONTH);
+        this.week = this.calendar.get(Calendar.DAY_OF_WEEK);
+        this.hour = this.calendar.get(Calendar.HOUR_OF_DAY);
+        this.minute = this.calendar.get(Calendar.MINUTE);
+        this.second = this.calendar.get(Calendar.SECOND);
+        this.millisecond = this.calendar.get(Calendar.MILLISECOND);
+        this.address = timeZoneDTO.getAddress();
+        this.julianDay = julianDay;
+        this.timeZone = timeZoneDTO.getTimeZone();
+        this.position = timeZoneDTO.getPosition();
+        // TODO 或许可以考虑用上面的week变量
+        this.weekName = DateTimeUtils.getWeek(calendar);
     }
 
     public TimeZoneDTO(Calendar calendar, String... names) {
@@ -116,25 +145,52 @@ public class TimeZoneDTO {
             this.second = calendar.get(Calendar.SECOND);
             this.millisecond = calendar.get(Calendar.MILLISECOND);
             this.calendar = calendar;
-            if (names.length == 2) {
-                this.province = names[0];
-                this.area = names[1];
-            } else if (names.length == 1) {
-                String name = names[0];
-                String[] nameList = name.trim().split("省|市|区|县|镇");
-                if (nameList.length < 2) {
-                    this.province = "广东";
-                    this.area = "徐闻";
-                } else if (nameList.length == 2) {
-                    this.province = nameList[0];
-                    this.area = nameList[1];
-                } else {
-                    this.province = nameList[0];
-                    this.area = nameList[2];
+            if (names != null && names.length > 0) {
+                if (names.length == 2) {
+                    this.province = names[0];
+                    this.area = names[1];
+                } else if (names.length == 1) {
+                    String name = names[0];
+                    String[] nameList = name.trim().split("省|市|区|县|镇");
+                    if (nameList.length < 2) {
+                        this.province = "广东";
+                        this.area = "徐闻";
+                    } else if (nameList.length == 2) {
+                        this.province = nameList[0];
+                        this.area = nameList[1];
+                    } else {
+                        this.province = nameList[0];
+                        this.area = nameList[2];
+                    }
                 }
+            } else {
+                this.province = "广东";
+                this.area = "徐闻";
             }
             this.address = AreaUtils.judgeArea(this.province, this.area)[1];
+            this.julianDay = JulianCalendarUtils.getJuLian(this.year, this.month, this.day);
+            // +0800
+            String format = DateTimeUtils.formatDateByFormat(calendar, "Z");
+            String value = format.substring(1, 3);
+            int i = 1, j = Integer.parseInt(value);
+            if (j > 0) {
+                i = Integer.parseInt(value);
+            } else {
+                i = Integer.parseInt(value.substring(1));
+            }
+            if (format.contains("-")) {
+                this.timeZone = format + " 西" + ConstantsUtils.TIMEZONE[i - 1] + "区";
+            } else {
+                this.timeZone = format + " 东" + ConstantsUtils.TIMEZONE[i - 1] + "区";
+            }
+            // BUG 如果日期递增字后，那么该对象则需要重构
+            this.position = (province.replaceAll("省", "") + " " + area.replaceAll("市", "").replaceAll("区", "").replaceAll("县", "").replaceAll("镇", "")
+                    .replaceAll("乡", ""));
+            // TODO 或许可以考虑用上面的week变量
+            this.weekName = DateTimeUtils.getWeek(calendar);
+
         } catch (Exception e) {
+            e.printStackTrace();
             throw new AlmanacException("时间与地址构造异常", e);
         }
     }
@@ -203,14 +259,6 @@ public class TimeZoneDTO {
         this.week = week;
     }
 
-    public int getTimeZone() {
-        return timeZone;
-    }
-
-    public void setTimeZone(int timeZone) {
-        this.timeZone = timeZone;
-    }
-
     public String getProvince() {
         return province;
     }
@@ -243,8 +291,57 @@ public class TimeZoneDTO {
         this.calendar = calendar;
     }
 
-    public Calendar toCalendar() {
-        return DateTimeUtils.intToCalendar(this.year, this.month, this.day, this.hour, this.minute, this.second, this.millisecond);
+    public Integer getJulianDay() {
+        return julianDay;
     }
 
+    public void setJulianDay(Integer julianDay) {
+        this.julianDay = julianDay;
+    }
+
+    public String getTimeZone() {
+        return timeZone;
+    }
+
+    public void setTimeZone(String timeZone) {
+        this.timeZone = timeZone;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getWeekName() {
+        return weekName;
+    }
+
+    public void setWeekName(String weekName) {
+        this.weekName = weekName;
+    }
+
+    @Override
+    public String toString() {
+        return "TimeZoneDTO{" +
+                "year=" + year +
+                ", month=" + month +
+                ", day=" + day +
+                ", hour=" + hour +
+                ", minute=" + minute +
+                ", second=" + second +
+                ", millisecond=" + millisecond +
+                ", week=" + week +
+                ", timeZone='" + timeZone + '\'' +
+                ", province='" + province + '\'' +
+                ", area='" + area + '\'' +
+                ", address='" + address + '\'' +
+                ", calendar=" + calendar +
+                ", julianDay=" + julianDay +
+                ", position='" + position + '\'' +
+                ", weekName='" + weekName + '\'' +
+                '}';
+    }
 }

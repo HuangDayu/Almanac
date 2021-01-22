@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 
-import cn.huangdayu.almanac.dto.AlmanacDTO;
+import cn.huangdayu.almanac.dto.SunMoonDTO;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
 
 /**
@@ -35,13 +35,13 @@ public class SunMoonUtils {
      */
     private static double longitude;
 
-    public static void init(String address, Calendar calendar, AlmanacDTO almanacDTO) {
-        sunTime(address, calendar, almanacDTO);
-        moonTime(calendar, almanacDTO);
+    public static void init(String address, Calendar calendar, SunMoonDTO sunMoonDTO) {
+        sunTime(address, calendar, sunMoonDTO);
+        moonTime(calendar, sunMoonDTO);
     }
 
-    public static void init(TimeZoneDTO timeZoneDTO, AlmanacDTO almanacDTO) {
-        init(timeZoneDTO.getAddress(), timeZoneDTO.toCalendar(), almanacDTO);
+    public static void init(TimeZoneDTO timeZoneDTO, SunMoonDTO sunMoonDTO) {
+        init(timeZoneDTO.getAddress(), timeZoneDTO.getCalendar(), sunMoonDTO);
     }
 
     /***
@@ -140,7 +140,7 @@ public class SunMoonUtils {
      * @param area
      * @param calendar
      */
-    private static void sunTime(String area, Calendar calendar, AlmanacDTO almanacDTO) {
+    private static void sunTime(String area, Calendar calendar, SunMoonDTO sunMoonDTO) {
 
         double tz = DateTimeUtils.getTimZoneInt(calendar);
         int year = calendar.get(Calendar.YEAR);
@@ -164,16 +164,16 @@ public class SunMoonUtils {
         /***
          * 设置经度
          */
-        almanacDTO.setLongitude(setStringPointDouble(longitude, true));
+        sunMoonDTO.setLongitude(setStringPointDouble(longitude, true));
         /***
          * 设置纬度
          */
-        almanacDTO.setLatitude(setStringPointDouble(latitude, false));
+        sunMoonDTO.setLatitude(setStringPointDouble(latitude, false));
 
         Double wd = latitude / 180 * Math.PI;
         Double jd = -longitude / 180 * Math.PI;
 
-        double richu = getJuLian_old(year, month, day, hour, min, sec) - JulianCalendarUtils.getJuLian_INT(year);// 2451545
+        double richu = getJuLian_old(year, month, day, hour, min, sec) - JulianCalendarUtils.getJuLianByYear(year);// 2451545
         // 2451544.5
 
         for (int i = 0; i < 10; i++) {
@@ -181,19 +181,19 @@ public class SunMoonUtils {
         }
 
         // 日出
-        almanacDTO.setSunRiseTime(doubleToStr(richu));
+        sunMoonDTO.setSunRiseTime(doubleToStr(richu));
         // 日落
-        almanacDTO.setSunSetTime(doubleToStr(midDayTime + midDayTime - richu));
+        sunMoonDTO.setSunSetTime(doubleToStr(midDayTime + midDayTime - richu));
         // 中天
-        almanacDTO.setMidDayTime(doubleToStr(midDayTime));
+        sunMoonDTO.setMidDayTime(doubleToStr(midDayTime));
         // 天亮
-        almanacDTO.setDawnTime(doubleToStr(dawnTime));
+        sunMoonDTO.setDawnTime(doubleToStr(dawnTime));
         // 天黑
-        almanacDTO.setDarkTime(doubleToStr(midDayTime + midDayTime - dawnTime));
+        sunMoonDTO.setDarkTime(doubleToStr(midDayTime + midDayTime - dawnTime));
         // 昼长 = 日落-日出
-        almanacDTO.setDiurnalTime(doubleToStr((midDayTime - richu) * 2 - 0.5));
+        sunMoonDTO.setDiurnalTime(doubleToStr((midDayTime - richu) * 2 - 0.5));
         // 夜长
-        almanacDTO.setNightTime(doubleToStr(24 - ((midDayTime - richu) * 2 - 0.5)));
+        sunMoonDTO.setNightTime(doubleToStr(24 - ((midDayTime - richu) * 2 - 0.5)));
 
     }
 
@@ -388,17 +388,17 @@ public class SunMoonUtils {
     }
 
 
-    private static void moonTime(Calendar calendar, AlmanacDTO almanacDTO) {
+    private static void moonTime(Calendar calendar, SunMoonDTO sunMoonDTO) {
         double dbLon = getDoubleLongitude();
         double dbLat = getDoubleLatitude();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH) + 1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         double mjdd = mjd(day, month, year, 0);
-        find_moonrise_set(mjdd, DateTimeUtils.getTimZoneInt(calendar), dbLon, dbLat, 0, 0, almanacDTO);
+        find_moonrise_set(mjdd, DateTimeUtils.getTimZoneInt(calendar), dbLon, dbLat, 0, 0, sunMoonDTO);
     }
 
-    private static void find_moonrise_set(double mjd, double tz, double glong, double glat, int dls, int ST, AlmanacDTO almanacDTO) {
+    private static void find_moonrise_set(double mjd, double tz, double glong, double glat, int dls, int ST, SunMoonDTO sunMoonDTO) {
         double sglat, date, ym, yz, utrise = 0, utset = 0, sinho, cglat, xe, ye;
         double yp, nz, hour, z1, z2, rads = 0.0174532925;
         Boolean rise, sett, above;
@@ -480,19 +480,19 @@ public class SunMoonUtils {
          *
          * @return
          */
-        almanacDTO.setMoonRiseTime(timeToStr(moonRise));
+        sunMoonDTO.setMoonRiseTime(timeToStr(moonRise));
         /***
          * 月落时间
          *
          * @return
          */
-        almanacDTO.setMoonSetTime(timeToStr(moonSet));
+        sunMoonDTO.setMoonSetTime(timeToStr(moonSet));
         /***
          * 月中时间
          *
          * @return
          */
-        almanacDTO.setMoonMiddleTime(timeToStr((moonSet + moonRise) / 2));
+        sunMoonDTO.setMoonMiddleTime(timeToStr((moonSet + moonRise) / 2));
 
     }
 

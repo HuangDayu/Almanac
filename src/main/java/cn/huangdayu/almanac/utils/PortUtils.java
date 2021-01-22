@@ -12,39 +12,27 @@ import java.util.Properties;
  */
 public class PortUtils {
 
-    private static Properties properLat;
-    private static Properties properLoog;
-
-    public static void init(Properties properLat, Properties properLoog) {
-        PortUtils.properLat = properLat;
-        PortUtils.properLoog = properLoog;
-    }
-
-    public static String setStr(double a, double b) {
-        return a + "|" + b;
-    }
-
-    public static String getProtName() {
+    public static String getProtName(Properties properLat,Properties properLoog) {
         // getProperties(setStr(setTwoPointDouble(x),setTwoPointDouble(y)))
         double x = SunMoonUtils.getDoubleLatitude();
         double y = SunMoonUtils.getDoubleLongitude();
         for (int i = 0; i < 10; i++) {
             // System.out.println(x + "," + y);
-            if (getPropertiesLat(setTwoPointString(x)) == null) {
+            if (properLat.getProperty(setTwoPointString(x)) == null) {
                 x = setTwoPointDouble(x + 0.01);
             } else {
-                return getPropertiesLat(setTwoPointString(x));
+                return properLat.getProperty(setTwoPointString(x));
             }
-            if (getPropertiesLoog(String.valueOf(setTwoPointDouble(y))) == null) {
+            if (properLoog.getProperty(String.valueOf(setTwoPointDouble(y))) == null) {
                 y = setTwoPointDouble(y + 0.01);
             } else {
-                return getPropertiesLoog(setTwoPointString(y));
+                return properLoog.getProperty(setTwoPointString(y));
             }
         }
-        return getPropertiesLat(setTwoPointString(x));
+        return properLat.getProperty(setTwoPointString(x));
     }
 
-    public static String setTwoPointString(double d) {
+    private static String setTwoPointString(double d) {
 
         DecimalFormat df1 = new DecimalFormat("########.00");
         String str = df1.format(d);
@@ -54,7 +42,7 @@ public class PortUtils {
     /***
      * 保留两个小数点方法包装
      */
-    public static double setTwoPointDouble(double d) {
+    private static double setTwoPointDouble(double d) {
 
         DecimalFormat df1 = new DecimalFormat("########.00");
         return Double.valueOf(df1.format(d));
@@ -65,19 +53,6 @@ public class PortUtils {
         // BigDecimal b = new BigDecimal(d);
         // double f1 = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 
-    }
-
-    /***
-     * @param str
-     *            key
-     * @return volue
-     */
-    public static String getPropertiesLat(String str) {
-        return properLat.getProperty(str);
-    }
-
-    public static String getPropertiesLoog(String str) {
-        return properLoog.getProperty(str);
     }
 
 }
