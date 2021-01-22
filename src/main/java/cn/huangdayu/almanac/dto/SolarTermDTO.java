@@ -85,6 +85,26 @@ public class SolarTermDTO {
         this.julianTime = julianTime;
     }
 
+    public SolarTermDTO getNextOne() {
+        for (SolarTermDTO solarTermDTO : next) {
+            if (solarTermDTO.getAfterDay() > 0) {
+                // 列表中，第一个大于0的则是下一个节气
+                return solarTermDTO;
+            }
+        }
+        return null;
+    }
+
+    public SolarTermDTO getByName(String name) {
+        for (SolarTermDTO solarTermDTO : next) {
+            if (solarTermDTO.getName().equalsIgnoreCase(name)) {
+                return solarTermDTO;
+            }
+        }
+        return null;
+    }
+
+
     @Override
     public String toString() {
         return "SolarTermDTO{" +

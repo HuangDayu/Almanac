@@ -189,18 +189,6 @@ public class AlmanacUtils {
             }
             solarTermDTO.setNext(solarTermAfterDTOS);
 
-
-            // 节气的取值范围是0-23
-            int jieqiIndex = (int) Math.floor((julianDayForThisDay - qiShuoDO.ZQ[0] - 7) / 15.2184);
-            if (jieqiIndex < 23 && julianDayForThisDay >= qiShuoDO.ZQ[jieqiIndex + 1]) {
-                jieqiIndex++;
-            }
-            if (julianDayForThisDay == qiShuoDO.ZQ[jieqiIndex]) {
-                solarTermDTO.setJulianDay(julianDayForThisDay + CommonUtils.JULIAN_FOR_2000);
-                solarTermDTO.setIndex(jieqiIndex);
-                solarTermDTO.setName(AnnalsUtils.JIEQI[jieqiIndex]);
-            }
-
             //------------------------------------计算天干地支------------------------------------//
 
             EraDTO eraDTO = new EraDTO();
@@ -280,11 +268,10 @@ public class AlmanacUtils {
 
 
             //------------------------------------计算节假日------------------------------------//
-            HolidayDTO holidayDTO = new HolidayDTO();
+            // 计算农历节日
+            HolidayDTO holidayDTO = AnnalsUtils.getHolidayInfo(lunarDTO, solarTermDTO, eraDTO);
             // 计算公历节日
             FestivalHolidayUtils.getDayName(gregorianDTO, holidayDTO);
-            // 计算农历节日
-            AnnalsUtils.getHolidayInfo(lunarDTO, holidayDTO, solarTermDTO, eraDTO);
 
             AlmanacDTO almanacDTO = new AlmanacDTO();
             almanacDTO.setEraDTO(eraDTO);

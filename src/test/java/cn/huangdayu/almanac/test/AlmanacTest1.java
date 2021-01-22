@@ -10,7 +10,7 @@ import cn.huangdayu.almanac.utils.AlmanacUtils;
  */
 public class AlmanacTest1 {
     public static void main(String[] args) {
-        TimeZoneDTO timeZoneDTO2 = new TimeZoneDTO("广东省徐闻县", "2021-01-06 11:13:29");
+        TimeZoneDTO timeZoneDTO2 = new TimeZoneDTO("广东省徐闻县", "2021-01-29 11:13:29");
         AlmanacDTO almanacDTO = AlmanacUtils.dayCalendar(timeZoneDTO2);
         System.out.println(almanacDTO.getTimeZoneDTO());
         System.out.println(almanacDTO.getEraDTO());
