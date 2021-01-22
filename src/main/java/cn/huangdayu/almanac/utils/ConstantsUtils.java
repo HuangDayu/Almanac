@@ -4,7 +4,7 @@ package cn.huangdayu.almanac.utils;
  * @author huangdayu create at 2021/1/21 20:50
  */
 public class ConstantsUtils {
-    public static final String[] GENG = {"[三更]", "[四更]", "[五更]", "", "", "", "", "", "", "[一更]", "[二更]"};
+    public static final String[] GENG = {"[三更]", "[四更]", "[五更]", "", "", "", "", "", "", "", "[一更]", "[二更]"};
     public static final String[] KE = {"一刻", "一刻", "二刻", "三刻", "四刻"};
     public static final String[] TIMEZONE = {"一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二"};
 

@@ -178,6 +178,10 @@ public class LunarDTO {
         this.kingChronologyName = kingChronologyName;
     }
 
+    public String getInfo() {
+        return zodiac.concat("年").concat(month).concat("月").concat(day).concat("日");
+    }
+
     @Override
     public String toString() {
         return "LunarDTO{" +

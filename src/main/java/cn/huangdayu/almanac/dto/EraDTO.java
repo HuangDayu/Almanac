@@ -54,6 +54,10 @@ public class EraDTO {
         this.time = time;
     }
 
+    public String getInfo() {
+        return year + "年" + month + "月" + day + "日" + time + "时";
+    }
+
     @Override
     public String toString() {
         return "EraDTO{" +
