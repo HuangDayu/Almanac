@@ -16,11 +16,11 @@ public class HolidayDTO {
     /**
      * 各种日子名称(连成一大串)
      */
-    private String allDay;
+    private String otherDay;
     /**
      * 放假日子(可用于日期数字置红)
      */
-    private int holidayDay;
+    private int flag;
 
     public String getHappyDay() {
         return happyDay;
@@ -38,20 +38,20 @@ public class HolidayDTO {
         this.majorDay = majorDay;
     }
 
-    public String getAllDay() {
-        return allDay;
+    public String getOtherDay() {
+        return otherDay;
     }
 
-    public void setAllDay(String allDay) {
-        this.allDay = allDay;
+    public void setOtherDay(String otherDay) {
+        this.otherDay = otherDay;
     }
 
-    public int getHolidayDay() {
-        return holidayDay;
+    public int getFlag() {
+        return flag;
     }
 
-    public void setHolidayDay(int holidayDay) {
-        this.holidayDay = holidayDay;
+    public void setFlag(int flag) {
+        this.flag = flag;
     }
 
     @Override
@@ -59,8 +59,8 @@ public class HolidayDTO {
         return "HolidayDTO{" +
                 "happyDay='" + happyDay + '\'' +
                 ", majorDay='" + majorDay + '\'' +
-                ", allDay='" + allDay + '\'' +
-                ", holidayDay=" + holidayDay +
+                ", otherDay='" + otherDay + '\'' +
+                ", flag=" + flag +
                 '}';
     }
 }
