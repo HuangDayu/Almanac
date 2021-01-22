@@ -5,7 +5,7 @@ package cn.huangdayu.almanac.dto;
  * @date 2020/4/3 15:58
  * @project Almanac
  */
-public class ChinaAddressDTO {
+public class AddressDTO {
     private String province;
     private String city;
     private String county;

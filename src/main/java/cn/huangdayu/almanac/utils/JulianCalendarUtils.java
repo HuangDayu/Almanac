@@ -21,18 +21,17 @@ public class JulianCalendarUtils {
     /***
      * 输入年，月，日算出儒略日 http://www.ilovematlab.cn/thread-19002-1-1.html
      *
-     * @param I
+     * @param year
      *            年
-     * @param J
+     * @param month
      *            月
-     * @param K
+     * @param day
      *            日
      * @return 儒略日
      */
-    public static int getJuLian(int I, int J, int K) {
-        int jl = K - 32075 + 1461 * (I + 4800 + (J - 14) / 12) / 4 + 367 * (J - 2 - (J - 14) / 12 * 12) / 12
-                - 3 * ((I + 4900 + (J - 14) / 12) / 100) / 4;
-        return jl;
+    public static int getJuLian(int year, int month, int day) {
+        return day - 32075 + 1461 * (year + 4800 + (month - 14) / 12) / 4 + 367 * (month - 2 - (month - 14) / 12 * 12) / 12
+                - 3 * ((year + 4900 + (month - 14) / 12) / 100) / 4;
     }
 
     public static int getJuLian(Calendar calendar) {
@@ -49,7 +48,7 @@ public class JulianCalendarUtils {
      *            公元1百年
      * @return 1757583
      */
-    public static int getJuLian_INT(int year) {
+    public static int getJuLianByYear(int year) {
         int quZhen = year / 100;
         int quYu = year % 100;
         String Str;
@@ -145,7 +144,7 @@ public class JulianCalendarUtils {
      * @param julianDays
      * @return
      */
-    public static TimeZoneDTO julianDaysToGregorianCalendar(double julianDays) {
+    public static TimeZoneDTO julianDaysToTimeZone(double julianDays) {
         int year, month, day, hour, minute;
         double second;
         int D = (int) Math.floor(julianDays + 0.5), c;
@@ -178,44 +177,37 @@ public class JulianCalendarUtils {
         F *= 60;
         second = F;
 
-        TimeZoneDTO timeZoneDTO = new TimeZoneDTO();
-        timeZoneDTO.setYear(year);
-        timeZoneDTO.setMonth(month);
-        timeZoneDTO.setDay(day);
-        timeZoneDTO.setHour(hour);
-        timeZoneDTO.setMinute(minute);
-        timeZoneDTO.setSecond((int) second);
-        return timeZoneDTO;
+        return new TimeZoneDTO(year, month, day, hour, minute, (int) second, 0);
     }
 
     /***
      * 日期转为串
      *
-     * @param julianDate
+     * @param timeZoneDTO
      * @return
      */
-    public static String julianDateToStr(TimeZoneDTO julianDate) {
-        String Y = "     " + julianDate.getYear(), M = "0" + julianDate.getMonth(), D = "0" + julianDate.getDay();
-        int h = julianDate.getHour(), m = julianDate.getMinute(), s = (int) Math.floor(julianDate.getSecond() + .5);
+    public static String julianDateByTimeZone(TimeZoneDTO timeZoneDTO) {
+        String y = "     " + timeZoneDTO.getYear(), m = "0" + timeZoneDTO.getMonth(), d = "0" + timeZoneDTO.getDay();
+        int h = timeZoneDTO.getHour(), mm = timeZoneDTO.getMinute(), s = (int) Math.floor(timeZoneDTO.getSecond() + .5);
         if (s >= 60) {
             s -= 60;
-            m++;
+            mm++;
         }
-        if (m >= 60) {
-            m -= 60;
+        if (mm >= 60) {
+            mm -= 60;
             h++;
         }
         String hStr, mStr, sStr;
         hStr = "0" + h;
-        mStr = "0" + m;
+        mStr = "0" + mm;
         sStr = "0" + s;
-        Y = CommonUtils.subString(Y, Y.length() - 5);
-        M = CommonUtils.subString(M, M.length() - 2);
-        D = CommonUtils.subString(D, D.length() - 2);
+        y = CommonUtils.subString(y, y.length() - 5);
+        m = CommonUtils.subString(m, m.length() - 2);
+        d = CommonUtils.subString(d, d.length() - 2);
         hStr = CommonUtils.subString(hStr, hStr.length() - 2);
         mStr = CommonUtils.subString(mStr, mStr.length() - 2);
         sStr = CommonUtils.subString(sStr, sStr.length() - 2);
-        return Y + "-" + M + "-" + D + " " + hStr + ":" + mStr + ":" + sStr;
+        return y + "-" + m + "-" + d + " " + hStr + ":" + mStr + ":" + sStr;
     }
 
     /****
@@ -225,7 +217,7 @@ public class JulianCalendarUtils {
      * @return
      */
     public static String julianDays2str(double jd) {
-        return julianDateToStr(julianDaysToGregorianCalendar(jd));
+        return julianDateByTimeZone(julianDaysToTimeZone(jd));
     }
 
     /***
@@ -234,7 +226,7 @@ public class JulianCalendarUtils {
      * @param jd
      * @return
      */
-    public static String moonPhaseTimeStr(double jd) {
+    public static String getJulianTime(double jd) {
 
         int h, m, s;
         jd += 0.5;
@@ -251,6 +243,10 @@ public class JulianCalendarUtils {
         return CommonUtils.subString(hStr, hStr.length() - 2, hStr.length()) + ":"
                 + CommonUtils.subString(mStr, mStr.length() - 2, mStr.length()) + ":"
                 + CommonUtils.subString(sStr, sStr.length() - 2, sStr.length());
+    }
+
+    public static String getJulianToDateTime(double julianDay) {
+        return DateTimeUtils.dateFormat(julianDaysToTimeZone(julianDay).getCalendar(), "yyyy-MM-dd HH:mm:ss.SS");
     }
 
     /****
