@@ -42,6 +42,10 @@ public class IslamicDTO {
         this.day = day;
     }
 
+    public String getInfo() {
+        return year + "年" + month + "月" + day + "日";
+    }
+
     @Override
     public String toString() {
         return "IslamicDTO{" +
