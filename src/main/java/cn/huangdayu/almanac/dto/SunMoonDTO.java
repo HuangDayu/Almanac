@@ -199,6 +199,10 @@ public class SunMoonDTO {
         this.portName = portName;
     }
 
+    public String getMoonPhaseInfo() {
+        return moonPhaseName + " " + moonPhaseTimeName;
+    }
+
     @Override
     public String toString() {
         return "SunMoonDTO{" +

@@ -8,7 +8,7 @@ import cn.huangdayu.almanac.utils.SolarTermUtils;
  */
 public class SolarTermsTest {
     public static void main(String[] args) {
-        for (SolarTermDTO solarTermDTO : SolarTermUtils.getSolarTermsByYear(2018)) {
+        for (SolarTermDTO solarTermDTO : SolarTermUtils.getSolarTermsByYear(1995)) {
             System.out.println(solarTermDTO);
         }
     }

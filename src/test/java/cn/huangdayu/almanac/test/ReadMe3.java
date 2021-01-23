@@ -1,6 +1,7 @@
 package cn.huangdayu.almanac.test;
 
 import cn.huangdayu.almanac.dto.AlmanacDTO;
+import cn.huangdayu.almanac.dto.SolarTermDTO;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
 import cn.huangdayu.almanac.utils.AlmanacUtils;
 import cn.huangdayu.almanac.utils.DateTimeUtils;
@@ -14,7 +15,8 @@ public class ReadMe3 {
 
     public static void main(String[] args) {
         AlmanacDTO[] almanacDTOS = {
-                AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省徐闻县", "2018-11-01 11:06:48.667")),
+//                AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省徐闻县", Calendar.getInstance())),
+                AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省徐闻县", "2018-11-01 11:06:48")),
                 AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省徐闻县", "1995-08-12 11:10:10")),
                 AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省徐闻县", "1-1-1 11:10:10"))
         };
@@ -24,6 +26,11 @@ public class ReadMe3 {
         for (Map.Entry<String, String> entry : MAP.entrySet()) {
             System.out.println(entry.getKey() + entry.getValue());
         }
+//        for (AlmanacDTO almanacDTO : almanacDTOS) {
+//            for (SolarTermDTO solarTermDTO : almanacDTO.getSolarTermDTO().getNext()) {
+//                System.out.println(solarTermDTO);
+//            }
+//        }
     }
 
     public static void pakMap(AlmanacDTO almanacDTO1) {
@@ -55,17 +62,13 @@ public class ReadMe3 {
         handler("月出", almanacDTO1.getSunMoonDTO().getMoonRiseTime());
         handler("月中", almanacDTO1.getSunMoonDTO().getMoonMiddleTime());
         handler("月落", almanacDTO1.getSunMoonDTO().getMoonSetTime());
-        handler("月相", almanacDTO1.getSunMoonDTO().getMoonPhaseName());
-        handler("月相时间", almanacDTO1.getSunMoonDTO().getMoonPhaseTimeName());
+        handler("月相", almanacDTO1.getSunMoonDTO().getMoonPhaseInfo());
         handler("月天数", String.valueOf(almanacDTO1.getLunarDTO().getDaysOfMonth()));
         handler("闰月否", almanacDTO1.getLunarDTO().getLeapDesc());
         handler("闰年否", String.valueOf(almanacDTO1.getLunarDTO().getLeapYear()));
         handler("星座", almanacDTO1.getJulianDTO().getConstellation());
-        handler("当下节气", almanacDTO1.getSolarTermDTO().getName());
-        handler("节气时间", almanacDTO1.getSolarTermDTO().getDateTime());
-        handler("最近节气", almanacDTO1.getSolarTermDTO().getNextOne().getName());
-        handler("节气到时", almanacDTO1.getSolarTermDTO().getNextOne().getDateTime());
-
+        handler("当下节气", almanacDTO1.getSolarTermDTO().getName() + " " + almanacDTO1.getSolarTermDTO().getDateTime());
+        handler("最近节气", almanacDTO1.getSolarTermDTO().getNextOne().getName() + " " + almanacDTO1.getSolarTermDTO().getNextOne().getDateTime());
         handler("春分", almanacDTO1.getSolarTermDTO().getByName("春分").getDateTime());
         handler("夏至", almanacDTO1.getSolarTermDTO().getByName("夏至").getDateTime());
         handler("秋分", almanacDTO1.getSolarTermDTO().getByName("秋分").getDateTime());

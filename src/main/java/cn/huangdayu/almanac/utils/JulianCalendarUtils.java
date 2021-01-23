@@ -186,6 +186,7 @@ public class JulianCalendarUtils {
      * @param timeZoneDTO
      * @return
      */
+    @Deprecated
     public static String julianDateByTimeZone(TimeZoneDTO timeZoneDTO) {
         String y = "     " + timeZoneDTO.getYear(), m = "0" + timeZoneDTO.getMonth(), d = "0" + timeZoneDTO.getDay();
         int h = timeZoneDTO.getHour(), mm = timeZoneDTO.getMinute(), s = (int) Math.floor(timeZoneDTO.getSecond() + .5);
@@ -217,7 +218,7 @@ public class JulianCalendarUtils {
      * @return
      */
     public static String julianDays2str(double jd) {
-        return julianDateByTimeZone(julianDaysToTimeZone(jd));
+        return julianDaysToTimeZone(jd).getDateTime();
     }
 
     /***
