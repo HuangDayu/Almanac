@@ -509,7 +509,7 @@ public class SunMoonUtils {
     }
 
     private static double range(double x) {
-        // TODO Auto-generated method stub
+
         double a, b;
         b = x / 360;
         a = 360 * (b - ipart(b));
@@ -520,7 +520,7 @@ public class SunMoonUtils {
     }
 
     private static double ipart(double x) {
-        // TODO Auto-generated method stub
+
         double a;
         if (x > 0) {
             a = Math.floor(x);
@@ -531,7 +531,7 @@ public class SunMoonUtils {
     }
 
     private static double[] quad(double ym, double yz, double yp) {
-        // TODO Auto-generated method stub
+
         double a, b, c, dis, dx, xe, ye, z1 = 0, z2 = 0, nz;
         double quadout[] = {0, 0, 0, 0, 0};
 
@@ -565,7 +565,7 @@ public class SunMoonUtils {
     }
 
     private static double sin_alt(int iobj, double mjd0, double hour, double glong, double cglat, double sglat) {
-        // TODO Auto-generated method stub
+
 
         double mjd, t, ra, dec, tau, salt, rads = 0.0174532925;
         double objpos[] = {0, 0};
@@ -585,7 +585,7 @@ public class SunMoonUtils {
     }
 
     private static double[] minimoon(double t) {
-        // TODO Auto-generated method stub
+
         double p2 = 6.283185307, arc = 206264.8062, coseps = 0.91748, sineps = 0.39778;
         double L0, L, LS, F, D, H, S, N, DL, CB, L_moon, B_moon, V, W, X, Y, Z, RHO, dec, ra;
         double mooneq[] = {0, 0};
@@ -646,13 +646,13 @@ public class SunMoonUtils {
     }
 
     private static double frac(double x) {
-        // TODO Auto-generated method stub
+
         x -= (int) x;
         return ((x < 0) ? x + 1.0 : x);
     }
 
     private static double mjd(int day, int month, int year, int hour) {
-        // TODO Auto-generated method stub
+
         double a, b;
         if (month <= 2) {
             month = month + 12;

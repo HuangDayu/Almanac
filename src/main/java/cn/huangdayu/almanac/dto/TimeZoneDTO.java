@@ -39,9 +39,16 @@ public class TimeZoneDTO {
      * 位置
      */
     private String address;
+    /**
+     * BUG 2021-01-23 因使用该对象，导致时间无法进入公元前
+     */
     private Calendar calendar;
     private Integer julianDay;
     private String position;
+    /**
+     * 星期
+     * TODO 或许可以考虑用上面的week变量
+     */
     private String weekName;
 
     private TimeZoneDTO() {
@@ -116,22 +123,26 @@ public class TimeZoneDTO {
         this(calendar, address);
     }
 
-    public TimeZoneDTO(TimeZoneDTO timeZoneDTO, int day,int julianDay) {
-        this.calendar = DateTimeUtils.intToCalendar(timeZoneDTO.getYear(), timeZoneDTO.getMonth(), day, timeZoneDTO.getHour(), timeZoneDTO.getMinute(), timeZoneDTO.getSecond(), timeZoneDTO.getMillisecond());
-        this.year = this.calendar.get(Calendar.YEAR);
-        this.month = this.calendar.get(Calendar.MONTH) + 1;
-        this.day = this.calendar.get(Calendar.DAY_OF_MONTH);
-        this.week = this.calendar.get(Calendar.DAY_OF_WEEK);
-        this.hour = this.calendar.get(Calendar.HOUR_OF_DAY);
-        this.minute = this.calendar.get(Calendar.MINUTE);
-        this.second = this.calendar.get(Calendar.SECOND);
-        this.millisecond = this.calendar.get(Calendar.MILLISECOND);
-        this.address = timeZoneDTO.getAddress();
-        this.julianDay = julianDay;
-        this.timeZone = timeZoneDTO.getTimeZone();
-        this.position = timeZoneDTO.getPosition();
-        // TODO 或许可以考虑用上面的week变量
-        this.weekName = DateTimeUtils.getWeek(calendar);
+    public TimeZoneDTO(TimeZoneDTO timeZoneDTO, int day, int julianDay) {
+        try {
+            this.calendar = DateTimeUtils.intToCalendar(timeZoneDTO.getYear(), timeZoneDTO.getMonth(), day, timeZoneDTO.getHour(), timeZoneDTO.getMinute(), timeZoneDTO.getSecond(), timeZoneDTO.getMillisecond());
+            this.year = this.calendar.get(Calendar.YEAR);
+            this.month = this.calendar.get(Calendar.MONTH) + 1;
+            this.day = this.calendar.get(Calendar.DAY_OF_MONTH);
+            this.week = this.calendar.get(Calendar.DAY_OF_WEEK);
+            this.hour = this.calendar.get(Calendar.HOUR_OF_DAY);
+            this.minute = this.calendar.get(Calendar.MINUTE);
+            this.second = this.calendar.get(Calendar.SECOND);
+            this.millisecond = this.calendar.get(Calendar.MILLISECOND);
+            this.address = timeZoneDTO.getAddress();
+            this.julianDay = julianDay;
+            this.timeZone = timeZoneDTO.getTimeZone();
+            this.position = timeZoneDTO.getPosition();
+            this.weekName = DateTimeUtils.getWeek(calendar);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new AlmanacException("时间与地址构造异常", e);
+        }
     }
 
     public TimeZoneDTO(Calendar calendar, String... names) {
@@ -183,12 +194,9 @@ public class TimeZoneDTO {
             } else {
                 this.timeZone = format + " 东" + ConstantsUtils.TIMEZONE[i - 1] + "区";
             }
-            // BUG 如果日期递增字后，那么该对象则需要重构
             this.position = (province.replaceAll("省", "") + " " + area.replaceAll("市", "").replaceAll("区", "").replaceAll("县", "").replaceAll("镇", "")
                     .replaceAll("乡", ""));
-            // TODO 或许可以考虑用上面的week变量
             this.weekName = DateTimeUtils.getWeek(calendar);
-
         } catch (Exception e) {
             e.printStackTrace();
             throw new AlmanacException("时间与地址构造异常", e);
@@ -321,6 +329,14 @@ public class TimeZoneDTO {
 
     public void setWeekName(String weekName) {
         this.weekName = weekName;
+    }
+
+    public String getDateTime() {
+        return year + "-" + add0(month) + "-" + add0(day) + " " + add0(hour) + ":" + add0(minute) + ":" + add0(second);
+    }
+
+    private String add0(int value) {
+        return value < 10 ? "0" + value : "" + value;
     }
 
     @Override
