@@ -102,7 +102,7 @@ public class SolarTermUtils {
         int chronicle = CommonUtils.year2Ayear(String.valueOf(year)) - 2001, n = 24;
         // 先申明引用，避免反复申请栈空间
         double sunLonValue, sunLonTime, julianDays;
-        // 从冬至开始计算
+        // 从立春开始计算
         for (int i = 21; i < n; ) {
             // 计算太阳视黄经
             sunLonValue = (chronicle + (double) i * 15 / 360 + 1) * 2 * Math.PI;
