@@ -10,6 +10,10 @@ public class LunarDTO {
      */
     private int monthOffset;
     /**
+     * 干支年
+     */
+    private String year;
+    /**
      * 农历月名称
      */
     private String month;
@@ -178,8 +182,16 @@ public class LunarDTO {
         this.kingChronologyName = kingChronologyName;
     }
 
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
     public String getInfo() {
-        return zodiac.concat("年").concat(month).concat("月").concat(day).concat("日");
+        return year + zodiac + "年" + month + "月" + day + "日";
     }
 
     @Override

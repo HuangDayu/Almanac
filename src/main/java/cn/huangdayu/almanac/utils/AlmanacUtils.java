@@ -220,6 +220,11 @@ public class AlmanacUtils {
 
             julianDay = yearChronology + 12000;
 
+            // 该年对应的生肖
+            lunarDTO.setZodiac(AnnalsUtils.SHENGXIAO[julianDay % 12]);
+            // 年号
+            lunarDTO.setYearName(AnnalsUtils.getYearName(year));
+
             // 干支纪年(立春)
             eraDTO.setYear(AnnalsUtils.TIANGAN[julianDay % 10] + AnnalsUtils.DIZHI[julianDay % 12]);
             julianDay = lunarYears + 12000;
@@ -228,6 +233,7 @@ public class AlmanacUtils {
             int kingChronology = lunarYears + 1984 + 2698;
             lunarDTO.setKingChronology(kingChronology);
             lunarDTO.setKingChronologyName("开元" + kingChronology + "年");
+            lunarDTO.setYear(eraDTO.getYear());
 
             // 纪月处理,1998年12月7(大雪)开始连续进行节气计数,0为甲子
             lunarMonthIndex = (int) Math.floor((julianDayForThisDay - qiShuoDO.ZQ[0]) / 30.43685);
@@ -240,11 +246,6 @@ public class AlmanacUtils {
             julianDay = lunarMonthIndex + (int) Math.floor((qiShuoDO.ZQ[12] + 390) / 365.2422) * 12 + 900000;
             // 农历纪月
             lunarDTO.setMonthChronology(julianDay % 12);
-            // TODO 对比chineseEraYear与julianDay的值是否一致
-            // 该年对应的生肖
-            lunarDTO.setZodiac(AnnalsUtils.SHENGXIAO[yearChronology % 12]);
-            // 干支纪年
-            lunarDTO.setYearName(AnnalsUtils.getYearName(year));
 
 
             eraDTO.setMonth(AnnalsUtils.TIANGAN[julianDay % 10] + AnnalsUtils.DIZHI[julianDay % 12]);
