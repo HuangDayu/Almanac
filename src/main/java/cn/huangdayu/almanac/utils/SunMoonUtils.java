@@ -368,7 +368,7 @@ public class SunMoonUtils {
         int m = (int) t;
         t = (t - m) * 60;
         int s = (int) t;
-        return h + ":" + m + ":" + s;
+        return (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
     }
 
     /***
@@ -381,10 +381,10 @@ public class SunMoonUtils {
         if (sum < 0) {
             return "--:--:--";
         }
-        int hh = (int) (sum);
-        int mm = (int) ((sum - hh) * 60);
-        int ss = (int) ((((sum - hh) * 60) - mm) * 60);
-        return hh + ":" + mm + ":" + ss;
+        int h = (int) (sum);
+        int m = (int) ((sum - h) * 60);
+        int s = (int) ((((sum - h) * 60) - m) * 60);
+        return (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
     }
 
 
