@@ -98,23 +98,29 @@ public class SolarTermUtils {
      */
     public static List<SolarTermDTO> getSolarTermsByYear(int year) {
         List<SolarTermDTO> solarTermDTOS = new ArrayList<>();
-        int y = CommonUtils.year2Ayear(String.valueOf(year)) - 2001;
-        int n = 24;
+        // 计算天文纪年
+        int chronicle = CommonUtils.year2Ayear(String.valueOf(year)) - 2001, n = 24;
+        // 先申明引用，避免反复申请栈空间
+        double sunLonValue, sunLonTime, julianDays;
+        // 从冬至开始计算
         for (int i = 21; i < n; ) {
-            // 精确节气时间计算
-            double time = AstronomyArithmeticUtils.S_aLon_t((y + (double) i * 15 / 360 + 1) * 2 * Math.PI);
-            double julianDays = time * 36525 + CommonUtils.JULIAN_FOR_2000 + (double) 8 / 24 - CommonUtils.dtT(time * 36525);
+            // 计算太阳视黄经
+            sunLonValue = (chronicle + (double) i * 15 / 360 + 1) * 2 * Math.PI;
+            // 计算精确节气时间
+            sunLonTime = AstronomyArithmeticUtils.S_aLon_t(sunLonValue);
+            // 计算气朔
+            julianDays = sunLonTime * 36525 + CommonUtils.JULIAN_FOR_2000 + (double) 8 / 24 - CommonUtils.dtT(sunLonTime * 36525);
             SolarTermDTO solarTermDTO = new SolarTermDTO();
-//            solarTermDTO.setTimeZone(JulianCalendarUtils.julianDaysToGregorianCalendar(julianDays));
             String name = AnnalsUtils.JIEQI[(i - 18 >= 0 ? i - 18 : i + 6) % 24];
             solarTermDTO.setName(name);
             solarTermDTO.setDesc(SOLAR_TERMS_MAP.get(name));
+            solarTermDTO.setDateTime(JulianCalendarUtils.julianDays2str(julianDays));
             solarTermDTOS.add(solarTermDTO);
             i++;
             if (i == 24) {
                 i = 0;
                 n = 21;
-                y += 1;
+                chronicle += 1;
             }
         }
         return solarTermDTOS;
