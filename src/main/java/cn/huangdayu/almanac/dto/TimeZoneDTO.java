@@ -145,6 +145,28 @@ public class TimeZoneDTO {
         }
     }
 
+    public TimeZoneDTO(TimeZoneDTO timeZoneDTO, int month) {
+        try {
+            this.calendar = DateTimeUtils.intToCalendar(timeZoneDTO.getYear(), month, timeZoneDTO.getDay(), timeZoneDTO.getHour(), timeZoneDTO.getMinute(), timeZoneDTO.getSecond(), timeZoneDTO.getMillisecond());
+            this.year = this.calendar.get(Calendar.YEAR);
+            this.month = this.calendar.get(Calendar.MONTH) + 1;
+            this.day = this.calendar.get(Calendar.DAY_OF_MONTH);
+            this.week = this.calendar.get(Calendar.DAY_OF_WEEK);
+            this.hour = this.calendar.get(Calendar.HOUR_OF_DAY);
+            this.minute = this.calendar.get(Calendar.MINUTE);
+            this.second = this.calendar.get(Calendar.SECOND);
+            this.millisecond = this.calendar.get(Calendar.MILLISECOND);
+            this.address = timeZoneDTO.getAddress();
+            this.julianDay = JulianCalendarUtils.getJuLian(this.year, this.month, this.day);
+            this.timeZone = timeZoneDTO.getTimeZone();
+            this.position = timeZoneDTO.getPosition();
+            this.weekName = DateTimeUtils.getWeek(calendar);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new AlmanacException("时间与地址构造异常", e);
+        }
+    }
+
     public TimeZoneDTO(Calendar calendar, String... names) {
         try {
             this.year = calendar.get(Calendar.YEAR);
