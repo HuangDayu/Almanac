@@ -61,17 +61,13 @@ public class ReadMe2 {
         handler("月出", almanacDTO1.getSunMoonDTO().getMoonRiseTime());
         handler("月中", almanacDTO1.getSunMoonDTO().getMoonMiddleTime());
         handler("月落", almanacDTO1.getSunMoonDTO().getMoonSetTime());
-        handler("月相", almanacDTO1.getSunMoonDTO().getMoonPhaseName());
-        handler("月相时间", almanacDTO1.getSunMoonDTO().getMoonPhaseTimeName());
+        handler("月相", almanacDTO1.getSunMoonDTO().getMoonPhaseInfo());
         handler("月天数", String.valueOf(almanacDTO1.getLunarDTO().getDaysOfMonth()));
         handler("闰月否", almanacDTO1.getLunarDTO().getLeapDesc());
         handler("闰年否", String.valueOf(almanacDTO1.getLunarDTO().getLeapYear()));
         handler("星座", almanacDTO1.getJulianDTO().getConstellation());
-        handler("当下节气", almanacDTO1.getSolarTermDTO().getName());
-        handler("节气时间", almanacDTO1.getSolarTermDTO().getDateTime());
-        handler("最近节气", almanacDTO1.getSolarTermDTO().getNextOne().getName());
-        handler("节气到时", almanacDTO1.getSolarTermDTO().getNextOne().getDateTime());
-
+        handler("当下节气", almanacDTO1.getSolarTermDTO().getName() + " " + almanacDTO1.getSolarTermDTO().getDateTime());
+        handler("最近节气", almanacDTO1.getSolarTermDTO().getNextOne().getName() + " " + almanacDTO1.getSolarTermDTO().getNextOne().getDateTime());
         handler("春分", almanacDTO1.getSolarTermDTO().getByName("春分").getDateTime());
         handler("夏至", almanacDTO1.getSolarTermDTO().getByName("夏至").getDateTime());
         handler("秋分", almanacDTO1.getSolarTermDTO().getByName("秋分").getDateTime());
