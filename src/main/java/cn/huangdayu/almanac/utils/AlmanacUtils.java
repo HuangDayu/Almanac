@@ -46,8 +46,14 @@ public class AlmanacUtils {
         // 这个月1号的儒略日,公历月首,中午
         int julianDayOfMonthFirst = (int) (Math.floor(JulianCalendarUtils.getJulianDayNumber(timeZoneDTO.getYear(), timeZoneDTO.getMonth())) - CommonUtils.JULIAN_FOR_2000);
 
+        int nextMonth = timeZoneDTO.getMonth() + 1, nextYear = timeZoneDTO.getYear();
+        if (nextMonth > 12) {
+            nextMonth = nextMonth - 12;
+            nextYear = timeZoneDTO.getYear() + 1;
+        }
+
         // 这个月1号的儒略日和下个月1号的儒略日之差,月天数(公历)
-        int julianDayForMonthSum = (int) (Math.floor(JulianCalendarUtils.getJulianDayNumber(timeZoneDTO.getYear(), timeZoneDTO.getMonth() + 1)) - CommonUtils.JULIAN_FOR_2000 - julianDayOfMonthFirst);
+        int julianDayForMonthSum = (int) (Math.floor(JulianCalendarUtils.getJulianDayNumber(nextYear, nextMonth)) - CommonUtils.JULIAN_FOR_2000 - julianDayOfMonthFirst);
 
         // 本月第一天的星期
         int weekFirstForMonthIndex = (julianDayOfMonthFirst + CommonUtils.JULIAN_FOR_2000 + 1 + 7000000) % 7;
@@ -169,8 +175,8 @@ public class AlmanacUtils {
             //------------------------------------计算节气------------------------------------//
 
             // 计算当前月份的前一个节气，并从该节气开始结算接下来的24个节气
-            int qk = (int) Math.floor((julianDayOfMonthFirst - qiShuoDO.ZQ[0] - 7) / 15.2184);
-            if (qk < 23 && julianDayOfMonthFirst >= qiShuoDO.ZQ[qk + 1]) {
+            int qk = (int) Math.floor((julianDayOfThisDay - qiShuoDO.ZQ[0] - 7) / 15.2184);
+            if (qk < 23 && julianDayOfThisDay >= qiShuoDO.ZQ[qk + 1]) {
                 // 节气的取值范围是0-23
                 qk++;
             }
@@ -179,8 +185,8 @@ public class AlmanacUtils {
             List<SolarTermDTO> solarTermAfterDTOS = new ArrayList<>();
             int qj = 24;
             for (int qi = qk; qi < qj; ) {
-                double sunLonTime = AnnalsUtils.qi_accurate(sunLonValue);
                 sunLonValue += CommonUtils.PI_2 / 24;
+                double sunLonTime = AnnalsUtils.qi_accurate(sunLonValue);
                 // BUG 2021-01-23 qiShuoDO.ZQ[qi]的儒略日与sunLonTime的值有出入,与julianDayOfThisDay的值一致
                 double afterJulianDay = CommonUtils.JULIAN_FOR_2000 + sunLonTime;
                 SolarTermDTO solarTerm = new SolarTermDTO();
@@ -324,6 +330,22 @@ public class AlmanacUtils {
             sunMoonDTO.setMoonPhaseTimeName(JulianCalendarUtils.getJulianTime(CommonUtils.JULIAN_FOR_2000 + d));
         } while (julianDay + 5 < julianDayOfMonthFirst + julianDayForMonthSum);
 
+        return almanacDTOS;
+    }
+
+
+    /**
+     * 年历
+     *
+     * @param timeZoneDTO
+     * @return
+     * @throws cn.huangdayu.almanac.exception.AlmanacException
+     */
+    public static AlmanacDTO[][] yearCalendar(TimeZoneDTO timeZoneDTO) {
+        AlmanacDTO[][] almanacDTOS = new AlmanacDTO[12][];
+        for (int i = 1; i <= 12; i++) {
+            almanacDTOS[i - 1] = monthCalendar(new TimeZoneDTO(timeZoneDTO, i));
+        }
         return almanacDTOS;
     }
 
