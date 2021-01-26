@@ -180,22 +180,24 @@ public class AlmanacUtils {
                 // 节气的取值范围是0-23
                 qk++;
             }
-            double sunLonValue = sunLon;
+            double sunLonValue = sunLon, sunLonTime;
             SolarTermDTO solarTermDTO = new SolarTermDTO();
             List<SolarTermDTO> solarTermAfterDTOS = new ArrayList<>();
-            int qj = 24;
+            int qj = 24, qn;
             for (int qi = qk; qi < qj; ) {
+                sunLonTime = AnnalsUtils.qi_accurate(sunLonValue);
+                // julianDay = (int) Math.floor(sunLonTime + 0.5);
+                qn = (int) Math.floor(sunLonValue / CommonUtils.PI_2 * 24 + 24000006.01) % 24;
                 sunLonValue += CommonUtils.PI_2 / 24;
-                double sunLonTime = AnnalsUtils.qi_accurate(sunLonValue);
                 // BUG 2021-01-23 qiShuoDO.ZQ[qi]的儒略日与sunLonTime的值有出入,与julianDayOfThisDay的值一致
                 double afterJulianDay = CommonUtils.JULIAN_FOR_2000 + sunLonTime;
                 SolarTermDTO solarTerm = new SolarTermDTO();
                 solarTerm.setJulianTime(sunLonTime);
                 solarTerm.setDateTime(JulianCalendarUtils.julianDays2str(afterJulianDay));
-                solarTerm.setIndex(qi);
-                solarTerm.setName(AnnalsUtils.JIEQI[qi]);
+                solarTerm.setIndex(qn);
+                solarTerm.setName(AnnalsUtils.JIEQI[qn]);
                 solarTerm.setJulianDay((int) afterJulianDay);
-                solarTerm.setDesc(SolarTermUtils.getSolarTermDesc(AnnalsUtils.JIEQI[qi]));
+                solarTerm.setDesc(SolarTermUtils.getSolarTermDesc(AnnalsUtils.JIEQI[qn]));
                 int afterDay = (int) afterJulianDay - CommonUtils.JULIAN_FOR_2000 - julianDayOfThisDay;
                 solarTerm.setAfterDay(afterDay);
                 if (afterDay == 0) {

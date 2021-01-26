@@ -56,7 +56,7 @@ public class TestUtils {
     }
 
     private static void handler(String key, String value) {
-        key = " | ".concat(key).concat(" | ");
+        key = " | `".concat(key).concat("` | ");
         if (value == null) {
             value = String.valueOf(value);
         }

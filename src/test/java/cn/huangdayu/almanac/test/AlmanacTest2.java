@@ -18,8 +18,8 @@ public class AlmanacTest2 {
         for (Map.Entry<String, String> entry : TestUtils.MAP.entrySet()) {
             System.out.println(entry.getKey() + entry.getValue());
         }
-        for (SolarTermDTO solarTermDTO : almanacDTO.getSolarTermDTO().getNext()) {
-            System.out.println(solarTermDTO);
-        }
+//        for (SolarTermDTO solarTermDTO : almanacDTO.getSolarTermDTO().getNext()) {
+//            System.out.println(solarTermDTO);
+//        }
     }
 }
