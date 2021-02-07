@@ -14,6 +14,7 @@
 # 引入依赖
 
 ```xml
+
 <dependency>
     <groupId>cn.huangdayu</groupId>
     <artifactId>almanac</artifactId>
@@ -31,7 +32,7 @@
  * @param timeZoneDTO
  * @return
  */
-AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省徐闻县", Calendar.getInstance()));
+AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省徐闻县",Calendar.getInstance()));
 
 /**
  * 月历
@@ -39,8 +40,27 @@ AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省徐闻县", Calendar.getInsta
  * @param timeZoneDTO
  * @return
  */
-AlmanacUtils.monthCalendar(new TimeZoneDTO("广东省徐闻县", Calendar.getInstance()));
+        AlmanacUtils.monthCalendar(new TimeZoneDTO("广东省徐闻县",Calendar.getInstance()));
 
+/**
+ * 集成抽象类的用法
+ */
+public class AlmanacApp extends Almanac {
+
+    public static void main(String[] args) {
+        Almanac almanac = new AlmanacApp();
+        AlmanacDTO almanacDTO = almanac.yearCalendar()[7][11];
+        TestUtils.pakMap(almanacDTO);
+        for (Map.Entry<String, String> entry : TestUtils.MAP.entrySet()) {
+            System.out.println(entry.getKey() + entry.getValue());
+        }
+    }
+
+    @Override
+    public TimeZoneDTO initTimeZone() {
+        return new TimeZoneDTO("广东省徐闻县", "2021-01-29 11:13:29");
+    }
+}
 ```
 
 # 说明
@@ -53,10 +73,10 @@ AlmanacUtils.monthCalendar(new TimeZoneDTO("广东省徐闻县", Calendar.getIns
 
 # 特别感谢
 
-- [wangpeng047](http://blog.csdn.net/wangpeng047/article/details/38559591)  
-- [lxslove](http://blog.csdn.net/lxslove/article/details/6083396)  
-- [moodlxs](http://www.cnblogs.com/moodlxs/archive/2010/12/18/2345392.html)  
-- [hanoi](http://www.cnblogs.com/hanoi/archive/2012/07/04/2576325.html)  
+- [wangpeng047](http://blog.csdn.net/wangpeng047/article/details/38559591)
+- [lxslove](http://blog.csdn.net/lxslove/article/details/6083396)
+- [moodlxs](http://www.cnblogs.com/moodlxs/archive/2010/12/18/2345392.html)
+- [hanoi](http://www.cnblogs.com/hanoi/archive/2012/07/04/2576325.html)
 
 # 日历说明
 
@@ -92,7 +112,7 @@ AlmanacUtils.monthCalendar(new TimeZoneDTO("广东省徐闻县", Calendar.getIns
 | `时间` | 11时06分48秒667毫秒 | 11时10分10秒00毫秒 | 11时10分10秒00毫秒 |
 | `星期` | 星期四 | 星期六 | 星期一 |
 | `地点` | 广东 徐闻 | 广东 徐闻 | 广东 徐闻 |
-| `年号` | [当代]新中国  公历纪元2018年 | [当代]新中国  公历纪元1995年 | [西汉]平帝 刘衍 元始1年 |
+| `年号` | [当代]新中国 公历纪元2018年 | [当代]新中国 公历纪元1995年 | [西汉]平帝 刘衍 元始1年 |
 | `农历` | 戊戌狗年玖月廿四 | 乙亥猪年柒月十七 | 庚申鸡年冬月十八 |
 | `时辰` | 午时 | 午时 | 午时 |
 | `黄历` | 戊戌年壬戌月丁酉日丙午时 | 乙亥年甲申月乙亥日壬午时 | 庚申年戊子月丁丑日丙午时 |
@@ -134,8 +154,8 @@ AlmanacUtils.monthCalendar(new TimeZoneDTO("广东省徐闻县", Calendar.getIns
 
 <div align="center">
 <img src="https://github.com/HuangDayu/AlmanacApp/blob/master/ezgif.com-video-to-gif-1.gif" height="450px" width="250px" alt="设置日期" >
-<img src="https://github.com/HuangDayu/AlmanacApp/blob/master//ezgif.com-video-to-gif-2.gif" height="450px" width="250px" alt="设置时间" >
-<img src="https://github.com/HuangDayu/AlmanacApp/blob/master//ezgif.com-video-to-gif-3.gif" height="450px" width="250px" alt="设置位置" >
+<img src="https://github.com/HuangDayu/AlmanacApp/blob/master/ezgif.com-video-to-gif-2.gif" height="450px" width="250px" alt="设置时间" >
+<img src="https://github.com/HuangDayu/AlmanacApp/blob/master/ezgif.com-video-to-gif-3.gif" height="450px" width="250px" alt="设置位置" >
 </div>
 
 # Almanac APP 下载
@@ -148,7 +168,7 @@ AlmanacUtils.monthCalendar(new TimeZoneDTO("广东省徐闻县", Calendar.getIns
 
 # 参考文献
 
-[寿星天文历Java封装整理版](https://blog.csdn.net/wangpeng047/article/details/38559591)  
-[寿星万年历---java算法实现-csdn](https://blog.csdn.net/lxslove/article/details/6083396)  
-[寿星万年历---java算法实现-cnblogs](http://www.cnblogs.com/moodlxs/archive/2010/12/18/2345392.html)  
-[根据经纬度计算日出、日落、中天、天亮、天黑和昼长时间](http://www.cnblogs.com/hanoi/archive/2012/07/04/2576325.html)  
+- [寿星天文历Java封装整理版](https://blog.csdn.net/wangpeng047/article/details/38559591)
+- [寿星万年历---java算法实现-csdn](https://blog.csdn.net/lxslove/article/details/6083396)
+- [寿星万年历---java算法实现-cnblogs](http://www.cnblogs.com/moodlxs/archive/2010/12/18/2345392.html)
+- [根据经纬度计算日出、日落、中天、天亮、天黑和昼长时间](http://www.cnblogs.com/hanoi/archive/2012/07/04/2576325.html)  
