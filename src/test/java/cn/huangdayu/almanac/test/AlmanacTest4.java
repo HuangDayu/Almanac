@@ -9,7 +9,7 @@ import cn.huangdayu.almanac.dto.TimeZoneDTO;
 import cn.huangdayu.almanac.utils.AlmanacUtils;
 import cn.huangdayu.almanac.utils.DateTimeUtils;
 
-public class ReadMe2 {
+public class AlmanacTest4 {
 
     public static void main(String[] args) {
 
