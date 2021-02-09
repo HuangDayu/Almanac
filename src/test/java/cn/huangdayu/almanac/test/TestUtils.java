@@ -19,7 +19,6 @@ public class TestUtils {
         handler("地点", almanacDTO1.getTimeZoneDTO().getPosition());
         handler("年号", almanacDTO1.getLunarDTO().getYearName());
         handler("农历", almanacDTO1.getLunarDTO().getInfo());
-        handler("时辰", almanacDTO1.getLunarDTO().getTime());
         handler("黄历", almanacDTO1.getEraDTO().getInfo());
         handler("回历", almanacDTO1.getIslamicDTO().getInfo());
         handler("儒略日", String.valueOf(almanacDTO1.getJulianDTO().getDays()));

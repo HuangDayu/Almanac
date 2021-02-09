@@ -6,15 +6,15 @@ import cn.huangdayu.almanac.utils.AlmanacUtils;
 
 import java.util.Map;
 
-public class ReadMe3 {
+public class AlmanacTest5 {
 
     public static void main(String[] args) {
         AlmanacDTO[] almanacDTOS = {
                 // TODO 农历算法错误，不应该以立春作为农历的第一天，而是正月
-                AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省徐闻县", "2021-02-02 11:06:48")),
-                AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省徐闻县", "2021-02-03 11:06:48")),
-                AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省徐闻县", "2021-02-04 11:06:48")),
-                AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省徐闻县", "2021-02-12 11:06:48")),
+                AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省徐闻县", "2021-02-02 11:14:48")),
+                AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省徐闻县", "2021-02-03 23:30:48")),
+                AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省徐闻县", "2021-02-04 01:45:48")),
+                AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省徐闻县", "2021-02-12 03:59:48")),
 
 
 //                AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省徐闻县", Calendar.getInstance())),

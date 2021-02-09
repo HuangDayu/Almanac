@@ -193,7 +193,7 @@ public class LunarDTO {
     }
 
     public String getInfo() {
-        return year + zodiac + "年" + month + (month.length() < 2 ? "月" : "") + day;
+        return year + zodiac + "年" + month + (month.length() < 2 ? "月" : "") + day + time;
     }
 
     @Override
