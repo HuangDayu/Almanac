@@ -212,7 +212,7 @@ public class AlmanacUtils {
             }
             solarTermDTO.setNext(solarTermAfterDTOS);
 
-            //------------------------------------计算天干地支------------------------------------//
+            //------------------------------------计算黄历 (天干地支)------------------------------------//
 
             EraDTO eraDTO = new EraDTO();
             // 干支纪年处理 以立春为界定年首
@@ -240,23 +240,22 @@ public class AlmanacUtils {
             julianDay = julianDay + 5810;
             // 农历纪年(10进制,1984年起算)
             int lunarYears = (int) Math.floor(julianDay / 365.2422 + 0.5);
-
-            julianDay = yearChronology + 12000;
-
-            // 该年对应的生肖
-            lunarDTO.setZodiac(AnnalsUtils.SHENGXIAO[julianDay % 12]);
-            // 年号
-            lunarDTO.setYearName(AnnalsUtils.getYearName(year));
-
-            // 干支纪年(立春)
-            eraDTO.setYear(AnnalsUtils.TIANGAN[julianDay % 10] + AnnalsUtils.DIZHI[julianDay % 12]);
             julianDay = lunarYears + 12000;
             // String Lyear3 = this.Gan[D % 10] + this.Zhi[D % 12]; // 干支纪年(正月) ,
             // 黄帝纪年,春节才视为新年
             int kingChronology = lunarYears + 1984 + 2698;
             lunarDTO.setKingChronology(kingChronology);
             lunarDTO.setKingChronologyName("开元" + kingChronology + "年");
-            lunarDTO.setYear(eraDTO.getYear());
+            // 干支纪年（春节）
+            lunarDTO.setYear(AnnalsUtils.TIANGAN[julianDay % 10] + AnnalsUtils.DIZHI[julianDay % 12]);
+            // 该年对应的生肖
+            lunarDTO.setZodiac(AnnalsUtils.SHENGXIAO[julianDay % 12]);
+            // 年号
+            lunarDTO.setYearName(AnnalsUtils.getYearName(year));
+
+            julianDay = yearChronology + 12000;
+            // 干支纪年(立春)
+            eraDTO.setYear(AnnalsUtils.TIANGAN[julianDay % 10] + AnnalsUtils.DIZHI[julianDay % 12]);
 
             // 纪月处理,1998年12月7(大雪)开始连续进行节气计数,0为甲子
             mk = (int) Math.floor((julianDayOfThisDay - qiShuoDO.ZQ[0]) / 30.43685);
