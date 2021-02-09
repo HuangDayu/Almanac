@@ -135,7 +135,7 @@ public class AlmanacUtils {
             }
 
 
-            //------------------------------------计算农历------------------------------------//
+            //------------------------------------计算农历（农历纪年以【正月初一】定年首）------------------------------------//
             LunarDTO lunarDTO = new LunarDTO();
             // 距农历月首的编移量,0对应初一
             lunarDTO.setMonthOffset(julianDayOfThisDay - qiShuoDO.HS[mk]);
@@ -171,6 +171,36 @@ public class AlmanacUtils {
                 lunarTime = lunarTime + ConstantsUtils.KE[k];
             }
             lunarDTO.setTime(lunarTime);
+            // 一般第3个月为春节
+            julianDay = qiShuoDO.HS[2];
+            for (j = 0; j < 14; j++) {
+                // 找春节
+                if (!"正".equals(qiShuoDO.ym[j]) || qiShuoDO.leap == j && j != 0) {
+                    continue;
+                }
+                julianDay = qiShuoDO.HS[j];
+                if (julianDayOfThisDay < julianDay) {
+                    julianDay -= 365;
+                    // 无需再找下一个正月
+                    break;
+                }
+            }
+            // 计算该年春节与1984年平均春节(立春附近)相差天数估计
+            julianDay = julianDay + 5810;
+            // 农历纪年(10进制,1984年起算)
+            int lunarYears = (int) Math.floor(julianDay / 365.2422 + 0.5);
+            julianDay = lunarYears + 12000;
+            // String Lyear3 = this.Gan[D % 10] + this.Zhi[D % 12]; // 干支纪年(正月) ,
+            // 黄帝纪年,春节才视为新年
+            int kingChronology = lunarYears + 1984 + 2698;
+            lunarDTO.setKingChronology(kingChronology);
+            lunarDTO.setKingChronologyName("开元" + kingChronology + "年");
+            // 干支纪年（春节）
+            lunarDTO.setYear(AnnalsUtils.TIANGAN[julianDay % 10] + AnnalsUtils.DIZHI[julianDay % 12]);
+            // 该年对应的生肖
+            lunarDTO.setZodiac(AnnalsUtils.SHENGXIAO[julianDay % 12]);
+            // 年号
+            lunarDTO.setYearName(AnnalsUtils.getYearName(year));
 
             //------------------------------------计算节气------------------------------------//
 
@@ -212,7 +242,7 @@ public class AlmanacUtils {
             }
             solarTermDTO.setNext(solarTermAfterDTOS);
 
-            //------------------------------------计算黄历 (天干地支)------------------------------------//
+            //------------------------------------计算黄历 (天干地支，干支纪年以【立春】定年首)------------------------------------//
 
             EraDTO eraDTO = new EraDTO();
             // 干支纪年处理 以立春为界定年首
@@ -221,37 +251,6 @@ public class AlmanacUtils {
             // 农历纪年(10进制,1984年起算)
             int yearChronology = (int) Math.floor(julianDay / 365.2422 + 0.5);
             lunarDTO.setYearChronology(yearChronology);
-            // 以下几行以正月初一定年首
-            // 一般第3个月为春节
-            julianDay = qiShuoDO.HS[2];
-            for (j = 0; j < 14; j++) {
-                // 找春节
-                if (!"正".equals(qiShuoDO.ym[j]) || qiShuoDO.leap == j && j != 0) {
-                    continue;
-                }
-                julianDay = qiShuoDO.HS[j];
-                if (julianDayOfThisDay < julianDay) {
-                    julianDay -= 365;
-                    // 无需再找下一个正月
-                    break;
-                }
-            }
-            // 计算该年春节与1984年平均春节(立春附近)相差天数估计
-            julianDay = julianDay + 5810;
-            // 农历纪年(10进制,1984年起算)
-            int lunarYears = (int) Math.floor(julianDay / 365.2422 + 0.5);
-            julianDay = lunarYears + 12000;
-            // String Lyear3 = this.Gan[D % 10] + this.Zhi[D % 12]; // 干支纪年(正月) ,
-            // 黄帝纪年,春节才视为新年
-            int kingChronology = lunarYears + 1984 + 2698;
-            lunarDTO.setKingChronology(kingChronology);
-            lunarDTO.setKingChronologyName("开元" + kingChronology + "年");
-            // 干支纪年（春节）
-            lunarDTO.setYear(AnnalsUtils.TIANGAN[julianDay % 10] + AnnalsUtils.DIZHI[julianDay % 12]);
-            // 该年对应的生肖
-            lunarDTO.setZodiac(AnnalsUtils.SHENGXIAO[julianDay % 12]);
-            // 年号
-            lunarDTO.setYearName(AnnalsUtils.getYearName(year));
 
             julianDay = yearChronology + 12000;
             // 干支纪年(立春)
