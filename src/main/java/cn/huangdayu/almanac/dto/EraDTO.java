@@ -1,6 +1,8 @@
 package cn.huangdayu.almanac.dto;
 
 /**
+ * 黄历，天干地支，以 [立春]  作为新年的第一天
+ *
  * @author huangdayu create at 2021/1/21 11:00
  */
 public class EraDTO {
