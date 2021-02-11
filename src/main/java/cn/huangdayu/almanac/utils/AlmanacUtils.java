@@ -227,7 +227,7 @@ public class AlmanacUtils {
                 solarTerm.setIndex(qn);
                 solarTerm.setName(AnnalsUtils.JIEQI[qn]);
                 solarTerm.setJulianDay((int) afterJulianDay);
-                solarTerm.setDesc(SolarTermUtils.getSolarTermDesc(AnnalsUtils.JIEQI[qn]));
+                solarTerm.setDesc(ConstantsUtils.getDesc(AnnalsUtils.JIEQI[qn]));
                 int afterDay = (int) afterJulianDay - CommonUtils.JULIAN_FOR_2000 - julianDayOfThisDay;
                 solarTerm.setAfterDay(afterDay);
                 if (afterDay == 0) {
