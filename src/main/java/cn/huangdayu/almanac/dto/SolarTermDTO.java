@@ -104,6 +104,14 @@ public class SolarTermDTO {
         return null;
     }
 
+    public String getDetails() {
+        return name + " " + dateTime;
+    }
+
+    public String getInfo() {
+        return name != null ? getDetails() : getNextOne().getDetails();
+    }
+
 
     @Override
     public String toString() {

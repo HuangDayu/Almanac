@@ -104,7 +104,7 @@ public class AnnalsUtils {
 
         // 按农历日期查找重量点节假日
         String d = lunarDTO.getMonth() + (lunarDTO.getMonth().length() < 2 ? "月" : "") + lunarDTO.getDay();
-        if (!"闰".equals(lunarDTO.getLeapDesc())) {
+        if (!lunarDTO.getLeapMonth()) {
             if ("正月初一".equals(d)) {
                 happyDay += "春节 ";
                 flag = 1;

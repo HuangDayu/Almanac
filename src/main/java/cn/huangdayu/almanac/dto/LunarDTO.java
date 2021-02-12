@@ -35,11 +35,11 @@ public class LunarDTO {
     /**
      * 农历闰状况(值为'闰'或空串)
      */
-    private String leapDesc;
+    private Boolean leapMonth = false;
     /**
      * 是否闰年
      */
-    private Boolean leapYear;
+    private Boolean leapYear = false;
     /**
      * 下个农历月名称,判断除夕时要用到
      */
@@ -104,12 +104,12 @@ public class LunarDTO {
         this.daysOfMonth = daysOfMonth;
     }
 
-    public String getLeapDesc() {
-        return leapDesc;
+    public Boolean getLeapMonth() {
+        return leapMonth;
     }
 
-    public void setLeapDesc(String leapDesc) {
-        this.leapDesc = leapDesc;
+    public void setLeapMonth(boolean leapMonth) {
+        this.leapMonth = leapMonth;
     }
 
     public Boolean getLeapYear() {
@@ -204,7 +204,7 @@ public class LunarDTO {
                 ", day='" + day + '\'' +
                 ", time='" + time + '\'' +
                 ", daysOfMonth=" + daysOfMonth +
-                ", leapDesc='" + leapDesc + '\'' +
+                ", leapDesc='" + leapMonth + '\'' +
                 ", leapYear=" + leapYear +
                 ", nextMonth='" + nextMonth + '\'' +
                 ", kingChronology=" + kingChronology +

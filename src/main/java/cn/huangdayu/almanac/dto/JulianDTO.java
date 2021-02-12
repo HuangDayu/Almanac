@@ -28,6 +28,10 @@ public class JulianDTO {
         this.constellation = constellation;
     }
 
+    public String getInfo() {
+        return getDays() + " " + getConstellation();
+    }
+
     @Override
     public String toString() {
         return "JulianDTO{" +
