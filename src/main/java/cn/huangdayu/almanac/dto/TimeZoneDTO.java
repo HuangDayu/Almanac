@@ -361,6 +361,10 @@ public class TimeZoneDTO {
         return value < 10 ? "0" + value : "" + value;
     }
 
+    public String getInfo() {
+        return DateTimeUtils.dateFormat(calendar, "yyyy-MM-dd HH:mm:ss.SS") + " " + getWeekName();
+    }
+
     @Override
     public String toString() {
         return "TimeZoneDTO{" +

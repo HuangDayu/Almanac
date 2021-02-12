@@ -43,7 +43,7 @@ public class TestUtils {
         handler("月落", almanacDTO1.getSunMoonDTO().getMoonSetTime());
         handler("月相", almanacDTO1.getSunMoonDTO().getMoonPhaseInfo());
         handler("月天数", String.valueOf(almanacDTO1.getLunarDTO().getDaysOfMonth()));
-        handler("闰月否", almanacDTO1.getLunarDTO().getLeapDesc());
+        handler("闰月否", String.valueOf(almanacDTO1.getLunarDTO().getLeapMonth()));
         handler("闰年否", String.valueOf(almanacDTO1.getLunarDTO().getLeapYear()));
         handler("星座", almanacDTO1.getJulianDTO().getConstellation());
         handler("当下节气", almanacDTO1.getSolarTermDTO().getName() + " " + almanacDTO1.getSolarTermDTO().getDateTime());

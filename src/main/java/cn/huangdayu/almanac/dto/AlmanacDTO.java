@@ -1,11 +1,6 @@
 package cn.huangdayu.almanac.dto;
 
-import cn.huangdayu.almanac.utils.DateTimeUtils;
-import cn.huangdayu.almanac.utils.PortUtils;
-import cn.huangdayu.almanac.utils.SolarTermUtils;
-
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -100,19 +95,16 @@ public class AlmanacDTO {
 
     public Map<String, String> toMap() {
         Map<String, String> map = new LinkedHashMap<>();
-        map.put("日期", DateTimeUtils.dateFormat(getTimeZoneDTO().getCalendar(), "yyyy-MM-dd HH:mm:ss.SS"));
-        map.put("星期", getTimeZoneDTO().getWeekName());
         map.put("地点", getTimeZoneDTO().getPosition());
+        map.put("西历", getTimeZoneDTO().getInfo());
         map.put("年号", getLunarDTO().getYearName());
         map.put("农历", getLunarDTO().getInfo());
         map.put("黄历", getEraDTO().getInfo());
-        map.put("回历", getIslamicDTO().getInfo());
-        map.put("儒略日", String.valueOf(getJulianDTO().getDays()));
+        map.put("节气", getSolarTermDTO().getInfo());
         map.put("黄帝纪年", getLunarDTO().getKingChronologyName());
-        map.put("生肖", getLunarDTO().getZodiac());
-        map.put("节日", getHolidayDTO().getMajorDay());
-        map.put("假日", getHolidayDTO().getHappyDay());
-        map.put("其他节日", getHolidayDTO().getOtherDay());
+        map.put("儒略历", getJulianDTO().getInfo());
+        map.put("回历", getIslamicDTO().getInfo());
+        map.put("节假日", getHolidayDTO().getInfo());
         map.put("经度", getSunMoonDTO().getLongitude());
         map.put("纬度", getSunMoonDTO().getLatitude());
         map.put("时区", getTimeZoneDTO().getTimeZone());
@@ -129,15 +121,8 @@ public class AlmanacDTO {
         map.put("月落", getSunMoonDTO().getMoonSetTime());
         map.put("月相", getSunMoonDTO().getMoonPhaseInfo());
         map.put("月天数", String.valueOf(getLunarDTO().getDaysOfMonth()));
-        map.put("闰月否", getLunarDTO().getLeapDesc());
-        map.put("闰年否", String.valueOf(getLunarDTO().getLeapYear()));
-        map.put("星座", getJulianDTO().getConstellation());
-        map.put("当下节气", getSolarTermDTO().getName() + " " + getSolarTermDTO().getDateTime());
-        map.put("最近节气", getSolarTermDTO().getNextOne().getName() + " " + getSolarTermDTO().getNextOne().getDateTime());
-        map.put("春分", getSolarTermDTO().getByName("春分").getDateTime());
-        map.put("夏至", getSolarTermDTO().getByName("夏至").getDateTime());
-        map.put("秋分", getSolarTermDTO().getByName("秋分").getDateTime());
-        map.put("冬至", getSolarTermDTO().getByName("冬至").getDateTime());
+        map.put("闰月", String.valueOf(getLunarDTO().getLeapMonth()));
+        map.put("闰年", String.valueOf(getLunarDTO().getLeapYear()));
         return map;
     }
 }

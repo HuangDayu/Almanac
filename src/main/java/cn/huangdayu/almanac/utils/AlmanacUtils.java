@@ -149,7 +149,7 @@ public class AlmanacUtils {
                 // 月大小
                 lunarDTO.setDaysOfMonth(qiShuoDO.dx[mk]);
                 // 闰状况
-                lunarDTO.setLeapDesc((qiShuoDO.leap != 0 && qiShuoDO.leap == mk) ? "闰" : "");
+                lunarDTO.setLeapMonth((qiShuoDO.leap != 0 && qiShuoDO.leap == mk));
                 // 下个月名称,判断除夕时要用到
                 lunarDTO.setNextMonth(mk < 13 ? qiShuoDO.ym[mk + 1] : "未知");
             } else {
@@ -157,7 +157,7 @@ public class AlmanacUtils {
                 LunarDTO lastLunarDay = almanacDTOS[i - 1].getLunarDTO();
                 lunarDTO.setMonth(lastLunarDay.getMonth());
                 lunarDTO.setDaysOfMonth(lastLunarDay.getDaysOfMonth());
-                lunarDTO.setLeapDesc(lastLunarDay.getLeapDesc());
+                lunarDTO.setLeapMonth(lastLunarDay.getLeapMonth());
                 lunarDTO.setNextMonth(lastLunarDay.getNextMonth());
             }
             int sum = (int) (hours + 0.01 * minute);

@@ -54,6 +54,10 @@ public class HolidayDTO {
         this.flag = flag;
     }
 
+    public String getInfo() {
+        return getHappyDay() + " " + getMajorDay() + " " + getOtherDay();
+    }
+
     @Override
     public String toString() {
         return "HolidayDTO{" +
