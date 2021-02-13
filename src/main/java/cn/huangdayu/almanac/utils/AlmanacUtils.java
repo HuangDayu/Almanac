@@ -329,7 +329,7 @@ public class AlmanacUtils {
             //月相时刻(儒略日)
             moonPhaseDTO.setJulianTime(CommonUtils.JULIAN_FOR_2000 + moonLonValue);
             //月相时间串
-            moonPhaseDTO.setDateTime(JulianCalendarUtils.getJulianTime(CommonUtils.JULIAN_FOR_2000 + moonLonValue));
+            moonPhaseDTO.setDateTime(JulianCalendarUtils.julianDays2str(CommonUtils.JULIAN_FOR_2000 + moonLonValue));
             moonPhaseDTOS.add(moonPhaseDTO);
             almanacDTO.setMoonPhaseDTO(moonPhaseDTO);
         } while (julianDay + 5 < julianDayOfMonthFirst + julianDayForMonthSum);
