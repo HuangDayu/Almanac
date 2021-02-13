@@ -41,7 +41,7 @@ public class TestUtils {
         handler("月出", almanacDTO1.getSunMoonDTO().getMoonRiseTime());
         handler("月中", almanacDTO1.getSunMoonDTO().getMoonMiddleTime());
         handler("月落", almanacDTO1.getSunMoonDTO().getMoonSetTime());
-        handler("月相", almanacDTO1.getSunMoonDTO().getMoonPhaseInfo());
+        handler("月相", almanacDTO1.getMoonPhaseDTO().getInfo());
         handler("月天数", String.valueOf(almanacDTO1.getLunarDTO().getDaysOfMonth()));
         handler("闰月否", String.valueOf(almanacDTO1.getLunarDTO().getLeapMonth()));
         handler("闰年否", String.valueOf(almanacDTO1.getLunarDTO().getLeapYear()));
