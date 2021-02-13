@@ -7,6 +7,10 @@ import java.util.List;
  */
 public class MoonPhaseDTO {
 
+    public MoonPhaseDTO(List<MoonPhaseDTO> next) {
+        this.next = next;
+    }
+
     private Integer index;
     /**
      * 月相名称
@@ -24,7 +28,7 @@ public class MoonPhaseDTO {
      */
     private double julianTime;
 
-    private List<MoonPhaseDTO> moonPhaseDTOS;
+    private List<MoonPhaseDTO> next;
 
     public Integer getIndex() {
         return index;
@@ -82,16 +86,20 @@ public class MoonPhaseDTO {
         this.julianTime = julianTime;
     }
 
-    public List<MoonPhaseDTO> getMoonPhaseDTOS() {
-        return moonPhaseDTOS;
+    public List<MoonPhaseDTO> getNext() {
+        return next;
     }
 
-    public void setMoonPhaseDTOS(List<MoonPhaseDTO> moonPhaseDTOS) {
-        this.moonPhaseDTOS = moonPhaseDTOS;
+    public void setNext(List<MoonPhaseDTO> next) {
+        this.next = next;
     }
 
     public String getInfo() {
         return name != null ? name + " " + dateTime : "无";
+    }
+
+    public String getDetails() {
+        return name != null ? name + " " + dateTime + " 至今" + afterDay + "天" : "无";
     }
 
 }

@@ -42,6 +42,8 @@ public class AlmanacUtils {
         // 某年气朔的数据信息
         QiShuoDO qiShuoDO = new QiShuoDO();
 
+        List<MoonPhaseDTO> moonPhaseDTOS = new ArrayList<>();
+
         // FIXME 2021-01-22 不知为何减去西历两千年的儒略日
         // 这个月1号的儒略日,公历月首,中午
         int julianDayOfMonthFirst = (int) (Math.floor(JulianCalendarUtils.getJulianDayNumber(timeZoneDTO.getYear(), timeZoneDTO.getMonth())) - CommonUtils.JULIAN_FOR_2000);
@@ -305,12 +307,11 @@ public class AlmanacUtils {
             almanacDTO.setSolarTermDTO(solarTermDTO);
             almanacDTO.setSunMoonDTO(sunMoonDTO);
             almanacDTO.setTimeZoneDTO(timeZoneOfThisDay);
-            almanacDTO.setMoonPhaseDTO(new MoonPhaseDTO());
+            almanacDTO.setMoonPhaseDTO(new MoonPhaseDTO(moonPhaseDTOS));
             almanacDTOS[i] = almanacDTO;
         }
 
         //------------------------------------计算月相------------------------------------//
-        List<MoonPhaseDTO> moonPhaseDTOS = new ArrayList<>();
         do {
             double moonLonValue = AnnalsUtils.so_accurate(moonLon);
             julianDay = (int) Math.floor(moonLonValue + 0.5);
