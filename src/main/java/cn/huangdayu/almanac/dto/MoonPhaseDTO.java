@@ -99,7 +99,7 @@ public class MoonPhaseDTO {
     }
 
     public String getDetails() {
-        return name != null ? name + " " + dateTime + " 至今" + afterDay + "天" : "无";
+        return name != null ? name + " " + dateTime : "无";
     }
 
 }
