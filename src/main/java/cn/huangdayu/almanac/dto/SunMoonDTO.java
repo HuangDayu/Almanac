@@ -58,43 +58,6 @@ public class SunMoonDTO {
      */
     private String moonMiddleTime;
 
-    /**
-     * 月相名称
-     */
-    private String moonPhaseName;
-    /**
-     * 月相时刻(儒略日)
-     */
-    private double moonPhaseTime;
-    /**
-     * 月相时间串
-     */
-    private String moonPhaseTimeName;
-
-    public String getMoonPhaseName() {
-        return moonPhaseName;
-    }
-
-    public void setMoonPhaseName(String moonPhaseName) {
-        this.moonPhaseName = moonPhaseName;
-    }
-
-    public double getMoonPhaseTime() {
-        return moonPhaseTime;
-    }
-
-    public void setMoonPhaseTime(double moonPhaseTime) {
-        this.moonPhaseTime = moonPhaseTime;
-    }
-
-    public String getMoonPhaseTimeName() {
-        return moonPhaseTimeName;
-    }
-
-    public void setMoonPhaseTimeName(String moonPhaseTimeName) {
-        this.moonPhaseTimeName = moonPhaseTimeName;
-    }
-
     public String getSunRiseTime() {
         return sunRiseTime;
     }
@@ -199,10 +162,6 @@ public class SunMoonDTO {
         this.portName = portName;
     }
 
-    public String getMoonPhaseInfo() {
-        return moonPhaseName + " " + moonPhaseTimeName;
-    }
-
     @Override
     public String toString() {
         return "SunMoonDTO{" +
@@ -219,9 +178,6 @@ public class SunMoonDTO {
                 ", moonRiseTime='" + moonRiseTime + '\'' +
                 ", moonSetTime='" + moonSetTime + '\'' +
                 ", moonMiddleTime='" + moonMiddleTime + '\'' +
-                ", moonPhaseName='" + moonPhaseName + '\'' +
-                ", moonPhaseTime=" + moonPhaseTime +
-                ", moonPhaseTimeName='" + moonPhaseTimeName + '\'' +
                 '}';
     }
 }

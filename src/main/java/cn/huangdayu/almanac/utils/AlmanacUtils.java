@@ -305,14 +305,15 @@ public class AlmanacUtils {
             almanacDTO.setSolarTermDTO(solarTermDTO);
             almanacDTO.setSunMoonDTO(sunMoonDTO);
             almanacDTO.setTimeZoneDTO(timeZoneOfThisDay);
+            almanacDTO.setMoonPhaseDTO(new MoonPhaseDTO());
             almanacDTOS[i] = almanacDTO;
         }
 
         //------------------------------------计算月相------------------------------------//
-
+        List<MoonPhaseDTO> moonPhaseDTOS = new ArrayList<>();
         do {
-            double d = AnnalsUtils.so_accurate(moonLon);
-            julianDay = (int) Math.floor(d + 0.5);
+            double moonLonValue = AnnalsUtils.so_accurate(moonLon);
+            julianDay = (int) Math.floor(moonLonValue + 0.5);
             int xn = (int) Math.floor(moonLon / CommonUtils.PI_2 * 4 + 4000000.01) % 4;
             moonLon += CommonUtils.PI_2 / 4;
             if (julianDay >= julianDayOfMonthFirst + julianDayForMonthSum) {
@@ -321,13 +322,16 @@ public class AlmanacUtils {
             if (julianDay < julianDayOfMonthFirst) {
                 continue;
             }
-            SunMoonDTO sunMoonDTO = almanacDTOS[julianDay - julianDayOfMonthFirst].getSunMoonDTO();
+            AlmanacDTO almanacDTO =  almanacDTOS[julianDay - julianDayOfMonthFirst];
+            MoonPhaseDTO moonPhaseDTO = almanacDTO.getMoonPhaseDTO();
             // 取得月相名称
-            sunMoonDTO.setMoonPhaseName(AnnalsUtils.YUEXIANG[xn]);
+            moonPhaseDTO.setName(AnnalsUtils.YUEXIANG[xn]);
             //月相时刻(儒略日)
-            sunMoonDTO.setMoonPhaseTime(CommonUtils.JULIAN_FOR_2000 + d);
+            moonPhaseDTO.setJulianTime(CommonUtils.JULIAN_FOR_2000 + moonLonValue);
             //月相时间串
-            sunMoonDTO.setMoonPhaseTimeName(JulianCalendarUtils.getJulianTime(CommonUtils.JULIAN_FOR_2000 + d));
+            moonPhaseDTO.setDateTime(JulianCalendarUtils.getJulianTime(CommonUtils.JULIAN_FOR_2000 + moonLonValue));
+            moonPhaseDTOS.add(moonPhaseDTO);
+            almanacDTO.setMoonPhaseDTO(moonPhaseDTO);
         } while (julianDay + 5 < julianDayOfMonthFirst + julianDayForMonthSum);
 
         return almanacDTOS;

@@ -1,6 +1,7 @@
 package cn.huangdayu.almanac.dto;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,6 +21,7 @@ public class AlmanacDTO {
     private SolarTermDTO solarTermDTO;
     private SunMoonDTO sunMoonDTO;
     private TimeZoneDTO timeZoneDTO;
+    private MoonPhaseDTO moonPhaseDTO;
 
     public LunarDTO getLunarDTO() {
         return lunarDTO;
@@ -93,6 +95,14 @@ public class AlmanacDTO {
         this.timeZoneDTO = timeZoneDTO;
     }
 
+    public MoonPhaseDTO getMoonPhaseDTO() {
+        return moonPhaseDTO;
+    }
+
+    public void setMoonPhaseDTO(MoonPhaseDTO moonPhaseDTO) {
+        this.moonPhaseDTO = moonPhaseDTO;
+    }
+
     public Map<String, String> toMap() {
         Map<String, String> map = new LinkedHashMap<>();
         map.put("地点", getTimeZoneDTO().getPosition());
@@ -119,7 +129,7 @@ public class AlmanacDTO {
         map.put("月出", getSunMoonDTO().getMoonRiseTime());
         map.put("月中", getSunMoonDTO().getMoonMiddleTime());
         map.put("月落", getSunMoonDTO().getMoonSetTime());
-        map.put("月相", getSunMoonDTO().getMoonPhaseInfo());
+        map.put("月相", getMoonPhaseDTO().getInfo());
         map.put("月天数", String.valueOf(getLunarDTO().getDaysOfMonth()));
         map.put("闰月", String.valueOf(getLunarDTO().getLeapMonth()));
         map.put("闰年", String.valueOf(getLunarDTO().getLeapYear()));
