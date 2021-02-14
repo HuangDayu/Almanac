@@ -9,9 +9,10 @@
 
 <!-- [![GitHub license](https://img.shields.io/github/license/HuangDayu/Almanac.svg)](https://github.com/HuangDayu/Almanac) -->
 
-**历**：包括万年历、皇历、日出月落、农历、黄历、节气、经纬度、节假日、伊斯兰历、儒略历、西历。
+**[历](https://almanac.huangdayu.cn/)**：包括万年历、皇历、日出月落、农历、黄历、干支，节气、月相，经纬度、节假日、伊斯兰历、儒略历、西历等。
 
-# 引入依赖
+
+## 引入依赖
 
 ```xml
 
@@ -22,7 +23,7 @@
 </dependency>
 ```
 
-# 使用示例
+## 使用示例
 
 ```java
 
@@ -63,22 +64,22 @@ public class AlmanacApp extends Almanac {
 }
 ```
 
-# 说明
+## 说明
 
 **本项目类似[寿星天文历](http://www.nongli.net/sxwnl/)和[日梭万年历](https://www.nongli114.com/rili/)，但是数据还不是很全，算法有待校验。**
 
-# 申明
+## 申明
 
 **我只是代码的搬运工！如有侵权，联系删除！**
 
-# 特别感谢
+## 特别感谢
 
 - [wangpeng047](http://blog.csdn.net/wangpeng047/article/details/38559591)
 - [lxslove](http://blog.csdn.net/lxslove/article/details/6083396)
 - [moodlxs](http://www.cnblogs.com/moodlxs/archive/2010/12/18/2345392.html)
 - [hanoi](http://www.cnblogs.com/hanoi/archive/2012/07/04/2576325.html)
 
-# 日历说明
+## 日历说明
 
 - 西历 公历 阳历
 - 农历 阴阳历 黄历
@@ -96,15 +97,15 @@ public class AlmanacApp extends Almanac {
 - [电子天文历表](http://almanac.pmo.ac.cn/dianzili.htm)
 - [天之文](http://www.astron.ac.cn/index.htm)
 
-# BUG
+## BUG
 
 - 时间无法进入公元前
 
-# 不足
+## 不足
 
 - 天文历信息不足：方位、赤纬、时角、黄经、黄纬，潮汐，太阳高度角，地球直射位置，地球远日点，地球近日点，日食月食等
 
-# 程序运行效果展示
+## 程序运行效果展示
 
 | key | value | value | value |
 | :--------: | :-------- | :-------- | :-------- |
@@ -150,7 +151,7 @@ public class AlmanacApp extends Almanac {
 | `秋分` | 2018-09-23 09:54:01  | 1995-09-23 20:13:00  | 1-09-25 15:39:49  |
 | `冬至` | 2018-12-22 06:22:38  | 1995-12-22 16:16:47  | 1-12-23 08:19:28  |
 
-# Almanac APP 演示
+## Almanac APP 演示
 
 <div align="center">
 <img src="https://github.com/HuangDayu/AlmanacApp/blob/master/ezgif.com-video-to-gif-1.gif" height="450px" width="250px" alt="设置日期" >
@@ -158,17 +159,35 @@ public class AlmanacApp extends Almanac {
 <img src="https://github.com/HuangDayu/AlmanacApp/blob/master/ezgif.com-video-to-gif-3.gif" height="450px" width="250px" alt="设置位置" >
 </div>
 
-# Almanac APP 下载
+## Almanac APP 下载
 
 - [点击下载](https://github.com/HuangDayu/AlmanacApp/raw/master/AlmanacApp.apk)
 
-# Almanac APP 源码
+## Almanac APP 源码
 
 - [AlmanacAPP](https://github.com/HuangDayu/AlmanacApp)
 
-# 参考文献
+## 参考文献
 
 - [寿星天文历Java封装整理版](https://blog.csdn.net/wangpeng047/article/details/38559591)
 - [寿星万年历---java算法实现-csdn](https://blog.csdn.net/lxslove/article/details/6083396)
 - [寿星万年历---java算法实现-cnblogs](http://www.cnblogs.com/moodlxs/archive/2010/12/18/2345392.html)
 - [根据经纬度计算日出、日落、中天、天亮、天黑和昼长时间](http://www.cnblogs.com/hanoi/archive/2012/07/04/2576325.html)  
+
+## License
+
+```license
+Copyright 2018 amy
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
