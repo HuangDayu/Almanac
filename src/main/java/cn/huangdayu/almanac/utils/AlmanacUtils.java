@@ -25,7 +25,11 @@ public class AlmanacUtils {
     public static AlmanacDTO dayCalendar(TimeZoneDTO timeZoneDTO) {
         /** 数组从0开始，所以要减1*/
         int index = timeZoneDTO.getDay() - 1;
-        return monthCalendar(timeZoneDTO)[index];
+        return monthCalendar(timeZoneDTO, index)[index];
+    }
+
+    public static AlmanacDTO[] monthCalendar(TimeZoneDTO timeZoneDTO) {
+        return monthCalendar(timeZoneDTO, -1);
     }
 
     /**
@@ -35,7 +39,7 @@ public class AlmanacUtils {
      * @return
      * @throws cn.huangdayu.almanac.exception.AlmanacException
      */
-    public static AlmanacDTO[] monthCalendar(TimeZoneDTO timeZoneDTO) {
+    private static AlmanacDTO[] monthCalendar(TimeZoneDTO timeZoneDTO, int dayIndex) {
 
         int julianDay;
 
@@ -69,17 +73,23 @@ public class AlmanacUtils {
         // 计算世界时与原子时之差
         double jd2 = julianDayOfMonthFirst + CommonUtils.dtT(julianDayOfMonthFirst) - (double) 8 / 24;
 
-        // 计算太阳黄经
+        // 太阳视黄经
         double sunLon = AstronomyArithmeticUtils.S_aLon(jd2 / 36525, 3);
         sunLon = (int) Math.floor((sunLon - 0.13) / CommonUtils.PI_2 * 24) * CommonUtils.PI_2 / 24;
 
-        // 月日视黄经的差值
+        // 月日视黄经
         double moonLon = AstronomyArithmeticUtils.MS_aLon(jd2 / 36525, 10, 3);
         moonLon = (int) Math.floor((moonLon - 0.78) / Math.PI * 2) * Math.PI / 2;
 
         // 计算月历
         for (int i = 0, j = 0; i < julianDayForMonthSum; i++) {
-            // 叠加日期，重构对象
+
+            // 判断是否只计算一天的历
+            if (dayIndex >= 0 && i != dayIndex) {
+                continue;
+            }
+
+            //------------------------------------叠加日期，重构对象------------------------------------//
             timeZoneDTO.setDay(i + 1);
             TimeZoneDTO timeZoneOfThisDay = new TimeZoneDTO(timeZoneDTO, julianDayForMonthSum + i);
 
@@ -125,24 +135,15 @@ public class AlmanacUtils {
             // 农历日名称
             lunarDTO.setDay(AnnalsUtils.DAY_NAME[julianDayOfThisDay - qiShuoDO.HS[mk]]);
             lunarDTO.setLeapYear(qiShuoDO.leap > 0);
-            // 月的信息
-            if (julianDayOfThisDay == qiShuoDO.HS[mk] || julianDayOfThisDay == julianDayOfMonthFirst) {
-                // 月名称
-                lunarDTO.setMonth(qiShuoDO.ym[mk]);
-                // 月大小
-                lunarDTO.setDaysOfMonth(qiShuoDO.dx[mk]);
-                // 闰状况
-                lunarDTO.setLeapMonth((qiShuoDO.leap != 0 && qiShuoDO.leap == mk));
-                // 下个月名称,判断除夕时要用到
-                lunarDTO.setNextMonth(mk < 13 ? qiShuoDO.ym[mk + 1] : "未知");
-            } else {
-                // 获得前一天的信息
-                LunarDTO lastLunarDay = almanacDTOS[i - 1].getLunarDTO();
-                lunarDTO.setMonth(lastLunarDay.getMonth());
-                lunarDTO.setDaysOfMonth(lastLunarDay.getDaysOfMonth());
-                lunarDTO.setLeapMonth(lastLunarDay.getLeapMonth());
-                lunarDTO.setNextMonth(lastLunarDay.getNextMonth());
-            }
+            // 月名称
+            lunarDTO.setMonth(qiShuoDO.ym[mk]);
+            // 月大小
+            lunarDTO.setDaysOfMonth(qiShuoDO.dx[mk]);
+            // 闰状况
+            lunarDTO.setLeapMonth((qiShuoDO.leap != 0 && qiShuoDO.leap == mk));
+            // 下个月名称,判断除夕时要用到
+            lunarDTO.setNextMonth(mk < 13 ? qiShuoDO.ym[mk + 1] : "未知");
+            // 时辰
             int sum = (int) (hours + 0.01 * minute);
             int index = (sum + 1) / 2;
             if (index >= 12) {
@@ -198,6 +199,7 @@ public class AlmanacUtils {
             List<SolarTermDTO> solarTermAfterDTOS = new ArrayList<>();
             int qj = 24, qn;
             for (int qi = qk; qi < qj; ) {
+                // FIXME 2021-01-17 计算太阳视黄经较耗时
                 sunLonTime = AnnalsUtils.qi_accurate(sunLonValue);
                 // julianDay = (int) Math.floor(sunLonTime + 0.5);
                 qn = (int) Math.floor(sunLonValue / CommonUtils.PI_2 * 24 + 24000006.01) % 24;
@@ -293,6 +295,7 @@ public class AlmanacUtils {
 
         //------------------------------------计算月相------------------------------------//
         do {
+            // FIXME 2021-01-17 计算月日视黄经较耗时
             double moonLonValue = AnnalsUtils.so_accurate(moonLon);
             julianDay = (int) Math.floor(moonLonValue + 0.5);
             int xn = (int) Math.floor(moonLon / CommonUtils.PI_2 * 4 + 4000000.01) % 4;
@@ -304,6 +307,9 @@ public class AlmanacUtils {
                 continue;
             }
             AlmanacDTO almanacDTO = almanacDTOS[julianDay - julianDayOfMonthFirst];
+            if (almanacDTO == null) {
+                continue;
+            }
             MoonPhaseDTO moonPhaseDTO = almanacDTO.getMoonPhaseDTO();
             // 取得月相名称
             moonPhaseDTO.setName(AnnalsUtils.YUEXIANG[xn]);
