@@ -16,7 +16,7 @@ public class AlmanacTest6 {
 //                AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省","徐闻县", "2021-02-03 23:30:48")),
 //                AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省","徐闻县", "2021-02-04 01:45:48")),
 //                AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省","徐闻县", "2021-02-12 03:59:48")),
-                AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省","徐闻县", Calendar.getInstance())),
+                AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省", "徐闻县", Calendar.getInstance())),
 
 
 //                AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省","徐闻县", Calendar.getInstance())),
@@ -26,7 +26,7 @@ public class AlmanacTest6 {
         };
         for (AlmanacDTO almanacDTO : almanacDTOS) {
             for (Map.Entry<String, String> entry : almanacDTO.toMap().entrySet()) {
-                System.out.println(entry.getKey() +" " + entry.getValue());
+                System.out.println(entry.getKey() + " " + entry.getValue());
             }
 //            System.out.println(almanacDTO.getMoonPhaseDTO().getNext().size());
 //            System.out.println(almanacDTO.getLunarDTO().toString());
@@ -38,7 +38,6 @@ public class AlmanacTest6 {
 //            }
 //        }
     }
-
 
 
 }
