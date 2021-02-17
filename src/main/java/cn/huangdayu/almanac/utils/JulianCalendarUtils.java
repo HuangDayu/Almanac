@@ -177,7 +177,7 @@ public class JulianCalendarUtils {
         F *= 60;
         second = F;
 
-        return new TimeZoneDTO(year, month, day, hour, minute, (int) second, 0);
+        return new TimeZoneDTO(year, month, day, hour, minute, (int) second);
     }
 
     /***
@@ -246,9 +246,9 @@ public class JulianCalendarUtils {
                 + CommonUtils.subString(sStr, sStr.length() - 2, sStr.length());
     }
 
-    public static String getJulianToDateTime(double julianDay) {
-        return DateTimeUtils.dateFormat(julianDaysToTimeZone(julianDay).getCalendar(), "yyyy-MM-dd HH:mm:ss.SS");
-    }
+//    public static String getJulianToDateTime(double julianDay) {
+//        return DateTimeUtils.dateFormat(julianDaysToTimeZone(julianDay).toCalendar(), "yyyy-MM-dd HH:mm:ss.SS");
+//    }
 
     /****
      * 星期计算

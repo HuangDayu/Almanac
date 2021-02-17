@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class AlmanacTest2 {
     public static void main(String[] args) {
-        TimeZoneDTO timeZoneDTO2 = new TimeZoneDTO("广东省徐闻县", "2021-01-29 11:13:29");
+        TimeZoneDTO timeZoneDTO2 = new TimeZoneDTO("广东省","徐闻县", "2021-01-29 11:13:29");
         AlmanacDTO almanacDTO = AlmanacUtils.yearCalendar(timeZoneDTO2)[7][11];
         TestUtils.pakMap(almanacDTO);
         for (Map.Entry<String, String> entry : TestUtils.MAP.entrySet()) {

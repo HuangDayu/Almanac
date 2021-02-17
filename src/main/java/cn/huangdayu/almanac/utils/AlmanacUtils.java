@@ -24,7 +24,7 @@ public class AlmanacUtils {
      */
     public static AlmanacDTO dayCalendar(TimeZoneDTO timeZoneDTO) {
         /** 数组从0开始，所以要减1*/
-        int index = timeZoneDTO.getCalendar().get(Calendar.DATE) - 1;
+        int index = timeZoneDTO.getDay() - 1;
         return monthCalendar(timeZoneDTO)[index];
     }
 
@@ -80,7 +80,8 @@ public class AlmanacUtils {
         // 计算月历
         for (int i = 0, j = 0; i < julianDayForMonthSum; i++) {
             // 叠加日期，重构对象
-            TimeZoneDTO timeZoneOfThisDay = new TimeZoneDTO(timeZoneDTO, i + 1, julianDayForMonthSum + i);
+            timeZoneDTO.setDay(i + 1);
+            TimeZoneDTO timeZoneOfThisDay = new TimeZoneDTO(timeZoneDTO, julianDayForMonthSum + i);
 
 
             //------------------------------------计算儒略日,北京时12:00------------------------------------//
@@ -98,31 +99,11 @@ public class AlmanacUtils {
 
 
             //------------------------------------计算西历,伽利略历------------------------------------//
-            GregorianDTO gregorianDTO = new GregorianDTO();
-            Calendar calendar = timeZoneOfThisDay.getCalendar();
-            int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH) + 1;
-            int day = calendar.get(Calendar.DAY_OF_MONTH);
-            int hours = calendar.get(Calendar.HOUR_OF_DAY);
-            int minute = calendar.get(Calendar.MINUTE);
-            // 公历月内日序数
-            gregorianDTO.setDayIndexForMonth(i);
-            // 公历年
-            gregorianDTO.setYear(year);
-            // 公历月
-            gregorianDTO.setMonth(month);
-            // 公历日名称
-            gregorianDTO.setDay(day);
-            // 公历月天数
-            gregorianDTO.setDaysOfMonth(julianDayForMonthSum);
-            // 月首的星期
-            gregorianDTO.setWeekFirstForMonth(weekFirstForMonthIndex);
-            // 当前日的星期
-            gregorianDTO.setWeek((weekFirstForMonthIndex + i) % 7);
-            // 本日所在的周序号
-            gregorianDTO.setWeekIndexForMonth((int) Math.floor((weekFirstForMonthIndex + i) / 7));
-            // 本月的总周数
-            gregorianDTO.setWeeksOfMonth((int) Math.floor((weekFirstForMonthIndex + julianDayForMonthSum - 1) / 7) + 1);
+            int year = timeZoneOfThisDay.getYear();
+            int month = timeZoneOfThisDay.getMonth();
+            int day = timeZoneOfThisDay.getDay();
+            int hours = timeZoneOfThisDay.getHour();
+            int minute = timeZoneOfThisDay.getMinute();
 
             //------------------------------------农历排月序计算------------------------------------//
             // 此处有线程安全问题, 暂时直接实例化，qiShuoDO.calcY是为减少计算次数而做的判断。（同一年数据一样）
@@ -295,11 +276,10 @@ public class AlmanacUtils {
             // 计算农历节日
             HolidayDTO holidayDTO = AnnalsUtils.getHolidayInfo(lunarDTO, solarTermDTO, eraDTO);
             // 计算公历节日
-            FestivalHolidayUtils.getDayName(gregorianDTO, holidayDTO);
+            FestivalHolidayUtils.getDayName(timeZoneOfThisDay, holidayDTO);
 
             AlmanacDTO almanacDTO = new AlmanacDTO();
             almanacDTO.setEraDTO(eraDTO);
-            almanacDTO.setGregorianDTO(gregorianDTO);
             almanacDTO.setHolidayDTO(holidayDTO);
             almanacDTO.setIslamicDTO(islamicDTO);
             almanacDTO.setJulianDTO(julianDTO);
@@ -323,7 +303,7 @@ public class AlmanacUtils {
             if (julianDay < julianDayOfMonthFirst) {
                 continue;
             }
-            AlmanacDTO almanacDTO =  almanacDTOS[julianDay - julianDayOfMonthFirst];
+            AlmanacDTO almanacDTO = almanacDTOS[julianDay - julianDayOfMonthFirst];
             MoonPhaseDTO moonPhaseDTO = almanacDTO.getMoonPhaseDTO();
             // 取得月相名称
             moonPhaseDTO.setName(AnnalsUtils.YUEXIANG[xn]);
@@ -349,7 +329,8 @@ public class AlmanacUtils {
     public static AlmanacDTO[][] yearCalendar(TimeZoneDTO timeZoneDTO) {
         AlmanacDTO[][] almanacDTOS = new AlmanacDTO[12][];
         for (int i = 1; i <= 12; i++) {
-            almanacDTOS[i - 1] = monthCalendar(new TimeZoneDTO(timeZoneDTO, i));
+            timeZoneDTO.setMonth(i);
+            almanacDTOS[i - 1] = monthCalendar(new TimeZoneDTO(timeZoneDTO));
         }
         return almanacDTOS;
     }

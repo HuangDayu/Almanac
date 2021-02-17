@@ -13,45 +13,44 @@ public class TestUtils {
 
     public static Map<String, String> MAP = new LinkedHashMap<>();
 
-    public static void pakMap(AlmanacDTO almanacDTO1) {
-        handler("日期", DateTimeUtils.dateFormat(almanacDTO1.getTimeZoneDTO().getCalendar(), "yyyy-MM-dd HH:mm:ss.SS"));
-        handler("星期", almanacDTO1.getTimeZoneDTO().getWeekName());
-        handler("地点", almanacDTO1.getTimeZoneDTO().getPosition());
-        handler("年号", almanacDTO1.getLunarDTO().getYearName());
-        handler("农历", almanacDTO1.getLunarDTO().getInfo());
-        handler("黄历", almanacDTO1.getEraDTO().getInfo());
-        handler("回历", almanacDTO1.getIslamicDTO().getInfo());
-        handler("儒略日", String.valueOf(almanacDTO1.getJulianDTO().getDays()));
-        handler("黄帝纪年", almanacDTO1.getLunarDTO().getKingChronologyName());
-        handler("生肖", almanacDTO1.getLunarDTO().getZodiac());
-        handler("节日", almanacDTO1.getHolidayDTO().getMajorDay());
-        handler("假日", almanacDTO1.getHolidayDTO().getHappyDay());
-        handler("其他节日", almanacDTO1.getHolidayDTO().getOtherDay());
-        handler("经度", almanacDTO1.getSunMoonDTO().getLongitude());
-        handler("纬度", almanacDTO1.getSunMoonDTO().getLatitude());
-        handler("时区", almanacDTO1.getTimeZoneDTO().getTimeZone());
-        handler("港口", almanacDTO1.getSunMoonDTO().getPortName());
-        handler("昼长", almanacDTO1.getSunMoonDTO().getDiurnalTime());
-        handler("夜长", almanacDTO1.getSunMoonDTO().getNightTime());
-        handler("天亮", almanacDTO1.getSunMoonDTO().getDawnTime());
-        handler("日出", almanacDTO1.getSunMoonDTO().getSunRiseTime());
-        handler("中天", almanacDTO1.getSunMoonDTO().getMidDayTime());
-        handler("日落", almanacDTO1.getSunMoonDTO().getSunSetTime());
-        handler("天黑", almanacDTO1.getSunMoonDTO().getDarkTime());
-        handler("月出", almanacDTO1.getSunMoonDTO().getMoonRiseTime());
-        handler("月中", almanacDTO1.getSunMoonDTO().getMoonMiddleTime());
-        handler("月落", almanacDTO1.getSunMoonDTO().getMoonSetTime());
-        handler("月相", almanacDTO1.getMoonPhaseDTO().getInfo());
-        handler("月天数", String.valueOf(almanacDTO1.getLunarDTO().getDaysOfMonth()));
-        handler("闰月否", String.valueOf(almanacDTO1.getLunarDTO().getLeapMonth()));
-        handler("闰年否", String.valueOf(almanacDTO1.getLunarDTO().getLeapYear()));
-        handler("星座", almanacDTO1.getJulianDTO().getConstellation());
-        handler("当下节气", almanacDTO1.getSolarTermDTO().getName() + " " + almanacDTO1.getSolarTermDTO().getDateTime());
-        handler("最近节气", almanacDTO1.getSolarTermDTO().getNextOne().getName() + " " + almanacDTO1.getSolarTermDTO().getNextOne().getDateTime());
-        handler("春分", almanacDTO1.getSolarTermDTO().getByName("春分").getDateTime());
-        handler("夏至", almanacDTO1.getSolarTermDTO().getByName("夏至").getDateTime());
-        handler("秋分", almanacDTO1.getSolarTermDTO().getByName("秋分").getDateTime());
-        handler("冬至", almanacDTO1.getSolarTermDTO().getByName("冬至").getDateTime());
+    public static void pakMap(AlmanacDTO almanacDTO) {
+        handler("西历", almanacDTO.getTimeZoneDTO().getInfo());
+        handler("地点", almanacDTO.getTimeZoneDTO().getPosition());
+        handler("年号", almanacDTO.getLunarDTO().getYearName());
+        handler("农历", almanacDTO.getLunarDTO().getInfo());
+        handler("黄历", almanacDTO.getEraDTO().getInfo());
+        handler("回历", almanacDTO.getIslamicDTO().getInfo());
+        handler("儒略日", String.valueOf(almanacDTO.getJulianDTO().getDays()));
+        handler("黄帝纪年", almanacDTO.getLunarDTO().getKingChronologyName());
+        handler("生肖", almanacDTO.getLunarDTO().getZodiac());
+        handler("节日", almanacDTO.getHolidayDTO().getMajorDay());
+        handler("假日", almanacDTO.getHolidayDTO().getHappyDay());
+        handler("其他节日", almanacDTO.getHolidayDTO().getOtherDay());
+        handler("经度", almanacDTO.getSunMoonDTO().getLongitude());
+        handler("纬度", almanacDTO.getSunMoonDTO().getLatitude());
+        handler("时区", almanacDTO.getTimeZoneDTO().getTimeZone());
+        handler("港口", almanacDTO.getSunMoonDTO().getPortName());
+        handler("昼长", almanacDTO.getSunMoonDTO().getDiurnalTime());
+        handler("夜长", almanacDTO.getSunMoonDTO().getNightTime());
+        handler("天亮", almanacDTO.getSunMoonDTO().getDawnTime());
+        handler("日出", almanacDTO.getSunMoonDTO().getSunRiseTime());
+        handler("中天", almanacDTO.getSunMoonDTO().getMidDayTime());
+        handler("日落", almanacDTO.getSunMoonDTO().getSunSetTime());
+        handler("天黑", almanacDTO.getSunMoonDTO().getDarkTime());
+        handler("月出", almanacDTO.getSunMoonDTO().getMoonRiseTime());
+        handler("月中", almanacDTO.getSunMoonDTO().getMoonMiddleTime());
+        handler("月落", almanacDTO.getSunMoonDTO().getMoonSetTime());
+        handler("月相", almanacDTO.getMoonPhaseDTO().getInfo());
+        handler("月天数", String.valueOf(almanacDTO.getLunarDTO().getDaysOfMonth()));
+        handler("闰月否", String.valueOf(almanacDTO.getLunarDTO().getLeapMonth()));
+        handler("闰年否", String.valueOf(almanacDTO.getLunarDTO().getLeapYear()));
+        handler("星座", almanacDTO.getJulianDTO().getConstellation());
+        handler("当下节气", almanacDTO.getSolarTermDTO().getName() + " " + almanacDTO.getSolarTermDTO().getDateTime());
+        handler("最近节气", almanacDTO.getSolarTermDTO().getNextOne().getName() + " " + almanacDTO.getSolarTermDTO().getNextOne().getDateTime());
+        handler("春分", almanacDTO.getSolarTermDTO().getByName("春分").getDateTime());
+        handler("夏至", almanacDTO.getSolarTermDTO().getByName("夏至").getDateTime());
+        handler("秋分", almanacDTO.getSolarTermDTO().getByName("秋分").getDateTime());
+        handler("冬至", almanacDTO.getSolarTermDTO().getByName("冬至").getDateTime());
     }
 
     private static void handler(String key, String value) {

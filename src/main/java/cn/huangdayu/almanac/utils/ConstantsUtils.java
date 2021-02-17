@@ -10,6 +10,7 @@ public class ConstantsUtils {
     public static final String[] GENG = {"[三更]", "[四更]", "[五更]", "", "", "", "", "", "", "", "[一更]", "[二更]"};
     public static final String[] KE = {"一刻", "一刻", "二刻", "三刻", "四刻"};
     public static final String[] TIMEZONE = {"一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二"};
+    public static final String[] WEEK_NAME = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
 
     public static final String FORMAT_ALL = "G yyyy年MM月dd日 HH时mm分ss秒SSS毫秒 Eak时 Z时区 yyyy年第w周第D天 M月第W周第d天";
     public static final String FORMAT_DATE_TIME_EN = "yyyy-MM-dd HH:mm:ss.SS";

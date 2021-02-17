@@ -14,7 +14,6 @@ public class AlmanacDTO {
 
     private LunarDTO lunarDTO;
     private EraDTO eraDTO;
-    private GregorianDTO gregorianDTO;
     private HolidayDTO holidayDTO;
     private IslamicDTO islamicDTO;
     private JulianDTO julianDTO;
@@ -37,14 +36,6 @@ public class AlmanacDTO {
 
     public void setEraDTO(EraDTO eraDTO) {
         this.eraDTO = eraDTO;
-    }
-
-    public GregorianDTO getGregorianDTO() {
-        return gregorianDTO;
-    }
-
-    public void setGregorianDTO(GregorianDTO gregorianDTO) {
-        this.gregorianDTO = gregorianDTO;
     }
 
     public HolidayDTO getHolidayDTO() {

@@ -25,6 +25,6 @@ public class AlmanacApp extends Almanac {
 
     @Override
     public TimeZoneDTO initTimeZone() {
-        return new TimeZoneDTO("广东省徐闻县", "2021-01-29 11:13:29");
+        return new TimeZoneDTO("广东省","徐闻县", "2021-01-29 11:13:29");
     }
 }

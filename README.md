@@ -33,7 +33,7 @@
  * @param timeZoneDTO
  * @return
  */
-AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省徐闻县",Calendar.getInstance()));
+AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省","徐闻县",Calendar.getInstance()));
 
 /**
  * 月历
@@ -41,7 +41,7 @@ AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省徐闻县",Calendar.getInstan
  * @param timeZoneDTO
  * @return
  */
-AlmanacUtils.monthCalendar(new TimeZoneDTO("广东省徐闻县",Calendar.getInstance()));
+AlmanacUtils.monthCalendar(new TimeZoneDTO("广东省","徐闻县",Calendar.getInstance()));
 
 /**
  * 集成抽象类的用法
@@ -59,7 +59,7 @@ public class AlmanacApp extends Almanac {
 
     @Override
     public TimeZoneDTO initTimeZone() {
-        return new TimeZoneDTO("广东省徐闻县", "2021-01-29 11:13:29");
+        return new TimeZoneDTO("广东省","徐闻县", "2021-01-29 11:13:29");
     }
 }
 ```

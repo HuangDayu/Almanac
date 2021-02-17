@@ -1,7 +1,9 @@
 package cn.huangdayu.almanac.utils;
 
-import cn.huangdayu.almanac.dto.GregorianDTO;
 import cn.huangdayu.almanac.dto.HolidayDTO;
+import cn.huangdayu.almanac.dto.TimeZoneDTO;
+
+import java.util.Calendar;
 
 
 /**
@@ -56,7 +58,7 @@ public class FestivalHolidayUtils {
      * @param gregorianDTO
      * @param holidayDTO
      */
-    public static void getDayName(GregorianDTO gregorianDTO, HolidayDTO holidayDTO) {
+    public static void getDayName(TimeZoneDTO gregorianDTO, HolidayDTO holidayDTO) {
         String happyDay = holidayDTO.getHappyDay();
         String majorDay = holidayDTO.getMajorDay();
         String otherDay = holidayDTO.getOtherDay();
@@ -110,12 +112,14 @@ public class FestivalHolidayUtils {
         }
 
         // 按周查找
-        int w = gregorianDTO.getWeekIndexForMonth();
-        if (gregorianDTO.getWeek() >= gregorianDTO.getWeekFirstForMonth()) {
+        // 在本月中的周序号
+        int w = gregorianDTO.getGregorianCalendar().get(Calendar.WEEK_OF_MONTH);
+        //所在月的月首的星期
+        if (gregorianDTO.getWeek() >= gregorianDTO.getGregorianCalendar().get(Calendar.DAY_OF_WEEK_IN_MONTH)) {
             w += 1;
         }
         int w2 = w;
-        if (gregorianDTO.getWeekIndexForMonth() == gregorianDTO.getWeeksOfMonth() - 1) {
+        if (gregorianDTO.getGregorianCalendar().get(Calendar.WEEK_OF_MONTH) == gregorianDTO.getGregorianCalendar().get(Calendar.WEEK_OF_MONTH) - 1) {
             w2 = 5;
         }
 
