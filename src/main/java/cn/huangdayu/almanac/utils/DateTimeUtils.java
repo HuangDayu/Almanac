@@ -1,5 +1,7 @@
 package cn.huangdayu.almanac.utils;
 
+import cn.huangdayu.almanac.dto.TimeZoneDTO;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,7 +22,6 @@ public class DateTimeUtils {
     public static String timeStr = "yyyy年MM月dd日  HH时mm分ss秒 时区:Z 星期中的天数:E 年中的周数:w 月份中的周数:W 年中的天数:D 月份中的天数:d 月份中的星期:F ";
 
     public static Calendar dateToCalendar(Date date) {
-        // System.out.println(dateFormat(date,timeStr));
         return timeInMillisToCalendar(date.getTime());
     }
 
@@ -30,8 +31,8 @@ public class DateTimeUtils {
         return calendar;
     }
 
-    public static Calendar timeInMillisToCalendar(long TimeInMillis) {
-        Calendar calendar = Calendar.getInstance();
+    public static GregorianCalendar timeInMillisToCalendar(long TimeInMillis) {
+        GregorianCalendar calendar = new GregorianCalendar();
         calendar.setTimeInMillis(TimeInMillis);
         return calendar;
     }
@@ -83,6 +84,18 @@ public class DateTimeUtils {
         return calendar;
     }
 
+    /**
+     * 使用clendar类来计算日期
+     *
+     * @param year
+     * @param month
+     * @param day
+     * @param hourOfDay
+     * @param minute
+     * @param second
+     * @param millisecond
+     * @return
+     */
     public static Calendar intToCalendar(int year, int month, int day, int hourOfDay, int minute, int second,
                                          int millisecond) {
         Calendar calendar = Calendar.getInstance();
@@ -94,6 +107,39 @@ public class DateTimeUtils {
         calendar.set(Calendar.SECOND, second);
         calendar.set(Calendar.MILLISECOND, millisecond);
         return calendar;
+    }
+
+    public static Calendar toCalendar(TimeZoneDTO timeZoneDTO) {
+        return intToCalendar(timeZoneDTO.getYear(), timeZoneDTO.getMonth(), timeZoneDTO.getDay(), timeZoneDTO.getHour(), timeZoneDTO.getMinute(), timeZoneDTO.getSecond());
+    }
+
+    public static void toTimeZone(TimeZoneDTO timeZoneDTO, Calendar calendar) {
+        timeZoneDTO.setYear(calendar.get(Calendar.YEAR));
+        timeZoneDTO.setMonth(calendar.get(Calendar.MONTH) + 1);
+        timeZoneDTO.setDay(calendar.get(Calendar.DAY_OF_MONTH));
+        timeZoneDTO.setWeek(calendar.get(Calendar.DAY_OF_WEEK));
+        timeZoneDTO.setHour(calendar.get(Calendar.HOUR_OF_DAY));
+        timeZoneDTO.setMinute(calendar.get(Calendar.MINUTE));
+        timeZoneDTO.setSecond(calendar.get(Calendar.SECOND));
+        timeZoneDTO.setIndex(DateTimeUtils.getTimZoneInt(calendar));
+        // +0800
+        String format = DateTimeUtils.formatDateByFormat(calendar, "Z");
+        String value = format.substring(1, 3);
+        int i = 1, j = Integer.parseInt(value);
+        if (j > 0) {
+            i = Integer.parseInt(value);
+        } else {
+            i = Integer.parseInt(value.substring(1));
+        }
+        if (format.contains("-")) {
+            timeZoneDTO.setTimeZone(format + " 西" + ConstantsUtils.TIMEZONE[i - 1] + "区");
+        } else {
+            timeZoneDTO.setTimeZone(format + " 东" + ConstantsUtils.TIMEZONE[i - 1] + "区");
+        }
+    }
+
+    public static void calculateTimeZone(TimeZoneDTO now, TimeZoneDTO old) {
+        toTimeZone(now, toCalendar(old));
     }
 
     public static String toUTC(Date date) {
@@ -128,7 +174,6 @@ public class DateTimeUtils {
     /**
      * 2018-09-07T09:24:05.350Z http://blog.sina.com.cn/s/blog_4550f3ca0101t042.html
      *
-     * @param instant
      * @return date
      */
     public static Date toDate(String str) {
@@ -193,10 +238,9 @@ public class DateTimeUtils {
     }
 
     public static int getTimZoneInt(Calendar calendar) {
-        return getTimZoneInt(calendarToDate(calendar));
+        return getTimZoneInt(calendar.getTime());
     }
 
-    ;
 
     public static int getTimZoneInt(Date date) {
         String strDateFormat = formatDateByFormat(date, "Z");// +0800
@@ -267,7 +311,6 @@ public class DateTimeUtils {
         int y = calendar.get(Calendar.YEAR);
         int m = calendar.get(Calendar.MONTH) + 1;
         int d = calendar.get(Calendar.DAY_OF_MONTH);
-        String week[] = new String[]{"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
         // String week[] = new String[] { "日", "一", "二", "三", "四", "五", "六" };
         // String week[] = new String[] { "周日", "周一", "周二", "周三", "周四", "周五", "周六" };
         if (m < 3) {
@@ -276,7 +319,7 @@ public class DateTimeUtils {
         }
         int w = (d + 1 + 2 * m + 3 * (m + 1) / 5 + y + (y >> 2) - y / 100 + y / 400) % 7;
 
-        return week[w];
+        return ConstantsUtils.WEEK_NAME[w];
     }
 
     public static String getTime(double d) {

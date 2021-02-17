@@ -25,21 +25,21 @@
 //
 //        // TimeBean timeBean = new TimeBean(2018, 9, 7, 17, 36, 33,1001);
 //
-//        // TimeBean timeBean = new TimeBean("广东省徐闻县",Calendar.getInstance());
+//        // TimeBean timeBean = new TimeBean("广东省","徐闻县",Calendar.getInstance());
 //
 //        // TimeBean timeBean = new TimeBean(new Date());
 //
 //        // TimeBean timeBean = new TimeBean(System.currentTimeMillis());
 //
-//        // TimeBean timeBean = new TimeBean("广东省徐闻县",new Date().toInstant());
+//        // TimeBean timeBean = new TimeBean("广东省","徐闻县",new Date().toInstant());
 //
-//        // TimeBean timeBean = new TimeBean("广东省徐闻县","2018-09-07T18:40:54.063Z");
+//        // TimeBean timeBean = new TimeBean("广东省","徐闻县","2018-09-07T18:40:54.063Z");
 //
-//        // TimeBean timeBean = new TimeBean("广东省徐闻县","2018-09-07 09:24:54.666");
+//        // TimeBean timeBean = new TimeBean("广东省","徐闻县","2018-09-07 09:24:54.666");
 //
-//        // TimeBean timeBean = new TimeBean("广东省徐闻县",2018, 9, 7, 17, 36, 33,1001);
+//        // TimeBean timeBean = new TimeBean("广东省","徐闻县",2018, 9, 7, 17, 36, 33,1001);
 //
-//        // TimeBean timeBean = new TimeBean("广东省徐闻县",1,1,1, 17, 36, 33);
+//        // TimeBean timeBean = new TimeBean("广东省","徐闻县",1,1,1, 17, 36, 33);
 //
 //        // TimeBean timeBean = new TimeBean("广东","徐闻","2018-09-07","09:24:54.666");
 //
@@ -47,13 +47,13 @@
 //
 //        // TimeBean timeBean = new TimeBean("2018年09月07日 18:24:54");
 //
-//        // TimeBean timeBean = new TimeBean("广东省徐闻县","2018-09-20 18:24:54");
+//        // TimeBean timeBean = new TimeBean("广东省","徐闻县","2018-09-20 18:24:54");
 //
-//        // TimeBean timeBean = new TimeBean("广东省徐闻县","2018-09-20 18:24");
+//        // TimeBean timeBean = new TimeBean("广东省","徐闻县","2018-09-20 18:24");
 //
 //        // TimeBean timeBean = new TimeBean("广东省广州市","2018年09月10日 14:12");
 //
-//        // TimeBean timeBean = new TimeBean("广东省徐闻县","2018-09-20 18:24:54.46");
+//        // TimeBean timeBean = new TimeBean("广东省","徐闻县","2018-09-20 18:24:54.46");
 //
 //        // TimeBean timeBean = new TimeBean("广东省", "徐闻县","2018-09-07","18:24:54");
 //

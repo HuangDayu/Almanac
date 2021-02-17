@@ -35,13 +35,10 @@ public class SunMoonUtils {
      */
     private static double longitude;
 
-    public static void init(String address, Calendar calendar, SunMoonDTO sunMoonDTO) {
-        sunTime(address, calendar, sunMoonDTO);
-        moonTime(calendar, sunMoonDTO);
-    }
 
     public static void init(TimeZoneDTO timeZoneDTO, SunMoonDTO sunMoonDTO) {
-        init(timeZoneDTO.getAddress(), timeZoneDTO.getCalendar(), sunMoonDTO);
+        sunTime(timeZoneDTO, sunMoonDTO);
+        moonTime(timeZoneDTO, sunMoonDTO);
     }
 
     /***
@@ -137,20 +134,12 @@ public class SunMoonUtils {
     /**
      * 算出日出日落方法
      *
-     * @param area
-     * @param calendar
+     * @param timeZoneDTO
+     * @param sunMoonDTO
      */
-    private static void sunTime(String area, Calendar calendar, SunMoonDTO sunMoonDTO) {
+    private static void sunTime(TimeZoneDTO timeZoneDTO, SunMoonDTO sunMoonDTO) {
 
-        double tz = DateTimeUtils.getTimZoneInt(calendar);
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH) + 1;
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int min = calendar.get(Calendar.MINUTE);
-        int sec = calendar.get(Calendar.SECOND);
-
-        String jwd = decodeJWD(area);
+        String jwd = decodeJWD(timeZoneDTO.getAddress());
 
         /***
          * 纬度
@@ -173,11 +162,11 @@ public class SunMoonUtils {
         Double wd = latitude / 180 * Math.PI;
         Double jd = -longitude / 180 * Math.PI;
 
-        double richu = getJuLian_old(year, month, day, hour, min, sec) - JulianCalendarUtils.getJuLianByYear(year);// 2451545
+        double richu = getJuLian_old(timeZoneDTO.getYear(), timeZoneDTO.getMonth(), timeZoneDTO.getDay(), timeZoneDTO.getHour(), timeZoneDTO.getMinute(), timeZoneDTO.getSecond()) - JulianCalendarUtils.getJuLianByYear(timeZoneDTO.getYear());// 2451545
         // 2451544.5
 
         for (int i = 0; i < 10; i++) {
-            richu = sunRiseTime(richu, jd, wd, tz / 24);// 逐步逼近法算10次
+            richu = sunRiseTime(richu, jd, wd, timeZoneDTO.getIndex() / 24);// 逐步逼近法算10次
         }
 
         // 日出
@@ -388,14 +377,11 @@ public class SunMoonUtils {
     }
 
 
-    private static void moonTime(Calendar calendar, SunMoonDTO sunMoonDTO) {
+    private static void moonTime(TimeZoneDTO timeZoneDTO, SunMoonDTO sunMoonDTO) {
         double dbLon = getDoubleLongitude();
         double dbLat = getDoubleLatitude();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH) + 1;
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        double mjdd = mjd(day, month, year, 0);
-        find_moonrise_set(mjdd, DateTimeUtils.getTimZoneInt(calendar), dbLon, dbLat, 0, 0, sunMoonDTO);
+        double mjdd = mjd(timeZoneDTO.getDay(), timeZoneDTO.getMonth(), timeZoneDTO.getYear(), 0);
+        find_moonrise_set(mjdd, timeZoneDTO.getIndex(), dbLon, dbLat, 0, 0, sunMoonDTO);
     }
 
     private static void find_moonrise_set(double mjd, double tz, double glong, double glat, int dls, int ST, SunMoonDTO sunMoonDTO) {
