@@ -313,7 +313,8 @@ public class QiShuoDO {
         // -721年至-104年的后九月及月建问题,与朔有关，与气无关
         int YY = (int) (Math.floor((ZQ[0] + 10 + 180) / 365.2422) + 2000); // 确定年份
         if (YY >= -721 && YY <= -104) {
-            Object[] ns = new Object[8];
+            // FIXME 2021-02-18 原先数组长度为8，但是计算公元前时间时，出现下标溢出，所以设置为10，不知是否有问题
+            Object[] ns = new Object[10];
             int yy;
             for (i = 0; i < 3; i++) {
                 yy = YY + i - 1;

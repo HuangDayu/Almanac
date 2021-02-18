@@ -50,12 +50,12 @@ public class AlmanacUtils {
 
         // FIXME 2021-01-22 不知为何减去西历两千年的儒略日
         // 这个月1号的儒略日,公历月首,中午
-        int julianDayOfMonthFirst = (int) (Math.floor(JulianCalendarUtils.getJulianDayNumber(timeZoneDTO.getYear(), timeZoneDTO.getMonth())) - CommonUtils.JULIAN_FOR_2000);
+        int julianDayOfMonthFirst = (int) (Math.floor(JulianCalendarUtils.getJulianDayNumber(timeZoneDTO.getEraYear(), timeZoneDTO.getMonth())) - CommonUtils.JULIAN_FOR_2000);
 
-        int nextMonth = timeZoneDTO.getMonth() + 1, nextYear = timeZoneDTO.getYear();
+        int nextMonth = timeZoneDTO.getMonth() + 1, nextYear = timeZoneDTO.getEraYear();
         if (nextMonth > 12) {
             nextMonth = nextMonth - 12;
-            nextYear = timeZoneDTO.getYear() + 1;
+            nextYear = timeZoneDTO.getEraYear() + 1;
         }
 
         // 这个月1号的儒略日和下个月1号的儒略日之差,月天数(公历)
@@ -109,11 +109,21 @@ public class AlmanacUtils {
 
 
             //------------------------------------计算西历,伽利略历------------------------------------//
-            int year = timeZoneOfThisDay.getYear();
-            int month = timeZoneOfThisDay.getMonth();
-            int day = timeZoneOfThisDay.getDay();
             int hours = timeZoneOfThisDay.getHour();
             int minute = timeZoneOfThisDay.getMinute();
+            // 公历月内日序数
+            timeZoneOfThisDay.setDayIndexOfMonth(i);
+            // 公历月天数
+            timeZoneOfThisDay.setDaysOfMonth(julianDayForMonthSum);
+            // 月首的星期
+            timeZoneOfThisDay.setWeekFirstOfMonth(weekFirstForMonthIndex);
+            // 当前日的星期
+            timeZoneOfThisDay.setWeekOfCurrentDay((weekFirstForMonthIndex + i) % 7);
+            // 本日所在的周序号
+            timeZoneOfThisDay.setWeekIndexOfMonth((int) Math.floor((weekFirstForMonthIndex + i) / 7));
+            // 本月的总周数
+            timeZoneOfThisDay.setWeeksOfMonth((int) Math.floor((weekFirstForMonthIndex + julianDayForMonthSum - 1) / 7) + 1);
+
 
             //------------------------------------农历排月序计算------------------------------------//
             // 此处有线程安全问题, 暂时直接实例化，qiShuoDO.calcY是为减少计算次数而做的判断。（同一年数据一样）
@@ -184,7 +194,7 @@ public class AlmanacUtils {
             // 该年对应的生肖
             lunarDTO.setZodiac(AnnalsUtils.SHENGXIAO[julianDay % 12]);
             // 年号
-            lunarDTO.setYearName(AnnalsUtils.getYearName(year));
+            lunarDTO.setYearName(AnnalsUtils.getYearName(timeZoneOfThisDay.getEraYear()));
 
             //------------------------------------计算节气------------------------------------//
 
