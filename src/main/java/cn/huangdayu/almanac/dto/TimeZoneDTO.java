@@ -19,6 +19,12 @@ import java.util.GregorianCalendar;
  * @update 2020-03-15
  */
 public class TimeZoneDTO {
+
+    /**
+     * 是否公元前
+     */
+    private int era;
+
     /**
      * 时区下标
      */
@@ -57,6 +63,19 @@ public class TimeZoneDTO {
      * BUG 2021-01-23 因使用Calendar对象，导致时间无法进入公元前，改用GregorianCalendar对象
      */
     private GregorianCalendar gregorianCalendar;
+
+    // 公历月内日序数
+    private int dayIndexOfMonth;
+    // 公历月天数
+    private int daysOfMonth;
+    // 本月的总周数
+    private int weeksOfMonth;
+    // 月首的星期
+    private int weekFirstOfMonth;
+    // 当前日的星期
+    private int weekOfCurrentDay;
+    // 本日所在的周序号
+    private int weekIndexOfMonth;
 
 
     private TimeZoneDTO() {
@@ -103,6 +122,7 @@ public class TimeZoneDTO {
         this.hour = gregorianCalendar.get(Calendar.HOUR_OF_DAY);
         this.minute = gregorianCalendar.get(Calendar.MINUTE);
         this.second = gregorianCalendar.get(Calendar.SECOND);
+        this.era = gregorianCalendar.get(Calendar.ERA);
         this.index = DateTimeUtils.getTimZoneInt(gregorianCalendar);
         String format = DateTimeUtils.formatDateByFormat(gregorianCalendar, "Z");// +0800
         String value = format.substring(1, 3);
@@ -126,7 +146,7 @@ public class TimeZoneDTO {
      * @param julianDay
      */
     public TimeZoneDTO(TimeZoneDTO timeZoneDTO, int julianDay) {
-        this(new GregorianCalendar(timeZoneDTO.getYear(), timeZoneDTO.getMonth() - 1, timeZoneDTO.getDay(), timeZoneDTO.getHour(), timeZoneDTO.getMinute(), timeZoneDTO.getSecond()));
+        this(new GregorianCalendar(timeZoneDTO.getEraYear(), timeZoneDTO.getMonth() - 1, timeZoneDTO.getDay(), timeZoneDTO.getHour(), timeZoneDTO.getMinute(), timeZoneDTO.getSecond()));
         try {
             this.address = timeZoneDTO.getAddress();
             this.julianDay = julianDay;
@@ -144,7 +164,7 @@ public class TimeZoneDTO {
      * @param timeZoneDTO
      */
     public TimeZoneDTO(TimeZoneDTO timeZoneDTO) {
-        this(new GregorianCalendar(timeZoneDTO.getYear(), timeZoneDTO.getMonth() - 1, timeZoneDTO.getDay(), timeZoneDTO.getHour(), timeZoneDTO.getMinute(), timeZoneDTO.getSecond()));
+        this(new GregorianCalendar(timeZoneDTO.getEraYear(), timeZoneDTO.getMonth() - 1, timeZoneDTO.getDay(), timeZoneDTO.getHour(), timeZoneDTO.getMinute(), timeZoneDTO.getSecond()));
         try {
             this.address = timeZoneDTO.getAddress();
             this.julianDay = JulianCalendarUtils.getJuLian(this.year, this.month, this.day);
@@ -192,6 +212,15 @@ public class TimeZoneDTO {
 
     public int getYear() {
         return year;
+    }
+
+    /**
+     * FIXME 2021-02-18 当时间进入公元前时，取反计算会导致值-1,不知何因
+     *
+     * @return
+     */
+    public int getEraYear() {
+        return getEra() == 0 ? -getYear() + 1 : getYear();
     }
 
     public void setYear(int year) {
@@ -302,6 +331,62 @@ public class TimeZoneDTO {
         this.index = index;
     }
 
+    public int getEra() {
+        return era;
+    }
+
+    public void setEra(int era) {
+        this.era = era;
+    }
+
+    public int getDayIndexOfMonth() {
+        return dayIndexOfMonth;
+    }
+
+    public void setDayIndexOfMonth(int dayIndexOfMonth) {
+        this.dayIndexOfMonth = dayIndexOfMonth;
+    }
+
+    public int getDaysOfMonth() {
+        return daysOfMonth;
+    }
+
+    public void setDaysOfMonth(int daysOfMonth) {
+        this.daysOfMonth = daysOfMonth;
+    }
+
+    public int getWeeksOfMonth() {
+        return weeksOfMonth;
+    }
+
+    public void setWeeksOfMonth(int weeksOfMonth) {
+        this.weeksOfMonth = weeksOfMonth;
+    }
+
+    public int getWeekFirstOfMonth() {
+        return weekFirstOfMonth;
+    }
+
+    public void setWeekFirstOfMonth(int weekFirstOfMonth) {
+        this.weekFirstOfMonth = weekFirstOfMonth;
+    }
+
+    public int getWeekOfCurrentDay() {
+        return weekOfCurrentDay;
+    }
+
+    public void setWeekOfCurrentDay(int weekOfCurrentDay) {
+        this.weekOfCurrentDay = weekOfCurrentDay;
+    }
+
+    public int getWeekIndexOfMonth() {
+        return weekIndexOfMonth;
+    }
+
+    public void setWeekIndexOfMonth(int weekIndexOfMonth) {
+        this.weekIndexOfMonth = weekIndexOfMonth;
+    }
+
     public GregorianCalendar getGregorianCalendar() {
         return gregorianCalendar;
     }
@@ -311,7 +396,7 @@ public class TimeZoneDTO {
     }
 
     public String getDateTime() {
-        return year + "-" + add0(month) + "-" + add0(day) + " " + add0(hour) + ":" + add0(minute) + ":" + add0(second);
+        return getEraYear() + "-" + add0(month) + "-" + add0(day) + " " + add0(hour) + ":" + add0(minute) + ":" + add0(second);
     }
 
     private String add0(int value) {
@@ -323,7 +408,7 @@ public class TimeZoneDTO {
     }
 
     public String getInfo() {
-        return getDateTime() + " " + ConstantsUtils.WEEK_NAME[week];
+        return (era == 0 ? "公元前" : "") + getDateTime() + " " + ConstantsUtils.WEEK_NAME[week];
     }
 
     @Override

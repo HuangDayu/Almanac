@@ -154,9 +154,9 @@ public class AlmanacApp extends Almanac {
 ## Almanac APP 演示
 
 <div align="center">
-<img src="https://github.com/HuangDayu/AlmanacApp/blob/master/ezgif.com-video-to-gif-1.gif" height="450px" width="250px" alt="设置日期" >
-<img src="https://github.com/HuangDayu/AlmanacApp/blob/master/ezgif.com-video-to-gif-2.gif" height="450px" width="250px" alt="设置时间" >
-<img src="https://github.com/HuangDayu/AlmanacApp/blob/master/ezgif.com-video-to-gif-3.gif" height="450px" width="250px" alt="设置位置" >
+<img src="https://almanac.huangdayu.cn/doc/image/ezgif.com-video-to-gif-1.gif" height="450px" width="250px" alt="设置日期" >
+<img src="https://almanac.huangdayu.cn/doc/image/ezgif.com-video-to-gif-2.gif" height="450px" width="250px" alt="设置时间" >
+<img src="https://almanac.huangdayu.cn/doc/image/ezgif.com-video-to-gif-3.gif" height="450px" width="250px" alt="设置位置" >
 </div>
 
 ## Almanac APP 下载
@@ -173,6 +173,10 @@ public class AlmanacApp extends Almanac {
 - [寿星万年历---java算法实现-csdn](https://blog.csdn.net/lxslove/article/details/6083396)
 - [寿星万年历---java算法实现-cnblogs](http://www.cnblogs.com/moodlxs/archive/2010/12/18/2345392.html)
 - [根据经纬度计算日出、日落、中天、天亮、天黑和昼长时间](http://www.cnblogs.com/hanoi/archive/2012/07/04/2576325.html)  
+
+## 在线工具
+
+- [儒略日数和日干支计算器](https://ytliu0.github.io/ChineseCalendar/Julian_simp.html)
 
 ## License
 
