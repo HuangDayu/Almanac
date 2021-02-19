@@ -211,19 +211,19 @@ public class AlmanacUtils {
             for (int qi = qk; qi < qj; ) {
                 // FIXME 2021-01-17 计算太阳视黄经较耗时
                 sunLonTime = AnnalsUtils.qi_accurate(sunLonValue);
-                // julianDay = (int) Math.floor(sunLonTime + 0.5);
+                julianDay = (int) Math.floor(sunLonTime + 0.5);
                 qn = (int) Math.floor(sunLonValue / CommonUtils.PI_2 * 24 + 24000006.01) % 24;
                 sunLonValue += CommonUtils.PI_2 / 24;
                 // BUG 2021-01-23 qiShuoDO.ZQ[qi]的儒略日与sunLonTime的值有出入,与julianDayOfThisDay的值一致
-                double afterJulianDay = CommonUtils.JULIAN_FOR_2000 + sunLonTime;
+                julianDay = CommonUtils.JULIAN_FOR_2000 + julianDay;
                 SolarTermDTO solarTerm = new SolarTermDTO();
                 solarTerm.setJulianTime(sunLonTime);
-                solarTerm.setDateTime(JulianCalendarUtils.julianDays2str(afterJulianDay));
+                solarTerm.setDateTime(JulianCalendarUtils.julianDays2str(julianDay));
                 solarTerm.setIndex(qn);
                 solarTerm.setName(AnnalsUtils.JIEQI[qn]);
-                solarTerm.setJulianDay((int) afterJulianDay);
+                solarTerm.setJulianDay(julianDay);
                 solarTerm.setDesc(ConstantsUtils.getDesc(AnnalsUtils.JIEQI[qn]));
-                int afterDay = (int) afterJulianDay - CommonUtils.JULIAN_FOR_2000 - julianDayOfThisDay;
+                int afterDay = julianDay - CommonUtils.JULIAN_FOR_2000 - julianDayOfThisDay;
                 solarTerm.setAfterDay(afterDay);
                 if (afterDay == 0) {
                     solarTermDTO = solarTerm;

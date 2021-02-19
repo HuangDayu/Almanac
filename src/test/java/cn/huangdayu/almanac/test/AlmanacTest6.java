@@ -18,7 +18,7 @@ public class AlmanacTest6 {
 //                AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省","徐闻县", "2021-02-12 03:59:48")),
 //                AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省", "徐闻县", Calendar.getInstance())),
 
-                AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省", "徐闻县", -20,2,12,3,59,48)),
+                AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省", "徐闻县", 2021,4,20,3,59,48)),
 
 //                AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省", "徐闻县", -210,2,12,3,59,48)),
 

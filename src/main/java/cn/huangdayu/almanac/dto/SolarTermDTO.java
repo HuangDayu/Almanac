@@ -105,7 +105,7 @@ public class SolarTermDTO {
     }
 
     public String getDetails() {
-        return name + " " + dateTime + " 至今" + afterDay + "天";
+        return name + " " + dateTime + (afterDay != 0 ? " 至今" + afterDay + "天" : " 今天");
     }
 
     public String getInfo() {
