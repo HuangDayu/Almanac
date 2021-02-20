@@ -81,13 +81,10 @@ public class AlmanacUtils {
         double moonLon = AstronomyArithmeticUtils.MS_aLon(jd2 / 36525, 10, 3);
         moonLon = (int) Math.floor((moonLon - 0.78) / Math.PI * 2) * Math.PI / 2;
 
-        // 计算月历
-        for (int i = 0, j = 0; i < julianDayForMonthSum; i++) {
+        boolean day = dayIndex >= 0;
 
-            // 判断是否只计算一天的历
-            if (dayIndex >= 0 && i != dayIndex) {
-                continue;
-            }
+        // 计算 dayIndex >= 0 ? 日历 : 月历
+        for (int i = day ? dayIndex : 0, j = 0; day ? i <= dayIndex : i < julianDayForMonthSum; i++) {
 
             //------------------------------------叠加日期，重构对象------------------------------------//
             timeZoneDTO.setDay(i + 1);
