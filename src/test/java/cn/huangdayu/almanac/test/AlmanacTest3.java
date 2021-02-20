@@ -18,7 +18,7 @@
 //
 //        TimeZoneDTO timeZoneDTO3 = new TimeZoneDTO("广东省","徐闻县", "1-1-1 11:10:10");
 //
-//        pakMap(AlmanacUtils.dayCalendar(timeZoneDTO1), AlmanacUtils.dayCalendar(timeZoneDTO2), AlmanacUtils.dayCalendar(timeZoneDTO3)).forEach((K, V) -> {
+//        pakMap(AlmanacUtils.ofDay(timeZoneDTO1), AlmanacUtils.ofDay(timeZoneDTO2), AlmanacUtils.ofDay(timeZoneDTO3)).forEach((K, V) -> {
 //            System.out.println("| `" + K + "`" + V + " |");
 //        });
 //    }

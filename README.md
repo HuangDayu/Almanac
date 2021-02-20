@@ -33,7 +33,7 @@
  * @param timeZoneDTO
  * @return
  */
-AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省","徐闻县",Calendar.getInstance()));
+AlmanacUtils.ofDay(new TimeZoneDTO("广东省","徐闻县",Calendar.getInstance()));
 
 /**
  * 月历
@@ -41,7 +41,7 @@ AlmanacUtils.dayCalendar(new TimeZoneDTO("广东省","徐闻县",Calendar.getIns
  * @param timeZoneDTO
  * @return
  */
-AlmanacUtils.monthCalendar(new TimeZoneDTO("广东省","徐闻县",Calendar.getInstance()));
+AlmanacUtils.ofMonth(new TimeZoneDTO("广东省","徐闻县",Calendar.getInstance()));
 
 /**
  * 集成抽象类的用法
@@ -50,7 +50,7 @@ public class AlmanacApp extends Almanac {
 
     public static void main(String[] args) {
         Almanac almanac = new AlmanacApp();
-        AlmanacDTO almanacDTO = almanac.yearCalendar()[7][11];
+        AlmanacDTO almanacDTO = almanac.ofYear()[7][11];
         TestUtils.pakMap(almanacDTO);
         for (Map.Entry<String, String> entry : TestUtils.MAP.entrySet()) {
             System.out.println(entry.getKey() + entry.getValue());

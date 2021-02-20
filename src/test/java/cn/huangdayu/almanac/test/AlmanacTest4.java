@@ -1,13 +1,10 @@
 package cn.huangdayu.almanac.test;
 
-import java.util.Calendar;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import cn.huangdayu.almanac.dto.AlmanacDTO;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
 import cn.huangdayu.almanac.utils.AlmanacUtils;
-import cn.huangdayu.almanac.utils.DateTimeUtils;
 
 public class AlmanacTest4 {
 
@@ -23,7 +20,7 @@ public class AlmanacTest4 {
 
 //        TimeZoneDTO timeZoneDTO3 = new TimeZoneDTO("广东省","徐闻县", "2021-02-01 11:10:10");
 
-        AlmanacDTO[] almanacDTOS = AlmanacUtils.monthCalendar(timeZoneDTO1);
+        AlmanacDTO[] almanacDTOS = AlmanacUtils.ofMonth(timeZoneDTO1);
         for (AlmanacDTO almanacDTO : almanacDTOS) {
             TestUtils.pakMap(almanacDTO);
         }
