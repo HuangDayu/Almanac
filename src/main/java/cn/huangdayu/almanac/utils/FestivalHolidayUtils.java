@@ -55,10 +55,10 @@ public class FestivalHolidayUtils {
     /**
      * 取某日节日
      *
-     * @param gregorianDTO
+     * @param timeZoneDTO
      * @param holidayDTO
      */
-    public static void getDayName(TimeZoneDTO gregorianDTO, HolidayDTO holidayDTO) {
+    public static void getDayName(TimeZoneDTO timeZoneDTO, HolidayDTO holidayDTO) {
         String happyDay = holidayDTO.getHappyDay();
         String majorDay = holidayDTO.getMajorDay();
         String otherDay = holidayDTO.getOtherDay();
@@ -71,30 +71,30 @@ public class FestivalHolidayUtils {
          * r.C 各种日子名称(连成一大串)
          * r.Fjia 放假日子(可用于日期数字置红)
          *****************/
-        String m0 = (gregorianDTO.getMonth() < 10 ? "0" : "") + gregorianDTO.getMonth();
-        String d0 = (gregorianDTO.getDay() < 10 ? "0" : "") + gregorianDTO.getDay();
+        String m0 = (timeZoneDTO.getMonth() < 10 ? "0" : "") + timeZoneDTO.getMonth();
+        String d0 = (timeZoneDTO.getDay() < 10 ? "0" : "") + timeZoneDTO.getDay();
         String s, s2, type;
 
-        if (gregorianDTO.getWeek() == 0 || gregorianDTO.getWeek() == 6) {
+        if (timeZoneDTO.getWeek() == 0 || timeZoneDTO.getWeek() == 6) {
             holidayDTO.setFlag(1); // 星期日或星期六放假
         }
 
         // 按公历日期查找
-        for (int i = 0; i < sFtv[gregorianDTO.getMonth() - 1].length; i++) { // 公历节日或纪念日,遍历本月节日表
-            s = sFtv[gregorianDTO.getMonth() - 1][i];
+        for (int i = 0; i < sFtv[timeZoneDTO.getMonth() - 1].length; i++) { // 公历节日或纪念日,遍历本月节日表
+            s = sFtv[timeZoneDTO.getMonth() - 1][i];
             if (!CommonUtils.subString(s, 0, 2).equals(d0)) {
                 continue;
             }
             s = CommonUtils.subString(s, 2);
             type = CommonUtils.subString(s, 0, 1);
             if ("-".equals(CommonUtils.subString(s, 5, 6))) { // 有年限的
-                if (gregorianDTO.getYear() < Integer.parseInt(CommonUtils.subString(s, 1, 5))
-                        || gregorianDTO.getYear() > Integer.parseInt(CommonUtils.subString(s, 6, 10))) {
+                if (timeZoneDTO.getYear() < Integer.parseInt(CommonUtils.subString(s, 1, 5))
+                        || timeZoneDTO.getYear() > Integer.parseInt(CommonUtils.subString(s, 6, 10))) {
                     continue;
                 }
                 s = CommonUtils.subString(s, 10);
             } else {
-                if (gregorianDTO.getYear() < 1850) {
+                if (timeZoneDTO.getYear() < 1850) {
                     continue;
                 }
                 s = CommonUtils.subString(s, 1);
@@ -112,19 +112,17 @@ public class FestivalHolidayUtils {
         }
 
         // 按周查找
-        // 在本月中的周序号
-        int w = gregorianDTO.getGregorianCalendar().get(Calendar.WEEK_OF_MONTH);
-        //所在月的月首的星期
-        if (gregorianDTO.getWeek() >= gregorianDTO.getGregorianCalendar().get(Calendar.DAY_OF_WEEK_IN_MONTH)) {
+        int w = timeZoneDTO.getWeekIndexOfMonth();
+        if (timeZoneDTO.getWeek() >= timeZoneDTO.getWeekFirstOfMonth()) {
             w += 1;
         }
         int w2 = w;
-        if (gregorianDTO.getGregorianCalendar().get(Calendar.WEEK_OF_MONTH) == gregorianDTO.getGregorianCalendar().get(Calendar.WEEK_OF_MONTH) - 1) {
+        if (timeZoneDTO.getWeekIndexOfMonth() == timeZoneDTO.getWeeksOfMonth() - 1) {
             w2 = 5;
         }
 
-        String wStr = m0 + w + gregorianDTO.getWeek(); // d日在本月的第几个星期某
-        String w2Str = m0 + w2 + gregorianDTO.getWeek();
+        String wStr = m0 + w + timeZoneDTO.getWeek(); // d日在本月的第几个星期某
+        String w2Str = m0 + w2 + timeZoneDTO.getWeek();
 
         for (int i = 0; i < wFtv.length; i++) {
             s = wFtv[i];
