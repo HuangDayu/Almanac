@@ -69,7 +69,7 @@
 //
 //        // TimeBean timeBean = new TimeBean("广东省广州市白云区", 1995, 8, 12, 11, 22, 33, 44);
 //
-//        pakMap(AlmanacUtils.dayCalendar(timeZoneDTO)).forEach((K, V) -> {
+//        pakMap(AlmanacUtils.ofDay(timeZoneDTO)).forEach((K, V) -> {
 //            System.out.println(K + ":" + V);
 //        });
 //

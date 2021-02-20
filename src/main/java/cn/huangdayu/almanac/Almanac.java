@@ -18,15 +18,15 @@ public abstract class Almanac {
 
 
     public AlmanacDTO dayCalendar() {
-        return AlmanacUtils.dayCalendar(initTimeZone());
+        return AlmanacUtils.ofDay(initTimeZone());
     }
 
     public AlmanacDTO[] monthCalendar() {
-        return AlmanacUtils.monthCalendar(initTimeZone());
+        return AlmanacUtils.ofMonth(initTimeZone());
     }
 
     public AlmanacDTO[][] yearCalendar() {
-        return AlmanacUtils.yearCalendar(initTimeZone());
+        return AlmanacUtils.ofYear(initTimeZone());
     }
 
 }

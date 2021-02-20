@@ -1,7 +1,6 @@
 package cn.huangdayu.almanac.utils;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import cn.huangdayu.almanac.dto.*;
@@ -22,14 +21,30 @@ public class AlmanacUtils {
      * @return
      * @throws cn.huangdayu.almanac.exception.AlmanacException
      */
-    public static AlmanacDTO dayCalendar(TimeZoneDTO timeZoneDTO) {
+    public static AlmanacDTO ofDay(TimeZoneDTO timeZoneDTO) {
         /** 数组从0开始，所以要减1*/
         int index = timeZoneDTO.getDay() - 1;
-        return monthCalendar(timeZoneDTO, index)[index];
+        return handler(timeZoneDTO, index)[index];
     }
 
-    public static AlmanacDTO[] monthCalendar(TimeZoneDTO timeZoneDTO) {
-        return monthCalendar(timeZoneDTO, -1);
+    public static AlmanacDTO[] ofMonth(TimeZoneDTO timeZoneDTO) {
+        return handler(timeZoneDTO, -1);
+    }
+
+    /**
+     * 年历
+     *
+     * @param timeZoneDTO
+     * @return
+     * @throws cn.huangdayu.almanac.exception.AlmanacException
+     */
+    public static AlmanacDTO[][] ofYear(TimeZoneDTO timeZoneDTO) {
+        AlmanacDTO[][] almanacDTOS = new AlmanacDTO[12][];
+        for (int i = 1; i <= 12; i++) {
+            timeZoneDTO.setMonth(i);
+            almanacDTOS[i - 1] = ofMonth(new TimeZoneDTO(timeZoneDTO));
+        }
+        return almanacDTOS;
     }
 
     /**
@@ -39,7 +54,7 @@ public class AlmanacUtils {
      * @return
      * @throws cn.huangdayu.almanac.exception.AlmanacException
      */
-    private static AlmanacDTO[] monthCalendar(TimeZoneDTO timeZoneDTO, int dayIndex) {
+    private static AlmanacDTO[] handler(TimeZoneDTO timeZoneDTO, int dayIndex) {
 
         int julianDay;
 
@@ -81,9 +96,9 @@ public class AlmanacUtils {
         double moonLon = AstronomyArithmeticUtils.MS_aLon(jd2 / 36525, 10, 3);
         moonLon = (int) Math.floor((moonLon - 0.78) / Math.PI * 2) * Math.PI / 2;
 
+        // dayIndex >= 0 ? 计算日历 : 计算月历
         boolean day = dayIndex >= 0;
 
-        // 计算 dayIndex >= 0 ? 日历 : 月历
         for (int i = day ? dayIndex : 0, j = 0; day ? i <= dayIndex : i < julianDayForMonthSum; i++) {
 
             //------------------------------------叠加日期，重构对象------------------------------------//
@@ -328,23 +343,6 @@ public class AlmanacUtils {
             almanacDTO.setMoonPhaseDTO(moonPhaseDTO);
         } while (julianDay + 5 < julianDayOfMonthFirst + julianDayForMonthSum);
 
-        return almanacDTOS;
-    }
-
-
-    /**
-     * 年历
-     *
-     * @param timeZoneDTO
-     * @return
-     * @throws cn.huangdayu.almanac.exception.AlmanacException
-     */
-    public static AlmanacDTO[][] yearCalendar(TimeZoneDTO timeZoneDTO) {
-        AlmanacDTO[][] almanacDTOS = new AlmanacDTO[12][];
-        for (int i = 1; i <= 12; i++) {
-            timeZoneDTO.setMonth(i);
-            almanacDTOS[i - 1] = monthCalendar(new TimeZoneDTO(timeZoneDTO));
-        }
         return almanacDTOS;
     }
 
