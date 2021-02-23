@@ -40,6 +40,9 @@ public class TimeZoneDTO {
      * TODO 或许可以考虑用上面的week变量，如果是周日是一周的第一天，那么久需要减1
      */
     private int week;
+    /**
+     * 时区
+     */
     private String timeZone;
     /**
      * 省份
@@ -54,27 +57,43 @@ public class TimeZoneDTO {
      */
     private String address;
     /**
-     *
+     * 儒略日
      */
     private Integer julianDay;
+
+    /**
+     * 位置
+     */
     private String position;
 
     /**
-     * BUG 2021-01-23 因使用Calendar对象，导致时间无法进入公元前，改用GregorianCalendar对象
+     * FIXME 2021-01-23 因使用Calendar对象，导致时间无法进入公元前，改用GregorianCalendar对象，ERA表示公元前标志
      */
     private GregorianCalendar gregorianCalendar;
 
-    // 公历月内日序数
+    /**
+     * 公历月内日序数
+     */
     private int dayIndexOfMonth;
-    // 公历月天数
+    /**
+     * 公历月天数
+     */
     private int daysOfMonth;
-    // 本月的总周数
+    /**
+     * 本月的总周数
+     */
     private int weeksOfMonth;
-    // 月首的星期
+    /**
+     * 月首的星期
+     */
     private int weekFirstOfMonth;
-    // 当前日的星期
+    /**
+     * 当前日的星期
+     */
     private int weekOfCurrentDay;
-    // 本日所在的周序号
+    /**
+     * 本日所在的周序号
+     */
     private int weekIndexOfMonth;
 
 
@@ -395,20 +414,20 @@ public class TimeZoneDTO {
         this.gregorianCalendar = gregorianCalendar;
     }
 
-    public String getDateTime() {
+    public String getDateTimeInfo() {
         return getEraYear() + "-" + add0(month) + "-" + add0(day) + " " + add0(hour) + ":" + add0(minute) + ":" + add0(second);
+    }
+
+    public String getDateInfo() {
+        return getEraYear() + "-" + add0(month) + "-" + add0(day);
     }
 
     private String add0(int value) {
         return value < 10 ? "0" + value : "" + value;
     }
 
-    private Calendar toCalendar() {
-        return DateTimeUtils.toCalendar(this);
-    }
-
     public String getInfo() {
-        return (era == 0 ? "公元前" : "") + getDateTime() + " " + ConstantsUtils.WEEK_NAME[week];
+        return (era == 0 ? "公元前" : "") + getDateTimeInfo() + " " + ConstantsUtils.WEEK_NAME[week];
     }
 
     @Override

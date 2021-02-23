@@ -218,7 +218,7 @@ public class JulianCalendarUtils {
      * @return
      */
     public static String julianDays2str(double jd) {
-        return julianDaysToTimeZone(jd).getDateTime();
+        return julianDaysToTimeZone(jd).getDateTimeInfo();
     }
 
     /***
