@@ -230,7 +230,7 @@ public class AlmanacUtils {
                 julianDay = CommonUtils.JULIAN_FOR_2000 + julianDay;
                 SolarTermDTO solarTerm = new SolarTermDTO();
                 solarTerm.setJulianTime(sunLonTime);
-                solarTerm.setDateTime(JulianCalendarUtils.julianDays2str(julianDay));
+                solarTerm.setDateTime(JulianCalendarUtils.julianDays2str(CommonUtils.JULIAN_FOR_2000 + sunLonTime));
                 solarTerm.setIndex(qn);
                 solarTerm.setName(AnnalsUtils.JIEQI[qn]);
                 solarTerm.setJulianDay(julianDay);
