@@ -66,7 +66,7 @@ public class AlmanacApp extends Almanac {
 
 ## 说明
 
-**本项目类似[寿星天文历](http://www.nongli.net/sxwnl/)和[日梭万年历](https://www.nongli114.com/rili/)，但是数据还不是很全，算法有待校验。**
+**本项目类似[寿星天文历](http://www.nongli.net/sxwnl/)和[日梭万年历](https://www.nongli114.com/rili/)，但是数据还不是很全，算法有待校验！**
 
 ## 申明
 
