@@ -11,9 +11,9 @@ import java.util.Map;
  */
 public class TestUtils {
 
-    public static Map<String, String> MAP = new LinkedHashMap<>();
+    private Map<String, String> MAP = new LinkedHashMap<>();
 
-    public static void pakMap(AlmanacDTO almanacDTO) {
+    public void pakMap(AlmanacDTO almanacDTO) {
         handler("西历", almanacDTO.getTimeZoneDTO().getInfo());
         handler("地点", almanacDTO.getTimeZoneDTO().getPosition());
         handler("年号", almanacDTO.getLunarDTO().getYearName());
@@ -53,7 +53,7 @@ public class TestUtils {
         handler("冬至", almanacDTO.getSolarTermDTO().getByName("冬至").getDateTime());
     }
 
-    private static void handler(String key, String value) {
+    private void handler(String key, String value) {
         key = " | `".concat(key).concat("` | ");
         if (value == null) {
             value = String.valueOf(value);
@@ -65,4 +65,7 @@ public class TestUtils {
         }
     }
 
+    public Map<String, String> getMap() {
+        return MAP;
+    }
 }

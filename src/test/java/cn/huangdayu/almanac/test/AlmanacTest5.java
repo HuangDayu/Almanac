@@ -22,11 +22,12 @@ public class AlmanacTest5 {
 //                AlmanacUtils.ofDay(new TimeZoneDTO("广东省","徐闻县", "1995-08-12 11:10:10")),
 //                AlmanacUtils.ofDay(new TimeZoneDTO("广东省","徐闻县", "1-1-1 11:10:10"))
         };
+        TestUtils testUtils = new TestUtils();
         for (AlmanacDTO almanacDTO : almanacDTOS) {
-            TestUtils.pakMap(almanacDTO);
+            testUtils.pakMap(almanacDTO);
 //            System.out.println(almanacDTO.getLunarDTO().toString());
         }
-        for (Map.Entry<String, String> entry : TestUtils.MAP.entrySet()) {
+        for (Map.Entry<String, String> entry : testUtils.getMap().entrySet()) {
             System.out.println(entry.getKey() + entry.getValue());
         }
 //        for (AlmanacDTO almanacDTO : almanacDTOS) {

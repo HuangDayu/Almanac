@@ -8,7 +8,7 @@
 //import cn.huangdayu.almanac.dto.TimeZoneDTO;
 //import cn.huangdayu.almanac.utils.AlmanacUtils;
 //
-//public class ReadMe {
+//public class AlmanacTest3 {
 //
 //    public static void main(String[] args)  {
 //
