@@ -14,8 +14,9 @@ public class AlmanacApp extends Almanac {
     public static void main(String[] args) {
         Almanac almanac = new AlmanacApp();
         AlmanacDTO almanacDTO = almanac.yearCalendar()[7][11];
-        TestUtils.pakMap(almanacDTO);
-        for (Map.Entry<String, String> entry : TestUtils.MAP.entrySet()) {
+        TestUtils testUtils = new TestUtils();
+        testUtils.pakMap(almanacDTO);
+        for (Map.Entry<String, String> entry : testUtils.getMap().entrySet()) {
             System.out.println(entry.getKey() + entry.getValue());
         }
 //        for (SolarTermDTO solarTermDTO : almanacDTO.getSolarTermDTO().getNext()) {
