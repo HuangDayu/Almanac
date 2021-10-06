@@ -187,6 +187,10 @@ public class AlmanacApp extends Almanac {
 - [icu4j](https://mvnrepository.com/artifact/com.ibm.icu/icu4j)
 - [lunar-java](https://github.com/6tail/lunar-java)
 
+## 回馈开源
+
+![](https://www.huangdayu.cn/assets/private/images/image-100.jpg "您的支持是我持续维护的动力源泉")
+
 ## License
 
 ```license
