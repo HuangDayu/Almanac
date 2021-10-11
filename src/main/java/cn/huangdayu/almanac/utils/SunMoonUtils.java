@@ -2,9 +2,8 @@ package cn.huangdayu.almanac.utils;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.Calendar;
 
-import cn.huangdayu.almanac.dto.SunMoonDTO;
+import cn.huangdayu.almanac.aggregates.sunrise_moonset.SunriseMoonset;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
 
 /**
@@ -36,9 +35,9 @@ public class SunMoonUtils {
     private static double longitude;
 
 
-    public static void init(TimeZoneDTO timeZoneDTO, SunMoonDTO sunMoonDTO) {
-        sunTime(timeZoneDTO, sunMoonDTO);
-        moonTime(timeZoneDTO, sunMoonDTO);
+    public static void init(TimeZoneDTO timeZoneDTO, SunriseMoonset sunriseMoonset) {
+        sunTime(timeZoneDTO, sunriseMoonset);
+        moonTime(timeZoneDTO, sunriseMoonset);
     }
 
     /***
@@ -135,9 +134,9 @@ public class SunMoonUtils {
      * 算出日出日落方法
      *
      * @param timeZoneDTO
-     * @param sunMoonDTO
+     * @param sunriseMoonset
      */
-    private static void sunTime(TimeZoneDTO timeZoneDTO, SunMoonDTO sunMoonDTO) {
+    private static void sunTime(TimeZoneDTO timeZoneDTO, SunriseMoonset sunriseMoonset) {
 
         String jwd = decodeJWD(timeZoneDTO.getAddress());
 
@@ -153,11 +152,11 @@ public class SunMoonUtils {
         /***
          * 设置经度
          */
-        sunMoonDTO.setLongitude(setStringPointDouble(longitude, true));
+        sunriseMoonset.setLongitude(setStringPointDouble(longitude, true));
         /***
          * 设置纬度
          */
-        sunMoonDTO.setLatitude(setStringPointDouble(latitude, false));
+        sunriseMoonset.setLatitude(setStringPointDouble(latitude, false));
 
         Double wd = latitude / 180 * Math.PI;
         Double jd = -longitude / 180 * Math.PI;
@@ -170,19 +169,19 @@ public class SunMoonUtils {
         }
 
         // 日出
-        sunMoonDTO.setSunRiseTime(doubleToStr(richu));
+        sunriseMoonset.setSunRiseTime(doubleToStr(richu));
         // 日落
-        sunMoonDTO.setSunSetTime(doubleToStr(midDayTime + midDayTime - richu));
+        sunriseMoonset.setSunSetTime(doubleToStr(midDayTime + midDayTime - richu));
         // 中天
-        sunMoonDTO.setMidDayTime(doubleToStr(midDayTime));
+        sunriseMoonset.setMidDayTime(doubleToStr(midDayTime));
         // 天亮
-        sunMoonDTO.setDawnTime(doubleToStr(dawnTime));
+        sunriseMoonset.setDawnTime(doubleToStr(dawnTime));
         // 天黑
-        sunMoonDTO.setDarkTime(doubleToStr(midDayTime + midDayTime - dawnTime));
+        sunriseMoonset.setDarkTime(doubleToStr(midDayTime + midDayTime - dawnTime));
         // 昼长 = 日落-日出
-        sunMoonDTO.setDiurnalTime(doubleToStr((midDayTime - richu) * 2 - 0.5));
+        sunriseMoonset.setDiurnalTime(doubleToStr((midDayTime - richu) * 2 - 0.5));
         // 夜长
-        sunMoonDTO.setNightTime(doubleToStr(24 - ((midDayTime - richu) * 2 - 0.5)));
+        sunriseMoonset.setNightTime(doubleToStr(24 - ((midDayTime - richu) * 2 - 0.5)));
 
     }
 
@@ -377,14 +376,14 @@ public class SunMoonUtils {
     }
 
 
-    private static void moonTime(TimeZoneDTO timeZoneDTO, SunMoonDTO sunMoonDTO) {
+    private static void moonTime(TimeZoneDTO timeZoneDTO, SunriseMoonset sunriseMoonset) {
         double dbLon = getDoubleLongitude();
         double dbLat = getDoubleLatitude();
         double mjdd = mjd(timeZoneDTO.getDay(), timeZoneDTO.getMonth(), timeZoneDTO.getYear(), 0);
-        find_moonrise_set(mjdd, timeZoneDTO.getIndex(), dbLon, dbLat, 0, 0, sunMoonDTO);
+        find_moonrise_set(mjdd, timeZoneDTO.getIndex(), dbLon, dbLat, 0, 0, sunriseMoonset);
     }
 
-    private static void find_moonrise_set(double mjd, double tz, double glong, double glat, int dls, int ST, SunMoonDTO sunMoonDTO) {
+    private static void find_moonrise_set(double mjd, double tz, double glong, double glat, int dls, int ST, SunriseMoonset sunriseMoonset) {
         double sglat, date, ym, yz, utrise = 0, utset = 0, sinho, cglat, xe, ye;
         double yp, nz, hour, z1, z2, rads = 0.0174532925;
         Boolean rise, sett, above;
@@ -466,19 +465,19 @@ public class SunMoonUtils {
          *
          * @return
          */
-        sunMoonDTO.setMoonRiseTime(timeToStr(moonRise));
+        sunriseMoonset.setMoonRiseTime(timeToStr(moonRise));
         /***
          * 月落时间
          *
          * @return
          */
-        sunMoonDTO.setMoonSetTime(timeToStr(moonSet));
+        sunriseMoonset.setMoonSetTime(timeToStr(moonSet));
         /***
          * 月中时间
          *
          * @return
          */
-        sunMoonDTO.setMoonMiddleTime(timeToStr((moonSet + moonRise) / 2));
+        sunriseMoonset.setMoonMiddleTime(timeToStr((moonSet + moonRise) / 2));
 
     }
 

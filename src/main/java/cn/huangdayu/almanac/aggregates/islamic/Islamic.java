@@ -1,9 +1,9 @@
-package cn.huangdayu.almanac.dto;
+package cn.huangdayu.almanac.aggregates.islamic;
 
 /**
  * @author huangdayu create at 2021/1/21 10:51
  */
-public class IslamicDTO {
+public class Islamic {
 
     /**
      * 年(回历)

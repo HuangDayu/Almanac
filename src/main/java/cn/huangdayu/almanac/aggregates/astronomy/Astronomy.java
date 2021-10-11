@@ -1,11 +1,11 @@
-package cn.huangdayu.almanac.dto;
+package cn.huangdayu.almanac.aggregates.astronomy;
 
 /**
  * 天文历
  *
  * @author huangdayu create at 2021/2/17 20:35
  */
-public class AstronomyDTO {
+public class Astronomy {
 
     // 太阳黄经
     private double sunAccurate;

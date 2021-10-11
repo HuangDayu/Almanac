@@ -1,11 +1,11 @@
-package cn.huangdayu.almanac.dto;
+package cn.huangdayu.almanac.aggregates.solar_term;
 
 import java.util.List;
 
 /**
  * @author huangdayu create at 2021/1/22 11:37
  */
-public class SolarTermDTO {
+public class SolarTerm {
 
     private Integer index;
     private String name;
@@ -18,7 +18,7 @@ public class SolarTermDTO {
      */
     private double julianTime;
 
-    private List<SolarTermDTO> next;
+    private List<SolarTerm> next;
 
     public Integer getIndex() {
         return index;
@@ -69,11 +69,11 @@ public class SolarTermDTO {
         this.desc = desc;
     }
 
-    public List<SolarTermDTO> getNext() {
+    public List<SolarTerm> getNext() {
         return next;
     }
 
-    public void setNext(List<SolarTermDTO> next) {
+    public void setNext(List<SolarTerm> next) {
         this.next = next;
     }
 
@@ -85,20 +85,20 @@ public class SolarTermDTO {
         this.julianTime = julianTime;
     }
 
-    public SolarTermDTO getNextOne() {
-        for (SolarTermDTO solarTermDTO : next) {
-            if (solarTermDTO.getAfterDay() > 0) {
+    public SolarTerm getNextOne() {
+        for (SolarTerm solarTerm : next) {
+            if (solarTerm.getAfterDay() > 0) {
                 // 列表中，第一个大于0的则是下一个节气
-                return solarTermDTO;
+                return solarTerm;
             }
         }
         return null;
     }
 
-    public SolarTermDTO getByName(String name) {
-        for (SolarTermDTO solarTermDTO : next) {
-            if (solarTermDTO.getName().equalsIgnoreCase(name)) {
-                return solarTermDTO;
+    public SolarTerm getByName(String name) {
+        for (SolarTerm solarTerm : next) {
+            if (solarTerm.getName().equalsIgnoreCase(name)) {
+                return solarTerm;
             }
         }
         return null;

@@ -1,13 +1,13 @@
-package cn.huangdayu.almanac.dto;
+package cn.huangdayu.almanac.aggregates.moon_phase;
 
 import java.util.List;
 
 /**
  * @author huangdayu create at 2021/2/13 8:38
  */
-public class MoonPhaseDTO {
+public class MoonPhase {
 
-    public MoonPhaseDTO(List<MoonPhaseDTO> next) {
+    public MoonPhase(List<MoonPhase> next) {
         this.next = next;
     }
 
@@ -28,7 +28,7 @@ public class MoonPhaseDTO {
      */
     private double julianTime;
 
-    private List<MoonPhaseDTO> next;
+    private List<MoonPhase> next;
 
     public Integer getIndex() {
         return index;
@@ -86,11 +86,11 @@ public class MoonPhaseDTO {
         this.julianTime = julianTime;
     }
 
-    public List<MoonPhaseDTO> getNext() {
+    public List<MoonPhase> getNext() {
         return next;
     }
 
-    public void setNext(List<MoonPhaseDTO> next) {
+    public void setNext(List<MoonPhase> next) {
         this.next = next;
     }
 

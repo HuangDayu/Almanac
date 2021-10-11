@@ -1,9 +1,9 @@
-package cn.huangdayu.almanac.dto;
+package cn.huangdayu.almanac.aggregates.sunrise_moonset;
 
 /**
  * @author huangdayu create at 2021/1/21 11:08
  */
-public class SunMoonDTO {
+public class SunriseMoonset {
 
     /**
      * 港口

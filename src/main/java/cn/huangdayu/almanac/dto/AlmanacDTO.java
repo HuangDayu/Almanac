@@ -1,7 +1,15 @@
 package cn.huangdayu.almanac.dto;
 
+import cn.huangdayu.almanac.aggregates.era.Era;
+import cn.huangdayu.almanac.aggregates.holiday.Holiday;
+import cn.huangdayu.almanac.aggregates.islamic.Islamic;
+import cn.huangdayu.almanac.aggregates.julian.Julian;
+import cn.huangdayu.almanac.aggregates.lunar.Lunar;
+import cn.huangdayu.almanac.aggregates.moon_phase.MoonPhase;
+import cn.huangdayu.almanac.aggregates.solar_term.SolarTerm;
+import cn.huangdayu.almanac.aggregates.sunrise_moonset.SunriseMoonset;
+
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,70 +20,70 @@ import java.util.Map;
  */
 public class AlmanacDTO {
 
-    private LunarDTO lunarDTO;
-    private EraDTO eraDTO;
-    private HolidayDTO holidayDTO;
-    private IslamicDTO islamicDTO;
-    private JulianDTO julianDTO;
-    private SolarTermDTO solarTermDTO;
-    private SunMoonDTO sunMoonDTO;
+    private Lunar lunar;
+    private Era era;
+    private Holiday holiday;
+    private Islamic islamic;
+    private Julian julian;
+    private SolarTerm solarTerm;
+    private SunriseMoonset sunriseMoonset;
     private TimeZoneDTO timeZoneDTO;
-    private MoonPhaseDTO moonPhaseDTO;
+    private MoonPhase moonPhase;
 
-    public LunarDTO getLunarDTO() {
-        return lunarDTO;
+    public Lunar getLunarDTO() {
+        return lunar;
     }
 
-    public void setLunarDTO(LunarDTO lunarDTO) {
-        this.lunarDTO = lunarDTO;
+    public void setLunarDTO(Lunar lunar) {
+        this.lunar = lunar;
     }
 
-    public EraDTO getEraDTO() {
-        return eraDTO;
+    public Era getEraDTO() {
+        return era;
     }
 
-    public void setEraDTO(EraDTO eraDTO) {
-        this.eraDTO = eraDTO;
+    public void setEraDTO(Era era) {
+        this.era = era;
     }
 
-    public HolidayDTO getHolidayDTO() {
-        return holidayDTO;
+    public Holiday getHolidayDTO() {
+        return holiday;
     }
 
-    public void setHolidayDTO(HolidayDTO holidayDTO) {
-        this.holidayDTO = holidayDTO;
+    public void setHolidayDTO(Holiday holiday) {
+        this.holiday = holiday;
     }
 
-    public IslamicDTO getIslamicDTO() {
-        return islamicDTO;
+    public Islamic getIslamicDTO() {
+        return islamic;
     }
 
-    public void setIslamicDTO(IslamicDTO islamicDTO) {
-        this.islamicDTO = islamicDTO;
+    public void setIslamicDTO(Islamic islamic) {
+        this.islamic = islamic;
     }
 
-    public JulianDTO getJulianDTO() {
-        return julianDTO;
+    public Julian getJulianDTO() {
+        return julian;
     }
 
-    public void setJulianDTO(JulianDTO julianDTO) {
-        this.julianDTO = julianDTO;
+    public void setJulianDTO(Julian julian) {
+        this.julian = julian;
     }
 
-    public SolarTermDTO getSolarTermDTO() {
-        return solarTermDTO;
+    public SolarTerm getSolarTermDTO() {
+        return solarTerm;
     }
 
-    public void setSolarTermDTO(SolarTermDTO solarTermDTO) {
-        this.solarTermDTO = solarTermDTO;
+    public void setSolarTermDTO(SolarTerm solarTerm) {
+        this.solarTerm = solarTerm;
     }
 
-    public SunMoonDTO getSunMoonDTO() {
-        return sunMoonDTO;
+    public SunriseMoonset getSunMoonDTO() {
+        return sunriseMoonset;
     }
 
-    public void setSunMoonDTO(SunMoonDTO sunMoonDTO) {
-        this.sunMoonDTO = sunMoonDTO;
+    public void setSunMoonDTO(SunriseMoonset sunriseMoonset) {
+        this.sunriseMoonset = sunriseMoonset;
     }
 
     public TimeZoneDTO getTimeZoneDTO() {
@@ -86,12 +94,12 @@ public class AlmanacDTO {
         this.timeZoneDTO = timeZoneDTO;
     }
 
-    public MoonPhaseDTO getMoonPhaseDTO() {
-        return moonPhaseDTO;
+    public MoonPhase getMoonPhaseDTO() {
+        return moonPhase;
     }
 
-    public void setMoonPhaseDTO(MoonPhaseDTO moonPhaseDTO) {
-        this.moonPhaseDTO = moonPhaseDTO;
+    public void setMoonPhaseDTO(MoonPhase moonPhase) {
+        this.moonPhase = moonPhase;
     }
 
     public Map<String, String> toMap() {
