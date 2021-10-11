@@ -21,11 +21,11 @@ public class AlmanacTest4 {
 //        TimeZoneDTO timeZoneDTO3 = new TimeZoneDTO("广东省","徐闻县", "2021-02-01 11:10:10");
 
         AlmanacDTO[] almanacDTOS = AlmanacUtils.ofMonth(timeZoneDTO1);
-        TestUtils testUtils = new TestUtils();
+        Pack pack = new Pack();
         for (AlmanacDTO almanacDTO : almanacDTOS) {
-            testUtils.pakMap(almanacDTO);
+            pack.toMap(almanacDTO);
         }
-        for (Map.Entry<String, String> entry : testUtils.getMap().entrySet()) {
+        for (Map.Entry<String, String> entry : pack.getMap().entrySet()) {
             System.out.println(entry.getKey() + entry.getValue());
         }
     }

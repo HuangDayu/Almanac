@@ -13,9 +13,9 @@ public class AlmanacTest2 {
     public static void main(String[] args) {
         TimeZoneDTO timeZoneDTO2 = new TimeZoneDTO("广东省","徐闻县", "2021-01-29 11:13:29");
         AlmanacDTO almanacDTO = AlmanacUtils.ofYear(timeZoneDTO2)[7][11];
-        TestUtils testUtils = new TestUtils();
-        testUtils.pakMap(almanacDTO);
-        for (Map.Entry<String, String> entry : testUtils.getMap().entrySet()) {
+        Pack pack = new Pack();
+        pack.toMap(almanacDTO);
+        for (Map.Entry<String, String> entry : pack.getMap().entrySet()) {
             System.out.println(entry.getKey() + entry.getValue());
         }
 //        for (SolarTermDTO solarTermDTO : almanacDTO.getSolarTermDTO().getNext()) {

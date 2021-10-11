@@ -9,11 +9,11 @@ import java.util.Map;
 /**
  * @author huangdayu create at 2021/1/25 10:10
  */
-public class TestUtils {
+public class Pack {
 
     private Map<String, String> MAP = new LinkedHashMap<>();
 
-    public void pakMap(AlmanacDTO almanacDTO) {
+    public void toMap(AlmanacDTO almanacDTO) {
         handler("西历", almanacDTO.getTimeZoneDTO().getInfo());
         handler("地点", almanacDTO.getTimeZoneDTO().getPosition());
         handler("年号", almanacDTO.getLunarDTO().getYearName());
