@@ -1,9 +1,7 @@
 package cn.huangdayu.almanac.utils;
 
-import cn.huangdayu.almanac.dto.HolidayDTO;
+import cn.huangdayu.almanac.aggregates.holiday.Holiday;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
-
-import java.util.Calendar;
 
 
 /**
@@ -56,13 +54,13 @@ public class FestivalHolidayUtils {
      * 取某日节日
      *
      * @param timeZoneDTO
-     * @param holidayDTO
+     * @param holiday
      */
-    public static void getDayName(TimeZoneDTO timeZoneDTO, HolidayDTO holidayDTO) {
-        String happyDay = holidayDTO.getHappyDay();
-        String majorDay = holidayDTO.getMajorDay();
-        String otherDay = holidayDTO.getOtherDay();
-        int flag = holidayDTO.getFlag();
+    public static void getDayName(TimeZoneDTO timeZoneDTO, Holiday holiday) {
+        String happyDay = holiday.getHappyDay();
+        String majorDay = holiday.getMajorDay();
+        String otherDay = holiday.getOtherDay();
+        int flag = holiday.getFlag();
 
         /****************
          * 节日名称生成 传入日物件u 返回某日节日信息
@@ -76,7 +74,7 @@ public class FestivalHolidayUtils {
         String s, s2, type;
 
         if (timeZoneDTO.getWeek() == 0 || timeZoneDTO.getWeek() == 6) {
-            holidayDTO.setFlag(1); // 星期日或星期六放假
+            holiday.setFlag(1); // 星期日或星期六放假
         }
 
         // 按公历日期查找
@@ -101,7 +99,7 @@ public class FestivalHolidayUtils {
             }
             if ("#".equals(type)) {
                 happyDay += s + " ";
-                holidayDTO.setFlag(1); // 放假的节日
+                holiday.setFlag(1); // 放假的节日
             }
             if ("I".equals(type)) {
                 majorDay += s + " "; // 主要
@@ -134,7 +132,7 @@ public class FestivalHolidayUtils {
             s = CommonUtils.subString(s, 5);
             if ("#".equals(type)) {
                 happyDay += s + " ";
-                holidayDTO.setFlag(1);
+                holiday.setFlag(1);
             }
             if ("I".equals(type)) {
                 majorDay += s + " ";
@@ -144,10 +142,10 @@ public class FestivalHolidayUtils {
             }
         }
 
-        holidayDTO.setHappyDay(happyDay);
-        holidayDTO.setMajorDay(majorDay);
-        holidayDTO.setOtherDay(otherDay);
-        holidayDTO.setFlag(flag);
+        holiday.setHappyDay(happyDay);
+        holiday.setMajorDay(majorDay);
+        holiday.setOtherDay(otherDay);
+        holiday.setFlag(flag);
     }
 
 }

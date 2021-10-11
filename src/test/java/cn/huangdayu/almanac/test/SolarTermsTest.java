@@ -1,6 +1,6 @@
 package cn.huangdayu.almanac.test;
 
-import cn.huangdayu.almanac.dto.SolarTermDTO;
+import cn.huangdayu.almanac.aggregates.solar_term.SolarTerm;
 import cn.huangdayu.almanac.utils.SolarTermUtils;
 
 /**
@@ -8,8 +8,8 @@ import cn.huangdayu.almanac.utils.SolarTermUtils;
  */
 public class SolarTermsTest {
     public static void main(String[] args) {
-        for (SolarTermDTO solarTermDTO : SolarTermUtils.getSolarTermsByYear(1995)) {
-            System.out.println(solarTermDTO);
+        for (SolarTerm solarTerm : SolarTermUtils.getSolarTermsByYear(1995)) {
+            System.out.println(solarTerm);
         }
     }
 }

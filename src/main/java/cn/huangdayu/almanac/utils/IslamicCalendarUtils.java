@@ -1,7 +1,6 @@
 package cn.huangdayu.almanac.utils;
 
-import cn.huangdayu.almanac.dto.AlmanacDTO;
-import cn.huangdayu.almanac.dto.IslamicDTO;
+import cn.huangdayu.almanac.aggregates.islamic.Islamic;
 
 
 /**
@@ -16,7 +15,7 @@ public class IslamicCalendarUtils {
      * 回历计算方法
      * @param julianDays
      */
-    public static IslamicDTO setIslamicCalendar(int julianDays) {
+    public static Islamic setIslamicCalendar(int julianDays) {
         // 以下算法使用Excel测试得到,测试时主要关心年临界与月临界
         int z, y, m, d;
         d = julianDays + 503105;
@@ -29,11 +28,11 @@ public class IslamicCalendarUtils {
         // 分子加0.11,分母加0.01的作用是第354或355天的的月分保持为12月(m=11)
         m = (int) Math.floor((d + 0.11) / 29.51);
         d -= (int) Math.floor(m * 29.5 + 0.5);
-        IslamicDTO islamicDTO = new IslamicDTO();
-        islamicDTO.setYear(z * 30 + y + 1);
-        islamicDTO.setMonth(m + 1);
-        islamicDTO.setDay(d + 1);
-        return islamicDTO;
+        Islamic islamic = new Islamic();
+        islamic.setYear(z * 30 + y + 1);
+        islamic.setMonth(m + 1);
+        islamic.setDay(d + 1);
+        return islamic;
     }
 
 }

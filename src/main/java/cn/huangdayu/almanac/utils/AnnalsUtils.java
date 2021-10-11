@@ -1,6 +1,9 @@
 package cn.huangdayu.almanac.utils;
 
-import cn.huangdayu.almanac.dto.*;
+import cn.huangdayu.almanac.aggregates.era.Era;
+import cn.huangdayu.almanac.aggregates.holiday.Holiday;
+import cn.huangdayu.almanac.aggregates.lunar.Lunar;
+import cn.huangdayu.almanac.aggregates.solar_term.SolarTerm;
 
 /**
  * 纪年表工具类
@@ -98,13 +101,13 @@ public class AnnalsUtils {
      * 计算农历节日
      *
      */
-    public static HolidayDTO getHolidayInfo(LunarDTO lunarDTO, SolarTermDTO solarTermDTO, EraDTO eraDTO) {
+    public static Holiday getHolidayInfo(Lunar lunar, SolarTerm solarTerm, Era era) {
         String happyDay = "", majorDay = "", otherDay = "";
         int flag = 0;
 
         // 按农历日期查找重量点节假日
-        String d = lunarDTO.getMonth() + (lunarDTO.getMonth().length() < 2 ? "月" : "") + lunarDTO.getDay();
-        if (!lunarDTO.getLeapMonth()) {
+        String d = lunar.getMonth() + (lunar.getMonth().length() < 2 ? "月" : "") + lunar.getDay();
+        if (!lunar.getLeapMonth()) {
             if ("正月初一".equals(d)) {
                 happyDay += "春节 ";
                 flag = 1;
@@ -206,12 +209,12 @@ public class AnnalsUtils {
                 majorDay += "腊八节 ";
             }
         }
-        if ("正".equals(lunarDTO.getNextMonth())) { // 最后一月
-            if ("十二三十".equals(d) && lunarDTO.getDaysOfMonth() == 30) {
+        if ("正".equals(lunar.getNextMonth())) { // 最后一月
+            if ("十二三十".equals(d) && lunar.getDaysOfMonth() == 30) {
                 happyDay += "除夕 ";
                 flag = 1;
             }
-            if ("十二廿九".equals(d) && lunarDTO.getDaysOfMonth() == 29) {
+            if ("十二廿九".equals(d) && lunar.getDaysOfMonth() == 29) {
                 happyDay += "除夕 ";
                 flag = 1;
             }
@@ -219,27 +222,27 @@ public class AnnalsUtils {
                 majorDay += "小年 ";
             }
         }
-        if (solarTermDTO.getName() != null && !"".equals(solarTermDTO.getName())) {
-            if ("清明".equals(solarTermDTO.getName())) {
-                happyDay += solarTermDTO.getName() + " ";
+        if (solarTerm.getName() != null && !"".equals(solarTerm.getName())) {
+            if ("清明".equals(solarTerm.getName())) {
+                happyDay += solarTerm.getName() + " ";
                 flag = 1;
             } else {
-                majorDay += solarTermDTO.getName() + " ";
+                majorDay += solarTerm.getName() + " ";
             }
         }
 
         // 农历杂节，一般都是通过节气计算，节气过后的称呼，所以需要将过去多少天数的值取反
         String w, w2;
         // 距冬至的天数
-        int dongzhi = -solarTermDTO.getNext().get(0).getAfterDay();
+        int dongzhi = -solarTerm.getNext().get(0).getAfterDay();
         // 距芒种的天数
-        int mangzhong = -solarTermDTO.getNext().get(11).getAfterDay();
+        int mangzhong = -solarTerm.getNext().get(11).getAfterDay();
         // 距夏至的天数
-        int xiazhi = -solarTermDTO.getNext().get(12).getAfterDay();
+        int xiazhi = -solarTerm.getNext().get(12).getAfterDay();
         // 距小暑的天数
-        int xiaoshu = -solarTermDTO.getNext().get(13).getAfterDay();
+        int xiaoshu = -solarTerm.getNext().get(13).getAfterDay();
         // 距立秋的天数
-        int liqiu = -solarTermDTO.getNext().get(15).getAfterDay();
+        int liqiu = -solarTerm.getNext().get(15).getAfterDay();
 
 
         if (dongzhi >= 0 && dongzhi < 81) { // 数九
@@ -251,8 +254,8 @@ public class AnnalsUtils {
             }
         }
 
-        w = CommonUtils.subString(eraDTO.getDay(), 0, 1);
-        w2 = CommonUtils.subString(eraDTO.getDay(), 1, 2);
+        w = CommonUtils.subString(era.getDay(), 0, 1);
+        w2 = CommonUtils.subString(era.getDay(), 1, 2);
         if (xiazhi >= 20 && xiazhi < 30 && "庚".equals(w)) {
             majorDay += "初伏 ";
         }
@@ -268,12 +271,12 @@ public class AnnalsUtils {
         if (xiaoshu >= 0 && xiaoshu < 12 && "未".equals(w2)) {
             majorDay += "出梅 ";
         }
-        HolidayDTO holidayDTO = new HolidayDTO();
-        holidayDTO.setHappyDay(happyDay);
-        holidayDTO.setMajorDay(majorDay);
-        holidayDTO.setOtherDay(otherDay);
-        holidayDTO.setFlag(flag);
-        return holidayDTO;
+        Holiday holiday = new Holiday();
+        holiday.setHappyDay(happyDay);
+        holiday.setMajorDay(majorDay);
+        holiday.setOtherDay(otherDay);
+        holiday.setFlag(flag);
+        return holiday;
     }
 
     /***

@@ -1,9 +1,9 @@
-package cn.huangdayu.almanac.dto;
+package cn.huangdayu.almanac.aggregates.holiday;
 
 /**
  * @author huangdayu create at 2021/1/21 11:11
  */
-public class HolidayDTO {
+public class Holiday {
 
     /**
      * 重要喜庆日子名称(可将日子名称置红)

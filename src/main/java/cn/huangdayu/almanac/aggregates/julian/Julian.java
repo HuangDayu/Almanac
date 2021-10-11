@@ -1,9 +1,9 @@
-package cn.huangdayu.almanac.dto;
+package cn.huangdayu.almanac.aggregates.julian;
 
 /**
  * @author huangdayu create at 2021/1/21 11:25
  */
-public class JulianDTO {
+public class Julian {
 
     private Integer days;
 

@@ -1,6 +1,6 @@
 package cn.huangdayu.almanac.utils;
 
-import cn.huangdayu.almanac.dto.SolarTermDTO;
+import cn.huangdayu.almanac.aggregates.solar_term.SolarTerm;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
 
 import java.util.*;
@@ -64,8 +64,8 @@ public class SolarTermUtils {
      * @param year
      * @return
      */
-    public static List<SolarTermDTO> getSolarTermsByYear(int year) {
-        List<SolarTermDTO> solarTermDTOS = new ArrayList<>();
+    public static List<SolarTerm> getSolarTermsByYear(int year) {
+        List<SolarTerm> solarTerms = new ArrayList<>();
         // 计算天文纪年
         int chronicle = CommonUtils.year2Ayear(String.valueOf(year)) - 2001, n = 24;
         // 先申明引用，避免反复申请栈空间
@@ -78,12 +78,12 @@ public class SolarTermUtils {
             sunLonTime = AstronomyArithmeticUtils.S_aLon_t(sunLonValue);
             // 计算气朔
             julianDays = sunLonTime * 36525 + CommonUtils.JULIAN_FOR_2000 + (double) 8 / 24 - CommonUtils.dtT(sunLonTime * 36525);
-            SolarTermDTO solarTermDTO = new SolarTermDTO();
+            SolarTerm solarTerm = new SolarTerm();
             String name = AnnalsUtils.JIEQI[(i - 18 >= 0 ? i - 18 : i + 6) % 24];
-            solarTermDTO.setName(name);
-            solarTermDTO.setDesc(ConstantsUtils.getDesc(name));
-            solarTermDTO.setDateTime(JulianCalendarUtils.julianDays2str(julianDays));
-            solarTermDTOS.add(solarTermDTO);
+            solarTerm.setName(name);
+            solarTerm.setDesc(ConstantsUtils.getDesc(name));
+            solarTerm.setDateTime(JulianCalendarUtils.julianDays2str(julianDays));
+            solarTerms.add(solarTerm);
             i++;
             if (i == 24) {
                 i = 0;
@@ -91,33 +91,33 @@ public class SolarTermUtils {
                 chronicle += 1;
             }
         }
-        return solarTermDTOS;
+        return solarTerms;
     }
 
     /**
      * 获取最近节气
      *
      * @param current
-     * @param solarTermDTOS
+     * @param solarTerms
      * @param timeZoneDTO
      * @return
      */
-    public static SolarTermDTO getSolarTerm(boolean current, List<SolarTermDTO> solarTermDTOS, TimeZoneDTO timeZoneDTO) {
+    public static SolarTerm getSolarTerm(boolean current, List<SolarTerm> solarTerms, TimeZoneDTO timeZoneDTO) {
 //        Map<Integer, String> treeMap = new TreeMap<>(new Comparator<Integer>() {
 //            @Override
 //            public int compare(Integer o1, Integer o2) {
 //                return o2 - o1;  //倒序.这里说明一下，如果返回负值，则o1先输出，反之则o2
 //            }
 //        });
-        for (int i = 0; i < solarTermDTOS.size(); i++) {
-            SolarTermDTO solarTermDTO = solarTermDTOS.get(i);
-            int cha = solarTermDTO.getJulianDay() - timeZoneDTO.getJulianDay();
+        for (int i = 0; i < solarTerms.size(); i++) {
+            SolarTerm solarTerm = solarTerms.get(i);
+            int cha = solarTerm.getJulianDay() - timeZoneDTO.getJulianDay();
             if (cha >= 0 && cha < 14) {
-                return current ? solarTermDTO : solarTermDTOS.get(i + 1);
+                return current ? solarTerm : solarTerms.get(i + 1);
             }
         }
-        List<SolarTermDTO> list = getSolarTermsByYear(timeZoneDTO.getYear() - 1);
-        list.addAll(solarTermDTOS);
+        List<SolarTerm> list = getSolarTermsByYear(timeZoneDTO.getYear() - 1);
+        list.addAll(solarTerms);
         list.addAll(getSolarTermsByYear(timeZoneDTO.getYear() + 1));
         return getSolarTerm(current, list, timeZoneDTO);
     }

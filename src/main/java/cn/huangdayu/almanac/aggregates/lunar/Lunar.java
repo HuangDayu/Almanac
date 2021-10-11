@@ -1,11 +1,11 @@
-package cn.huangdayu.almanac.dto;
+package cn.huangdayu.almanac.aggregates.lunar;
 
 /**
  * 农历，阴历，以 [正月初一] 作为新年的第一天
  *
  * @author huangdayu create at 2021/1/21 10:53
  */
-public class LunarDTO {
+public class Lunar {
 
     /**
      * 距农历月首的编移量,0对应初一

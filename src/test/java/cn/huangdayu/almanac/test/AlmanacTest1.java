@@ -1,8 +1,8 @@
 package cn.huangdayu.almanac.test;
 
 import cn.huangdayu.almanac.dto.AlmanacDTO;
-import cn.huangdayu.almanac.dto.MoonPhaseDTO;
-import cn.huangdayu.almanac.dto.SolarTermDTO;
+import cn.huangdayu.almanac.aggregates.moon_phase.MoonPhase;
+import cn.huangdayu.almanac.aggregates.solar_term.SolarTerm;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
 import cn.huangdayu.almanac.utils.AlmanacUtils;
 
@@ -20,14 +20,14 @@ public class AlmanacTest1 {
         System.out.println(almanacDTO.getIslamicDTO());
         System.out.println(almanacDTO.getJulianDTO());
         System.out.println(almanacDTO.getSolarTermDTO());
-        for (SolarTermDTO solarTermDTO : almanacDTO.getSolarTermDTO().getNext()) {
-            System.out.println(solarTermDTO);
+        for (SolarTerm solarTerm : almanacDTO.getSolarTermDTO().getNext()) {
+            System.out.println(solarTerm);
         }
         System.out.println(almanacDTO.getSunMoonDTO());
         System.out.println(almanacDTO.getSolarTermDTO().getDesc());
 
-        for (MoonPhaseDTO moonPhaseDTO : almanacDTO.getMoonPhaseDTO().getNext()) {
-            System.out.println(moonPhaseDTO);
+        for (MoonPhase moonPhase : almanacDTO.getMoonPhaseDTO().getNext()) {
+            System.out.println(moonPhase);
         }
     }
 }
