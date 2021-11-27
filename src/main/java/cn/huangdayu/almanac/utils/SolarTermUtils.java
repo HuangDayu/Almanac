@@ -94,32 +94,32 @@ public class SolarTermUtils {
         return solarTerms;
     }
 
-    /**
-     * 获取最近节气
-     *
-     * @param current
-     * @param solarTerms
-     * @param timeZoneDTO
-     * @return
-     */
-    public static SolarTerm getSolarTerm(boolean current, List<SolarTerm> solarTerms, TimeZoneDTO timeZoneDTO) {
+//    /**
+//     * 获取最近节气
+//     *
+//     * @param current
+//     * @param solarTerms
+//     * @param timeZoneDTO
+//     * @return
+//     */
+//    public static SolarTerm getSolarTerm(boolean current, List<SolarTerm> solarTerms, TimeZoneDTO timeZoneDTO) {
 //        Map<Integer, String> treeMap = new TreeMap<>(new Comparator<Integer>() {
 //            @Override
 //            public int compare(Integer o1, Integer o2) {
 //                return o2 - o1;  //倒序.这里说明一下，如果返回负值，则o1先输出，反之则o2
 //            }
 //        });
-        for (int i = 0; i < solarTerms.size(); i++) {
-            SolarTerm solarTerm = solarTerms.get(i);
-            int cha = solarTerm.getJulianDay() - timeZoneDTO.getJulianDay();
-            if (cha >= 0 && cha < 14) {
-                return current ? solarTerm : solarTerms.get(i + 1);
-            }
-        }
-        List<SolarTerm> list = getSolarTermsByYear(timeZoneDTO.getYear() - 1);
-        list.addAll(solarTerms);
-        list.addAll(getSolarTermsByYear(timeZoneDTO.getYear() + 1));
-        return getSolarTerm(current, list, timeZoneDTO);
-    }
+//        for (int i = 0; i < solarTerms.size(); i++) {
+//            SolarTerm solarTerm = solarTerms.get(i);
+//            int cha = solarTerm.getJulianDay() - timeZoneDTO.getJulianDay();
+//            if (cha >= 0 && cha < 14) {
+//                return current ? solarTerm : solarTerms.get(i + 1);
+//            }
+//        }
+//        List<SolarTerm> list = getSolarTermsByYear(timeZoneDTO.getYear() - 1);
+//        list.addAll(solarTerms);
+//        list.addAll(getSolarTermsByYear(timeZoneDTO.getYear() + 1));
+//        return getSolarTerm(current, list, timeZoneDTO);
+//    }
 
 }
