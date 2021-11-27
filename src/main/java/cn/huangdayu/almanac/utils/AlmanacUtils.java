@@ -93,7 +93,6 @@ public class AlmanacUtils {
 
             //------------------------------------计算儒略日,北京时12:00------------------------------------//
             int julianDayForToday = julianOfMonth.getFirstJulianDayOfMonth() + i;
-            Julian julian = new Julian(julianDayForToday + CommonUtils.JULIAN_FOR_2000);
 
             //------------------------------------计算日出月落,经纬度,港口------------------------------------//
             SunriseMoonset sunriseMoonset = new SunriseMoonset(timeZoneForToday);
@@ -129,15 +128,8 @@ public class AlmanacUtils {
             Era era = new Era(julianDayForToday, lunar, timeZoneForToday);
 
 
-            //------------------------------------计算星座------------------------------------//
-
-            // 星座
-            int mk = (int) Math.floor((julianDayForToday - qiShuo.zhongQi[0] - 15) / 30.43685);
-            if (mk < 11 && julianDayForToday >= qiShuo.zhongQi[2 * mk + 2]) {
-                // 星座所在月的序数,(如果j=13,ob.d0不会超过第14号中气)
-                mk++;
-            }
-            julian.setConstellation(AnnalsUtils.XINGZUO[(mk + 12) % 12] + "座");
+            //------------------------------------计算星座和儒略日------------------------------------//
+            Julian julian = new Julian(julianDayForToday, qiShuo);
 
 
             //------------------------------------计算节假日------------------------------------//
