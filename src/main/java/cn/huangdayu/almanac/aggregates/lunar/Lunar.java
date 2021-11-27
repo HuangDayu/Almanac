@@ -14,23 +14,23 @@ import lombok.Data;
 @Data
 public class Lunar {
 
-    public Lunar(TimeZoneDTO timeZoneDTO, int julianDayOfToday, QiShuo qiShuo) {
+    public Lunar(TimeZoneDTO timeZoneDTO, int julianDayForToday, QiShuo qiShuo) {
         //------------------------------------农历排月序计算------------------------------------//
         // 此处有线程安全问题, 暂时直接实例化，qiShuoDO.calcY是为减少计算次数而做的判断。（同一年数据一样）
-        if (julianDayOfToday < qiShuo.zhongQi[0] || julianDayOfToday >= qiShuo.zhongQi[24]) {
-            qiShuo.calculateMonth(julianDayOfToday);
+        if (julianDayForToday < qiShuo.zhongQi[0] || julianDayForToday >= qiShuo.zhongQi[24]) {
+            qiShuo.calculateMonth(julianDayForToday);
         }
 
         // 农历所在月的序数
-        int mk = (julianDayOfToday - qiShuo.heShuo[0]) / 30;
-        if (mk < 13 && qiShuo.heShuo[mk + 1] <= julianDayOfToday) {
+        int mk = (julianDayForToday - qiShuo.heShuo[0]) / 30;
+        if (mk < 13 && qiShuo.heShuo[mk + 1] <= julianDayForToday) {
             mk++;
         }
 
         // 距农历月首的编移量,0对应初一
-        this.setMonthOffset(julianDayOfToday - qiShuo.heShuo[mk]);
+        this.setMonthOffset(julianDayForToday - qiShuo.heShuo[mk]);
         // 农历日名称
-        this.setDay(AnnalsUtils.DAY_NAME[julianDayOfToday - qiShuo.heShuo[mk]]);
+        this.setDay(AnnalsUtils.DAY_NAME[julianDayForToday - qiShuo.heShuo[mk]]);
         this.setLeapYear(qiShuo.leapMonthIndex > 0);
         // 月名称
         this.setMonth(qiShuo.monthNames[mk]);
@@ -53,35 +53,52 @@ public class Lunar {
         }
         this.setTime(lunarTime);
         // 一般第3个月为春节
-        int julianDay = qiShuo.heShuo[2];
+        int value = qiShuo.heShuo[2];
         for (int l = 0; l < 14; l++) {
             // 找春节
             if (!"正".equals(qiShuo.monthNames[l]) || qiShuo.leapMonthIndex == l && l != 0) {
                 continue;
             }
-            julianDay = qiShuo.heShuo[l];
-            if (julianDayOfToday < julianDay) {
-                julianDay -= 365;
+            value = qiShuo.heShuo[l];
+            if (julianDayForToday < value) {
+                value -= 365;
                 // 无需再找下一个正月
                 break;
             }
         }
         // 计算该年春节与1984年平均春节(立春附近)相差天数估计
-        julianDay = julianDay + 5810;
+        value = value + 5810;
         // 农历纪年(10进制,1984年起算)
-        int lunarYears = (int) Math.floor(julianDay / 365.2422 + 0.5);
-        julianDay = lunarYears + 12000;
+        int lunarYears = (int) Math.floor(value / 365.2422 + 0.5);
+        value = lunarYears + 12000;
         // String Lyear3 = this.Gan[D % 10] + this.Zhi[D % 12]; // 干支纪年(正月) ,
         // 黄帝纪年,春节才视为新年
         int kingChronology = lunarYears + 1984 + 2698;
         this.setKingChronology(kingChronology);
         this.setKingChronologyName("开元" + kingChronology + "年");
         // 干支纪年（春节）
-        this.setYear(AnnalsUtils.TIANGAN[julianDay % 10] + AnnalsUtils.DIZHI[julianDay % 12]);
+        this.setYear(AnnalsUtils.TIANGAN[value % 10] + AnnalsUtils.DIZHI[value % 12]);
         // 该年对应的生肖
-        this.setZodiac(AnnalsUtils.SHENGXIAO[julianDay % 12]);
+        this.setZodiac(AnnalsUtils.SHENGXIAO[value % 12]);
         // 年号
         this.setYearName(AnnalsUtils.getYearName(timeZoneDTO.getEraYear()));
+
+        // 干支纪年处理 以立春为界定年首
+        value = (int) (qiShuo.zhongQi[3] + (julianDayForToday < qiShuo.zhongQi[3] ? -365 : 0) + 365.25 * 16 - 35);
+        // 以立春为界定纪年 农历纪年(10进制,1984年起算)
+        this.setYearChronology((int) Math.floor(value / 365.2422 + 0.5));
+
+        // 纪月处理,1998年12月7(大雪)开始连续进行节气计数,0为甲子
+        mk = (int) Math.floor((julianDayForToday - qiShuo.zhongQi[0]) / 30.43685);
+        if (mk < 12 && julianDayForToday >= qiShuo.zhongQi[2 * mk + 1]) {
+            // 相对大雪的月数计算,lunarMonthIndex的取值范围 0-12
+            mk++;
+        }
+        // 相对于1998年12月7(大雪)的月数,900000为正数基数
+        value = mk + (int) Math.floor((qiShuo.zhongQi[12] + 390) / 365.2422) * 12 + 900000;
+        this.setMonthChronologySum(value);
+        // 农历纪月
+        this.setMonthChronology(value % 12);
     }
 
 
@@ -130,6 +147,12 @@ public class Lunar {
      * 农历年,农历纪年(10进制,1984年起算)
      */
     private int yearChronology;
+
+    /**
+     * 农历月总数
+     */
+    public int monthChronologySum;
+
     /**
      * 农历月,农历纪月
      */
