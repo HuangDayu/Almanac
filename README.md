@@ -9,7 +9,7 @@
 
 <!-- [![GitHub license](https://img.shields.io/github/license/HuangDayu/Almanac.svg)](https://github.com/HuangDayu/Almanac) -->
 
-本项目类似[寿星天文历](http://www.nongli.net/sxwnl/)和[日梭万年历](https://www.nongli114.com/rili/)，包括但不限皇历、日出月落、农历、黄历、干支、节气、月相、经纬度、节假日、伊斯兰历、儒略历、天文历、回历、西历等。
+本项目类似[寿星天文历](http://www.nongli.net/sxwnl/)和[日梭万年历](https://www.nongli114.com/rili/)，包括但不限皇历、生辰八字、日出月落、农历、黄历、干支、节气、月相、经纬度、节假日、伊斯兰历、儒略历、天文历、回历、西历等。
 
 
 ## 引入依赖
