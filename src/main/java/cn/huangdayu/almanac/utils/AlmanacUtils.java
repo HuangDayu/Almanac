@@ -1,7 +1,5 @@
 package cn.huangdayu.almanac.utils;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import cn.huangdayu.almanac.aggregates.astronomical.Astronomical;
 import cn.huangdayu.almanac.aggregates.era.Era;
@@ -18,8 +16,7 @@ import cn.huangdayu.almanac.aggregates.qishuo.QiShuo;
 /**
  * 历计算工具类
  *
- * @author huangdayu
- * @update 2020-03-15
+ * @author huangdayu create at 2020-03-15
  */
 public class AlmanacUtils {
     private AlmanacUtils() {
@@ -28,16 +25,21 @@ public class AlmanacUtils {
     /**
      * 日历
      *
-     * @param timeZoneDTO
-     * @return
-     * @throws cn.huangdayu.almanac.exception.AlmanacException
+     * @param timeZoneDTO 时区数据结构体
+     * @return 历数据对象
      */
     public static AlmanacDTO ofDay(TimeZoneDTO timeZoneDTO) {
-        /** 数组从0开始，所以要减1*/
+        // 数组从0开始，所以要减1
         int index = timeZoneDTO.getDay() - 1;
         return handler(timeZoneDTO, index)[index];
     }
 
+    /**
+     * 月历
+     *
+     * @param timeZoneDTO 时区数据结构体
+     * @return 历数据对象
+     */
     public static AlmanacDTO[] ofMonth(TimeZoneDTO timeZoneDTO) {
         return handler(timeZoneDTO, -1);
     }
@@ -45,9 +47,8 @@ public class AlmanacUtils {
     /**
      * 年历
      *
-     * @param timeZoneDTO
-     * @return
-     * @throws cn.huangdayu.almanac.exception.AlmanacException
+     * @param timeZoneDTO 时区数据结构体
+     * @return 历数据对象
      */
     public static AlmanacDTO[][] ofYear(TimeZoneDTO timeZoneDTO) {
         AlmanacDTO[][] almanacDTOS = new AlmanacDTO[12][];
@@ -59,15 +60,12 @@ public class AlmanacUtils {
     }
 
     /**
-     * 月历
+     * 计算历
      *
-     * @param timeZoneDTO
-     * @return
-     * @throws cn.huangdayu.almanac.exception.AlmanacException
+     * @param timeZoneDTO 时区数据结构体
+     * @return 历数据对象
      */
     private static AlmanacDTO[] handler(TimeZoneDTO timeZoneDTO, int dayIndex) {
-
-        int julianDay;
 
         // 某年气朔的数据信息
         QiShuo qiShuo = new QiShuo();
