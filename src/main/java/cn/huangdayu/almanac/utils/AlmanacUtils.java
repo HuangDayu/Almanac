@@ -98,7 +98,7 @@ public class AlmanacUtils {
             SunriseMoonset sunriseMoonset = new SunriseMoonset(timeZoneForToday);
 
             //------------------------------------计算回历------------------------------------//
-            Islamic islamic = IslamicCalendarUtils.setIslamicCalendar(julianDayForToday);
+            Islamic islamic = new Islamic(julianDayForToday);
 
 
             //------------------------------------计算西历,伽利略历------------------------------------//
