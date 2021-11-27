@@ -126,44 +126,13 @@ public class AlmanacUtils {
 
             //------------------------------------计算黄历 (天干地支，干支纪年以【立春】定年首)------------------------------------//
 
-            Era era = new Era();
-            // 干支纪年处理 以立春为界定年首
-            julianDay = (int) (qiShuo.zhongQi[3] + (julianDayForToday < qiShuo.zhongQi[3] ? -365 : 0) + 365.25 * 16 - 35);
-            // 以立春为界定纪年
-            // 农历纪年(10进制,1984年起算)
-            int yearChronology = (int) Math.floor(julianDay / 365.2422 + 0.5);
-            lunar.setYearChronology(yearChronology);
-
-            julianDay = yearChronology + 12000;
-            // 干支纪年(立春)
-            era.setYear(AnnalsUtils.TIANGAN[julianDay % 10] + AnnalsUtils.DIZHI[julianDay % 12]);
-
-            // 纪月处理,1998年12月7(大雪)开始连续进行节气计数,0为甲子
-            int mk = (int) Math.floor((julianDayForToday - qiShuo.zhongQi[0]) / 30.43685);
-            if (mk < 12 && julianDayForToday >= qiShuo.zhongQi[2 * mk + 1]) {
-                // 相对大雪的月数计算,lunarMonthIndex的取值范围 0-12
-                mk++;
-            }
-
-            // 相对于1998年12月7(大雪)的月数,900000为正数基数
-            julianDay = mk + (int) Math.floor((qiShuo.zhongQi[12] + 390) / 365.2422) * 12 + 900000;
-            // 农历纪月
-            lunar.setMonthChronology(julianDay % 12);
+            Era era = new Era(julianDayForToday, lunar, timeZoneForToday);
 
 
-            era.setMonth(AnnalsUtils.TIANGAN[julianDay % 10] + AnnalsUtils.DIZHI[julianDay % 12]);
-
-            // 纪日,2000年1月7日起算
-            julianDay = julianDayForToday - 6 + 9000000;
-
-            era.setDay(AnnalsUtils.TIANGAN[julianDay % 10] + AnnalsUtils.DIZHI[julianDay % 12]);
-
-            int h = (timeZoneForToday.getHour() + 1) / 2;
-            //天干地支时,大鱼叔叔所写，算法可能有误
-            era.setTime(AnnalsUtils.TIANGAN[(h + julianDay * 12) % 10] + AnnalsUtils.DIZHI[h % 12]);
+            //------------------------------------计算星座------------------------------------//
 
             // 星座
-            mk = (int) Math.floor((julianDayForToday - qiShuo.zhongQi[0] - 15) / 30.43685);
+            int mk = (int) Math.floor((julianDayForToday - qiShuo.zhongQi[0] - 15) / 30.43685);
             if (mk < 11 && julianDayForToday >= qiShuo.zhongQi[2 * mk + 2]) {
                 // 星座所在月的序数,(如果j=13,ob.d0不会超过第14号中气)
                 mk++;
