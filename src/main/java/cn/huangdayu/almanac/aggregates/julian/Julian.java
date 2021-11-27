@@ -1,18 +1,21 @@
 package cn.huangdayu.almanac.aggregates.julian;
 
+import cn.huangdayu.almanac.aggregates.BaseAlmanac;
 import cn.huangdayu.almanac.aggregates.qishuo.QiShuo;
 import cn.huangdayu.almanac.utils.AnnalsUtils;
 import cn.huangdayu.almanac.utils.CommonUtils;
 import cn.huangdayu.almanac.utils.JulianCalendarUtils;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 儒略日
  *
  * @author huangdayu create at 2021/1/21 11:25
  */
-@Data
-public class Julian {
+@Setter
+@Getter
+public class Julian extends BaseAlmanac {
 
     public Julian(int julianDayForToday, QiShuo qiShuo) {
         this.days = julianDayForToday + CommonUtils.JULIAN_FOR_2000;
@@ -63,6 +66,7 @@ public class Julian {
      */
     private String constellation;
 
+    @Override
     public String getInfo() {
         return getDays() + " " + getConstellation();
     }

@@ -1,18 +1,21 @@
 package cn.huangdayu.almanac.aggregates.holiday;
 
+import cn.huangdayu.almanac.aggregates.BaseAlmanac;
 import cn.huangdayu.almanac.aggregates.era.Era;
 import cn.huangdayu.almanac.aggregates.lunar.Lunar;
 import cn.huangdayu.almanac.aggregates.solar_term.SolarTerm;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
 import cn.huangdayu.almanac.utils.AnnalsUtils;
 import cn.huangdayu.almanac.utils.FestivalHolidayUtils;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author huangdayu create at 2021/1/21 11:11
  */
-@Data
-public class Holiday {
+@Getter
+@Setter
+public class Holiday extends BaseAlmanac {
 
     public Holiday(TimeZoneDTO timeZoneDTO, Lunar lunar, SolarTerm solarTerm, Era era) {
         // 计算农历节日
@@ -38,6 +41,7 @@ public class Holiday {
      */
     private int flag;
 
+    @Override
     public String getInfo() {
         return getHappyDay() + " " + getMajorDay() + " " + getOtherDay();
     }

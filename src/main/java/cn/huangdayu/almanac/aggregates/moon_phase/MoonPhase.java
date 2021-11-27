@@ -1,12 +1,13 @@
 package cn.huangdayu.almanac.aggregates.moon_phase;
 
+import cn.huangdayu.almanac.aggregates.BaseAlmanac;
 import cn.huangdayu.almanac.aggregates.astronomical.Astronomical;
 import cn.huangdayu.almanac.aggregates.julian.Julian;
-import cn.huangdayu.almanac.aggregates.solar_term.SolarTerm;
 import cn.huangdayu.almanac.utils.AnnalsUtils;
 import cn.huangdayu.almanac.utils.CommonUtils;
 import cn.huangdayu.almanac.utils.JulianCalendarUtils;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +17,9 @@ import java.util.List;
  *
  * @author huangdayu create at 2021/2/13 8:38
  */
-@Data
-public class MoonPhase {
+@Getter
+@Setter
+public class MoonPhase extends BaseAlmanac {
 
     private MoonPhase() {
     }
@@ -25,7 +27,7 @@ public class MoonPhase {
     public MoonPhase(int julianDayForToday, Julian julianOfMonth, Astronomical astronomical) {
         List<MoonPhase> moonPhasesList = new ArrayList<>();
         int julianDays = julianOfMonth.getFirstJulianDayOfMonth() + julianOfMonth.getNumberDayOfMonth();
-        double moonLon = astronomical.getMoonSolarRetina();
+        double moonLon = astronomical.getLunarRetina();
         for (int j = 0; j < julianOfMonth.getNumberDayOfMonth(); j++) {
             double moonLonValue = AnnalsUtils.so_accurate(moonLon);
             julianDay = (int) Math.floor(moonLonValue + 0.5);
@@ -67,11 +69,8 @@ public class MoonPhase {
 
     private List<MoonPhase> next;
 
+    @Override
     public String getInfo() {
-        return name != null ? name + " " + dateTime : "无";
-    }
-
-    public String getDetails() {
         return name != null ? name + " " + dateTime : "无";
     }
 

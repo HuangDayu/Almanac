@@ -1,4 +1,4 @@
-package cn.huangdayu.almanac;
+package cn.huangdayu.almanac.aggregates;
 
 public abstract class BaseAlmanac {
 
