@@ -45,8 +45,7 @@ public class Pack {
         handler("闰月否", String.valueOf(almanacDTO.getLunar().getLeapMonth()));
         handler("闰年否", String.valueOf(almanacDTO.getLunar().getLeapYear()));
         handler("星座", almanacDTO.getJulian().getConstellation());
-        handler("当下节气", almanacDTO.getSolarTerm().getName() + " " + almanacDTO.getSolarTerm().getDateTime());
-        handler("最近节气", almanacDTO.getSolarTerm().getNextOne().getName() + " " + almanacDTO.getSolarTerm().getNextOne().getDateTime());
+        handler("节气", almanacDTO.getSolarTerm().getInfo());
         handler("春分", almanacDTO.getSolarTerm().getByName("春分").getDateTime());
         handler("夏至", almanacDTO.getSolarTerm().getByName("夏至").getDateTime());
         handler("秋分", almanacDTO.getSolarTerm().getByName("秋分").getDateTime());
