@@ -174,7 +174,7 @@ public class AlmanacApp extends Almanac {
 ## License
 
 ```license
-Copyright 2018 huangdayu
+Copyright 2017-12-4 huangdayu
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
