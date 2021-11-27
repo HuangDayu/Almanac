@@ -72,8 +72,6 @@ public class AlmanacUtils {
         // 某年气朔的数据信息
         QiShuo qiShuo = new QiShuo();
 
-        List<MoonPhase> moonPhases = new ArrayList<>();
-
         Julian julianOfMonth = new Julian(timeZoneDTO.getEraYear(), timeZoneDTO.getMonth());
 
         // 提取各日信息
@@ -103,6 +101,8 @@ public class AlmanacUtils {
             Julian julian = new Julian(julianDayForToday, qiShuo);
             // 计算节假日
             Holiday holiday = new Holiday(timeZoneForToday, lunar, solarTermDTO, era);
+            // 计算月相
+            MoonPhase moonPhase = new MoonPhase(julianDayForToday, julianOfMonth, astronomical);
 
             almanacDTOS[i] = AlmanacDTO.builder()
                     .era(era)
@@ -113,39 +113,9 @@ public class AlmanacUtils {
                     .solarTerm(solarTermDTO)
                     .sunriseMoonset(sunriseMoonset)
                     .timeZoneDTO(timeZoneForToday)
-                    .moonPhase(new MoonPhase(moonPhases))
+                    .moonPhase(moonPhase)
                     .build();
         }
-
-        // 计算月相
-        double moonLon = astronomical.getMoonSolarRetina();
-        do {
-            // FIXME 2021-01-17 计算月日视黄经较耗时
-            double moonLonValue = AnnalsUtils.so_accurate(moonLon);
-            julianDay = (int) Math.floor(moonLonValue + 0.5);
-            int xn = (int) Math.floor(moonLon / CommonUtils.PI_2 * 4 + 4000000.01) % 4;
-            moonLon += CommonUtils.PI_2 / 4;
-            if (julianDay >= julianOfMonth.getFirstJulianDayOfMonth() + julianOfMonth.getNumberDayOfMonth()) {
-                break;
-            }
-            if (julianDay < julianOfMonth.getFirstJulianDayOfMonth()) {
-                continue;
-            }
-            AlmanacDTO almanacDTO = almanacDTOS[julianDay - julianOfMonth.getFirstJulianDayOfMonth()];
-            if (almanacDTO == null) {
-                continue;
-            }
-            MoonPhase moonPhase = almanacDTO.getMoonPhase();
-            // 取得月相名称
-            moonPhase.setName(AnnalsUtils.YUEXIANG[xn]);
-            //月相时刻(儒略日)
-            moonPhase.setJulianTime(CommonUtils.JULIAN_FOR_2000 + moonLonValue);
-            //月相时间串
-            moonPhase.setDateTime(JulianCalendarUtils.julianDays2str(CommonUtils.JULIAN_FOR_2000 + moonLonValue));
-            moonPhases.add(moonPhase);
-            almanacDTO.setMoonPhase(moonPhase);
-        } while (julianDay + 5 < julianOfMonth.getFirstJulianDayOfMonth() + julianOfMonth.getNumberDayOfMonth());
-
         return almanacDTOS;
     }
 
