@@ -1,5 +1,6 @@
 package cn.huangdayu.almanac.test;
 
+import cn.huangdayu.almanac.AlmanacService;
 import cn.huangdayu.almanac.dto.AlmanacDTO;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
 import cn.huangdayu.almanac.utils.AlmanacUtils;
@@ -26,8 +27,8 @@ public class TestDrivenRefactoring {
     public void tdd() {
         Pack pack = new Pack();
         for (int i = 0; i < timeZoneDTOS.length; i++) {
-            TimeZoneDTO timeZoneDTO = timeZoneDTOS[i];
-            AlmanacDTO almanacDTO = AlmanacUtils.ofDay(timeZoneDTO);
+            AlmanacService almanacService = new AlmanacService(timeZoneDTOS[i]);
+            AlmanacDTO almanacDTO = almanacService.dayCalendar();
             pack.toMap(almanacDTO);
         }
         Set<Map.Entry<String, String>> map = pack.getMap().entrySet();
