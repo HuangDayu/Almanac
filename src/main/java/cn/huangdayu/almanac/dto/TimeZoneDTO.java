@@ -5,6 +5,7 @@ import cn.huangdayu.almanac.utils.AreaUtils;
 import cn.huangdayu.almanac.utils.ConstantsUtils;
 import cn.huangdayu.almanac.utils.DateTimeUtils;
 import cn.huangdayu.almanac.utils.JulianCalendarUtils;
+import lombok.Data;
 
 import java.time.Instant;
 import java.util.Calendar;
@@ -18,6 +19,7 @@ import java.util.GregorianCalendar;
  * @author huangdayu
  * @update 2020-03-15
  */
+@Data
 public class TimeZoneDTO {
 
     /**
@@ -56,10 +58,6 @@ public class TimeZoneDTO {
      * 位置
      */
     private String address;
-    /**
-     * 儒略日
-     */
-    private Integer julianDay;
 
     /**
      * 位置
@@ -159,25 +157,6 @@ public class TimeZoneDTO {
     }
 
     /**
-     * 指定天
-     *
-     * @param timeZoneDTO
-     * @param julianDay
-     */
-    public TimeZoneDTO(TimeZoneDTO timeZoneDTO, int julianDay) {
-        this(new GregorianCalendar(timeZoneDTO.getEraYear(), timeZoneDTO.getMonth() - 1, timeZoneDTO.getDay(), timeZoneDTO.getHour(), timeZoneDTO.getMinute(), timeZoneDTO.getSecond()));
-        try {
-            this.address = timeZoneDTO.getAddress();
-            this.julianDay = julianDay;
-            this.timeZone = timeZoneDTO.getTimeZone();
-            this.position = timeZoneDTO.getPosition();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new AlmanacException("时间与地址构造异常", e);
-        }
-    }
-
-    /**
      * 指定月
      *
      * @param timeZoneDTO
@@ -186,7 +165,6 @@ public class TimeZoneDTO {
         this(new GregorianCalendar(timeZoneDTO.getEraYear(), timeZoneDTO.getMonth() - 1, timeZoneDTO.getDay(), timeZoneDTO.getHour(), timeZoneDTO.getMinute(), timeZoneDTO.getSecond()));
         try {
             this.address = timeZoneDTO.getAddress();
-            this.julianDay = JulianCalendarUtils.getJuLian(this.year, this.month, this.day);
             this.timeZone = timeZoneDTO.getTimeZone();
             this.position = timeZoneDTO.getPosition();
         } catch (Exception e) {
@@ -221,7 +199,6 @@ public class TimeZoneDTO {
                 this.area = "徐闻";
             }
             this.address = AreaUtils.judgeArea(this.province, this.area)[1];
-            this.julianDay = JulianCalendarUtils.getJuLian(this.year, this.month, this.day);
             this.position = (province.replaceAll("省", "") + " " + area.replaceAll("市", "").replaceAll("区", "").replaceAll("县", "").replaceAll("镇", "").replaceAll("乡", ""));
         } catch (Exception e) {
             e.printStackTrace();
@@ -229,8 +206,9 @@ public class TimeZoneDTO {
         }
     }
 
-    public int getYear() {
-        return year;
+    public TimeZoneDTO nextDay(int day) {
+        this.setDay(day);
+        return new TimeZoneDTO(this);
     }
 
     /**
@@ -240,178 +218,6 @@ public class TimeZoneDTO {
      */
     public int getEraYear() {
         return getEra() == 0 ? -getYear() + 1 : getYear();
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public int getDay() {
-        return day;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
-
-    public int getHour() {
-        return hour;
-    }
-
-    public void setHour(int hour) {
-        this.hour = hour;
-    }
-
-    public int getMinute() {
-        return minute;
-    }
-
-    public void setMinute(int minute) {
-        this.minute = minute;
-    }
-
-    public int getSecond() {
-        return second;
-    }
-
-    public void setSecond(int second) {
-        this.second = second;
-    }
-
-    public int getWeek() {
-        return week;
-    }
-
-    public void setWeek(int week) {
-        this.week = week;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    public String getArea() {
-        return area;
-    }
-
-    public void setArea(String area) {
-        this.area = area;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Integer getJulianDay() {
-        return julianDay;
-    }
-
-    public void setJulianDay(Integer julianDay) {
-        this.julianDay = julianDay;
-    }
-
-    public String getTimeZone() {
-        return timeZone;
-    }
-
-    public void setTimeZone(String timeZone) {
-        this.timeZone = timeZone;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public double getIndex() {
-        return index;
-    }
-
-    public void setIndex(double index) {
-        this.index = index;
-    }
-
-    public int getEra() {
-        return era;
-    }
-
-    public void setEra(int era) {
-        this.era = era;
-    }
-
-    public int getDayIndexOfMonth() {
-        return dayIndexOfMonth;
-    }
-
-    public void setDayIndexOfMonth(int dayIndexOfMonth) {
-        this.dayIndexOfMonth = dayIndexOfMonth;
-    }
-
-    public int getDaysOfMonth() {
-        return daysOfMonth;
-    }
-
-    public void setDaysOfMonth(int daysOfMonth) {
-        this.daysOfMonth = daysOfMonth;
-    }
-
-    public int getWeeksOfMonth() {
-        return weeksOfMonth;
-    }
-
-    public void setWeeksOfMonth(int weeksOfMonth) {
-        this.weeksOfMonth = weeksOfMonth;
-    }
-
-    public int getWeekFirstOfMonth() {
-        return weekFirstOfMonth;
-    }
-
-    public void setWeekFirstOfMonth(int weekFirstOfMonth) {
-        this.weekFirstOfMonth = weekFirstOfMonth;
-    }
-
-    public int getWeekOfCurrentDay() {
-        return weekOfCurrentDay;
-    }
-
-    public void setWeekOfCurrentDay(int weekOfCurrentDay) {
-        this.weekOfCurrentDay = weekOfCurrentDay;
-    }
-
-    public int getWeekIndexOfMonth() {
-        return weekIndexOfMonth;
-    }
-
-    public void setWeekIndexOfMonth(int weekIndexOfMonth) {
-        this.weekIndexOfMonth = weekIndexOfMonth;
-    }
-
-    public GregorianCalendar getGregorianCalendar() {
-        return gregorianCalendar;
-    }
-
-    public void setGregorianCalendar(GregorianCalendar gregorianCalendar) {
-        this.gregorianCalendar = gregorianCalendar;
     }
 
     public String getDateTimeInfo() {
@@ -444,7 +250,6 @@ public class TimeZoneDTO {
                 ", province='" + province + '\'' +
                 ", area='" + area + '\'' +
                 ", address='" + address + '\'' +
-                ", julianDay=" + julianDay +
                 ", position='" + position + '\'' +
                 '}';
     }

@@ -88,8 +88,7 @@ public class AlmanacUtils {
         for (int i = day ? dayIndex : 0, j = 0; day ? i <= dayIndex : i < julianOfMonth.getNumberDayOfMonth(); i++) {
 
             //------------------------------------叠加日期，重构对象------------------------------------//
-            timeZoneDTO.setDay(i + 1);
-            TimeZoneDTO timeZoneOfThisDay = new TimeZoneDTO(timeZoneDTO, julianOfMonth.getNumberDayOfMonth() + i);
+            TimeZoneDTO timeZoneOfThisDay = timeZoneDTO.nextDay(i + 1);
 
 
             //------------------------------------计算儒略日,北京时12:00------------------------------------//
@@ -104,8 +103,6 @@ public class AlmanacUtils {
 
 
             //------------------------------------计算西历,伽利略历------------------------------------//
-            int hours = timeZoneOfThisDay.getHour();
-            int minute = timeZoneOfThisDay.getMinute();
             // 公历月内日序数
             timeZoneOfThisDay.setDayIndexOfMonth(i);
             // 公历月天数
@@ -115,9 +112,9 @@ public class AlmanacUtils {
             // 当前日的星期
             timeZoneOfThisDay.setWeekOfCurrentDay((julianOfMonth.getWeekFirstDayOfMonth() + i) % 7);
             // 本日所在的周序号
-            timeZoneOfThisDay.setWeekIndexOfMonth((int) Math.floor((julianOfMonth.getWeekFirstDayOfMonth() + i) / 7));
+            timeZoneOfThisDay.setWeekIndexOfMonth(((julianOfMonth.getWeekFirstDayOfMonth() + i) / 7));
             // 本月的总周数
-            timeZoneOfThisDay.setWeeksOfMonth((int) Math.floor((julianOfMonth.getWeekFirstDayOfMonth() + julianOfMonth.getNumberDayOfMonth() - 1) / 7) + 1);
+            timeZoneOfThisDay.setWeeksOfMonth(((julianOfMonth.getWeekFirstDayOfMonth() + julianOfMonth.getNumberDayOfMonth() - 1) / 7) + 1);
 
 
             //------------------------------------农历排月序计算------------------------------------//
@@ -127,7 +124,7 @@ public class AlmanacUtils {
             }
 
             // 农历所在月的序数
-            int mk = (int) Math.floor((julianDayOfThisDay - qiShuo.heShuo[0]) / 30);
+            int mk = ((julianDayOfThisDay - qiShuo.heShuo[0]) / 30);
             if (mk < 13 && qiShuo.heShuo[mk + 1] <= julianDayOfThisDay) {
                 mk++;
             }
@@ -149,14 +146,14 @@ public class AlmanacUtils {
             // 下个月名称,判断除夕时要用到
             lunar.setNextMonth(mk < 13 ? qiShuo.monthNames[mk + 1] : "未知");
             // 时辰
-            int sum = (int) (hours + 0.01 * minute);
+            int sum = (int) (timeZoneOfThisDay.getHour() + 0.01 * timeZoneOfThisDay.getMinute());
             int index = (sum + 1) / 2;
             if (index >= 12) {
                 index = 0;
             }
             String lunarTime = AnnalsUtils.DIZHI[index] + "时" + ConstantsUtils.GENG[index];
-            if ((minute % 15) > 13) {
-                int k = (minute + 3) / 15;
+            if ((timeZoneOfThisDay.getMinute() % 15) > 13) {
+                int k = (timeZoneOfThisDay.getMinute() + 3) / 15;
                 lunarTime = lunarTime + ConstantsUtils.KE[k];
             }
             lunar.setTime(lunarTime);
@@ -266,7 +263,7 @@ public class AlmanacUtils {
 
             era.setDay(AnnalsUtils.TIANGAN[julianDay % 10] + AnnalsUtils.DIZHI[julianDay % 12]);
 
-            int h = (hours + 1) / 2;
+            int h = (timeZoneOfThisDay.getHour() + 1) / 2;
             //天干地支时,大鱼叔叔所写，算法可能有误
             era.setTime(AnnalsUtils.TIANGAN[(h + julianDay * 12) % 10] + AnnalsUtils.DIZHI[h % 12]);
 
