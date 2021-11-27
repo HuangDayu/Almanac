@@ -1,5 +1,6 @@
 package cn.huangdayu.almanac.dto;
 
+import cn.huangdayu.almanac.aggregates.julian.Julian;
 import cn.huangdayu.almanac.exception.AlmanacException;
 import cn.huangdayu.almanac.utils.AreaUtils;
 import cn.huangdayu.almanac.utils.ConstantsUtils;
@@ -206,9 +207,22 @@ public class TimeZoneDTO {
         }
     }
 
-    public TimeZoneDTO nextDay(int day) {
-        this.setDay(day);
-        return new TimeZoneDTO(this);
+    public TimeZoneDTO nextDay(int day, Julian julian) {
+        this.setDay(day + 1);
+        TimeZoneDTO timeZoneDTO = new TimeZoneDTO(this);
+        // 公历月内日序数
+        timeZoneDTO.setDayIndexOfMonth(day);
+        // 公历月天数
+        timeZoneDTO.setDaysOfMonth(julian.getNumberDayOfMonth());
+        // 月首的星期
+        timeZoneDTO.setWeekFirstOfMonth(julian.getWeekFirstDayOfMonth());
+        // 当前日的星期
+        timeZoneDTO.setWeekOfCurrentDay((julian.getWeekFirstDayOfMonth() + day) % 7);
+        // 本日所在的周序号
+        timeZoneDTO.setWeekIndexOfMonth(((julian.getWeekFirstDayOfMonth() + day) / 7));
+        // 本月的总周数
+        timeZoneDTO.setWeeksOfMonth(((julian.getWeekFirstDayOfMonth() + julian.getNumberDayOfMonth() - 1) / 7) + 1);
+        return timeZoneDTO;
     }
 
     /**

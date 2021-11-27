@@ -88,7 +88,7 @@ public class AlmanacUtils {
         for (int i = day ? dayIndex : 0, j = 0; day ? i <= dayIndex : i < julianOfMonth.getNumberDayOfMonth(); i++) {
 
             //------------------------------------叠加日期，重构对象------------------------------------//
-            TimeZoneDTO timeZoneForToday = timeZoneDTO.nextDay(i + 1);
+            TimeZoneDTO timeZoneForToday = timeZoneDTO.nextDay(i, julianOfMonth);
 
 
             //------------------------------------计算儒略日,北京时12:00------------------------------------//
@@ -99,21 +99,6 @@ public class AlmanacUtils {
 
             //------------------------------------计算回历------------------------------------//
             Islamic islamic = new Islamic(julianDayForToday);
-
-
-            //------------------------------------计算西历,伽利略历------------------------------------//
-            // 公历月内日序数
-            timeZoneForToday.setDayIndexOfMonth(i);
-            // 公历月天数
-            timeZoneForToday.setDaysOfMonth(julianOfMonth.getNumberDayOfMonth());
-            // 月首的星期
-            timeZoneForToday.setWeekFirstOfMonth(julianOfMonth.getWeekFirstDayOfMonth());
-            // 当前日的星期
-            timeZoneForToday.setWeekOfCurrentDay((julianOfMonth.getWeekFirstDayOfMonth() + i) % 7);
-            // 本日所在的周序号
-            timeZoneForToday.setWeekIndexOfMonth(((julianOfMonth.getWeekFirstDayOfMonth() + i) / 7));
-            // 本月的总周数
-            timeZoneForToday.setWeeksOfMonth(((julianOfMonth.getWeekFirstDayOfMonth() + julianOfMonth.getNumberDayOfMonth() - 1) / 7) + 1);
 
 
             //------------------------------------计算农历（农历纪年以【正月初一】定年首）------------------------------------//
