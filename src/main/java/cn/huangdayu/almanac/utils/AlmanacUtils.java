@@ -3,6 +3,7 @@ package cn.huangdayu.almanac.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.huangdayu.almanac.aggregates.astronomical.Astronomical;
 import cn.huangdayu.almanac.aggregates.era.Era;
 import cn.huangdayu.almanac.aggregates.holiday.Holiday;
 import cn.huangdayu.almanac.aggregates.islamic.Islamic;
@@ -79,16 +80,7 @@ public class AlmanacUtils {
         // 提取各日信息
         AlmanacDTO[] almanacDTOS = new AlmanacDTO[julianOfMonth.getNumberDayOfMonth()];
 
-        // 计算世界时与原子时之差
-        double jd2 = julianOfMonth.getFirstJulianDayOfMonth() + CommonUtils.dtT(julianOfMonth.getFirstJulianDayOfMonth()) - (double) 8 / 24;
-
-        // 太阳视黄经
-        double sunLon = AstronomyArithmeticUtils.S_aLon(jd2 / 36525, 3);
-        sunLon = (int) Math.floor((sunLon - 0.13) / CommonUtils.PI_2 * 24) * CommonUtils.PI_2 / 24;
-
-        // 月日视黄经
-        double moonLon = AstronomyArithmeticUtils.MS_aLon(jd2 / 36525, 10, 3);
-        moonLon = (int) Math.floor((moonLon - 0.78) / Math.PI * 2) * Math.PI / 2;
+        Astronomical astronomical = new Astronomical(julianOfMonth.getFirstJulianDayOfMonth());
 
         // dayIndex >= 0 ? 计算日历 : 计算月历
         boolean day = dayIndex >= 0;
@@ -210,7 +202,7 @@ public class AlmanacUtils {
                 // 节气的取值范围是0-23
                 qk++;
             }
-            double sunLonValue = sunLon, sunLonTime;
+            double sunLonValue = astronomical.getSunSolarRetina(), sunLonTime;
             SolarTerm solarTermDTO = new SolarTerm();
             List<SolarTerm> solarTermAfterDTOS = new ArrayList<>();
             int qj = 24, qn;
@@ -310,6 +302,7 @@ public class AlmanacUtils {
         }
 
         //------------------------------------计算月相------------------------------------//
+        double moonLon = astronomical.getMoonSolarRetina();
         do {
             // FIXME 2021-01-17 计算月日视黄经较耗时
             double moonLonValue = AnnalsUtils.so_accurate(moonLon);
