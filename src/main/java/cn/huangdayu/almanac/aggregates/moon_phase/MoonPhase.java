@@ -3,6 +3,7 @@ package cn.huangdayu.almanac.aggregates.moon_phase;
 import cn.huangdayu.almanac.aggregates.BaseAlmanac;
 import cn.huangdayu.almanac.aggregates.astronomical.Astronomical;
 import cn.huangdayu.almanac.aggregates.julian.Julian;
+import cn.huangdayu.almanac.aggregates.solar_term.SolarTerm;
 import cn.huangdayu.almanac.utils.AnnalsUtils;
 import cn.huangdayu.almanac.utils.CommonUtils;
 import cn.huangdayu.almanac.utils.JulianCalendarUtils;
@@ -45,6 +46,7 @@ public class MoonPhase extends BaseAlmanac {
             moonPhase.setJulianTime(CommonUtils.JULIAN_FOR_2000 + moonLonValue);
             //月相时间串
             moonPhase.setDateTime(JulianCalendarUtils.julianDays2str(CommonUtils.JULIAN_FOR_2000 + moonLonValue));
+            moonPhase.setAfterDay(afterDays);
             moonPhasesList.add(moonPhase);
         }
         this.setNext(moonPhasesList);
@@ -69,9 +71,18 @@ public class MoonPhase extends BaseAlmanac {
 
     private List<MoonPhase> next;
 
+    public MoonPhase getNextOne() {
+        for (MoonPhase moonPhase : next) {
+            if (moonPhase.getAfterDay() > 0) {
+                return moonPhase;
+            }
+        }
+        return next.get(0);
+    }
+
     @Override
     public String getInfo() {
-        return name != null ? name + " " + dateTime : "无";
+        return name != null ? name + " " + dateTime : getNextOne().getInfo();
     }
 
 

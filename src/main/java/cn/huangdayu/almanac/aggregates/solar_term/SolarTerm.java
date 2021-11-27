@@ -82,7 +82,7 @@ public class SolarTerm extends BaseAlmanac {
                 return solarTerm;
             }
         }
-        return null;
+        return next.get(0);
     }
 
     public SolarTerm getByName(String name) {
@@ -91,7 +91,7 @@ public class SolarTerm extends BaseAlmanac {
                 return solarTerm;
             }
         }
-        return null;
+        return next.get(0);
     }
 
     @Override
