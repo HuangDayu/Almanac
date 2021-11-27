@@ -71,30 +71,16 @@ public class AlmanacUtils {
 
         List<MoonPhase> moonPhases = new ArrayList<>();
 
-        // FIXME 2021-01-22 不知为何减去西历两千年的儒略日
-        // 这个月1号的儒略日,公历月首,中午
-        int julianDayOfMonthFirst = (int) (Math.floor(JulianCalendarUtils.getJulianDayNumber(timeZoneDTO.getEraYear(), timeZoneDTO.getMonth())) - CommonUtils.JULIAN_FOR_2000);
-
-        int nextMonth = timeZoneDTO.getMonth() + 1, nextYear = timeZoneDTO.getEraYear();
-        if (nextMonth > 12) {
-            nextMonth = nextMonth - 12;
-            nextYear = timeZoneDTO.getEraYear() + 1;
-        }
-
-        // 这个月1号的儒略日和下个月1号的儒略日之差,月天数(公历)
-        int julianDayForMonthSum = (int) (Math.floor(JulianCalendarUtils.getJulianDayNumber(nextYear, nextMonth)) - CommonUtils.JULIAN_FOR_2000 - julianDayOfMonthFirst);
-
-        // 本月第一天的星期
-        int weekFirstForMonthIndex = (julianDayOfMonthFirst + CommonUtils.JULIAN_FOR_2000 + 1 + 7000000) % 7;
+        Julian julianOfMonth = new Julian(timeZoneDTO.getEraYear(), timeZoneDTO.getMonth());
 
         // 所属公历年对应的农历干支纪年
         int chineseEraYear = timeZoneDTO.getYear() - 1984 + 12000;
 
         // 提取各日信息
-        AlmanacDTO[] almanacDTOS = new AlmanacDTO[julianDayForMonthSum];
+        AlmanacDTO[] almanacDTOS = new AlmanacDTO[julianOfMonth.getNumberDayOfMonth()];
 
         // 计算世界时与原子时之差
-        double jd2 = julianDayOfMonthFirst + CommonUtils.dtT(julianDayOfMonthFirst) - (double) 8 / 24;
+        double jd2 = julianOfMonth.getFirstJulianDayOfMonth() + CommonUtils.dtT(julianOfMonth.getFirstJulianDayOfMonth()) - (double) 8 / 24;
 
         // 太阳视黄经
         double sunLon = AstronomyArithmeticUtils.S_aLon(jd2 / 36525, 3);
@@ -107,16 +93,16 @@ public class AlmanacUtils {
         // dayIndex >= 0 ? 计算日历 : 计算月历
         boolean day = dayIndex >= 0;
 
-        for (int i = day ? dayIndex : 0, j = 0; day ? i <= dayIndex : i < julianDayForMonthSum; i++) {
+        for (int i = day ? dayIndex : 0, j = 0; day ? i <= dayIndex : i < julianOfMonth.getNumberDayOfMonth(); i++) {
 
             //------------------------------------叠加日期，重构对象------------------------------------//
             timeZoneDTO.setDay(i + 1);
-            TimeZoneDTO timeZoneOfThisDay = new TimeZoneDTO(timeZoneDTO, julianDayForMonthSum + i);
+            TimeZoneDTO timeZoneOfThisDay = new TimeZoneDTO(timeZoneDTO, julianOfMonth.getNumberDayOfMonth() + i);
 
 
             //------------------------------------计算儒略日,北京时12:00------------------------------------//
             Julian julian = new Julian();
-            int julianDayOfThisDay = julianDayOfMonthFirst + i;
+            int julianDayOfThisDay = julianOfMonth.getFirstJulianDayOfMonth() + i;
             julian.setDays(julianDayOfThisDay + CommonUtils.JULIAN_FOR_2000);
 
             //------------------------------------计算日出月落,经纬度,港口------------------------------------//
@@ -134,15 +120,15 @@ public class AlmanacUtils {
             // 公历月内日序数
             timeZoneOfThisDay.setDayIndexOfMonth(i);
             // 公历月天数
-            timeZoneOfThisDay.setDaysOfMonth(julianDayForMonthSum);
+            timeZoneOfThisDay.setDaysOfMonth(julianOfMonth.getNumberDayOfMonth());
             // 月首的星期
-            timeZoneOfThisDay.setWeekFirstOfMonth(weekFirstForMonthIndex);
+            timeZoneOfThisDay.setWeekFirstOfMonth(julianOfMonth.getWeekFirstDayOfMonth());
             // 当前日的星期
-            timeZoneOfThisDay.setWeekOfCurrentDay((weekFirstForMonthIndex + i) % 7);
+            timeZoneOfThisDay.setWeekOfCurrentDay((julianOfMonth.getWeekFirstDayOfMonth() + i) % 7);
             // 本日所在的周序号
-            timeZoneOfThisDay.setWeekIndexOfMonth((int) Math.floor((weekFirstForMonthIndex + i) / 7));
+            timeZoneOfThisDay.setWeekIndexOfMonth((int) Math.floor((julianOfMonth.getWeekFirstDayOfMonth() + i) / 7));
             // 本月的总周数
-            timeZoneOfThisDay.setWeeksOfMonth((int) Math.floor((weekFirstForMonthIndex + julianDayForMonthSum - 1) / 7) + 1);
+            timeZoneOfThisDay.setWeeksOfMonth((int) Math.floor((julianOfMonth.getWeekFirstDayOfMonth() + julianOfMonth.getNumberDayOfMonth() - 1) / 7) + 1);
 
 
             //------------------------------------农历排月序计算------------------------------------//
@@ -330,13 +316,13 @@ public class AlmanacUtils {
             julianDay = (int) Math.floor(moonLonValue + 0.5);
             int xn = (int) Math.floor(moonLon / CommonUtils.PI_2 * 4 + 4000000.01) % 4;
             moonLon += CommonUtils.PI_2 / 4;
-            if (julianDay >= julianDayOfMonthFirst + julianDayForMonthSum) {
+            if (julianDay >= julianOfMonth.getFirstJulianDayOfMonth() + julianOfMonth.getNumberDayOfMonth()) {
                 break;
             }
-            if (julianDay < julianDayOfMonthFirst) {
+            if (julianDay < julianOfMonth.getFirstJulianDayOfMonth()) {
                 continue;
             }
-            AlmanacDTO almanacDTO = almanacDTOS[julianDay - julianDayOfMonthFirst];
+            AlmanacDTO almanacDTO = almanacDTOS[julianDay - julianOfMonth.getFirstJulianDayOfMonth()];
             if (almanacDTO == null) {
                 continue;
             }
@@ -349,7 +335,7 @@ public class AlmanacUtils {
             moonPhase.setDateTime(JulianCalendarUtils.julianDays2str(CommonUtils.JULIAN_FOR_2000 + moonLonValue));
             moonPhases.add(moonPhase);
             almanacDTO.setMoonPhaseDTO(moonPhase);
-        } while (julianDay + 5 < julianDayOfMonthFirst + julianDayForMonthSum);
+        } while (julianDay + 5 < julianOfMonth.getFirstJulianDayOfMonth() + julianOfMonth.getNumberDayOfMonth());
 
         return almanacDTOS;
     }

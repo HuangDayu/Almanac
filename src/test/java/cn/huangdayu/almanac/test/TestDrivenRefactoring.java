@@ -38,6 +38,7 @@ public class TestDrivenRefactoring {
             Assert.assertEquals(entry.getKey() + entry.getValue(), TEXTS[i]);
             i++;
         }
+        System.out.println("Test driven refactoring pass !");
     }
 
     @Test
