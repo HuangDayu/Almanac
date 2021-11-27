@@ -1,18 +1,21 @@
 package cn.huangdayu.almanac.aggregates.lunar;
 
+import cn.huangdayu.almanac.aggregates.BaseAlmanac;
 import cn.huangdayu.almanac.aggregates.qishuo.QiShuo;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
 import cn.huangdayu.almanac.utils.AnnalsUtils;
 import cn.huangdayu.almanac.utils.ConstantsUtils;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 农历，阴历，以 [正月初一] 作为新年的第一天
  *
  * @author huangdayu create at 2021/1/21 10:53
  */
-@Data
-public class Lunar {
+@Getter
+@Setter
+public class Lunar extends BaseAlmanac {
 
     public Lunar(TimeZoneDTO timeZoneDTO, int julianDayForToday, QiShuo qiShuo) {
         //------------------------------------农历排月序计算------------------------------------//
@@ -174,6 +177,7 @@ public class Lunar {
     private String kingChronologyName;
 
 
+    @Override
     public String getInfo() {
         return year + zodiac + "年" + month + (month.length() < 2 ? "月" : "") + day + time;
     }

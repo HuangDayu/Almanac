@@ -1,18 +1,20 @@
 package cn.huangdayu.almanac.aggregates.era;
 
+import cn.huangdayu.almanac.aggregates.BaseAlmanac;
 import cn.huangdayu.almanac.aggregates.lunar.Lunar;
-import cn.huangdayu.almanac.aggregates.qishuo.QiShuo;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
 import cn.huangdayu.almanac.utils.AnnalsUtils;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 黄历，天干地支，以 [立春]  作为新年的第一天
  *
  * @author huangdayu create at 2021/1/21 11:00
  */
-@Data
-public class Era {
+@Setter
+@Getter
+public class Era extends BaseAlmanac {
 
     public Era(int julianDayForToday, Lunar lunar, TimeZoneDTO timeZoneDTO) {
         int value = lunar.getYearChronology() + 12000;
@@ -49,6 +51,7 @@ public class Era {
      */
     private String time;
 
+    @Override
     public String getInfo() {
         return year + "年" + month + "月" + day + "日" + time + "时";
     }

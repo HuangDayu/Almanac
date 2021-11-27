@@ -1,14 +1,19 @@
 package cn.huangdayu.almanac.aggregates.sunrise_moonset;
 
+import cn.huangdayu.almanac.aggregates.BaseAlmanac;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
 import cn.huangdayu.almanac.utils.PortUtils;
 import cn.huangdayu.almanac.utils.PropertiesUtils;
 import cn.huangdayu.almanac.utils.SunMoonUtils;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author huangdayu create at 2021/1/21 11:08
  */
-public class SunriseMoonset {
+@Getter
+@Setter
+public class SunriseMoonset extends BaseAlmanac {
 
     public SunriseMoonset(TimeZoneDTO timeZoneDTO) {
         SunMoonUtils.init(timeZoneDTO, this);
@@ -68,108 +73,9 @@ public class SunriseMoonset {
      */
     private String moonMiddleTime;
 
-    public String getSunRiseTime() {
-        return sunRiseTime;
-    }
-
-    public void setSunRiseTime(String sunRiseTime) {
-        this.sunRiseTime = sunRiseTime;
-    }
-
-    public String getSunSetTime() {
-        return sunSetTime;
-    }
-
-    public void setSunSetTime(String sunSetTime) {
-        this.sunSetTime = sunSetTime;
-    }
-
-    public String getMidDayTime() {
-        return midDayTime;
-    }
-
-    public void setMidDayTime(String midDayTime) {
-        this.midDayTime = midDayTime;
-    }
-
-    public String getDawnTime() {
-        return dawnTime;
-    }
-
-    public void setDawnTime(String dawnTime) {
-        this.dawnTime = dawnTime;
-    }
-
-    public String getDarkTime() {
-        return darkTime;
-    }
-
-    public void setDarkTime(String darkTime) {
-        this.darkTime = darkTime;
-    }
-
-    public String getDiurnalTime() {
-        return diurnalTime;
-    }
-
-    public void setDiurnalTime(String diurnalTime) {
-        this.diurnalTime = diurnalTime;
-    }
-
-    public String getNightTime() {
-        return nightTime;
-    }
-
-    public void setNightTime(String nightTime) {
-        this.nightTime = nightTime;
-    }
-
-    public String getMoonRiseTime() {
-        return moonRiseTime;
-    }
-
-    public void setMoonRiseTime(String moonRiseTime) {
-        this.moonRiseTime = moonRiseTime;
-    }
-
-    public String getMoonSetTime() {
-        return moonSetTime;
-    }
-
-    public void setMoonSetTime(String moonSetTime) {
-        this.moonSetTime = moonSetTime;
-    }
-
-    public String getMoonMiddleTime() {
-        return moonMiddleTime;
-    }
-
-    public void setMoonMiddleTime(String moonMiddleTime) {
-        this.moonMiddleTime = moonMiddleTime;
-    }
-
-    public String getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getPortName() {
-        return portName;
-    }
-
-    public void setPortName(String portName) {
-        this.portName = portName;
+    @Override
+    public String getInfo() {
+        return portName + " " + longitude + " " + latitude;
     }
 
     @Override

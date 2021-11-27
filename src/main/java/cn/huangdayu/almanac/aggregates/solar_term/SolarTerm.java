@@ -1,12 +1,14 @@
 package cn.huangdayu.almanac.aggregates.solar_term;
 
+import cn.huangdayu.almanac.aggregates.BaseAlmanac;
 import cn.huangdayu.almanac.aggregates.astronomical.Astronomical;
 import cn.huangdayu.almanac.aggregates.qishuo.QiShuo;
 import cn.huangdayu.almanac.utils.AnnalsUtils;
 import cn.huangdayu.almanac.utils.CommonUtils;
 import cn.huangdayu.almanac.utils.ConstantsUtils;
 import cn.huangdayu.almanac.utils.JulianCalendarUtils;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +16,9 @@ import java.util.List;
 /**
  * @author huangdayu create at 2021/1/22 11:37
  */
-@Data
-public class SolarTerm {
+@Setter
+@Getter
+public class SolarTerm extends BaseAlmanac {
 
     private SolarTerm() {
     }
@@ -27,7 +30,7 @@ public class SolarTerm {
             // 节气的取值范围是0-23
             qk++;
         }
-        double sunLonValue = astronomical.getSunSolarRetina();
+        double sunLonValue = astronomical.getSolarRetina();
         double sunLonTime;
         List<SolarTerm> solarTermAfterDTOS = new ArrayList<>();
         int qj = 24;
@@ -95,6 +98,7 @@ public class SolarTerm {
         return name + " " + dateTime + (afterDay != 0 ? " 至今" + afterDay + "天" : " 今天");
     }
 
+    @Override
     public String getInfo() {
         return name != null ? getDetails() : getNextOne().getDetails();
     }
