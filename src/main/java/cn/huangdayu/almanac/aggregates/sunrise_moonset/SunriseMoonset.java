@@ -1,9 +1,19 @@
 package cn.huangdayu.almanac.aggregates.sunrise_moonset;
 
+import cn.huangdayu.almanac.dto.TimeZoneDTO;
+import cn.huangdayu.almanac.utils.PortUtils;
+import cn.huangdayu.almanac.utils.PropertiesUtils;
+import cn.huangdayu.almanac.utils.SunMoonUtils;
+
 /**
  * @author huangdayu create at 2021/1/21 11:08
  */
 public class SunriseMoonset {
+
+    public SunriseMoonset(TimeZoneDTO timeZoneDTO) {
+        SunMoonUtils.init(timeZoneDTO, this);
+        this.portName = PortUtils.getPortName(PropertiesUtils.getLatitude(), PropertiesUtils.getLongitude());
+    }
 
     /**
      * 港口

@@ -13,15 +13,12 @@ import java.util.Properties;
  */
 public class PropertiesUtils {
 
-    private static final Properties LATPORT, LOOGPORT, ADMINISTRATIVE;
-
-    static {
-        // 初始化配置
-        LATPORT = getLatitudeProperties();
-        LOOGPORT = getLongitudeProperties();
-        ADMINISTRATIVE = getAdministrativeProperties();
+    private PropertiesUtils() {
     }
 
+    private static final Properties LATITUDE = getLatitudeProperties();
+    private static final Properties LONGITUDE = getLongitudeProperties();
+    private static final Properties ADMINISTRATIVE = getAdministrativeProperties();
 
     public static Properties getProperties(String name) {
         Properties properties = new Properties();
@@ -60,12 +57,12 @@ public class PropertiesUtils {
         return getProperties("loogport.properties");
     }
 
-    public static Properties getLATPORT() {
-        return LATPORT;
+    public static Properties getLatitude() {
+        return LATITUDE;
     }
 
-    public static Properties getLOOGPORT() {
-        return LOOGPORT;
+    public static Properties getLongitude() {
+        return LONGITUDE;
     }
 
     public static Properties getADMINISTRATIVE() {

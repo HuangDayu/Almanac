@@ -12,7 +12,8 @@ import lombok.Data;
 @Data
 public class Julian {
 
-    public Julian() {
+    public Julian(int days) {
+        this.days = days;
     }
 
     public Julian(int year, int month) {
