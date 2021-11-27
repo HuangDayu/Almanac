@@ -1,4 +1,4 @@
-# Almanac
+# Almanac 历
 
 [![GitHub watch](https://img.shields.io/github/watchers/HuangDayu/Almanac.svg)](https://github.com/HuangDayu/Almanac/watchers)
 [![GitHub issues](https://img.shields.io/github/issues/HuangDayu/Almanac.svg)](https://github.com/HuangDayu/Almanac/issues)
@@ -9,7 +9,7 @@
 
 <!-- [![GitHub license](https://img.shields.io/github/license/HuangDayu/Almanac.svg)](https://github.com/HuangDayu/Almanac) -->
 
-**[历](https://almanac.huangdayu.cn/)**：包括万年历、皇历、日出月落、农历、黄历、干支，节气、月相，经纬度、节假日、伊斯兰历、儒略历、西历等。
+本项目类似[寿星天文历](http://www.nongli.net/sxwnl/)和[日梭万年历](https://www.nongli114.com/rili/)，包括但不限皇历、日出月落、农历、黄历、干支、节气、月相、经纬度、节假日、伊斯兰历、儒略历、天文历、回历、西历等。
 
 
 ## 引入依赖
@@ -64,45 +64,10 @@ public class AlmanacApp extends Almanac {
 }
 ```
 
-## 说明
-
-**本项目类似[寿星天文历](http://www.nongli.net/sxwnl/)和[日梭万年历](https://www.nongli114.com/rili/)，但是数据还不是很全，算法有待校验！**
-
-## 申明
-
-**我只是代码的搬运工！如有侵权，联系删除！**
-
-## 特别感谢
-
-- [wangpeng047](http://blog.csdn.net/wangpeng047/article/details/38559591)
-- [lxslove](http://blog.csdn.net/lxslove/article/details/6083396)
-- [moodlxs](http://www.cnblogs.com/moodlxs/archive/2010/12/18/2345392.html)
-- [hanoi](http://www.cnblogs.com/hanoi/archive/2012/07/04/2576325.html)
-
-## 日历说明
-
-- 西历 公历 阳历
-- 农历 阴阳历 黄历
-- 伊斯兰历 回历 阴历
-- 儒略历 格里历
-- 天文历
-- [黄帝纪年](https://baike.baidu.com/item/%E9%BB%84%E5%B8%9D%E7%BA%AA%E5%B9%B4) [黄帝历](https://baike.baidu.com/item/%E9%BB%84%E5%B8%9D%E5%8E%86) [古六历](https://baike.baidu.com/item/%E5%8F%A4%E5%85%AD%E5%8E%86)
-- [寿星天文历](http://www.nongli.net/sxwnl/)
-- [日梭万年历](http://www.nongli114.com/rili/2017.html)
-- [紫金天文台](http://www.pmo.ac.cn/)
-- [中华农历网](http://www.nongli.net/)
-- [时间科普](http://www.time.ac.cn/serve/down.htm)
-- [中国科学院国家授时中心](http://www.ntsc.ac.cn/)
-- [中国科学院紫金天文台](http://almanac.pmo.ac.cn/)
-- [电子天文历表](http://almanac.pmo.ac.cn/dianzili.htm)
-- [天之文](http://www.astron.ac.cn/index.htm)
-
-## BUG
-
-- 时间无法进入公元前
-
 ## 不足
 
+- 算法并不完全准确
+- 时间无法进入公元前
 - 天文历信息不足：方位、赤纬、时角、黄经、黄纬，潮汐，太阳高度角，地球直射位置，地球远日点，地球近日点，日食月食等
 
 ## 展示
@@ -151,7 +116,7 @@ public class AlmanacApp extends Almanac {
 | `秋分` | 2018-09-23 09:54:01  | 1995-09-23 20:13:00  | 1-09-25 15:39:49  |
 | `冬至` | 2018-12-22 06:22:38  | 1995-12-22 16:16:47  | 1-12-23 08:19:28  |
 
-## Almanac APP
+## Almanac Application
 
 ### 演示
 
@@ -186,6 +151,21 @@ public class AlmanacApp extends Almanac {
 - [time4j](http://time4j.net/)
 - [icu4j](https://mvnrepository.com/artifact/com.ibm.icu/icu4j)
 - [lunar-java](https://github.com/6tail/lunar-java)
+
+## 日历文献
+
+- [黄帝纪年](https://baike.baidu.com/item/%E9%BB%84%E5%B8%9D%E7%BA%AA%E5%B9%B4) 
+- [黄帝历](https://baike.baidu.com/item/%E9%BB%84%E5%B8%9D%E5%8E%86) 
+- [古六历](https://baike.baidu.com/item/%E5%8F%A4%E5%85%AD%E5%8E%86)
+- [寿星天文历](http://www.nongli.net/sxwnl/)
+- [日梭万年历](http://www.nongli114.com/rili/2017.html)
+- [紫金天文台](http://www.pmo.ac.cn/)
+- [中华农历网](http://www.nongli.net/)
+- [时间科普](http://www.time.ac.cn/serve/down.htm)
+- [中国科学院国家授时中心](http://www.ntsc.ac.cn/)
+- [中国科学院紫金天文台](http://almanac.pmo.ac.cn/)
+- [电子天文历表](http://almanac.pmo.ac.cn/dianzili.htm)
+- [天之文](http://www.astron.ac.cn/index.htm)
 
 ## 回馈开源
 
