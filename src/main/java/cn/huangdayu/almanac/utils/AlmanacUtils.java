@@ -22,6 +22,8 @@ import cn.huangdayu.almanac.aggregates.qishuo.QiShuo;
  * @update 2020-03-15
  */
 public class AlmanacUtils {
+    private AlmanacUtils() {
+    }
 
     /**
      * 日历
