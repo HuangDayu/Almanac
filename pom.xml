@@ -18,7 +18,17 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <skipTests>true</skipTests>
+        <fastjson.version>1.2.69_sec11</fastjson.version>
+        <lombok.version>RELEASE</lombok.version>
+        <junit.version>4.13.1</junit.version>
     </properties>
+
+    <developers>
+        <developer>
+            <name>huangdayu</name>
+            <url>https://www.huangdayu.cn</url>
+        </developer>
+    </developers>
 
     <distributionManagement>
         <repository>
@@ -32,19 +42,19 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.69_sec11</version>
+            <version>${fastjson.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.13.1</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>RELEASE</version>
+            <version>${lombok.version}</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
