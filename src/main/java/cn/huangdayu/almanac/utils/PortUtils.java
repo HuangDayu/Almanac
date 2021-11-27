@@ -12,7 +12,7 @@ import java.util.Properties;
  */
 public class PortUtils {
 
-    public static String getProtName(Properties properLat,Properties properLoog) {
+    public static String getPortName(Properties properLat, Properties properLoog) {
         // getProperties(setStr(setTwoPointDouble(x),setTwoPointDouble(y)))
         double x = SunMoonUtils.getDoubleLatitude();
         double y = SunMoonUtils.getDoubleLongitude();

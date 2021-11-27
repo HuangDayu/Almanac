@@ -93,14 +93,11 @@ public class AlmanacUtils {
 
 
             //------------------------------------计算儒略日,北京时12:00------------------------------------//
-            Julian julian = new Julian();
             int julianDayOfThisDay = julianOfMonth.getFirstJulianDayOfMonth() + i;
-            julian.setDays(julianDayOfThisDay + CommonUtils.JULIAN_FOR_2000);
+            Julian julian = new Julian(julianDayOfThisDay + CommonUtils.JULIAN_FOR_2000);
 
             //------------------------------------计算日出月落,经纬度,港口------------------------------------//
-            SunriseMoonset sunriseMoonset = new SunriseMoonset();
-            SunMoonUtils.init(timeZoneOfThisDay, sunriseMoonset);
-            sunriseMoonset.setPortName(PortUtils.getProtName(PropertiesUtils.getLATPORT(), PropertiesUtils.getLOOGPORT()));
+            SunriseMoonset sunriseMoonset = new SunriseMoonset(timeZoneOfThisDay);
 
             //------------------------------------计算回历------------------------------------//
             Islamic islamic = IslamicCalendarUtils.setIslamicCalendar(julianDayOfThisDay);
