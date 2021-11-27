@@ -74,66 +74,48 @@ public class AlmanacUtils {
 
         Julian julianOfMonth = new Julian(timeZoneDTO.getEraYear(), timeZoneDTO.getMonth());
 
-        // 所属公历年对应的农历干支纪年
-        int chineseEraYear = timeZoneDTO.getYear() - 1984 + 12000;
-
         // 提取各日信息
         AlmanacDTO[] almanacDTOS = new AlmanacDTO[julianOfMonth.getNumberDayOfMonth()];
 
         Astronomical astronomical = new Astronomical(julianOfMonth.getFirstJulianDayOfMonth());
 
         // dayIndex >= 0 ? 计算日历 : 计算月历
-        boolean day = dayIndex >= 0;
+        boolean forDay = dayIndex >= 0;
 
-        for (int i = day ? dayIndex : 0, j = 0; day ? i <= dayIndex : i < julianOfMonth.getNumberDayOfMonth(); i++) {
-
-            //------------------------------------叠加日期，重构对象------------------------------------//
+        for (int i = forDay ? dayIndex : 0; forDay ? i <= dayIndex : i < julianOfMonth.getNumberDayOfMonth(); i++) {
+            // 叠加日期
             TimeZoneDTO timeZoneForToday = timeZoneDTO.nextDay(i, julianOfMonth);
-
-
-            //------------------------------------计算儒略日,北京时12:00------------------------------------//
+            // 计算儒略日,北京时12:00
             int julianDayForToday = julianOfMonth.getFirstJulianDayOfMonth() + i;
-
-            //------------------------------------计算日出月落,经纬度,港口------------------------------------//
+            // 计算日出月落,经纬度,港口
             SunriseMoonset sunriseMoonset = new SunriseMoonset(timeZoneForToday);
-
-            //------------------------------------计算回历------------------------------------//
+            // 计算回历
             Islamic islamic = new Islamic(julianDayForToday);
-
-
-            //------------------------------------计算农历（农历纪年以【正月初一】定年首）------------------------------------//
+            // 计算农历（农历纪年以【正月初一】定年首）
             Lunar lunar = new Lunar(timeZoneForToday, julianDayForToday, qiShuo);
-
-
-            //------------------------------------计算节气------------------------------------//
+            // 计算节气
             SolarTerm solarTermDTO = new SolarTerm(julianDayForToday, qiShuo, astronomical);
-
-            //------------------------------------计算黄历 (天干地支，干支纪年以【立春】定年首)------------------------------------//
-
+            // 计算黄历 (天干地支，干支纪年以【立春】定年首)
             Era era = new Era(julianDayForToday, lunar, timeZoneForToday);
-
-
-            //------------------------------------计算星座和儒略日------------------------------------//
+            // 计算星座和儒略日
             Julian julian = new Julian(julianDayForToday, qiShuo);
-
-
-            //------------------------------------计算节假日------------------------------------//
+            // 计算节假日
             Holiday holiday = new Holiday(timeZoneForToday, lunar, solarTermDTO, era);
 
-            AlmanacDTO almanacDTO = new AlmanacDTO();
-            almanacDTO.setEraDTO(era);
-            almanacDTO.setHolidayDTO(holiday);
-            almanacDTO.setIslamicDTO(islamic);
-            almanacDTO.setJulianDTO(julian);
-            almanacDTO.setLunarDTO(lunar);
-            almanacDTO.setSolarTermDTO(solarTermDTO);
-            almanacDTO.setSunMoonDTO(sunriseMoonset);
-            almanacDTO.setTimeZoneDTO(timeZoneForToday);
-            almanacDTO.setMoonPhaseDTO(new MoonPhase(moonPhases));
-            almanacDTOS[i] = almanacDTO;
+            almanacDTOS[i] = AlmanacDTO.builder()
+                    .era(era)
+                    .holiday(holiday)
+                    .islamic(islamic)
+                    .julian(julian)
+                    .lunar(lunar)
+                    .solarTerm(solarTermDTO)
+                    .sunriseMoonset(sunriseMoonset)
+                    .timeZoneDTO(timeZoneForToday)
+                    .moonPhase(new MoonPhase(moonPhases))
+                    .build();
         }
 
-        //------------------------------------计算月相------------------------------------//
+        // 计算月相
         double moonLon = astronomical.getMoonSolarRetina();
         do {
             // FIXME 2021-01-17 计算月日视黄经较耗时
@@ -151,7 +133,7 @@ public class AlmanacUtils {
             if (almanacDTO == null) {
                 continue;
             }
-            MoonPhase moonPhase = almanacDTO.getMoonPhaseDTO();
+            MoonPhase moonPhase = almanacDTO.getMoonPhase();
             // 取得月相名称
             moonPhase.setName(AnnalsUtils.YUEXIANG[xn]);
             //月相时刻(儒略日)
@@ -159,7 +141,7 @@ public class AlmanacUtils {
             //月相时间串
             moonPhase.setDateTime(JulianCalendarUtils.julianDays2str(CommonUtils.JULIAN_FOR_2000 + moonLonValue));
             moonPhases.add(moonPhase);
-            almanacDTO.setMoonPhaseDTO(moonPhase);
+            almanacDTO.setMoonPhase(moonPhase);
         } while (julianDay + 5 < julianOfMonth.getFirstJulianDayOfMonth() + julianOfMonth.getNumberDayOfMonth());
 
         return almanacDTOS;
