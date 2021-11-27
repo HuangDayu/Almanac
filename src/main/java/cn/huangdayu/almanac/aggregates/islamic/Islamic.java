@@ -15,7 +15,7 @@ public class Islamic {
         int z, y, m, d;
         d = julianDays + 503105;
         // 10631为一周期(30年)
-        z = (int) Math.floor(d / 10631);
+        z = d / 10631;
         d -= z * 10631;
         // 加0.5的作用是保证闰年正确(一周中的闰年是第2,5,7,10,13,16,18,21,24,26,29年)
         y = (int) Math.floor((d + 0.5) / 354.366);
