@@ -122,45 +122,7 @@ public class AlmanacUtils {
 
 
             //------------------------------------计算节气------------------------------------//
-
-            // 计算当前月份的前一个节气，并从该节气开始结算接下来的24个节气
-            int qk = (int) Math.floor((julianDayForToday - qiShuo.zhongQi[0] - 7) / 15.2184);
-            if (qk < 23 && julianDayForToday >= qiShuo.zhongQi[qk + 1]) {
-                // 节气的取值范围是0-23
-                qk++;
-            }
-            double sunLonValue = astronomical.getSunSolarRetina(), sunLonTime;
-            SolarTerm solarTermDTO = new SolarTerm();
-            List<SolarTerm> solarTermAfterDTOS = new ArrayList<>();
-            int qj = 24, qn;
-            for (int qi = qk; qi < qj; ) {
-                // FIXME 2021-01-17 计算太阳视黄经较耗时
-                sunLonTime = AnnalsUtils.qi_accurate(sunLonValue);
-                julianDay = (int) Math.floor(sunLonTime + 0.5);
-                qn = (int) Math.floor(sunLonValue / CommonUtils.PI_2 * 24 + 24000006.01) % 24;
-                sunLonValue += CommonUtils.PI_2 / 24;
-                // BUG 2021-01-23 qiShuoDO.ZQ[qi]的儒略日与sunLonTime的值有出入,与julianDayOfThisDay的值一致
-                julianDay = CommonUtils.JULIAN_FOR_2000 + julianDay;
-                SolarTerm solarTerm = new SolarTerm();
-                solarTerm.setJulianTime(sunLonTime);
-                solarTerm.setDateTime(JulianCalendarUtils.julianDays2str(CommonUtils.JULIAN_FOR_2000 + sunLonTime));
-                solarTerm.setIndex(qn);
-                solarTerm.setName(AnnalsUtils.JIEQI[qn]);
-                solarTerm.setJulianDay(julianDay);
-                solarTerm.setDesc(ConstantsUtils.getDesc(AnnalsUtils.JIEQI[qn]));
-                int afterDay = julianDay - CommonUtils.JULIAN_FOR_2000 - julianDayForToday;
-                solarTerm.setAfterDay(afterDay);
-                if (afterDay == 0) {
-                    solarTermDTO = solarTerm;
-                }
-                solarTermAfterDTOS.add(solarTerm);
-                qi++;
-                if (qi == 24) {
-                    qi = 0;
-                    qj = qk;
-                }
-            }
-            solarTermDTO.setNext(solarTermAfterDTOS);
+            SolarTerm solarTermDTO = new SolarTerm(julianDayForToday, qiShuo, astronomical);
 
             //------------------------------------计算黄历 (天干地支，干支纪年以【立春】定年首)------------------------------------//
 
