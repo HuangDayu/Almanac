@@ -101,7 +101,7 @@ public class AnnalsUtils {
      * 计算农历节日
      *
      */
-    public static Holiday getHolidayInfo(Lunar lunar, SolarTerm solarTerm, Era era) {
+    public static void getHolidayInfo(Holiday holiday, Lunar lunar, SolarTerm solarTerm, Era era) {
         String happyDay = "", majorDay = "", otherDay = "";
         int flag = 0;
 
@@ -271,12 +271,10 @@ public class AnnalsUtils {
         if (xiaoshu >= 0 && xiaoshu < 12 && "未".equals(w2)) {
             majorDay += "出梅 ";
         }
-        Holiday holiday = new Holiday();
         holiday.setHappyDay(happyDay);
         holiday.setMajorDay(majorDay);
         holiday.setOtherDay(otherDay);
         holiday.setFlag(flag);
-        return holiday;
     }
 
     /***

@@ -133,10 +133,7 @@ public class AlmanacUtils {
 
 
             //------------------------------------计算节假日------------------------------------//
-            // 计算农历节日
-            Holiday holiday = AnnalsUtils.getHolidayInfo(lunar, solarTermDTO, era);
-            // 计算公历节日
-            FestivalHolidayUtils.getDayName(timeZoneForToday, holiday);
+            Holiday holiday = new Holiday(timeZoneForToday, lunar, solarTermDTO, era);
 
             AlmanacDTO almanacDTO = new AlmanacDTO();
             almanacDTO.setEraDTO(era);
