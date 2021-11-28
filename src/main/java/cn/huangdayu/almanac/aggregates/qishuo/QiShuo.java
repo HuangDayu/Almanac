@@ -265,23 +265,23 @@ public class QiShuo {
     /***
      * 各月名称
      */
-    private String[] monthNames = new String[14];
+    private final String[] monthNames = new String[14];
     /***
      * 各月数字号码
      */
-    private int[] monthIndex = new int[14];
+    private final int[] monthIndex = new int[14];
     /***
      * 中气表,其中.liqiu是节气立秋的儒略日,计算三伏时用到
      */
-    private int[] zhongQi = new int[27];
+    private final int[] zhongQi = new int[27];
     /***
      * 合朔表
      */
-    private int[] heShuo = new int[15];
+    private final int[] heShuo = new int[15];
     /***
      * 各月大小
      */
-    private int[] monthValue = new int[15];
+    private final int[] monthValue = new int[15];
 
     /***
      * 农历排月序计算,可定出农历,有效范围：两个冬至之间(冬至一 <= d < 冬至二)
