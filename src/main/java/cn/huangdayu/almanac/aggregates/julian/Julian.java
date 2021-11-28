@@ -20,8 +20,8 @@ public class Julian extends BaseAlmanac {
     public Julian(int julianDayForToday, QiShuo qiShuo) {
         this.days = julianDayForToday + CommonUtils.JULIAN_FOR_2000;
         // 星座
-        int mk = (int) Math.floor((julianDayForToday - qiShuo.zhongQi[0] - 15) / 30.43685);
-        if (mk < 11 && julianDayForToday >= qiShuo.zhongQi[2 * mk + 2]) {
+        int mk = (int) Math.floor((julianDayForToday - qiShuo.getZhongQi()[0] - 15) / 30.43685);
+        if (mk < 11 && julianDayForToday >= qiShuo.getZhongQi()[2 * mk + 2]) {
             // 星座所在月的序数,(如果j=13,ob.d0不会超过第14号中气)
             mk++;
         }

@@ -25,8 +25,8 @@ public class SolarTerm extends BaseAlmanac {
 
     public SolarTerm(int julianDayForToday, QiShuo qiShuo, Astronomical astronomical) {
         // 计算当前月份的前一个节气，并从该节气开始结算接下来的24个节气
-        int qk = (int) Math.floor((julianDayForToday - qiShuo.zhongQi[0] - 7) / 15.2184);
-        if (qk < 23 && julianDayForToday >= qiShuo.zhongQi[qk + 1]) {
+        int qk = (int) Math.floor((julianDayForToday - qiShuo.getZhongQi()[0] - 7) / 15.2184);
+        if (qk < 23 && julianDayForToday >= qiShuo.getZhongQi()[qk + 1]) {
             // 节气的取值范围是0-23
             qk++;
         }

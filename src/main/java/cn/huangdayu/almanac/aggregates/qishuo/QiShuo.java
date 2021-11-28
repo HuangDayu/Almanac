@@ -261,11 +261,11 @@ public class QiShuo {
     /***
      * 闰月位置
      */
-    public int leapMonthIndex = 0;
+    private int leapMonthIndex = 0;
     /***
      * 各月名称
      */
-    public String[] monthNames = new String[14];
+    private String[] monthNames = new String[14];
     /***
      * 各月数字号码
      */
@@ -273,15 +273,15 @@ public class QiShuo {
     /***
      * 中气表,其中.liqiu是节气立秋的儒略日,计算三伏时用到
      */
-    public int[] zhongQi = new int[27];
+    private int[] zhongQi = new int[27];
     /***
      * 合朔表
      */
-    public int[] heShuo = new int[15];
+    private int[] heShuo = new int[15];
     /***
      * 各月大小
      */
-    public int[] monthValue = new int[15];
+    private int[] monthValue = new int[15];
 
     /***
      * 农历排月序计算,可定出农历,有效范围：两个冬至之间(冬至一 <= d < 冬至二)
