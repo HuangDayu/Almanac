@@ -3,12 +3,24 @@ package cn.huangdayu.almanac.aggregates.qishuo;
 import cn.huangdayu.almanac.utils.AstronomyArithmeticUtils;
 import cn.huangdayu.almanac.utils.AnnalsUtils;
 import cn.huangdayu.almanac.utils.CommonUtils;
+import lombok.Getter;
 
 /***
  * 气朔计算和参数数据表类
  *
  */
+@Getter
 public class QiShuo {
+
+    private QiShuo() {
+    }
+
+    public QiShuo(int julianDayForToday) {
+        // 此处有线程安全问题, 暂时直接实例化，qiShuoDO.calcY是为减少计算次数而做的判断。（同一年数据一样）
+        if (julianDayForToday < zhongQi[0] || julianDayForToday >= zhongQi[24]) {
+            calculateMonth(julianDayForToday);
+        }
+    }
 
 
     // 朔修正表
@@ -276,7 +288,7 @@ public class QiShuo {
      *
      * @param julianDay
      */
-    public void calculateMonth(int julianDay) {
+    private void calculateMonth(int julianDay) {
         int[] zhongQiValue = zhongQi, heShuoValue = heShuo; // 中气表,日月合朔表(整日)
         int i;
         double j, k;

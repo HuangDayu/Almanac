@@ -67,9 +67,6 @@ public class AlmanacUtils {
      */
     private static AlmanacDTO[] handler(TimeZoneDTO timeZoneDTO, int dayIndex) {
 
-        // 某年气朔的数据信息
-        QiShuo qiShuo = new QiShuo();
-
         Julian julianOfMonth = new Julian(timeZoneDTO.getEraYear(), timeZoneDTO.getMonth());
 
         // 提取各日信息
@@ -85,6 +82,8 @@ public class AlmanacUtils {
             TimeZoneDTO timeZoneForToday = timeZoneDTO.nextDay(i, julianOfMonth);
             // 计算儒略日,北京时12:00
             int julianDayForToday = julianOfMonth.getFirstJulianDayOfMonth() + i;
+            // 计算气朔的数据信息
+            QiShuo qiShuo = new QiShuo(julianDayForToday);
             // 计算日出月落,经纬度,港口
             SunriseMoonset sunriseMoonset = new SunriseMoonset(timeZoneForToday);
             // 计算回历

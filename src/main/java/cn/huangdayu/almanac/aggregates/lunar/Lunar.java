@@ -19,10 +19,6 @@ public class Lunar extends BaseAlmanac {
 
     public Lunar(TimeZoneDTO timeZoneDTO, int julianDayForToday, QiShuo qiShuo) {
         //------------------------------------农历排月序计算------------------------------------//
-        // 此处有线程安全问题, 暂时直接实例化，qiShuoDO.calcY是为减少计算次数而做的判断。（同一年数据一样）
-        if (julianDayForToday < qiShuo.zhongQi[0] || julianDayForToday >= qiShuo.zhongQi[24]) {
-            qiShuo.calculateMonth(julianDayForToday);
-        }
 
         // 农历所在月的序数
         int mk = (julianDayForToday - qiShuo.heShuo[0]) / 30;
