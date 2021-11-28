@@ -19,7 +19,7 @@
 <dependency>
     <groupId>cn.huangdayu</groupId>
     <artifactId>almanac</artifactId>
-    <version>[1+,)</version>
+    <version>20211128</version>
 </dependency>
 ```
 
