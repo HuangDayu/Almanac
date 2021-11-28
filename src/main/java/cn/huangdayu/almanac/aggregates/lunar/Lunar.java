@@ -21,24 +21,24 @@ public class Lunar extends BaseAlmanac {
         //------------------------------------农历排月序计算------------------------------------//
 
         // 农历所在月的序数
-        int mk = (julianDayForToday - qiShuo.heShuo[0]) / 30;
-        if (mk < 13 && qiShuo.heShuo[mk + 1] <= julianDayForToday) {
+        int mk = (julianDayForToday - qiShuo.getHeShuo()[0]) / 30;
+        if (mk < 13 && qiShuo.getHeShuo()[mk + 1] <= julianDayForToday) {
             mk++;
         }
 
         // 距农历月首的编移量,0对应初一
-        this.setMonthOffset(julianDayForToday - qiShuo.heShuo[mk]);
+        this.setMonthOffset(julianDayForToday - qiShuo.getHeShuo()[mk]);
         // 农历日名称
-        this.setDay(AnnalsUtils.DAY_NAME[julianDayForToday - qiShuo.heShuo[mk]]);
-        this.setLeapYear(qiShuo.leapMonthIndex > 0);
+        this.setDay(AnnalsUtils.DAY_NAME[julianDayForToday - qiShuo.getHeShuo()[mk]]);
+        this.setLeapYear(qiShuo.getLeapMonthIndex() > 0);
         // 月名称
-        this.setMonth(qiShuo.monthNames[mk]);
+        this.setMonth(qiShuo.getMonthNames()[mk]);
         // 月大小
-        this.setDaysOfMonth(qiShuo.monthValue[mk]);
+        this.setDaysOfMonth(qiShuo.getMonthValue()[mk]);
         // 闰状况
-        this.setLeapMonth((qiShuo.leapMonthIndex != 0 && qiShuo.leapMonthIndex == mk));
+        this.setLeapMonth((qiShuo.getLeapMonthIndex() != 0 && qiShuo.getLeapMonthIndex() == mk));
         // 下个月名称,判断除夕时要用到
-        this.setNextMonth(mk < 13 ? qiShuo.monthNames[mk + 1] : "未知");
+        this.setNextMonth(mk < 13 ? qiShuo.getMonthNames()[mk + 1] : "未知");
         // 时辰
         int sum = (int) (timeZoneDTO.getHour() + 0.01 * timeZoneDTO.getMinute());
         int index = (sum + 1) / 2;
@@ -52,13 +52,13 @@ public class Lunar extends BaseAlmanac {
         }
         this.setTime(lunarTime);
         // 一般第3个月为春节
-        int value = qiShuo.heShuo[2];
+        int value = qiShuo.getHeShuo()[2];
         for (int l = 0; l < 14; l++) {
             // 找春节
-            if (!"正".equals(qiShuo.monthNames[l]) || qiShuo.leapMonthIndex == l && l != 0) {
+            if (!"正".equals(qiShuo.getMonthNames()[l]) || qiShuo.getLeapMonthIndex() == l && l != 0) {
                 continue;
             }
-            value = qiShuo.heShuo[l];
+            value = qiShuo.getHeShuo()[l];
             if (julianDayForToday < value) {
                 value -= 365;
                 // 无需再找下一个正月
@@ -83,18 +83,18 @@ public class Lunar extends BaseAlmanac {
         this.setYearName(AnnalsUtils.getYearName(timeZoneDTO.getEraYear()));
 
         // 干支纪年处理 以立春为界定年首
-        value = (int) (qiShuo.zhongQi[3] + (julianDayForToday < qiShuo.zhongQi[3] ? -365 : 0) + 365.25 * 16 - 35);
+        value = (int) (qiShuo.getZhongQi()[3] + (julianDayForToday < qiShuo.getZhongQi()[3] ? -365 : 0) + 365.25 * 16 - 35);
         // 以立春为界定纪年 农历纪年(10进制,1984年起算)
         this.setYearChronology((int) Math.floor(value / 365.2422 + 0.5));
 
         // 纪月处理,1998年12月7(大雪)开始连续进行节气计数,0为甲子
-        mk = (int) Math.floor((julianDayForToday - qiShuo.zhongQi[0]) / 30.43685);
-        if (mk < 12 && julianDayForToday >= qiShuo.zhongQi[2 * mk + 1]) {
+        mk = (int) Math.floor((julianDayForToday - qiShuo.getZhongQi()[0]) / 30.43685);
+        if (mk < 12 && julianDayForToday >= qiShuo.getZhongQi()[2 * mk + 1]) {
             // 相对大雪的月数计算,lunarMonthIndex的取值范围 0-12
             mk++;
         }
         // 相对于1998年12月7(大雪)的月数,900000为正数基数
-        value = mk + (int) Math.floor((qiShuo.zhongQi[12] + 390) / 365.2422) * 12 + 900000;
+        value = mk + (int) Math.floor((qiShuo.getZhongQi()[12] + 390) / 365.2422) * 12 + 900000;
         this.setMonthChronologySum(value);
         // 农历纪月
         this.setMonthChronology(value % 12);
