@@ -1,7 +1,6 @@
 package cn.huangdayu.almanac.test;
 
 import cn.huangdayu.almanac.dto.AlmanacDTO;
-import cn.huangdayu.almanac.utils.DateTimeUtils;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -53,7 +52,7 @@ public class Pack {
         handler("冬至", almanacDTO.getSolarTermDTO().getByName("冬至").getDateTime());
     }
 
-    private void handler(String key, String value) {
+    public void handler(String key, String value) {
         key = " | `".concat(key).concat("` | ");
         if (value == null) {
             value = String.valueOf(value);
