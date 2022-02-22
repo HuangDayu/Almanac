@@ -107,10 +107,11 @@ public class AlmanacDTO {
         map.put("地点", getTimeZoneDTO().getPosition());
         map.put("西历", getTimeZoneDTO().getInfo());
         map.put("年号", getLunarDTO().getYearName());
+        map.put("黄帝纪元", getLunarDTO().getKingChronologyName());
         map.put("农历", getLunarDTO().getInfo());
         map.put("黄历", getEraDTO().getInfo());
         map.put("节气", getSolarTermDTO().getInfo());
-        map.put("黄帝纪元", getLunarDTO().getKingChronologyName());
+        map.put("月相", getMoonPhaseDTO().getInfo());
         map.put("儒略历", getJulianDTO().getInfo());
         map.put("回历", getIslamicDTO().getInfo());
         map.put("节假日", getHolidayDTO().getInfo());
@@ -128,7 +129,6 @@ public class AlmanacDTO {
         map.put("月出", getSunMoonDTO().getMoonRiseTime());
         map.put("月中", getSunMoonDTO().getMoonMiddleTime());
         map.put("月落", getSunMoonDTO().getMoonSetTime());
-        map.put("月相", getMoonPhaseDTO().getInfo());
         map.put("月期", String.valueOf(getLunarDTO().getDaysOfMonth()));
         map.put("闰月", String.valueOf(getLunarDTO().getLeapMonth()));
         map.put("闰年", String.valueOf(getLunarDTO().getLeapYear()));
