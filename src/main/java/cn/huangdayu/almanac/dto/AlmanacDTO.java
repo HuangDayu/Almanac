@@ -36,19 +36,20 @@ public class AlmanacDTO {
 
     public Map<String, String> toMap() {
         Map<String, String> map = new LinkedHashMap<>();
-        map.put("地点", getTimeZoneDTO().getPosition());
-        map.put("西历", getTimeZoneDTO().getInfo());
+        map.put("地点", timeZoneDTO.getPosition());
+        map.put("西历", timeZoneDTO.getInfo());
         map.put("年号", lunar.getYearName());
+        map.put("黄帝纪元", lunar.getKingChronologyName());
         map.put("农历", lunar.getInfo());
-        map.put("干支", era.getInfo());
-        map.put("节气", solarTerm.getInfo());
-        map.put("黄帝纪年", lunar.getKingChronologyName());
+        map.put("黄历", era.getInfo());
+        map.put("节气", solarTerm.getDetails());
+        map.put("月相", moonPhase.getDetails());
         map.put("儒略历", julian.getInfo());
         map.put("回历", islamic.getInfo());
         map.put("节假日", holiday.getInfo());
         map.put("经度", sunriseMoonset.getLongitude());
         map.put("纬度", sunriseMoonset.getLatitude());
-        map.put("时区", getTimeZoneDTO().getTimeZone());
+        map.put("时区", timeZoneDTO.getTimeZone());
         map.put("港口", sunriseMoonset.getPortName());
         map.put("昼长", sunriseMoonset.getDiurnalTime());
         map.put("夜长", sunriseMoonset.getNightTime());
@@ -60,7 +61,6 @@ public class AlmanacDTO {
         map.put("月出", sunriseMoonset.getMoonRiseTime());
         map.put("月中", sunriseMoonset.getMoonMiddleTime());
         map.put("月落", sunriseMoonset.getMoonSetTime());
-        map.put("月相", moonPhase.getInfo());
         map.put("月期", String.valueOf(lunar.getDaysOfMonth()));
         map.put("闰月", String.valueOf(lunar.getLeapMonth()));
         map.put("闰年", String.valueOf(lunar.getLeapYear()));

@@ -18,10 +18,10 @@ public class Pack {
         handler("地点", almanacDTO.getTimeZoneDTO().getPosition());
         handler("年号", almanacDTO.getLunar().getYearName());
         handler("农历", almanacDTO.getLunar().getInfo());
-        handler("干支", almanacDTO.getEra().getInfo());
+        handler("黄历", almanacDTO.getEra().getInfo());
         handler("回历", almanacDTO.getIslamic().getInfo());
         handler("儒略日", String.valueOf(almanacDTO.getJulian().getDays()));
-        handler("黄帝纪年", almanacDTO.getLunar().getKingChronologyName());
+        handler("黄帝纪元", almanacDTO.getLunar().getKingChronologyName());
         handler("生肖", almanacDTO.getLunar().getZodiac());
         handler("节日", almanacDTO.getHoliday().getMajorDay());
         handler("假日", almanacDTO.getHoliday().getHappyDay());
@@ -52,7 +52,7 @@ public class Pack {
         handler("冬至", almanacDTO.getSolarTerm().getByName("冬至").getDateTime());
     }
 
-    private void handler(String key, String value) {
+    public void handler(String key, String value) {
         key = " | `".concat(key).concat("` | ");
         if (value == null) {
             value = String.valueOf(value);
