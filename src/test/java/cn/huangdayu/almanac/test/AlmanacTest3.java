@@ -38,7 +38,7 @@
 //        map.put("八字", " | " + almanacDTO1.getBaZi() + " | " + almanacDTO2.getBaZi() + " | " + almanacDTO3.getBaZi());
 //        map.put("回历", " | " + almanacDTO1.getIslamic() + " | " + almanacDTO2.getIslamic() + " | " + almanacDTO3.getIslamic());
 //        map.put("儒略日", " | " + almanacDTO1.getJulianDay() + " | " + almanacDTO2.getJulianDay() + " | " + almanacDTO3.getJulianDay());
-//        map.put("黄帝纪年", " | " + almanacDTO1.getChronology() + " | " + almanacDTO2.getChronology() + " | " + almanacDTO3.getChronology());
+//        map.put("黄帝纪元", " | " + almanacDTO1.getChronology() + " | " + almanacDTO2.getChronology() + " | " + almanacDTO3.getChronology());
 //        map.put("生肖", " | " + almanacDTO1.getZodiac() + " | " + almanacDTO2.getZodiac() + " | " + almanacDTO3.getZodiac());
 //        map.put("节假日", " | " + almanacDTO1.getHolidayVacations() + " | " + almanacDTO2.getHolidayVacations() + " | " + almanacDTO3.getHolidayVacations());
 //        map.put("经度", " | " + almanacDTO1.getLongitude() + " | " + almanacDTO2.getLongitude() + " | " + almanacDTO3.getLongitude());
