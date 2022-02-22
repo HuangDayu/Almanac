@@ -94,6 +94,10 @@ public class SolarTerm extends BaseAlmanac {
         return next.get(0);
     }
 
+    public String getDetails() {
+        return name != null ? getInfo() + (afterDay != 0 ? " 至今" + afterDay + "天" : " 今天") : getNextOne().getDetails();
+    }
+
     @Override
     public String getInfo() {
         return name != null ? name + " " + dateTime : getNextOne().getInfo();
