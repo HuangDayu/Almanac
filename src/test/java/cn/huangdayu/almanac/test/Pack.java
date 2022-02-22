@@ -18,10 +18,10 @@ public class Pack {
         handler("地点", almanacDTO.getTimeZoneDTO().getPosition());
         handler("年号", almanacDTO.getLunarDTO().getYearName());
         handler("农历", almanacDTO.getLunarDTO().getInfo());
-        handler("干支", almanacDTO.getEraDTO().getInfo());
+        handler("黄历", almanacDTO.getEraDTO().getInfo());
         handler("回历", almanacDTO.getIslamicDTO().getInfo());
         handler("儒略日", String.valueOf(almanacDTO.getJulianDTO().getDays()));
-        handler("黄帝纪年", almanacDTO.getLunarDTO().getKingChronologyName());
+        handler("黄帝纪元", almanacDTO.getLunarDTO().getKingChronologyName());
         handler("生肖", almanacDTO.getLunarDTO().getZodiac());
         handler("节日", almanacDTO.getHolidayDTO().getMajorDay());
         handler("假日", almanacDTO.getHolidayDTO().getHappyDay());

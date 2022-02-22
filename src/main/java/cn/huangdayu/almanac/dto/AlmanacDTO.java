@@ -108,9 +108,9 @@ public class AlmanacDTO {
         map.put("西历", getTimeZoneDTO().getInfo());
         map.put("年号", getLunarDTO().getYearName());
         map.put("农历", getLunarDTO().getInfo());
-        map.put("干支", getEraDTO().getInfo());
+        map.put("黄历", getEraDTO().getInfo());
         map.put("节气", getSolarTermDTO().getInfo());
-        map.put("黄帝纪年", getLunarDTO().getKingChronologyName());
+        map.put("黄帝纪元", getLunarDTO().getKingChronologyName());
         map.put("儒略历", getJulianDTO().getInfo());
         map.put("回历", getIslamicDTO().getInfo());
         map.put("节假日", getHolidayDTO().getInfo());
