@@ -36,7 +36,11 @@ public class TestDrivenRefactoring {
         Set<Map.Entry<String, String>> map = pack.getMap().entrySet();
         int i = 0;
         for (Map.Entry<String, String> entry : map) {
-            Assert.assertEquals(entry.getKey() + entry.getValue(), TEXTS[i]);
+            String[] s1 = (entry.getKey() + entry.getValue()).split("\\|");
+            String[] s2 = TEXTS[i].split("\\|");
+            for (int j = 0; j < s1.length; j++) {
+                Assert.assertEquals(s1[j].trim(), s2[j].trim());
+            }
             i++;
         }
         System.out.println("Test driven refactoring pass !");

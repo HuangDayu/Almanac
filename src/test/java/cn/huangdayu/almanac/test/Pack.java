@@ -1,7 +1,6 @@
 package cn.huangdayu.almanac.test;
 
 import cn.huangdayu.almanac.dto.AlmanacDTO;
-import cn.huangdayu.almanac.utils.DateTimeUtils;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -23,9 +22,9 @@ public class Pack {
         handler("儒略日", String.valueOf(almanacDTO.getJulian().getDays()));
         handler("黄帝纪元", almanacDTO.getLunar().getKingChronologyName());
         handler("生肖", almanacDTO.getLunar().getZodiac());
-        handler("节日", almanacDTO.getHoliday().getMajorDay());
-        handler("假日", almanacDTO.getHoliday().getHappyDay());
-        handler("其他节日", almanacDTO.getHoliday().getOtherDay());
+        handler("节日", almanacDTO.getHoliday().getLunarHolidays());
+        handler("假日", almanacDTO.getHoliday().getCalendarHolidays());
+        handler("其他节日", almanacDTO.getHoliday().getSolarTermHolidays());
         handler("经度", almanacDTO.getSunriseMoonset().getLongitude());
         handler("纬度", almanacDTO.getSunriseMoonset().getLatitude());
         handler("时区", almanacDTO.getTimeZoneDTO().getTimeZone());
