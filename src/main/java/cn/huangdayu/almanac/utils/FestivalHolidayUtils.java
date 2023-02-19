@@ -1,6 +1,5 @@
 package cn.huangdayu.almanac.utils;
 
-import cn.huangdayu.almanac.aggregates.holiday.Holiday;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
 
 
@@ -54,13 +53,10 @@ public class FestivalHolidayUtils {
      * 取某日节日
      *
      * @param timeZoneDTO
-     * @param holiday
      */
-    public static void getDayName(TimeZoneDTO timeZoneDTO, Holiday holiday) {
-        String happyDay = holiday.getHappyDay();
-        String majorDay = holiday.getMajorDay();
-        String otherDay = holiday.getOtherDay();
-        int flag = holiday.getFlag();
+    public static String getCalendarHolidays(TimeZoneDTO timeZoneDTO) {
+        String calendarHolidays = "";
+        int flag = 0;
 
         /****************
          * 节日名称生成 传入日物件u 返回某日节日信息
@@ -74,7 +70,7 @@ public class FestivalHolidayUtils {
         String s, s2, type;
 
         if (timeZoneDTO.getWeek() == 0 || timeZoneDTO.getWeek() == 6) {
-            holiday.setFlag(1); // 星期日或星期六放假
+            flag = 1; // 星期日或星期六放假
         }
 
         // 按公历日期查找
@@ -98,14 +94,14 @@ public class FestivalHolidayUtils {
                 s = CommonUtils.subString(s, 1);
             }
             if ("#".equals(type)) {
-                happyDay += s + " ";
-                holiday.setFlag(1); // 放假的节日
+                calendarHolidays += s + " ";
+                flag = 1; // 放假的节日
             }
             if ("I".equals(type)) {
-                majorDay += s + " "; // 主要
+                calendarHolidays += s + " "; // 主要
             }
             if (".".equals(type)) {
-                otherDay += s + " "; // 其它
+                calendarHolidays += s + " "; // 其它
             }
         }
 
@@ -131,21 +127,17 @@ public class FestivalHolidayUtils {
             type = CommonUtils.subString(s, 4, 5);
             s = CommonUtils.subString(s, 5);
             if ("#".equals(type)) {
-                happyDay += s + " ";
-                holiday.setFlag(1);
+                calendarHolidays += s + " ";
+                flag = 1;
             }
             if ("I".equals(type)) {
-                majorDay += s + " ";
+                calendarHolidays += s + " ";
             }
             if (".".equals(type)) {
-                otherDay += s + " ";
+                calendarHolidays += s + " ";
             }
         }
-
-        holiday.setHappyDay(happyDay);
-        holiday.setMajorDay(majorDay);
-        holiday.setOtherDay(otherDay);
-        holiday.setFlag(flag);
+        return calendarHolidays;
     }
 
 }

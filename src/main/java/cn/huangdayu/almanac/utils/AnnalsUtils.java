@@ -5,6 +5,10 @@ import cn.huangdayu.almanac.aggregates.holiday.Holiday;
 import cn.huangdayu.almanac.aggregates.lunar.Lunar;
 import cn.huangdayu.almanac.aggregates.solar_term.SolarTerm;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
 /**
  * 纪年表工具类
  *
@@ -97,142 +101,80 @@ public class AnnalsUtils {
         return s;
     }
 
+    static Map<String, String> holidayMap = new HashMap<>();
+
+    static Map<String, Function<Lunar, Boolean>> functionMap = new HashMap<>();
+
+    static void put(String date, String name) {
+        holidayMap.putIfAbsent(date, name);
+    }
+
+    static void put(String date, String name, Function<Lunar, Boolean> function) {
+        holidayMap.putIfAbsent(date, name);
+        functionMap.putIfAbsent(date, function);
+    }
+
+    static {
+        put("正月初一", "春节", lunar -> true);
+        put("正月初二", "大年初二", lunar -> true);
+        put("五月初五", "端午节", lunar -> true);
+        put("八月十五", "中秋节", lunar -> true);
+        put("腊月初八", "腊八节");
+        put("正月十五", "元宵节 上元节 壮族歌墟节 苗族踩山节 达斡尔族卡钦");
+        put("正月十六", "侗族芦笙节(至正月二十)");
+        put("正月廿五", "填仓节");
+        put("正月廿九", "送穷日");
+        put("二月初一", "瑶族忌鸟节");
+        put("二月初二", "春龙节(龙抬头) 畲族会亲节");
+        put("二月初八", "傈傈族刀杆节");
+        put("三月初三", "北帝诞 苗族黎族歌墟节");
+        put("三月十五", "白族三月街(至三月二十)");
+        put("三月廿三", "天后诞 妈祖诞");
+        put("四月初八", "牛王诞");
+        put("四月十八", "锡伯族西迁节");
+        put("五月十三", "关帝诞 阿昌族泼水节");
+        put("五月廿二", "鄂温克族米阔鲁节");
+        put("五月廿九", "瑶族达努节");
+        put("六月初六", "姑姑节 天贶节 壮族祭田节 瑶族尝新节");
+        put("六月廿四", "火把节、星回节(彝、白、佤、阿昌、纳西、基诺族 )");
+        put("七月初七", "七夕(中国情人节,乞巧节,女儿节 )");
+        put("七月十三", "侗族吃新节");
+        put("七月十五", "中元节 鬼节");
+        put("九月初九", "重阳节");
+        put("十月初一", "祭祖节(十月朝)");
+        put("十月十五", "下元节");
+        put("十月十六", "瑶族盘王节");
+        put("十二初八", "腊八节");
+        put("十二廿三", "小年");
+        put("十二廿九", "除夕", lunar -> "正".equals(lunar.getNextMonth()) && lunar.getDaysOfMonth() == 30);
+        put("十二三十", "除夕", lunar -> "正".equals(lunar.getNextMonth()) && lunar.getDaysOfMonth() == 29);
+    }
+
+
     /***
      * 计算农历节日
      *
      */
-    public static void getHolidayInfo(Holiday holiday, Lunar lunar, SolarTerm solarTerm, Era era) {
-        String happyDay = "", majorDay = "", otherDay = "";
-        int flag = 0;
-
+    public static String getCalendarHolidays(Lunar lunar, SolarTerm solarTerm) {
+        String calendarHolidays = "";
         // 按农历日期查找重量点节假日
-        String d = lunar.getMonth() + (lunar.getMonth().length() < 2 ? "月" : "") + lunar.getDay();
-        if (!lunar.getLeapMonth()) {
-            if ("正月初一".equals(d)) {
-                happyDay += "春节 ";
-                flag = 1;
-            }
-            if ("正月初二".equals(d)) {
-                majorDay += "大年初二 ";
-                flag = 1;
-            }
-            if ("五月初五".equals(d)) {
-                happyDay += "端午节 ";
-                flag = 1;
-            }
-            if ("八月十五".equals(d)) {
-                happyDay += "中秋节 ";
-                flag = 1;
-            }
-            if ("腊月初八".equals(d)) {
-                majorDay += "腊八节 ";
-            }
-            if ("正月十五".equals(d)) {
-                happyDay += "元宵节 ";
-                majorDay += "上元节 ";
-                otherDay += "壮族歌墟节 苗族踩山节 达斡尔族卡钦 ";
-            }
-            if ("正月十六".equals(d)) {
-                otherDay += "侗族芦笙节(至正月二十) ";
-            }
-            if ("正月廿五".equals(d)) {
-                otherDay += "填仓节 ";
-            }
-            if ("正月廿九".equals(d)) {
-                otherDay += "送穷日 ";
-            }
-            if ("二月初一".equals(d)) {
-                otherDay += "瑶族忌鸟节 ";
-            }
-            if ("二月初二".equals(d)) {
-                majorDay += "春龙节(龙抬头) ";
-                otherDay += "畲族会亲节 ";
-            }
-            if ("二月初八".equals(d)) {
-                otherDay += "傈傈族刀杆节 ";
-            }
-            if ("三月初三".equals(d)) {
-                majorDay += "北帝诞 ";
-                otherDay += "苗族黎族歌墟节 ";
-            }
-            if ("三月十五".equals(d)) {
-                otherDay += "白族三月街(至三月二十) ";
-            }
-            if ("三月廿三".equals(d)) {
-                majorDay += "天后诞 妈祖诞 ";
-            }
-            if ("四月初八".equals(d)) {
-                majorDay += "牛王诞 ";
-            }
-            if ("四月十八".equals(d)) {
-                otherDay += "锡伯族西迁节 ";
-            }
-            if ("五月十三".equals(d)) {
-                majorDay += "关帝诞 ";
-                otherDay += "阿昌族泼水节 ";
-            }
-            if ("五月廿二".equals(d)) {
-                otherDay += "鄂温克族米阔鲁节 ";
-            }
-            if ("五月廿九".equals(d)) {
-                otherDay += "瑶族达努节 ";
-            }
-            if ("六月初六".equals(d)) {
-                majorDay += "姑姑节 天贶节 ";
-                otherDay += "壮族祭田节 瑶族尝新节 ";
-            }
-            if ("六月廿四".equals(d)) {
-                otherDay += "火把节、星回节(彝、白、佤、阿昌、纳西、基诺族 ) ";
-            }
-            if ("七月初七".equals(d)) {
-                majorDay += "七夕(中国情人节,乞巧节,女儿节 ) ";
-            }
-            if ("七月十三".equals(d)) {
-                otherDay += "侗族吃新节 ";
-            }
-            if ("七月十五".equals(d)) {
-                majorDay += "中元节 鬼节";
-            }
-            if ("九月初九".equals(d)) {
-                majorDay += "重阳节 ";
-            }
-            if ("十月初一".equals(d)) {
-                majorDay += "祭祖节(十月朝) ";
-            }
-            if ("十月十五".equals(d)) {
-                majorDay += "下元节 ";
-            }
-            if ("十月十六".equals(d)) {
-                otherDay += "瑶族盘王节 ";
-            }
-            if ("十二初八".equals(d)) {
-                majorDay += "腊八节 ";
-            }
-        }
-        if ("正".equals(lunar.getNextMonth())) { // 最后一月
-            if ("十二三十".equals(d) && lunar.getDaysOfMonth() == 30) {
-                happyDay += "除夕 ";
-                flag = 1;
-            }
-            if ("十二廿九".equals(d) && lunar.getDaysOfMonth() == 29) {
-                happyDay += "除夕 ";
-                flag = 1;
-            }
-            if ("十二廿三".equals(d)) {
-                majorDay += "小年 ";
+        String date = lunar.getMonth() + (lunar.getMonth().length() < 2 ? "月" : "") + lunar.getDay();
+        if (Boolean.FALSE.equals(lunar.getLeapMonth())) {
+            Function<Lunar, Boolean> function = functionMap.get(date);
+            if (function == null || Boolean.TRUE.equals(function.apply(lunar))) {
+                calendarHolidays = holidayMap.getOrDefault(date, "");
             }
         }
         if (solarTerm.getName() != null && !"".equals(solarTerm.getName())) {
-            if ("清明".equals(solarTerm.getName())) {
-                happyDay += solarTerm.getName() + " ";
-                flag = 1;
-            } else {
-                majorDay += solarTerm.getName() + " ";
-            }
+            calendarHolidays += " " + solarTerm.getName() + " ";
         }
+        return calendarHolidays;
+    }
 
+    public static String getSolarTermHolidays(SolarTerm solarTerm, Era era) {
+        String majorDay = "";
         // 农历杂节，一般都是通过节气计算，节气过后的称呼，所以需要将过去多少天数的值取反
-        String w, w2;
+        String w1, w2;
         // 距冬至的天数
         int dongzhi = -solarTerm.getNext().get(0).getAfterDay();
         // 距芒种的天数
@@ -246,35 +188,32 @@ public class AnnalsUtils {
 
 
         if (dongzhi >= 0 && dongzhi < 81) { // 数九
-            w = NUMBER_CN[(int) (Math.floor(dongzhi / 9) + 1)];
+            w1 = NUMBER_CN[(int) (Math.floor(dongzhi / 9) + 1)];
             if (dongzhi % 9 == 0) {
-                majorDay += "『" + w + "九』 ";
+                majorDay += "『" + w1 + "九』 ";
             } else {
-                otherDay += w + "九第" + (dongzhi % 9 + 1) + "天 ";
+                majorDay += w1 + "九第" + (dongzhi % 9 + 1) + "天 ";
             }
         }
 
-        w = CommonUtils.subString(era.getDay(), 0, 1);
+        w1 = CommonUtils.subString(era.getDay(), 0, 1);
         w2 = CommonUtils.subString(era.getDay(), 1, 2);
-        if (xiazhi >= 20 && xiazhi < 30 && "庚".equals(w)) {
+        if (xiazhi >= 20 && xiazhi < 30 && "庚".equals(w1)) {
             majorDay += "初伏 ";
         }
-        if (xiazhi >= 30 && xiazhi < 40 && "庚".equals(w)) {
+        if (xiazhi >= 30 && xiazhi < 40 && "庚".equals(w1)) {
             majorDay += "中伏 ";
         }
-        if (liqiu >= 0 && liqiu < 10 && "庚".equals(w)) {
+        if (liqiu >= 0 && liqiu < 10 && "庚".equals(w1)) {
             majorDay += "末伏 ";
         }
-        if (mangzhong >= 0 && mangzhong < 10 && "丙".equals(w)) {
+        if (mangzhong >= 0 && mangzhong < 10 && "丙".equals(w1)) {
             majorDay += "入梅 ";
         }
         if (xiaoshu >= 0 && xiaoshu < 12 && "未".equals(w2)) {
             majorDay += "出梅 ";
         }
-        holiday.setHappyDay(happyDay);
-        holiday.setMajorDay(majorDay);
-        holiday.setOtherDay(otherDay);
-        holiday.setFlag(flag);
+        return majorDay;
     }
 
     /***
