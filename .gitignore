@@ -70,3 +70,5 @@ hs_err_pid*
 # system ignore
 .DS_Store
 Thumbs.db
+
+.jsweet
