@@ -351,7 +351,7 @@ public class DateTimeUtils {
      * @param mm
      * @param ss
      * @return
-     */
+
     public static synchronized long UTC(int y, int m, int d, int hh, int mm, int ss) {
         DateTimeUtils.makeUTCCalendar();
         synchronized (utcCal) {
@@ -359,14 +359,14 @@ public class DateTimeUtils {
             utcCal.set(y, m, d, hh, mm, ss);
             return utcCal.getTimeInMillis();
         }
-    }
+    }*/
 
     /***
      * 取 Date 对象中用全球标准时间 (UTC) 表示的日期
      *
      * @param date
      * @return
-     */
+
     public static synchronized int getUTCDay(Date date) {
         DateTimeUtils.makeUTCCalendar();
         synchronized (utcCal) {
@@ -374,5 +374,5 @@ public class DateTimeUtils {
             utcCal.setTimeInMillis(date.getTime());
             return utcCal.get(Calendar.DAY_OF_MONTH);
         }
-    }
+    }*/
 }

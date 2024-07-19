@@ -1,7 +1,6 @@
 package cn.huangdayu.almanac.utils;
 
 import cn.huangdayu.almanac.aggregates.era.Era;
-import cn.huangdayu.almanac.aggregates.holiday.Holiday;
 import cn.huangdayu.almanac.aggregates.lunar.Lunar;
 import cn.huangdayu.almanac.aggregates.solar_term.SolarTerm;
 
@@ -109,9 +108,9 @@ public class AnnalsUtils {
         holidayMap.putIfAbsent(date, name);
     }
 
-    static void put(String date, String name, Function<Lunar, Boolean> function) {
+    static void put(String date, String name, Function<Lunar, Boolean> fun) {
         holidayMap.putIfAbsent(date, name);
-        functionMap.putIfAbsent(date, function);
+        functionMap.putIfAbsent(date, fun);
     }
 
     static {
@@ -160,8 +159,8 @@ public class AnnalsUtils {
         // 按农历日期查找重量点节假日
         String date = lunar.getMonth() + (lunar.getMonth().length() < 2 ? "月" : "") + lunar.getDay();
         if (Boolean.FALSE.equals(lunar.getLeapMonth())) {
-            Function<Lunar, Boolean> function = functionMap.get(date);
-            if (function == null || Boolean.TRUE.equals(function.apply(lunar))) {
+            Function<Lunar, Boolean> fun = functionMap.get(date);
+            if (fun == null || Boolean.TRUE.equals(fun.apply(lunar))) {
                 calendarHolidays = holidayMap.getOrDefault(date, "");
             }
         }

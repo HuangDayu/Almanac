@@ -10,7 +10,7 @@ public class ConstantsUtils {
     public static final String[] GENG = {"[三更]", "[四更]", "[五更]", "", "", "", "", "", "", "", "[一更]", "[二更]"};
     public static final String[] KE = {"一刻", "一刻", "二刻", "三刻", "四刻"};
     public static final String[] TIMEZONE = {"一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二"};
-    public static final String[] WEEK_NAME = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
+    public static final String[] WEEK_NAME = {"","星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
 
     public static final String FORMAT_ALL = "G yyyy年MM月dd日 HH时mm分ss秒SSS毫秒 Eak时 Z时区 yyyy年第w周第D天 M月第W周第d天";
     public static final String FORMAT_DATE_TIME_EN = "yyyy-MM-dd HH:mm:ss.SS";
@@ -50,8 +50,8 @@ public class ConstantsUtils {
         DESC_MAP.put("农历", "农历又称阴历，以正月初一作为新年的第一天。");
         DESC_MAP.put("年号", "即中华历史朝代年号信息");
         DESC_MAP.put("回历", "又称伊斯兰历");
-        DESC_MAP.put("黄帝纪元", "又称皇帝纪年，黃帝紀元，軒轅紀年，道历，一種紀年法，以黃帝即位作為紀年之始。原本是道教曆法所用紀元——道曆，零星見于古籍，在清朝末期曾被提倡，但未有廣泛使用。");
-        DESC_MAP.put("黄历", "又称天干地支，以立春作为新年的第一天");
+        DESC_MAP.put("黄帝纪年", "又称皇帝纪年，黃帝紀元，軒轅紀年，一種紀年法，以黃帝作為紀年之始。原本是道教曆法所用紀元——道曆，零星見于古籍，在清朝末期曾被提倡，但未有廣泛使用。");
+        DESC_MAP.put("干支", "干支历又称黄历，以立春作为新年的第一天");
 
     }
 

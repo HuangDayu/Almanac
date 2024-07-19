@@ -5,7 +5,6 @@ import cn.huangdayu.almanac.exception.AlmanacException;
 import cn.huangdayu.almanac.utils.AreaUtils;
 import cn.huangdayu.almanac.utils.ConstantsUtils;
 import cn.huangdayu.almanac.utils.DateTimeUtils;
-import cn.huangdayu.almanac.utils.JulianCalendarUtils;
 import lombok.Data;
 
 import java.time.Instant;
@@ -136,7 +135,7 @@ public class TimeZoneDTO {
         this.year = gregorianCalendar.get(Calendar.YEAR);
         this.month = gregorianCalendar.get(Calendar.MONTH) + 1;
         this.day = gregorianCalendar.get(Calendar.DAY_OF_MONTH);
-        this.week = gregorianCalendar.get(Calendar.DAY_OF_WEEK) - (gregorianCalendar.getFirstDayOfWeek() == Calendar.SUNDAY ? 1 : 0);
+        this.week = gregorianCalendar.get(Calendar.DAY_OF_WEEK);
         this.hour = gregorianCalendar.get(Calendar.HOUR_OF_DAY);
         this.minute = gregorianCalendar.get(Calendar.MINUTE);
         this.second = gregorianCalendar.get(Calendar.SECOND);
