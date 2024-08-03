@@ -2,6 +2,8 @@ package cn.huangdayu.almanac.utils;
 
 import cn.huangdayu.almanac.exception.AlmanacException;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -24,8 +26,12 @@ public class PropertiesUtils {
         Properties properties = new Properties();
         try {
             properties.load(PropertiesUtils.class.getClassLoader().getResourceAsStream(name));
-        } catch (IOException e) {
-            throw new AlmanacException("获取配置文件异常", e);
+        } catch (Exception e) {
+            try {
+                properties.load(new BufferedReader(new FileReader(name)));
+            } catch (Exception ex) {
+                throw new AlmanacException("获取配置文件异常", ex);
+            }
         }
         return properties;
     }

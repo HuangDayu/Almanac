@@ -142,17 +142,19 @@ public class TimeZoneDTO {
         this.era = gregorianCalendar.get(Calendar.ERA);
         this.index = DateTimeUtils.getTimZoneInt(gregorianCalendar);
         String format = DateTimeUtils.formatDateByFormat(gregorianCalendar, "Z");// +0800
-        String value = format.substring(1, 3);
-        int i = 1, j = Integer.parseInt(value);
-        if (j > 0) {
-            i = Integer.parseInt(value);
-        } else {
-            i = Integer.parseInt(value.substring(1));
-        }
-        if (format.contains("-")) {
-            this.timeZone = format + " 西" + ConstantsUtils.TIMEZONE[i - 1] + "区";
-        } else {
-            this.timeZone = format + " 东" + ConstantsUtils.TIMEZONE[i - 1] + "区";
+        if (format != null && format.length() > 0) {
+            String value = format.substring(1, 3);
+            int i = 1, j = Integer.parseInt(value);
+            if (j > 0) {
+                i = Integer.parseInt(value);
+            } else {
+                i = Integer.parseInt(value.substring(1));
+            }
+            if (format.contains("-")) {
+                this.timeZone = format + " 西" + ConstantsUtils.TIMEZONE[i - 1] + "区";
+            } else {
+                this.timeZone = format + " 东" + ConstantsUtils.TIMEZONE[i - 1] + "区";
+            }
         }
     }
 

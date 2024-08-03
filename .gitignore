@@ -72,3 +72,8 @@ hs_err_pid*
 Thumbs.db
 
 .jsweet
+.gradle
+gradle
+gradlew
+gradlew.bat
+node_modules

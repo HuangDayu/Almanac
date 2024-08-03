@@ -1,0 +1,9 @@
+-cp
+E:\\Code\\me\\Almanac\\build\\classes\\java\\graal;E:\\Code\\me\\Almanac\\build\\classes\\kotlin\\graal;E:\\Code\\me\\Almanac\\build\\libs\\almanac-20211128.jar;C:\\Users\\huang\\.m2\\repository\\org\\jetbrains\\kotlin\\kotlin-stdlib-jdk8\\2.0.0\\kotlin-stdlib-jdk8-2.0.0.jar;C:\\Users\\huang\\.m2\\repository\\com\\alibaba\\fastjson\\1.2.69_sec11\\fastjson-1.2.69_sec11.jar;C:\\Users\\huang\\.m2\\repository\\org\\jetbrains\\kotlin\\kotlin-stdlib-jdk7\\2.0.0\\kotlin-stdlib-jdk7-2.0.0.jar;C:\\Users\\huang\\.m2\\repository\\org\\jetbrains\\kotlin\\kotlin-stdlib\\2.0.0\\kotlin-stdlib-2.0.0.jar;C:\\Users\\huang\\.m2\\repository\\org\\jetbrains\\annotations\\13.0\\annotations-13.0.jar
+--no-fallback
+-o
+E:\\Code\\me\\Almanac\\build\\native\\nativeCompile\\almanac
+-H:ConfigurationFileDirectories=E:\\Code\\me\\Almanac\\build\\native\\generated\\generateResourcesConfigFile,C:\\Users\\huang\\.gradle\\native-build-tools\\repositories\\58a8bf3c9b9736dd29eae4552e7ed28900cd18b0\\exploded\\org.jetbrains.kotlin\\kotlin-stdlib\\1.7.10
+-O4
+--shared
+--verbose
