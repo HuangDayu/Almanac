@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.utils.extendsFrom
 
@@ -10,17 +11,12 @@ plugins {
     id("org.graalvm.buildtools.native") version "0.10.2"
 }
 
+group = "cn.huangdayu"
+version = "20211128"
+description = "almanac"
+
 graalvmNative {
     toolchainDetection.set(true)
-}
-
-
-repositories {
-    mavenLocal()
-    maven {
-        url = uri("https://repo.maven.apache.org/maven2/")
-    }
-    mavenCentral()
 }
 
 val graal by sourceSets.creating
@@ -53,7 +49,6 @@ graalvmNative {
         named("main") {
             imageName.set("almanac")
             mainClass.set("cn.huangdayu.almanac.AlmanacNative")
-            buildArgs.add("-O4")
             buildArgs.add("--shared")
         }
         named("test") {
@@ -65,42 +60,44 @@ graalvmNative {
     }
 }
 
-
-group = "cn.huangdayu"
-version = "20211128"
-description = "almanac"
-
 java {
+    charset("UTF-8")
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(22))
+    }
     withSourcesJar()
-//    withJavadocJar()
-}
-
-
-val compileKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions {
-    jvmTarget = "22"
-}
-
-val compileTestKotlin: KotlinCompile by tasks
-compileTestKotlin.kotlinOptions {
-    jvmTarget = "22"
+    // withJavadocJar()
 }
 
 tasks.withType<JavaExec> {
-    jvmArgs = listOf("-Dsun.stdout.encoding=UTF-8", "-Dsun.stderr.encoding=UTF-8")
+    defaultCharacterEncoding = "UTF-8"
+    jvmArgs = listOf(
+        "-Dfile.encoding=UTF-8", "-Dsun.stdout.encoding=UTF-8", "-Dsun.stderr.encoding=UTF-8"
+    )
 }
 
-
-publishing {
-    publications.create<MavenPublication>("maven") {
-        from(components["java"])
-    }
+tasks.withType<Javadoc>() {
+    options.encoding = "UTF-8"
 }
 
 tasks.withType<JavaCompile>() {
     options.encoding = "UTF-8"
 }
 
+tasks.withType<KotlinCompile>().configureEach {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_22)
+    }
+}
+
+
+repositories {
+    mavenLocal()
+    maven {
+        url = uri("https://repo.maven.apache.org/maven2/")
+    }
+    mavenCentral()
+}
 
 buildscript {
     repositories {
@@ -110,5 +107,11 @@ buildscript {
     }
     dependencies {
         classpath("io.freefair.gradle:lombok-plugin:8.6")
+    }
+}
+
+publishing {
+    publications.create<MavenPublication>("maven") {
+        from(components["java"])
     }
 }
