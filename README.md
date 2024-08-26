@@ -9,10 +9,18 @@
 
 <!-- [![GitHub license](https://img.shields.io/github/license/HuangDayu/Almanac.svg)](https://github.com/HuangDayu/Almanac) -->
 
-本项目类似[寿星天文历](http://www.nongli.net/sxwnl/)和[日梭万年历](https://www.nongli114.com/rili/)，包括但不限皇历、生辰八字、日出月落、农历、黄历、干支、节气、月相、经纬度、节假日、伊斯兰历、儒略历、天文历、回历、西历等。
 
 
-## 引入依赖
+本项目学习[寿星天文历](http://www.nongli.net/sxwnl/)和[日梭万年历](https://www.nongli114.com/rili/)，包括但不限皇历、生辰八字、日出月落、农历、黄历、干支、节气、月相、经纬度、节假日、伊斯兰历、儒略历、天文历、回历、西历等日历数据和天文数据的计算，支持年、月、日的计算范围。
+
+本项目部分源码源于开源，所以也完全开源，无授权许可，禁止商用。
+
+
+
+
+## 如何使用
+
+### 引入依赖
 
 ```xml
 
@@ -23,7 +31,7 @@
 </dependency>
 ```
 
-## 使用示例
+### 代码示例
 
 ```java
 
@@ -64,13 +72,7 @@ public class AlmanacApp extends Almanac {
 }
 ```
 
-## 不足
-
-- 算法并不完全准确
-- 时间无法进入公元前
-- 天文历信息不足：方位、赤纬、时角、黄经、黄纬，潮汐，太阳高度角，地球直射位置，地球远日点，地球近日点，日食月食等
-
-## 展示
+### 数据示例
 
 | key | value | value | value |
 | :--------: | :-------- | :-------- | :-------- |
@@ -116,9 +118,7 @@ public class AlmanacApp extends Almanac {
 | `秋分` | 2018-09-23 09:54:01  | 1995-09-23 20:13:00  | 1-09-25 15:39:49  |
 | `冬至` | 2018-12-22 06:22:38  | 1995-12-22 16:16:47  | 1-12-23 08:19:28  |
 
-## Almanac Application
-
-### 演示
+### 应用示例 
 
 <div align="center">
 <img src="https://almanac.huangdayu.cn/doc/image/ezgif.com-video-to-gif-1.gif" height="450px" width="250px" alt="设置日期" >
@@ -126,15 +126,24 @@ public class AlmanacApp extends Almanac {
 <img src="https://almanac.huangdayu.cn/doc/image/ezgif.com-video-to-gif-3.gif" height="450px" width="250px" alt="设置位置" >
 </div>
 
-### 下载
+### 应用下载
 
 - [点击下载](https://almanac.huangdayu.cn/doc/app/AlmanacApp-0.0.3.apk)
 
-### 源码
+### 应用源码
 
 - [AlmanacAPP](https://github.com/HuangDayu/AlmanacApp)
 
-## 参考文献
+
+### 不足之处
+
+- 算法并不完全准确，个别数据进度不高
+- 时间无法进入公元前
+- 天文历信息不足，如缺失方位、赤纬、时角、黄经、黄纬、潮汐、太阳高度角、地球直射位置、地球远日点、地球近日点、日食月食等
+
+## 相关文档 
+
+### 参考文献
 
 - [寿星天文历Java封装整理版](https://blog.csdn.net/wangpeng047/article/details/38559591)
 - [寿星万年历---java算法实现-csdn](https://blog.csdn.net/lxslove/article/details/6083396)
@@ -142,17 +151,17 @@ public class AlmanacApp extends Almanac {
 - [根据经纬度计算日出、日落、中天、天亮、天黑和昼长时间](http://www.cnblogs.com/hanoi/archive/2012/07/04/2576325.html)  
 - [日历相关的算法](https://fancyerii.github.io/2019/03/27/calendar/)
 
-## 在线工具
+### 在线工具
 
 - [儒略日数和日干支计算器](https://ytliu0.github.io/ChineseCalendar/Julian_simp.html)
 
-## 相关开源
+### 相关开源
 
 - [time4j](http://time4j.net/)
 - [icu4j](https://mvnrepository.com/artifact/com.ibm.icu/icu4j)
 - [lunar-java](https://github.com/6tail/lunar-java)
 
-## 日历文献
+### 日历文献
 
 - [黄帝纪年](https://baike.baidu.com/item/%E9%BB%84%E5%B8%9D%E7%BA%AA%E5%B9%B4) 
 - [黄帝历](https://baike.baidu.com/item/%E9%BB%84%E5%B8%9D%E5%8E%86) 
@@ -167,9 +176,6 @@ public class AlmanacApp extends Almanac {
 - [电子天文历表](http://almanac.pmo.ac.cn/dianzili.htm)
 - [天之文](http://www.astron.ac.cn/index.htm)
 
-## 回馈开源
-
-![](https://www.huangdayu.cn/assets/private/images/image-100.jpg "您的支持是我持续维护的动力源泉")
 
 ## License
 
