@@ -47,10 +47,10 @@ public class AlmanacDTO {
         map.put("儒略历", julian.getInfo());
         map.put("回历", islamic.getInfo());
         map.put("节假日", holiday.getInfo());
-        map.put("经度", sunriseMoonset.getLongitude());
-        map.put("纬度", sunriseMoonset.getLatitude());
+        map.put("经度", timeZoneDTO.getLongitude());
+        map.put("纬度", timeZoneDTO.getLatitude());
         map.put("时区", timeZoneDTO.getTimeZone());
-        map.put("港口", sunriseMoonset.getPortName());
+        map.put("港口", timeZoneDTO.getPortName());
         map.put("昼长", sunriseMoonset.getDiurnalTime());
         map.put("夜长", sunriseMoonset.getNightTime());
         map.put("天亮", sunriseMoonset.getDawnTime());

@@ -2,8 +2,6 @@ package cn.huangdayu.almanac.aggregates.sunrise_moonset;
 
 import cn.huangdayu.almanac.aggregates.BaseAlmanac;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
-import cn.huangdayu.almanac.utils.PortUtils;
-import cn.huangdayu.almanac.utils.PropertiesUtils;
 import cn.huangdayu.almanac.utils.SunMoonUtils;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,21 +15,7 @@ public class SunriseMoonset extends BaseAlmanac {
 
     public SunriseMoonset(TimeZoneDTO timeZoneDTO) {
         SunMoonUtils.init(timeZoneDTO, this);
-        this.portName = PortUtils.getPortName(PropertiesUtils.getLatitude(), PropertiesUtils.getLongitude());
     }
-
-    /**
-     * 港口
-     */
-    private String portName;
-    /**
-     * 经度
-     */
-    private String longitude;
-    /**
-     * 纬度
-     */
-    private String latitude;
     /**
      * 日出
      */
@@ -75,25 +59,8 @@ public class SunriseMoonset extends BaseAlmanac {
 
     @Override
     public String getInfo() {
-        return portName + " " + longitude + " " + latitude;
+        return sunRiseTime + " " + sunSetTime;
     }
 
-    @Override
-    public String toString() {
-        return "SunMoonDTO{" +
-                "portName='" + portName + '\'' +
-                ", longitude='" + longitude + '\'' +
-                ", latitude='" + latitude + '\'' +
-                ", sunRiseTime='" + sunRiseTime + '\'' +
-                ", sunSetTime='" + sunSetTime + '\'' +
-                ", midDayTime='" + midDayTime + '\'' +
-                ", dawnTime='" + dawnTime + '\'' +
-                ", darkTime='" + darkTime + '\'' +
-                ", diurnalTime='" + diurnalTime + '\'' +
-                ", nightTime='" + nightTime + '\'' +
-                ", moonRiseTime='" + moonRiseTime + '\'' +
-                ", moonSetTime='" + moonSetTime + '\'' +
-                ", moonMiddleTime='" + moonMiddleTime + '\'' +
-                '}';
-    }
+
 }

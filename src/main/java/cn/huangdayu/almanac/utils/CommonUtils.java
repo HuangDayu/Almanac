@@ -3,7 +3,10 @@ package cn.huangdayu.almanac.utils;
 import cn.huangdayu.almanac.exception.AlmanacException;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.util.GregorianCalendar;
 import java.util.regex.Pattern;
+
 
 /**
  * 公用数据工具类
@@ -12,6 +15,83 @@ import java.util.regex.Pattern;
  * @update 2020-03-15
  */
 public class CommonUtils {
+
+	public static String fillZero(int value) {
+		return value < 10 ? "0" + value : "" + value;
+	}
+
+	/***
+	 * 保留两个小数点方法包装
+	 */
+	public static double getTwoPointDouble(double d) {
+		BigDecimal b = new BigDecimal(d);
+		double f1 = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+		return f1;
+	}
+
+
+	/***
+	 * 保留4个小数点 改变经纬度格式 :东经 110°16'67"
+	 */
+	public static String setStringPointDouble(double itude, boolean boo) {
+		// 经度（正：东经 负：西经）
+		// 纬度（正：北纬 负：南纬）
+		BigDecimal big = new BigDecimal(itude);
+		// String str0 = String.valueOf(big.setScale(4,
+		// BigDecimal.ROUND_HALF_UP).doubleValue());// 转成字符串
+		String str0 = String.valueOf(roundByScale(itude, 4));// 转成字符串
+		int leng = str0.length();// 获取长度
+		String str1 = str0.substring(0, leng - 5);
+		String str2 = str0.substring(leng - 4, leng - 2);
+		String str3 = str0.substring(leng - 2, leng);// 最后两位
+		String str4 = setItude(itude, boo) + str1 + "°" + str2 + "'" + str3 + "\"";
+		return str4;
+	}
+
+	/***
+	 * 经度（正：东经 负：西经） 纬度（正：北纬 负：南纬）
+	 *
+	 * @param d
+	 * @return
+	 */
+	public static String setItude(double d, boolean b) {
+		if (!b) {
+			if (d < 0) {
+				return "南纬 ";
+			} else {
+				return "北纬 ";
+			}
+		} else {
+			if (d < 0) {
+				return "西经 ";
+			} else {
+				return "东经 ";
+			}
+		}
+
+	}
+
+
+	/**
+	 * 将double格式化为指定小数位的String，不足小数位用0补全
+	 *
+	 * @param v     需要格式化的数字
+	 * @param scale 小数点后保留几位
+	 * @return
+	 */
+	public static String roundByScale(double v, int scale) {
+		if (scale < 0) {
+			throw new IllegalArgumentException("The   scale   must   be   a   positive   integer   or   zero");
+		}
+		if (scale == 0) {
+			return new DecimalFormat("0").format(v);
+		}
+		String formatStr = "0.";
+		for (int i = 0; i < scale; i++) {
+			formatStr = formatStr + "0";
+		}
+		return new DecimalFormat(formatStr).format(v);
+	}
 
 
 	public static String subString(String str, int beginIndex) {

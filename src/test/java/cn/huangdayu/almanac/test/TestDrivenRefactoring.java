@@ -111,10 +111,10 @@ public class TestDrivenRefactoring {
             handler("节日", almanacDTO.getHoliday().getLunarHolidays());
             handler("假日", almanacDTO.getHoliday().getCalendarHolidays());
             handler("其他节日", almanacDTO.getHoliday().getSolarTermHolidays());
-            handler("经度", almanacDTO.getSunriseMoonset().getLongitude());
-            handler("纬度", almanacDTO.getSunriseMoonset().getLatitude());
+            handler("经度", almanacDTO.getTimeZoneDTO().getLongitude());
+            handler("纬度", almanacDTO.getTimeZoneDTO().getLatitude());
             handler("时区", almanacDTO.getTimeZoneDTO().getTimeZone());
-            handler("港口", almanacDTO.getSunriseMoonset().getPortName());
+            handler("港口", almanacDTO.getTimeZoneDTO().getPortName());
             handler("昼长", almanacDTO.getSunriseMoonset().getDiurnalTime());
             handler("夜长", almanacDTO.getSunriseMoonset().getNightTime());
             handler("天亮", almanacDTO.getSunriseMoonset().getDawnTime());

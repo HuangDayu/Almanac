@@ -7,7 +7,7 @@ package cn.huangdayu.almanac.utils;
  * @author huangdayu
  * @update 2020-03-15
  */
-public class AstronomyArithmeticUtils {
+public class AstronomicalUtils {
 
 
 	public static double gxc_sunLon(double t) { // 太阳光行差,t是世纪数

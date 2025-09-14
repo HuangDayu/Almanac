@@ -4,6 +4,8 @@ import cn.huangdayu.almanac.dto.TimeZoneDTO;
 
 import java.util.Calendar;
 
+import static cn.huangdayu.almanac.utils.CommonUtils.fillZero;
+
 
 /**
  * 儒略历工具类
@@ -144,7 +146,7 @@ public class JulianCalendarUtils {
      * @param julianDays
      * @return
      */
-    public static TimeZoneDTO julianDaysToTimeZone(double julianDays) {
+    public static String julianDaysToTimeZone(double julianDays) {
         int year, month, day, hour, minute;
         double second;
         int D = (int) Math.floor(julianDays + 0.5), c;
@@ -177,7 +179,7 @@ public class JulianCalendarUtils {
         F *= 60;
         second = F;
 
-        return new TimeZoneDTO(year, month, day, hour, minute, (int) second);
+        return year + "-" + fillZero(month) + "-" + fillZero(day) + " " + fillZero(hour) + ":" + fillZero(minute) + ":" + fillZero((int) second);
     }
 
     /***
@@ -218,7 +220,7 @@ public class JulianCalendarUtils {
      * @return
      */
     public static String julianDays2str(double jd) {
-        return julianDaysToTimeZone(jd).getDateTimeInfo();
+        return julianDaysToTimeZone(jd);
     }
 
     /***

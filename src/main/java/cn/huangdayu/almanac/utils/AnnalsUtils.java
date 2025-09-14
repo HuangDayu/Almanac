@@ -222,7 +222,7 @@ public class AnnalsUtils {
      * @return
      */
     public static double qi_accurate(double W) {
-        double t = AstronomyArithmeticUtils.S_aLon_t(W) * 36525;
+        double t = AstronomicalUtils.S_aLon_t(W) * 36525;
         return t - CommonUtils.dtT(t) + (double) 8 / 24;
     }
 
@@ -233,7 +233,7 @@ public class AnnalsUtils {
      * @return
      */
     public static double so_accurate(double W) {
-        double t = AstronomyArithmeticUtils.MS_aLon_t(W) * 36525;
+        double t = AstronomicalUtils.MS_aLon_t(W) * 36525;
         return t - CommonUtils.dtT(t) + (double) 8 / 24;
     }
 

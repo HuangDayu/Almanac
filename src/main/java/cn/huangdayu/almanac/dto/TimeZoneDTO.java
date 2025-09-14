@@ -1,16 +1,20 @@
 package cn.huangdayu.almanac.dto;
 
 import cn.huangdayu.almanac.aggregates.julian.Julian;
-import cn.huangdayu.almanac.exception.AlmanacException;
-import cn.huangdayu.almanac.utils.AreaUtils;
 import cn.huangdayu.almanac.utils.ConstantsUtils;
 import cn.huangdayu.almanac.utils.DateTimeUtils;
+import cn.huangdayu.almanac.utils.PropertiesUtils;
+import cn.huangdayu.almanac.utils.TimeZoneUtils;
 import lombok.Data;
 
 import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+
+import static cn.huangdayu.almanac.utils.CommonUtils.fillZero;
+import static cn.huangdayu.almanac.utils.CommonUtils.setStringPointDouble;
+import static cn.huangdayu.almanac.utils.TimeZoneUtils.decodeJWD;
 
 
 /**
@@ -58,7 +62,27 @@ public class TimeZoneDTO {
      * 位置
      */
     private String address;
+    /***
+     * 纬度
+     */
+    private double latitudeValue;
+    /***
+     * 经度
+     */
+    private double longitudeValue;
 
+    /**
+     * 经度
+     */
+    private String longitude;
+    /**
+     * 纬度
+     */
+    private String latitude;
+    /**
+     * 港口
+     */
+    private String portName;
     /**
      * 位置
      */
@@ -114,10 +138,6 @@ public class TimeZoneDTO {
         this(province, area, DateTimeUtils.timeInMillisToCalendar(date.getTime()));
     }
 
-    public TimeZoneDTO(String province, String area, GregorianCalendar gregorianCalendar) {
-        this(gregorianCalendar, province, area);
-    }
-
     public TimeZoneDTO(String province, String area, long currentTimeMillis) {
         this(province, area, DateTimeUtils.timeInMillisToCalendar(currentTimeMillis));
     }
@@ -126,11 +146,16 @@ public class TimeZoneDTO {
         this(province, area, new GregorianCalendar(year, month - 1, day, hourOfDay, minute, second));
     }
 
-    public TimeZoneDTO(int year, int month, int day, int hourOfDay, int minute, int second) {
-        this(new GregorianCalendar(year, month - 1, day, hourOfDay, minute, second));
+    /**
+     * 指定月
+     *
+     * @param timeZoneDTO
+     */
+    public TimeZoneDTO(TimeZoneDTO timeZoneDTO) {
+        this(timeZoneDTO.getProvince(), timeZoneDTO.getArea(), new GregorianCalendar(timeZoneDTO.getEraYear(), timeZoneDTO.getMonth() - 1, timeZoneDTO.getDay(), timeZoneDTO.getHour(), timeZoneDTO.getMinute(), timeZoneDTO.getSecond()));
     }
 
-    private TimeZoneDTO(GregorianCalendar gregorianCalendar) {
+    public TimeZoneDTO(String province, String area, GregorianCalendar gregorianCalendar) {
         this.gregorianCalendar = gregorianCalendar;
         this.year = gregorianCalendar.get(Calendar.YEAR);
         this.month = gregorianCalendar.get(Calendar.MONTH) + 1;
@@ -141,71 +166,17 @@ public class TimeZoneDTO {
         this.second = gregorianCalendar.get(Calendar.SECOND);
         this.era = gregorianCalendar.get(Calendar.ERA);
         this.index = DateTimeUtils.getTimZoneInt(gregorianCalendar);
-        String format = DateTimeUtils.formatDateByFormat(gregorianCalendar, "Z");// +0800
-        if (format != null && format.length() > 0) {
-            String value = format.substring(1, 3);
-            int i = 1, j = Integer.parseInt(value);
-            if (j > 0) {
-                i = Integer.parseInt(value);
-            } else {
-                i = Integer.parseInt(value.substring(1));
-            }
-            if (format.contains("-")) {
-                this.timeZone = format + " 西" + ConstantsUtils.TIMEZONE[i - 1] + "区";
-            } else {
-                this.timeZone = format + " 东" + ConstantsUtils.TIMEZONE[i - 1] + "区";
-            }
-        }
-    }
-
-    /**
-     * 指定月
-     *
-     * @param timeZoneDTO
-     */
-    public TimeZoneDTO(TimeZoneDTO timeZoneDTO) {
-        this(new GregorianCalendar(timeZoneDTO.getEraYear(), timeZoneDTO.getMonth() - 1, timeZoneDTO.getDay(), timeZoneDTO.getHour(), timeZoneDTO.getMinute(), timeZoneDTO.getSecond()));
-        try {
-            this.address = timeZoneDTO.getAddress();
-            this.timeZone = timeZoneDTO.getTimeZone();
-            this.position = timeZoneDTO.getPosition();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new AlmanacException("时间与地址构造异常", e);
-        }
-    }
-
-    public TimeZoneDTO(GregorianCalendar gregorianCalendar, String... names) {
-        this(gregorianCalendar);
-        try {
-            if (names != null && names.length > 0) {
-                if (names.length == 2) {
-                    this.province = names[0];
-                    this.area = names[1];
-                } else if (names.length == 1) {
-                    String name = names[0];
-                    String[] nameList = name.trim().split("[省市区县镇]");
-                    if (nameList.length < 2) {
-                        this.province = "广东";
-                        this.area = "徐闻";
-                    } else if (nameList.length == 2) {
-                        this.province = nameList[0];
-                        this.area = nameList[1];
-                    } else {
-                        this.province = nameList[0];
-                        this.area = nameList[2];
-                    }
-                }
-            } else {
-                this.province = "广东";
-                this.area = "徐闻";
-            }
-            this.address = AreaUtils.judgeArea(this.province, this.area)[1];
-            this.position = (province.replaceAll("省", "") + " " + area.replaceAll("市", "").replaceAll("区", "").replaceAll("县", "").replaceAll("镇", "").replaceAll("乡", ""));
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new AlmanacException("时间与地址构造异常", e);
-        }
+        this.timeZone = TimeZoneUtils.getTimeZone(gregorianCalendar);
+        this.province = province;
+        this.area = area;
+        this.address = TimeZoneUtils.judgeArea(this.province, this.area)[1];
+        String jwd = decodeJWD(this.address);
+        this.latitudeValue = (Double.parseDouble(jwd.substring(0, 2)) + Double.parseDouble(jwd.substring(2, 4)) / 60);
+        this.longitudeValue = (Double.parseDouble(jwd.substring(4, 7)) + Double.parseDouble(jwd.substring(7)) / 60);
+        this.portName = TimeZoneUtils.getPortName(PropertiesUtils.getLatitude(), PropertiesUtils.getLongitude(), this.latitudeValue, this.longitudeValue);
+        this.position = (province.replaceAll("省", "") + " " + area.replaceAll("市", "").replaceAll("区", "").replaceAll("县", "").replaceAll("镇", "").replaceAll("乡", ""));
+        this.longitude = setStringPointDouble(this.longitudeValue, true);
+        this.latitude = setStringPointDouble(this.latitudeValue, false);
     }
 
     public TimeZoneDTO nextDay(int day, Julian julian) {
@@ -236,15 +207,11 @@ public class TimeZoneDTO {
     }
 
     public String getDateTimeInfo() {
-        return getEraYear() + "-" + add0(month) + "-" + add0(day) + " " + add0(hour) + ":" + add0(minute) + ":" + add0(second);
+        return getEraYear() + "-" + fillZero(month) + "-" + fillZero(day) + " " + fillZero(hour) + ":" + fillZero(minute) + ":" + fillZero(second);
     }
 
     public String getDateInfo() {
-        return getEraYear() + "-" + add0(month) + "-" + add0(day);
-    }
-
-    private String add0(int value) {
-        return value < 10 ? "0" + value : "" + value;
+        return getEraYear() + "-" + fillZero(month) + "-" + fillZero(day);
     }
 
     public String getInfo() {

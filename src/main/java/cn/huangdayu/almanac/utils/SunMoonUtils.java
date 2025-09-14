@@ -6,6 +6,8 @@ import java.text.DecimalFormat;
 import cn.huangdayu.almanac.aggregates.sunrise_moonset.SunriseMoonset;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
 
+import static cn.huangdayu.almanac.utils.CommonUtils.getTwoPointDouble;
+
 /**
  * 日出月落工具类
  *
@@ -24,110 +26,13 @@ public class SunMoonUtils {
 
     private static double moonSet;
 
-    private static String codeStr = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    /***
-     * 纬度
-     */
-    private static double latitude;
-    /***
-     * 经度
-     */
-    private static double longitude;
-
 
     public static void init(TimeZoneDTO timeZoneDTO, SunriseMoonset sunriseMoonset) {
         sunTime(timeZoneDTO, sunriseMoonset);
         moonTime(timeZoneDTO, sunriseMoonset);
     }
 
-    /***
-     * 经度（正：东经 负：西经） 纬度（正：北纬 负：南纬）
-     *
-     * @param d
-     * @return
-     */
-    public static String setItude(double d, boolean b) {
-        if (!b) {
-            if (d < 0) {
-                return "南纬 ";
-            } else {
-                return "北纬 ";
-            }
-        } else {
-            if (d < 0) {
-                return "西经 ";
-            } else {
-                return "东经 ";
-            }
-        }
 
-    }
-
-    /***
-     * 保留4个小数点 改变经纬度格式 :东经 110°16'67"
-     */
-    public static String setStringPointDouble(double itude, boolean boo) {
-        // 经度（正：东经 负：西经）
-        // 纬度（正：北纬 负：南纬）
-        BigDecimal big = new BigDecimal(itude);
-        // String str0 = String.valueOf(big.setScale(4,
-        // BigDecimal.ROUND_HALF_UP).doubleValue());// 转成字符串
-        String str0 = String.valueOf(roundByScale(itude, 4));// 转成字符串
-        int leng = str0.length();// 获取长度
-        String str1 = str0.substring(0, leng - 5);
-        String str2 = str0.substring(leng - 4, leng - 2);
-        String str3 = str0.substring(leng - 2, leng);// 最后两位
-        String str4 = setItude(itude, boo) + str1 + "°" + str2 + "'" + str3 + "\"";
-        return str4;
-    }
-
-    /**
-     * 将double格式化为指定小数位的String，不足小数位用0补全
-     *
-     * @param v     需要格式化的数字
-     * @param scale 小数点后保留几位
-     * @return
-     */
-    public static String roundByScale(double v, int scale) {
-        if (scale < 0) {
-            throw new IllegalArgumentException("The   scale   must   be   a   positive   integer   or   zero");
-        }
-        if (scale == 0) {
-            return new DecimalFormat("0").format(v);
-        }
-        String formatStr = "0.";
-        for (int i = 0; i < scale; i++) {
-            formatStr = formatStr + "0";
-        }
-        return new DecimalFormat(formatStr).format(v);
-    }
-
-    /***
-     * 保留两个小数点方法包装
-     */
-    public static double getTwoPointDouble(double d) {
-        BigDecimal b = new BigDecimal(d);
-        double f1 = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        return f1;
-    }
-
-    /***
-     * 获取经度
-     *
-     * @return double型
-     */
-    public static double getDoubleLongitude() {
-        return getTwoPointDouble(longitude);
-    }
-
-    /**
-     * 获取纬度
-     *
-     * @return double型
-     */
-    public static double getDoubleLatitude() {
-        return getTwoPointDouble(latitude);
-    }
 
 
     /**
@@ -138,28 +43,8 @@ public class SunMoonUtils {
      */
     private static void sunTime(TimeZoneDTO timeZoneDTO, SunriseMoonset sunriseMoonset) {
 
-        String jwd = decodeJWD(timeZoneDTO.getAddress());
-
-        /***
-         * 纬度
-         */
-        latitude = (Double.parseDouble(jwd.substring(0, 2)) + Double.parseDouble(jwd.substring(2, 4)) / 60);
-        /***
-         * 经度
-         */
-        longitude = (Double.parseDouble(jwd.substring(4, 7)) + Double.parseDouble(jwd.substring(7)) / 60);
-
-        /***
-         * 设置经度
-         */
-        sunriseMoonset.setLongitude(setStringPointDouble(longitude, true));
-        /***
-         * 设置纬度
-         */
-        sunriseMoonset.setLatitude(setStringPointDouble(latitude, false));
-
-        Double wd = latitude / 180 * Math.PI;
-        Double jd = -longitude / 180 * Math.PI;
+        Double wd = timeZoneDTO.getLatitudeValue() / 180 * Math.PI;
+        Double jd = -timeZoneDTO.getLongitudeValue() / 180 * Math.PI;
 
         double richu = getJuLian_old(timeZoneDTO.getYear(), timeZoneDTO.getMonth(), timeZoneDTO.getDay(), timeZoneDTO.getHour(), timeZoneDTO.getMinute(), timeZoneDTO.getSecond()) - JulianCalendarUtils.getJuLianByYear(timeZoneDTO.getYear());// 2451545
         // 2451544.5
@@ -185,44 +70,6 @@ public class SunMoonUtils {
 
     }
 
-    /****
-     * 加密
-     *
-     * @param encode
-     * @return
-     */
-    public static String decodeJWD(String encode) {
-        StringBuilder jwd = new StringBuilder();
-        for (int i = 0; i < 4; i++) {
-            if (2 == i) {
-                jwd.append(String.format("%03d", codeStr.indexOf(encode.charAt(i)) + 73));
-            } else {
-                jwd.append(String.format("%02d", codeStr.indexOf(encode.charAt(i))));
-            }
-        }
-        return jwd.toString();
-    }
-
-    /****
-     * 解密
-     *
-     * @param decode
-     * @return
-     */
-    public static String encodeJWD(Integer decode) {
-        StringBuilder jwd = new StringBuilder();
-        int i = 230811316;
-        int ge = i % 100;
-        int shi = i % 100000 - ge;
-        int bai = i % 10000000 - shi;
-        int qian = i % 1000000000 - bai;
-        shi = shi / 100 - 73;
-        bai = bai / 100000;
-        qian = qian / 10000000;
-        jwd.append(codeStr.charAt(qian)).append(codeStr.charAt(bai)).append(codeStr.charAt(shi))
-                .append(codeStr.charAt(ge));
-        return jwd.toString();
-    }
 
     /**
      * 太阳升起时间
@@ -377,8 +224,8 @@ public class SunMoonUtils {
 
 
     private static void moonTime(TimeZoneDTO timeZoneDTO, SunriseMoonset sunriseMoonset) {
-        double dbLon = getDoubleLongitude();
-        double dbLat = getDoubleLatitude();
+        double dbLon = getTwoPointDouble(timeZoneDTO.getLongitudeValue());
+        double dbLat = getTwoPointDouble(timeZoneDTO.getLatitudeValue());
         double mjdd = mjd(timeZoneDTO.getDay(), timeZoneDTO.getMonth(), timeZoneDTO.getYear(), 0);
         find_moonrise_set(mjdd, timeZoneDTO.getIndex(), dbLon, dbLat, 0, 0, sunriseMoonset);
     }

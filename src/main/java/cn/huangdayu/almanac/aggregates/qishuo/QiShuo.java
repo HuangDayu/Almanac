@@ -1,6 +1,6 @@
 package cn.huangdayu.almanac.aggregates.qishuo;
 
-import cn.huangdayu.almanac.utils.AstronomyArithmeticUtils;
+import cn.huangdayu.almanac.utils.AstronomicalUtils;
 import cn.huangdayu.almanac.utils.AnnalsUtils;
 import cn.huangdayu.almanac.utils.CommonUtils;
 import lombok.Getter;
@@ -127,11 +127,11 @@ public class QiShuo {
      * @return
      */
     private static double qHighCalculate(double w) {
-        double t = AstronomyArithmeticUtils.S_aLon_t2(w) * 36525;
+        double t = AstronomicalUtils.S_aLon_t2(w) * 36525;
         t = t - CommonUtils.dtT(t) + (double) 8 / 24;
         double v = ((t + 0.5) % 1) * 86400;
         if (v < 1200 || v > 86400 - 1200) {
-            t = AstronomyArithmeticUtils.S_aLon_t(w) * 36525 - CommonUtils.dtT(t) + (double) 8 / 24;
+            t = AstronomicalUtils.S_aLon_t(w) * 36525 - CommonUtils.dtT(t) + (double) 8 / 24;
         }
         return t;
     }
@@ -143,11 +143,11 @@ public class QiShuo {
      * @return
      */
     private static double sHighCalculate(double w) {
-        double t = AstronomyArithmeticUtils.MS_aLon_t2(w) * 36525;
+        double t = AstronomicalUtils.MS_aLon_t2(w) * 36525;
         t = t - CommonUtils.dtT(t) + (double) 8 / 24;
         double v = ((t + 0.5) % 1) * 86400;
         if (v < 1800 || v > 86400 - 1800) {
-            t = AstronomyArithmeticUtils.MS_aLon_t(w) * 36525 - CommonUtils.dtT(t) + (double) 8 / 24;
+            t = AstronomicalUtils.MS_aLon_t(w) * 36525 - CommonUtils.dtT(t) + (double) 8 / 24;
         }
         return t;
     }
