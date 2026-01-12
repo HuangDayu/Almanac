@@ -1,0 +1,16 @@
+[dependencies]
+  [dependencies.j2cjlib]
+    path = "../j2cjlib"
+    version = "1.0.0"
+
+[package]
+  cjc-version = "0.53.3"
+  compile-option = "--int-overflow=wrapping"
+  description = ""
+  name = "almanac"
+  output-type = "executable"
+  src-dir = "src"
+  target-dir = "build"
+  version = "1.0.0"
+  [package.package_configuration]
+  [package.scripts]
