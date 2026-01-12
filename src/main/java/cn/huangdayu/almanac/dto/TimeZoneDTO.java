@@ -122,6 +122,10 @@ public class TimeZoneDTO {
         this(new CoordinatesDTO(province, area), gregorianCalendar);
     }
 
+    public TimeZoneDTO(double longitude, double latitude, String dateTime) {
+        this(new CoordinatesDTO(longitude, latitude), DateTimeUtils.timeInMillisToCalendar(DateTimeUtils.toDate(dateTime).getTime()));
+    }
+
     public TimeZoneDTO(CoordinatesDTO coordinates, GregorianCalendar gregorianCalendar) {
         this.coordinates = coordinates;
         this.gregorianCalendar = gregorianCalendar;

@@ -27,8 +27,8 @@ public class CoordinatesUtils {
     public static double[] decodeCoordinatesByArea(String province, String area) {
         String coordinates = decodeCoordinates(province, area);
         double[] value = new double[2];
-        value[0] = (Double.parseDouble(coordinates.substring(0, 2)) + Double.parseDouble(coordinates.substring(2, 4)) / 60);
-        value[1] = (Double.parseDouble(coordinates.substring(4, 7)) + Double.parseDouble(coordinates.substring(7)) / 60);
+        value[0] = (Double.parseDouble(coordinates.substring(4, 7)) + Double.parseDouble(coordinates.substring(7)) / 60);
+        value[1] = (Double.parseDouble(coordinates.substring(0, 2)) + Double.parseDouble(coordinates.substring(2, 4)) / 60);
         return value;
     }
 
@@ -41,7 +41,7 @@ public class CoordinatesUtils {
      */
     private static String decodeCoordinates(String province, String area) {
         province = province.replaceAll("省", "");
-        area = area.replaceAll("市", "").replaceAll("区", "").replaceAll("县", "").replaceAll("镇", "").replaceAll("乡", "");
+        area = area.replaceAll("[市区县镇乡]", "");
         String[] provinces = PROVINCE.split(",");
         for (int i = 0; i < provinces.length; i++) {
             if (province.contains(provinces[i])) {
@@ -124,12 +124,12 @@ public class CoordinatesUtils {
     /****
      * 加密经纬度坐标
      *
-     * @param decode
+     * @param i
      * @return
      */
-    private static String encodeCoordinates(Integer decode) {
+    public static String encodeCoordinates(Integer i) {
         StringBuilder jwd = new StringBuilder();
-        int i = 230811316;
+        //int i = 230811316;
         int ge = i % 100;
         int shi = i % 100000 - ge;
         int bai = i % 10000000 - shi;

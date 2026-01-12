@@ -24,8 +24,25 @@ public class TestDrivenRefactoring {
             new TimeZoneDTO("广东省", "广州市", "2021-10-11 11:10:10"),
     };
 
+    TimeZoneDTO[] timeZoneDTOS2 = {
+            new TimeZoneDTO(110.16d, 20.33d, "-211-1-1 11:10:10"),
+            new TimeZoneDTO(110.35d, 21.26d, "1-1-1 11:10:10"),
+            new TimeZoneDTO(110.16d, 20.33d, "1995-08-12 11:10:10"),
+            new TimeZoneDTO(110.16d, 20.33d, "2018-11-01 11:06:48"),
+            new TimeZoneDTO(113.26d, 23.13d, "2021-10-11 11:10:10"),
+    };
+
     @Test
     public void tdd() {
+        test(timeZoneDTOS);
+    }
+
+    @Test
+    public void tdd2() {
+        test(timeZoneDTOS2);
+    }
+
+    public void test(TimeZoneDTO[] timeZoneDTOS) {
         Pack pack = new Pack();
         for (int i = 0; i < timeZoneDTOS.length; i++) {
             AlmanacService almanacService = new AlmanacService(timeZoneDTOS[i]);

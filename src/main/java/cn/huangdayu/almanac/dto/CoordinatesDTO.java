@@ -3,24 +3,53 @@ package cn.huangdayu.almanac.dto;
 import cn.huangdayu.almanac.utils.CoordinatesUtils;
 import cn.huangdayu.almanac.utils.PropertiesUtils;
 
+import java.util.Map;
+
 import static cn.huangdayu.almanac.utils.CommonUtils.setStringPointDouble;
 
 /**
  * 坐标信息
+ *
  * @author huangdayu
  */
 public class CoordinatesDTO {
 
-    public CoordinatesDTO(String province,String area) {
+    public CoordinatesDTO(String province, String area) {
         this.province = province;
         this.area = area;
-        double[]  coordinates = CoordinatesUtils.decodeCoordinatesByArea(this.province, this.area);
-        this.latitudeValue = coordinates[0];
-        this.longitudeValue = coordinates[1];
+        double[] coordinates = CoordinatesUtils.decodeCoordinatesByArea(this.province, this.area);
+        this.longitudeValue = coordinates[0];
+        this.latitudeValue = coordinates[1];
         this.portName = CoordinatesUtils.getPortName(PropertiesUtils.getLatitudeProperties(), PropertiesUtils.getLongitudeProperties(), this.latitudeValue, this.longitudeValue);
-        this.position = (province.replaceAll("省", "") + " " + area.replaceAll("市", "").replaceAll("区", "").replaceAll("县", "").replaceAll("镇", "").replaceAll("乡", ""));
+        this.position = province.replaceAll("省", "") + " " + area.replaceAll("[市区县镇乡]", "");
         this.longitudeStr = setStringPointDouble(this.longitudeValue, true);
         this.latitudeStr = setStringPointDouble(this.latitudeValue, false);
+    }
+
+    public CoordinatesDTO(double longitude, double latitude) {
+        this.longitudeValue = longitude;
+        this.latitudeValue = latitude;
+        this.longitudeStr = setStringPointDouble(this.longitudeValue, true);
+        this.latitudeStr = setStringPointDouble(this.latitudeValue, false);
+        String value = encode(latitudeStr) + encode(longitudeStr);
+        String code = CoordinatesUtils.encodeCoordinates(Integer.parseInt(value));
+        for (Map.Entry<Object, Object> entry : PropertiesUtils.getAdministrativeProperties().entrySet()) {
+            String[] areas = entry.getValue().toString().split(" ");
+            for (int i = 1; i < areas.length; i++) {
+                if (areas[i].contains(code)) {
+                    this.position = areas[0] + " " + areas[i].replaceAll(code, "");
+                    this.province = areas[0];
+                    this.area = areas[i].replaceAll(code, "");
+                    this.portName = CoordinatesUtils.getPortName(PropertiesUtils.getLatitudeProperties(), PropertiesUtils.getLongitudeProperties(), this.latitudeValue, this.longitudeValue);
+                }
+            }
+        }
+    }
+
+    private static String encode(String spd) {
+        spd = spd.split(" ")[1];
+        String[] split = spd.split("°");
+        return split[0] + split[1].split("'")[0];
     }
 
     /**

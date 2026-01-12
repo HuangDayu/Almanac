@@ -4,7 +4,6 @@ import cn.huangdayu.almanac.exception.AlmanacException;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.util.GregorianCalendar;
 import java.util.regex.Pattern;
 
 
@@ -33,43 +32,33 @@ public class CommonUtils {
 	/***
 	 * 保留4个小数点 改变经纬度格式 :东经 110°16'67"
 	 */
-	public static String setStringPointDouble(double itude, boolean boo) {
+	public static String setStringPointDouble(double value, boolean isLongitudeValue) {
 		// 经度（正：东经 负：西经）
 		// 纬度（正：北纬 负：南纬）
-		BigDecimal big = new BigDecimal(itude);
+		BigDecimal big = new BigDecimal(value);
 		// String str0 = String.valueOf(big.setScale(4,
 		// BigDecimal.ROUND_HALF_UP).doubleValue());// 转成字符串
-		String str0 = String.valueOf(roundByScale(itude, 4));// 转成字符串
+		String str0 = String.valueOf(roundByScale(value, 4));// 转成字符串
 		int leng = str0.length();// 获取长度
 		String str1 = str0.substring(0, leng - 5);
 		String str2 = str0.substring(leng - 4, leng - 2);
 		String str3 = str0.substring(leng - 2, leng);// 最后两位
-		String str4 = setItude(itude, boo) + str1 + "°" + str2 + "'" + str3 + "\"";
-		return str4;
+		return setCnStr(value, isLongitudeValue) + str1 + "°" + str2 + "'" + str3 + "\"";
 	}
 
 	/***
 	 * 经度（正：东经 负：西经） 纬度（正：北纬 负：南纬）
 	 *
-	 * @param d
+	 * @param value
 	 * @return
 	 */
-	public static String setItude(double d, boolean b) {
-		if (!b) {
-			if (d < 0) {
-				return "南纬 ";
-			} else {
-				return "北纬 ";
-			}
-		} else {
-			if (d < 0) {
-				return "西经 ";
-			} else {
-				return "东经 ";
-			}
-		}
-
-	}
+    public static String setCnStr(double value, boolean isLongitudeValue) {
+        if (isLongitudeValue) {
+            return value < 0 ? "西经 " : "东经 ";
+        } else {
+            return value < 0 ? "南纬 " : "北纬 ";
+        }
+    }
 
 
 	/**
@@ -135,7 +124,7 @@ public class CommonUtils {
 
 	/***
 	 * 二次曲线外推
-	 * 
+	 *
 	 * @param y
 	 * @param jsd
 	 * @return
@@ -173,7 +162,7 @@ public class CommonUtils {
 
 	/***
 	 * 传入儒略日(J2000起算),计算TD-UT(单位:日)
-	 * 
+	 *
 	 * @param t
 	 * @return
 	 */
@@ -192,7 +181,7 @@ public class CommonUtils {
 
 	/***
 	 * 只计算黄经章动
-	 * 
+	 *
 	 * @param t
 	 * @return
 	 */
@@ -1870,7 +1859,7 @@ public class CommonUtils {
 
 	/***
 	 * xt星体,zn坐标号,t儒略世纪数,n计算项数
-	 * 
+	 *
 	 * @param xt
 	 *            星体
 	 * @param zn
@@ -2433,7 +2422,7 @@ public class CommonUtils {
 
 	/***
 	 * 计算月亮
-	 * 
+	 *
 	 * @param zn
 	 * @param t
 	 * @param n
