@@ -8,8 +8,6 @@ import cn.huangdayu.almanac.aggregates.lunar.Lunar;
 import cn.huangdayu.almanac.aggregates.moon_phase.MoonPhase;
 import cn.huangdayu.almanac.aggregates.solar_term.SolarTerm;
 import cn.huangdayu.almanac.aggregates.sunrise_moonset.SunriseMoonset;
-import lombok.Builder;
-import lombok.Data;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -46,7 +44,7 @@ public class AlmanacDTO {
 
     public Map<String, String> toMap() {
         Map<String, String> map = new LinkedHashMap<>();
-        map.put("地点", timeZoneDTO.getPosition());
+        map.put("地点", timeZoneDTO.getCoordinates().getPosition());
         map.put("西历", timeZoneDTO.getInfo());
         map.put("年号", lunar.getYearName());
         map.put("黄帝纪元", lunar.getKingChronologyName());
@@ -57,10 +55,10 @@ public class AlmanacDTO {
         map.put("儒略历", julian.getInfo());
         map.put("回历", islamic.getInfo());
         map.put("节假日", holiday.getInfo());
-        map.put("经度", timeZoneDTO.getLongitude());
-        map.put("纬度", timeZoneDTO.getLatitude());
+        map.put("经度", timeZoneDTO.getCoordinates().getLongitudeStr());
+        map.put("纬度", timeZoneDTO.getCoordinates().getLatitudeStr());
         map.put("时区", timeZoneDTO.getTimeZone());
-        map.put("港口", timeZoneDTO.getPortName());
+        map.put("港口", timeZoneDTO.getCoordinates().getPortName());
         map.put("昼长", sunriseMoonset.getDiurnalTime());
         map.put("夜长", sunriseMoonset.getNightTime());
         map.put("天亮", sunriseMoonset.getDawnTime());

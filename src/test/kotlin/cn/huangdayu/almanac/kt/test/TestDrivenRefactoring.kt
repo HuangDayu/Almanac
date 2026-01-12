@@ -63,7 +63,7 @@ class TestDrivenRefactoring {
 
         fun toMap(almanacDTO: AlmanacDTO) {
             handler("西历", almanacDTO.timeZoneDTO.info)
-            handler("地点", almanacDTO.timeZoneDTO.position)
+            handler("地点", almanacDTO.timeZoneDTO.coordinates.position)
             handler("年号", almanacDTO.lunar.yearName)
             handler("农历", almanacDTO.lunar.info)
             handler("黄历", almanacDTO.era.info)
@@ -74,10 +74,10 @@ class TestDrivenRefactoring {
             handler("节日", almanacDTO.holiday.lunarHolidays)
             handler("假日", almanacDTO.holiday.calendarHolidays)
             handler("其他节日", almanacDTO.holiday.solarTermHolidays)
-            handler("经度", almanacDTO.timeZoneDTO.longitude)
-            handler("纬度", almanacDTO.timeZoneDTO.latitude)
+            handler("经度", almanacDTO.timeZoneDTO.coordinates.longitudeStr)
+            handler("纬度", almanacDTO.timeZoneDTO.coordinates.latitudeStr)
             handler("时区", almanacDTO.timeZoneDTO.timeZone)
-            handler("港口", almanacDTO.timeZoneDTO.portName)
+            handler("港口", almanacDTO.timeZoneDTO.coordinates.portName)
             handler("昼长", almanacDTO.sunriseMoonset.diurnalTime)
             handler("夜长", almanacDTO.sunriseMoonset.nightTime)
             handler("天亮", almanacDTO.sunriseMoonset.dawnTime)

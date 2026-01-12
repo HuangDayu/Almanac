@@ -1,8 +1,5 @@
 package cn.huangdayu.almanac.utils;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-
 import cn.huangdayu.almanac.aggregates.sunrise_moonset.SunriseMoonset;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
 
@@ -43,14 +40,14 @@ public class SunMoonUtils {
      */
     private static void sunTime(TimeZoneDTO timeZoneDTO, SunriseMoonset sunriseMoonset) {
 
-        Double wd = timeZoneDTO.getLatitudeValue() / 180 * Math.PI;
-        Double jd = -timeZoneDTO.getLongitudeValue() / 180 * Math.PI;
+        Double wd = timeZoneDTO.getCoordinates().getLatitudeValue() / 180 * Math.PI;
+        Double jd = -timeZoneDTO.getCoordinates().getLongitudeValue() / 180 * Math.PI;
 
         double richu = getJuLian_old(timeZoneDTO.getYear(), timeZoneDTO.getMonth(), timeZoneDTO.getDay(), timeZoneDTO.getHour(), timeZoneDTO.getMinute(), timeZoneDTO.getSecond()) - JulianCalendarUtils.getJuLianByYear(timeZoneDTO.getYear());// 2451545
         // 2451544.5
 
         for (int i = 0; i < 10; i++) {
-            richu = sunRiseTime(richu, jd, wd, timeZoneDTO.getIndex() / 24);// 逐步逼近法算10次
+            richu = sunRiseTime(richu, jd, wd, timeZoneDTO.getTimeZoneIndex() / 24);// 逐步逼近法算10次
         }
 
         // 日出
@@ -224,10 +221,10 @@ public class SunMoonUtils {
 
 
     private static void moonTime(TimeZoneDTO timeZoneDTO, SunriseMoonset sunriseMoonset) {
-        double dbLon = getTwoPointDouble(timeZoneDTO.getLongitudeValue());
-        double dbLat = getTwoPointDouble(timeZoneDTO.getLatitudeValue());
+        double dbLon = getTwoPointDouble(timeZoneDTO.getCoordinates().getLongitudeValue());
+        double dbLat = getTwoPointDouble(timeZoneDTO.getCoordinates().getLatitudeValue());
         double mjdd = mjd(timeZoneDTO.getDay(), timeZoneDTO.getMonth(), timeZoneDTO.getYear(), 0);
-        find_moonrise_set(mjdd, timeZoneDTO.getIndex(), dbLon, dbLat, 0, 0, sunriseMoonset);
+        find_moonrise_set(mjdd, timeZoneDTO.getTimeZoneIndex(), dbLon, dbLat, 0, 0, sunriseMoonset);
     }
 
     private static void find_moonrise_set(double mjd, double tz, double glong, double glat, int dls, int ST, SunriseMoonset sunriseMoonset) {

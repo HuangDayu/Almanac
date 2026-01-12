@@ -100,7 +100,7 @@ public class TestDrivenRefactoring {
 
         public void toMap(AlmanacDTO almanacDTO) {
             handler("西历", almanacDTO.getTimeZoneDTO().getInfo());
-            handler("地点", almanacDTO.getTimeZoneDTO().getPosition());
+            handler("地点", almanacDTO.getTimeZoneDTO().getCoordinates().getPosition());
             handler("年号", almanacDTO.getLunar().getYearName());
             handler("农历", almanacDTO.getLunar().getInfo());
             handler("黄历", almanacDTO.getEra().getInfo());
@@ -111,10 +111,10 @@ public class TestDrivenRefactoring {
             handler("节日", almanacDTO.getHoliday().getLunarHolidays());
             handler("假日", almanacDTO.getHoliday().getCalendarHolidays());
             handler("其他节日", almanacDTO.getHoliday().getSolarTermHolidays());
-            handler("经度", almanacDTO.getTimeZoneDTO().getLongitude());
-            handler("纬度", almanacDTO.getTimeZoneDTO().getLatitude());
+            handler("经度", almanacDTO.getTimeZoneDTO().getCoordinates().getLongitudeStr());
+            handler("纬度", almanacDTO.getTimeZoneDTO().getCoordinates().getLatitudeStr());
             handler("时区", almanacDTO.getTimeZoneDTO().getTimeZone());
-            handler("港口", almanacDTO.getTimeZoneDTO().getPortName());
+            handler("港口", almanacDTO.getTimeZoneDTO().getCoordinates().getPortName());
             handler("昼长", almanacDTO.getSunriseMoonset().getDiurnalTime());
             handler("夜长", almanacDTO.getSunriseMoonset().getNightTime());
             handler("天亮", almanacDTO.getSunriseMoonset().getDawnTime());

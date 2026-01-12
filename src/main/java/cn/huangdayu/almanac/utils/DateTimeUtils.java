@@ -121,7 +121,7 @@ public class DateTimeUtils {
         timeZoneDTO.setHour(calendar.get(Calendar.HOUR_OF_DAY));
         timeZoneDTO.setMinute(calendar.get(Calendar.MINUTE));
         timeZoneDTO.setSecond(calendar.get(Calendar.SECOND));
-        timeZoneDTO.setIndex(DateTimeUtils.getTimZoneInt(calendar));
+        timeZoneDTO.setTimeZoneIndex(DateTimeUtils.getTimZoneInt(calendar));
         // +0800
         String format = DateTimeUtils.formatDateByFormat(calendar, "Z");
         String value = format.substring(1, 3);
