@@ -55,10 +55,7 @@ public class TimeZoneDTO {
      * 市/县/区
      */
     private String area;
-    /**
-     * 位置
-     */
-    private String address;
+
     /***
      * 纬度
      */
@@ -166,10 +163,9 @@ public class TimeZoneDTO {
         this.timeZone = CoordinatesUtils.getTimeZone(gregorianCalendar);
         this.province = province;
         this.area = area;
-        this.address = CoordinatesUtils.judgeArea(this.province, this.area)[1];
-        String coordinates = CoordinatesUtils.decodeCoordinates(this.address);
-        this.latitudeValue = (Double.parseDouble(coordinates.substring(0, 2)) + Double.parseDouble(coordinates.substring(2, 4)) / 60);
-        this.longitudeValue = (Double.parseDouble(coordinates.substring(4, 7)) + Double.parseDouble(coordinates.substring(7)) / 60);
+        double[]  coordinates = CoordinatesUtils.decodeCoordinatesByArea(this.province, this.area);
+        this.latitudeValue = coordinates[0];
+        this.longitudeValue = coordinates[1];
         this.portName = CoordinatesUtils.getPortName(PropertiesUtils.getLatitudeProperties(), PropertiesUtils.getLongitudeProperties(), this.latitudeValue, this.longitudeValue);
         this.position = (province.replaceAll("省", "") + " " + area.replaceAll("市", "").replaceAll("区", "").replaceAll("县", "").replaceAll("镇", "").replaceAll("乡", ""));
         this.longitude = setStringPointDouble(this.longitudeValue, true);
@@ -309,14 +305,6 @@ public class TimeZoneDTO {
 
     public void setArea(String area) {
         this.area = area;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public double getLatitudeValue() {
