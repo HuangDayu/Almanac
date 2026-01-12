@@ -78,3 +78,7 @@ gradlew
 gradlew.bat
 node_modules
 build
+
+src/main/cangjie
+src/main/javascript
+src/main/navite

@@ -1,25 +1,17 @@
 package cn.huangdayu.almanac.aggregates.holiday;
 
-import cn.huangdayu.almanac.aggregates.BaseAlmanac;
+import cn.huangdayu.almanac.aggregates.AbstractAlmanac;
 import cn.huangdayu.almanac.aggregates.era.Era;
 import cn.huangdayu.almanac.aggregates.lunar.Lunar;
 import cn.huangdayu.almanac.aggregates.solar_term.SolarTerm;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
 import cn.huangdayu.almanac.utils.AnnalsUtils;
 import cn.huangdayu.almanac.utils.FestivalHolidayUtils;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  * @author huangdayu create at 2021/1/21 11:11
  */
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
-public class Holiday extends BaseAlmanac {
+public class Holiday extends AbstractAlmanac {
 
     public Holiday(TimeZoneDTO timeZoneDTO, Lunar lunar, SolarTerm solarTerm, Era era) {
         // 计算农历节日
@@ -57,14 +49,36 @@ public class Holiday extends BaseAlmanac {
         return calendarHolidays + " " + lunarHolidays + " " + solarTermHolidays;
     }
 
-    @Override
-    public String toString() {
-        return "HolidayDTO{" +
-                "happyDay='" + calendarHolidays + '\'' +
-                ", majorDay='" + lunarHolidays + '\'' +
-                ", otherDay='" + solarTermHolidays + '\'' +
-                ", flag=" + flag +
-                '}';
+    public String getCalendarHolidays() {
+        return calendarHolidays;
+    }
+
+    public void setCalendarHolidays(String calendarHolidays) {
+        this.calendarHolidays = calendarHolidays;
+    }
+
+    public String getLunarHolidays() {
+        return lunarHolidays;
+    }
+
+    public void setLunarHolidays(String lunarHolidays) {
+        this.lunarHolidays = lunarHolidays;
+    }
+
+    public String getSolarTermHolidays() {
+        return solarTermHolidays;
+    }
+
+    public void setSolarTermHolidays(String solarTermHolidays) {
+        this.solarTermHolidays = solarTermHolidays;
+    }
+
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
     }
 }
 // Expected : | `节假日` |   一九第9天  |  『二九』   |   三九第3天  |  『二九』   |  『三九』   |

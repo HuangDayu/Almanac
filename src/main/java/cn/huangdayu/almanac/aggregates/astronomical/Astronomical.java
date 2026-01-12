@@ -1,19 +1,15 @@
 package cn.huangdayu.almanac.aggregates.astronomical;
 
-import cn.huangdayu.almanac.aggregates.BaseAlmanac;
+import cn.huangdayu.almanac.aggregates.AbstractAlmanac;
 import cn.huangdayu.almanac.utils.AstronomicalUtils;
 import cn.huangdayu.almanac.utils.CommonUtils;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 天文历
  *
  * @author huangdayu create at 2021/2/17 20:35
  */
-@Getter
-@Setter
-public class Astronomical extends BaseAlmanac {
+public class Astronomical extends AbstractAlmanac {
 
     public Astronomical(int firstJulianDayOfMonth) {
         // 计算世界时与原子时之差
@@ -41,5 +37,21 @@ public class Astronomical extends BaseAlmanac {
     @Override
     public String getInfo() {
         return solarRetina + " " + lunarRetina;
+    }
+
+    public double getSolarRetina() {
+        return solarRetina;
+    }
+
+    public void setSolarRetina(double solarRetina) {
+        this.solarRetina = solarRetina;
+    }
+
+    public double getLunarRetina() {
+        return lunarRetina;
+    }
+
+    public void setLunarRetina(double lunarRetina) {
+        this.lunarRetina = lunarRetina;
     }
 }

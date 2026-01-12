@@ -1,21 +1,17 @@
 package cn.huangdayu.almanac.aggregates.julian;
 
-import cn.huangdayu.almanac.aggregates.BaseAlmanac;
+import cn.huangdayu.almanac.aggregates.AbstractAlmanac;
 import cn.huangdayu.almanac.aggregates.qishuo.QiShuo;
 import cn.huangdayu.almanac.utils.AnnalsUtils;
 import cn.huangdayu.almanac.utils.CommonUtils;
 import cn.huangdayu.almanac.utils.JulianCalendarUtils;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 儒略日
  *
  * @author huangdayu create at 2021/1/21 11:25
  */
-@Setter
-@Getter
-public class Julian extends BaseAlmanac {
+public class Julian extends AbstractAlmanac {
 
     public Julian(int julianDayForToday, QiShuo qiShuo) {
         this.days = julianDayForToday + CommonUtils.JULIAN_FOR_2000;
@@ -71,11 +67,43 @@ public class Julian extends BaseAlmanac {
         return getDays() + " " + getConstellation();
     }
 
-    @Override
-    public String toString() {
-        return "JulianDTO{" +
-                "days=" + days +
-                ", constellation='" + constellation + '\'' +
-                '}';
+    public int getFirstJulianDayOfMonth() {
+        return firstJulianDayOfMonth;
+    }
+
+    public void setFirstJulianDayOfMonth(int firstJulianDayOfMonth) {
+        this.firstJulianDayOfMonth = firstJulianDayOfMonth;
+    }
+
+    public int getNumberDayOfMonth() {
+        return numberDayOfMonth;
+    }
+
+    public void setNumberDayOfMonth(int numberDayOfMonth) {
+        this.numberDayOfMonth = numberDayOfMonth;
+    }
+
+    public int getWeekFirstDayOfMonth() {
+        return weekFirstDayOfMonth;
+    }
+
+    public void setWeekFirstDayOfMonth(int weekFirstDayOfMonth) {
+        this.weekFirstDayOfMonth = weekFirstDayOfMonth;
+    }
+
+    public Integer getDays() {
+        return days;
+    }
+
+    public void setDays(Integer days) {
+        this.days = days;
+    }
+
+    public String getConstellation() {
+        return constellation;
+    }
+
+    public void setConstellation(String constellation) {
+        this.constellation = constellation;
     }
 }

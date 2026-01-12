@@ -20,8 +20,6 @@ import java.util.Map;
  * @author huangdayu
  * @update 2020-03-15
  */
-@Builder
-@Data
 public class AlmanacDTO {
 
     private Lunar lunar;
@@ -33,6 +31,18 @@ public class AlmanacDTO {
     private SunriseMoonset sunriseMoonset;
     private TimeZoneDTO timeZoneDTO;
     private MoonPhase moonPhase;
+
+    public AlmanacDTO(Lunar lunar, Era era, Holiday holiday, Islamic islamic, Julian julian, SolarTerm solarTerm, SunriseMoonset sunriseMoonset, TimeZoneDTO timeZoneDTO, MoonPhase moonPhase) {
+        this.lunar = lunar;
+        this.era = era;
+        this.holiday = holiday;
+        this.islamic = islamic;
+        this.julian = julian;
+        this.solarTerm = solarTerm;
+        this.sunriseMoonset = sunriseMoonset;
+        this.timeZoneDTO = timeZoneDTO;
+        this.moonPhase = moonPhase;
+    }
 
     public Map<String, String> toMap() {
         Map<String, String> map = new LinkedHashMap<>();
@@ -65,5 +75,77 @@ public class AlmanacDTO {
         map.put("闰月", String.valueOf(lunar.getLeapMonth()));
         map.put("闰年", String.valueOf(lunar.getLeapYear()));
         return map;
+    }
+
+    public Lunar getLunar() {
+        return lunar;
+    }
+
+    public void setLunar(Lunar lunar) {
+        this.lunar = lunar;
+    }
+
+    public Era getEra() {
+        return era;
+    }
+
+    public void setEra(Era era) {
+        this.era = era;
+    }
+
+    public Holiday getHoliday() {
+        return holiday;
+    }
+
+    public void setHoliday(Holiday holiday) {
+        this.holiday = holiday;
+    }
+
+    public Islamic getIslamic() {
+        return islamic;
+    }
+
+    public void setIslamic(Islamic islamic) {
+        this.islamic = islamic;
+    }
+
+    public Julian getJulian() {
+        return julian;
+    }
+
+    public void setJulian(Julian julian) {
+        this.julian = julian;
+    }
+
+    public SolarTerm getSolarTerm() {
+        return solarTerm;
+    }
+
+    public void setSolarTerm(SolarTerm solarTerm) {
+        this.solarTerm = solarTerm;
+    }
+
+    public SunriseMoonset getSunriseMoonset() {
+        return sunriseMoonset;
+    }
+
+    public void setSunriseMoonset(SunriseMoonset sunriseMoonset) {
+        this.sunriseMoonset = sunriseMoonset;
+    }
+
+    public TimeZoneDTO getTimeZoneDTO() {
+        return timeZoneDTO;
+    }
+
+    public void setTimeZoneDTO(TimeZoneDTO timeZoneDTO) {
+        this.timeZoneDTO = timeZoneDTO;
+    }
+
+    public MoonPhase getMoonPhase() {
+        return moonPhase;
+    }
+
+    public void setMoonPhase(MoonPhase moonPhase) {
+        this.moonPhase = moonPhase;
     }
 }

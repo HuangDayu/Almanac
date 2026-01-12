@@ -8,10 +8,11 @@ import cn.huangdayu.almanac.aggregates.islamic.Islamic;
 import cn.huangdayu.almanac.aggregates.julian.Julian;
 import cn.huangdayu.almanac.aggregates.lunar.Lunar;
 import cn.huangdayu.almanac.aggregates.moon_phase.MoonPhase;
+import cn.huangdayu.almanac.aggregates.qishuo.QiShuo;
 import cn.huangdayu.almanac.aggregates.solar_term.SolarTerm;
 import cn.huangdayu.almanac.aggregates.sunrise_moonset.SunriseMoonset;
-import cn.huangdayu.almanac.dto.*;
-import cn.huangdayu.almanac.aggregates.qishuo.QiShuo;
+import cn.huangdayu.almanac.dto.AlmanacDTO;
+import cn.huangdayu.almanac.dto.TimeZoneDTO;
 
 /**
  * 历计算工具类
@@ -101,17 +102,7 @@ public class AlmanacUtils {
             // 计算月相
             MoonPhase moonPhase = new MoonPhase(julianDayForToday, julianOfMonth, astronomical);
 
-            almanacDTOS[i] = AlmanacDTO.builder()
-                    .era(era)
-                    .holiday(holiday)
-                    .islamic(islamic)
-                    .julian(julian)
-                    .lunar(lunar)
-                    .solarTerm(solarTermDTO)
-                    .sunriseMoonset(sunriseMoonset)
-                    .timeZoneDTO(timeZoneForToday)
-                    .moonPhase(moonPhase)
-                    .build();
+            almanacDTOS[i] = new AlmanacDTO(lunar, era, holiday, islamic, julian, solarTermDTO, sunriseMoonset, timeZoneForToday, moonPhase);
         }
         return almanacDTOS;
     }

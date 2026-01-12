@@ -4,8 +4,7 @@ import cn.huangdayu.almanac.aggregates.julian.Julian;
 import cn.huangdayu.almanac.utils.ConstantsUtils;
 import cn.huangdayu.almanac.utils.DateTimeUtils;
 import cn.huangdayu.almanac.utils.PropertiesUtils;
-import cn.huangdayu.almanac.utils.TimeZoneUtils;
-import lombok.Data;
+import cn.huangdayu.almanac.utils.CoordinatesUtils;
 
 import java.time.Instant;
 import java.util.Calendar;
@@ -14,7 +13,6 @@ import java.util.GregorianCalendar;
 
 import static cn.huangdayu.almanac.utils.CommonUtils.fillZero;
 import static cn.huangdayu.almanac.utils.CommonUtils.setStringPointDouble;
-import static cn.huangdayu.almanac.utils.TimeZoneUtils.decodeJWD;
 
 
 /**
@@ -23,7 +21,6 @@ import static cn.huangdayu.almanac.utils.TimeZoneUtils.decodeJWD;
  * @author huangdayu
  * @update 2020-03-15
  */
-@Data
 public class TimeZoneDTO {
 
     /**
@@ -166,14 +163,14 @@ public class TimeZoneDTO {
         this.second = gregorianCalendar.get(Calendar.SECOND);
         this.era = gregorianCalendar.get(Calendar.ERA);
         this.index = DateTimeUtils.getTimZoneInt(gregorianCalendar);
-        this.timeZone = TimeZoneUtils.getTimeZone(gregorianCalendar);
+        this.timeZone = CoordinatesUtils.getTimeZone(gregorianCalendar);
         this.province = province;
         this.area = area;
-        this.address = TimeZoneUtils.judgeArea(this.province, this.area)[1];
-        String jwd = decodeJWD(this.address);
-        this.latitudeValue = (Double.parseDouble(jwd.substring(0, 2)) + Double.parseDouble(jwd.substring(2, 4)) / 60);
-        this.longitudeValue = (Double.parseDouble(jwd.substring(4, 7)) + Double.parseDouble(jwd.substring(7)) / 60);
-        this.portName = TimeZoneUtils.getPortName(PropertiesUtils.getLatitude(), PropertiesUtils.getLongitude(), this.latitudeValue, this.longitudeValue);
+        this.address = CoordinatesUtils.judgeArea(this.province, this.area)[1];
+        String coordinates = CoordinatesUtils.decodeCoordinates(this.address);
+        this.latitudeValue = (Double.parseDouble(coordinates.substring(0, 2)) + Double.parseDouble(coordinates.substring(2, 4)) / 60);
+        this.longitudeValue = (Double.parseDouble(coordinates.substring(4, 7)) + Double.parseDouble(coordinates.substring(7)) / 60);
+        this.portName = CoordinatesUtils.getPortName(PropertiesUtils.getLatitudeProperties(), PropertiesUtils.getLongitudeProperties(), this.latitudeValue, this.longitudeValue);
         this.position = (province.replaceAll("省", "") + " " + area.replaceAll("市", "").replaceAll("区", "").replaceAll("县", "").replaceAll("镇", "").replaceAll("乡", ""));
         this.longitude = setStringPointDouble(this.longitudeValue, true);
         this.latitude = setStringPointDouble(this.latitudeValue, false);
@@ -218,21 +215,211 @@ public class TimeZoneDTO {
         return (era == 0 ? "公元前" : "") + getDateTimeInfo() + " " + ConstantsUtils.WEEK_NAME[week];
     }
 
-    @Override
-    public String toString() {
-        return "TimeZoneDTO{" +
-                "year=" + year +
-                ", month=" + month +
-                ", day=" + day +
-                ", hour=" + hour +
-                ", minute=" + minute +
-                ", second=" + second +
-                ", week=" + week +
-                ", timeZone='" + timeZone + '\'' +
-                ", province='" + province + '\'' +
-                ", area='" + area + '\'' +
-                ", address='" + address + '\'' +
-                ", position='" + position + '\'' +
-                '}';
+    public int getEra() {
+        return era;
+    }
+
+    public void setEra(int era) {
+        this.era = era;
+    }
+
+    public double getIndex() {
+        return index;
+    }
+
+    public void setIndex(double index) {
+        this.index = index;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    public int getHour() {
+        return hour;
+    }
+
+    public void setHour(int hour) {
+        this.hour = hour;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
+
+    public void setMinute(int minute) {
+        this.minute = minute;
+    }
+
+    public int getSecond() {
+        return second;
+    }
+
+    public void setSecond(int second) {
+        this.second = second;
+    }
+
+    public int getWeek() {
+        return week;
+    }
+
+    public void setWeek(int week) {
+        this.week = week;
+    }
+
+    public String getTimeZone() {
+        return timeZone;
+    }
+
+    public void setTimeZone(String timeZone) {
+        this.timeZone = timeZone;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public double getLatitudeValue() {
+        return latitudeValue;
+    }
+
+    public void setLatitudeValue(double latitudeValue) {
+        this.latitudeValue = latitudeValue;
+    }
+
+    public double getLongitudeValue() {
+        return longitudeValue;
+    }
+
+    public void setLongitudeValue(double longitudeValue) {
+        this.longitudeValue = longitudeValue;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getPortName() {
+        return portName;
+    }
+
+    public void setPortName(String portName) {
+        this.portName = portName;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public GregorianCalendar getGregorianCalendar() {
+        return gregorianCalendar;
+    }
+
+    public void setGregorianCalendar(GregorianCalendar gregorianCalendar) {
+        this.gregorianCalendar = gregorianCalendar;
+    }
+
+    public int getDayIndexOfMonth() {
+        return dayIndexOfMonth;
+    }
+
+    public void setDayIndexOfMonth(int dayIndexOfMonth) {
+        this.dayIndexOfMonth = dayIndexOfMonth;
+    }
+
+    public int getDaysOfMonth() {
+        return daysOfMonth;
+    }
+
+    public void setDaysOfMonth(int daysOfMonth) {
+        this.daysOfMonth = daysOfMonth;
+    }
+
+    public int getWeeksOfMonth() {
+        return weeksOfMonth;
+    }
+
+    public void setWeeksOfMonth(int weeksOfMonth) {
+        this.weeksOfMonth = weeksOfMonth;
+    }
+
+    public int getWeekFirstOfMonth() {
+        return weekFirstOfMonth;
+    }
+
+    public void setWeekFirstOfMonth(int weekFirstOfMonth) {
+        this.weekFirstOfMonth = weekFirstOfMonth;
+    }
+
+    public int getWeekOfCurrentDay() {
+        return weekOfCurrentDay;
+    }
+
+    public void setWeekOfCurrentDay(int weekOfCurrentDay) {
+        this.weekOfCurrentDay = weekOfCurrentDay;
+    }
+
+    public int getWeekIndexOfMonth() {
+        return weekIndexOfMonth;
+    }
+
+    public void setWeekIndexOfMonth(int weekIndexOfMonth) {
+        this.weekIndexOfMonth = weekIndexOfMonth;
     }
 }

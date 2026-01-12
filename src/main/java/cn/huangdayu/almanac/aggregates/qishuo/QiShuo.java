@@ -8,8 +8,9 @@ import lombok.Getter;
 /***
  * 气朔计算和参数数据表类
  *
+ * “气（节气）”以太阳运行为依据划分季节，“朔（月相）”以月相变化为依据划分月份
+ *
  */
-@Getter
 public class QiShuo {
 
     private QiShuo() {
@@ -402,4 +403,35 @@ public class QiShuo {
         }
     }
 
+    public static String getsCorrectTable() {
+        return sCorrectTable;
+    }
+
+    public static String getqCorrectTable() {
+        return qCorrectTable;
+    }
+
+    public int getLeapMonthIndex() {
+        return leapMonthIndex;
+    }
+
+    public String[] getMonthNames() {
+        return monthNames;
+    }
+
+    public int[] getMonthIndex() {
+        return monthIndex;
+    }
+
+    public int[] getZhongQi() {
+        return zhongQi;
+    }
+
+    public int[] getHeShuo() {
+        return heShuo;
+    }
+
+    public int[] getMonthValue() {
+        return monthValue;
+    }
 }

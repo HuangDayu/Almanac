@@ -3,25 +3,24 @@ package cn.huangdayu.almanac.utils;
 import cn.huangdayu.almanac.exception.AlmanacException;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static cn.huangdayu.almanac.utils.CommonUtils.getTwoPointDouble;
 
 
 /**
- * 处理地址工具类
+ * 经纬度坐标工具类
  *
  * @author huangdayu
  * @update 2020-03-15
  */
-public class TimeZoneUtils {
+public class CoordinatesUtils {
 
-    private static String codeStr = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    /**
+     * 经纬度坐标转换密钥
+     */
+    private static final String COORDINATES_CODE = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
 
     /**
@@ -97,30 +96,30 @@ public class TimeZoneUtils {
 
 
     /****
-     * 加密
+     * 解密经纬度坐标
      *
      * @param encode
      * @return
      */
-    public static String decodeJWD(String encode) {
+    public static String decodeCoordinates(String encode) {
         StringBuilder jwd = new StringBuilder();
         for (int i = 0; i < 4; i++) {
             if (2 == i) {
-                jwd.append(String.format("%03d", codeStr.indexOf(encode.charAt(i)) + 73));
+                jwd.append(String.format("%03d", COORDINATES_CODE.indexOf(encode.charAt(i)) + 73));
             } else {
-                jwd.append(String.format("%02d", codeStr.indexOf(encode.charAt(i))));
+                jwd.append(String.format("%02d", COORDINATES_CODE.indexOf(encode.charAt(i))));
             }
         }
         return jwd.toString();
     }
 
     /****
-     * 解密
+     * 加密经纬度坐标
      *
      * @param decode
      * @return
      */
-    public static String encodeJWD(Integer decode) {
+    public static String encodeCoordinates(Integer decode) {
         StringBuilder jwd = new StringBuilder();
         int i = 230811316;
         int ge = i % 100;
@@ -130,8 +129,8 @@ public class TimeZoneUtils {
         shi = shi / 100 - 73;
         bai = bai / 100000;
         qian = qian / 10000000;
-        jwd.append(codeStr.charAt(qian)).append(codeStr.charAt(bai)).append(codeStr.charAt(shi))
-                .append(codeStr.charAt(ge));
+        jwd.append(COORDINATES_CODE.charAt(qian)).append(COORDINATES_CODE.charAt(bai)).append(COORDINATES_CODE.charAt(shi))
+                .append(COORDINATES_CODE.charAt(ge));
         return jwd.toString();
     }
 

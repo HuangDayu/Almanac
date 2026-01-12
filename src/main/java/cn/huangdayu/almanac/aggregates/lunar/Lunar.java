@@ -1,21 +1,17 @@
 package cn.huangdayu.almanac.aggregates.lunar;
 
-import cn.huangdayu.almanac.aggregates.BaseAlmanac;
+import cn.huangdayu.almanac.aggregates.AbstractAlmanac;
 import cn.huangdayu.almanac.aggregates.qishuo.QiShuo;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
 import cn.huangdayu.almanac.utils.AnnalsUtils;
 import cn.huangdayu.almanac.utils.ConstantsUtils;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 农历，阴历，以 [正月初一] 作为新年的第一天
  *
  * @author huangdayu create at 2021/1/21 10:53
  */
-@Getter
-@Setter
-public class Lunar extends BaseAlmanac {
+public class Lunar extends AbstractAlmanac {
 
     public Lunar(TimeZoneDTO timeZoneDTO, int julianDayForToday, QiShuo qiShuo) {
         //------------------------------------农历排月序计算------------------------------------//
@@ -178,23 +174,131 @@ public class Lunar extends BaseAlmanac {
         return year + zodiac + "年" + month + (month.length() < 2 ? "月" : "") + day + time;
     }
 
-    @Override
-    public String toString() {
-        return "LunarDTO{" +
-                "monthOffset=" + monthOffset +
-                ", month='" + month + '\'' +
-                ", day='" + day + '\'' +
-                ", time='" + time + '\'' +
-                ", daysOfMonth=" + daysOfMonth +
-                ", leapDesc='" + leapMonth + '\'' +
-                ", leapYear=" + leapYear +
-                ", nextMonth='" + nextMonth + '\'' +
-                ", kingChronology=" + kingChronology +
-                ", yearChronology=" + yearChronology +
-                ", monthChronology=" + monthChronology +
-                ", zodiac='" + zodiac + '\'' +
-                ", yearName='" + yearName + '\'' +
-                ", kingChronologyName='" + kingChronologyName + '\'' +
-                '}';
+    public int getMonthOffset() {
+        return monthOffset;
+    }
+
+    public void setMonthOffset(int monthOffset) {
+        this.monthOffset = monthOffset;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public int getDaysOfMonth() {
+        return daysOfMonth;
+    }
+
+    public void setDaysOfMonth(int daysOfMonth) {
+        this.daysOfMonth = daysOfMonth;
+    }
+
+    public Boolean getLeapMonth() {
+        return leapMonth;
+    }
+
+    public void setLeapMonth(Boolean leapMonth) {
+        this.leapMonth = leapMonth;
+    }
+
+    public Boolean getLeapYear() {
+        return leapYear;
+    }
+
+    public void setLeapYear(Boolean leapYear) {
+        this.leapYear = leapYear;
+    }
+
+    public String getNextMonth() {
+        return nextMonth;
+    }
+
+    public void setNextMonth(String nextMonth) {
+        this.nextMonth = nextMonth;
+    }
+
+    public int getKingChronology() {
+        return kingChronology;
+    }
+
+    public void setKingChronology(int kingChronology) {
+        this.kingChronology = kingChronology;
+    }
+
+    public int getYearChronology() {
+        return yearChronology;
+    }
+
+    public void setYearChronology(int yearChronology) {
+        this.yearChronology = yearChronology;
+    }
+
+    public int getMonthChronologySum() {
+        return monthChronologySum;
+    }
+
+    public void setMonthChronologySum(int monthChronologySum) {
+        this.monthChronologySum = monthChronologySum;
+    }
+
+    public int getMonthChronology() {
+        return monthChronology;
+    }
+
+    public void setMonthChronology(int monthChronology) {
+        this.monthChronology = monthChronology;
+    }
+
+    public String getZodiac() {
+        return zodiac;
+    }
+
+    public void setZodiac(String zodiac) {
+        this.zodiac = zodiac;
+    }
+
+    public String getYearName() {
+        return yearName;
+    }
+
+    public void setYearName(String yearName) {
+        this.yearName = yearName;
+    }
+
+    public String getKingChronologyName() {
+        return kingChronologyName;
+    }
+
+    public void setKingChronologyName(String kingChronologyName) {
+        this.kingChronologyName = kingChronologyName;
     }
 }

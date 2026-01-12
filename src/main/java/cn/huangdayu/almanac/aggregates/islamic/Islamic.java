@@ -1,17 +1,13 @@
 package cn.huangdayu.almanac.aggregates.islamic;
 
-import cn.huangdayu.almanac.aggregates.BaseAlmanac;
-import lombok.Getter;
-import lombok.Setter;
+import cn.huangdayu.almanac.aggregates.AbstractAlmanac;
 
 /**
  * 回历
  *
  * @author huangdayu create at 2021/1/21 10:51
  */
-@Setter
-@Getter
-public class Islamic extends BaseAlmanac {
+public class Islamic extends AbstractAlmanac {
 
     public Islamic(int julianDays) {
         // 以下算法使用Excel测试得到,测试时主要关心年临界与月临界
@@ -49,12 +45,28 @@ public class Islamic extends BaseAlmanac {
         return year + "年" + month + "月" + day + "日";
     }
 
-    @Override
-    public String toString() {
-        return "IslamicDTO{" +
-                "year=" + year +
-                ", month=" + month +
-                ", day=" + day +
-                '}';
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
     }
 }

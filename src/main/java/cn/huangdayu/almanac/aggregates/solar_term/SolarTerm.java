@@ -1,14 +1,12 @@
 package cn.huangdayu.almanac.aggregates.solar_term;
 
-import cn.huangdayu.almanac.aggregates.BaseAlmanac;
+import cn.huangdayu.almanac.aggregates.AbstractAlmanac;
 import cn.huangdayu.almanac.aggregates.astronomical.Astronomical;
 import cn.huangdayu.almanac.aggregates.qishuo.QiShuo;
 import cn.huangdayu.almanac.utils.AnnalsUtils;
 import cn.huangdayu.almanac.utils.CommonUtils;
 import cn.huangdayu.almanac.utils.ConstantsUtils;
 import cn.huangdayu.almanac.utils.JulianCalendarUtils;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +14,7 @@ import java.util.List;
 /**
  * @author huangdayu create at 2021/1/22 11:37
  */
-@Setter
-@Getter
-public class SolarTerm extends BaseAlmanac {
+public class SolarTerm extends AbstractAlmanac {
 
     private SolarTerm() {
     }
@@ -104,15 +100,67 @@ public class SolarTerm extends BaseAlmanac {
     }
 
 
-    @Override
-    public String toString() {
-        return "SolarTermDTO{" +
-                "index=" + index +
-                ", name='" + name + '\'' +
-                ", julianDay=" + julianDay +
-                ", afterDay=" + afterDay +
-                ", date='" + dateTime + '\'' +
-                ", julianTime=" + julianTime +
-                '}';
+    public Integer getIndex() {
+        return index;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getJulianDay() {
+        return julianDay;
+    }
+
+    public void setJulianDay(Integer julianDay) {
+        this.julianDay = julianDay;
+    }
+
+    public Integer getAfterDay() {
+        return afterDay;
+    }
+
+    public void setAfterDay(Integer afterDay) {
+        this.afterDay = afterDay;
+    }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public double getJulianTime() {
+        return julianTime;
+    }
+
+    public void setJulianTime(double julianTime) {
+        this.julianTime = julianTime;
+    }
+
+    public List<SolarTerm> getNext() {
+        return next;
+    }
+
+    public void setNext(List<SolarTerm> next) {
+        this.next = next;
     }
 }
