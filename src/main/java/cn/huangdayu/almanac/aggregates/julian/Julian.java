@@ -70,7 +70,7 @@ public class Julian extends AbstractAlmanac {
 
     @Override
     public InfoDTO getBaseInfo() {
-        return new InfoDTO("儒略日", "Julian", getDays() + " " + getConstellation());
+        return new InfoDTO("儒略日", "Julian", getDays() + "");
     }
 
     @Override
@@ -78,9 +78,6 @@ public class Julian extends AbstractAlmanac {
         LinkedList<InfoDTO> list = new LinkedList<>();
         list.add(new InfoDTO("儒略日", "days", days + ""));
         list.add(new InfoDTO("星座", "constellation", constellation));
-        list.add(new InfoDTO("月初", "firstJulianDayOfMonth", firstJulianDayOfMonth + ""));
-        list.add(new InfoDTO("月天数", "numberDayOfMonth", numberDayOfMonth + ""));
-        list.add(new InfoDTO("星期", "weekFirstDayOfMonth", weekFirstDayOfMonth + ""));
         return list;
     }
 

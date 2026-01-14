@@ -20,7 +20,7 @@ public class Holiday extends AbstractAlmanac {
         // 计算农历节日
         this.lunarHolidays = AnnalsUtils.getCalendarHolidays(lunar, solarTerm);
         // 计算节气伏梅
-        this.solarTermHolidays = AnnalsUtils.getSolarTermHolidays(solarTerm, era);
+        this.shuJiu = AnnalsUtils.getSolarTermHolidays(solarTerm, era);
         // 计算公历节日
         this.calendarHolidays = FestivalHolidayUtils.getCalendarHolidays(timeZoneDTO);
     }
@@ -39,9 +39,9 @@ public class Holiday extends AbstractAlmanac {
      */
     private String lunarHolidays;
     /**
-     * 节气
+     * 数九日
      */
-    private String solarTermHolidays;
+    private String shuJiu;
     /**
      * 放假日子(可用于日期数字置红)
      */
@@ -49,7 +49,7 @@ public class Holiday extends AbstractAlmanac {
 
     @Override
     public InfoDTO getBaseInfo() {
-        return new InfoDTO("节假日", "Holiday", calendarHolidays + " " + lunarHolidays + " " + solarTermHolidays);
+        return new InfoDTO("节假日", "Holiday", calendarHolidays + " " + lunarHolidays + " " + shuJiu);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class Holiday extends AbstractAlmanac {
         LinkedList<InfoDTO> list = new LinkedList<>();
         list.add(new InfoDTO("公历节日", "calendarHolidays", calendarHolidays));
         list.add(new InfoDTO("农历节日", "lunarHolidays", lunarHolidays));
-        list.add(new InfoDTO("当前节气", "solarTermHolidays", solarTermHolidays));
+        list.add(new InfoDTO("数九寒天", "solarTermHolidays", shuJiu));
         list.add(new InfoDTO("是否放假", "holiday", holiday + ""));
         return list;
     }
@@ -78,12 +78,12 @@ public class Holiday extends AbstractAlmanac {
         this.lunarHolidays = lunarHolidays;
     }
 
-    public String getSolarTermHolidays() {
-        return solarTermHolidays;
+    public String getShuJiu() {
+        return shuJiu;
     }
 
-    public void setSolarTermHolidays(String solarTermHolidays) {
-        this.solarTermHolidays = solarTermHolidays;
+    public void setShuJiu(String shuJiu) {
+        this.shuJiu = shuJiu;
     }
 
     public boolean isHoliday() {

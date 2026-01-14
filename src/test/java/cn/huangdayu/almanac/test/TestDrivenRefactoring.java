@@ -162,7 +162,7 @@ public class TestDrivenRefactoring {
         map.put("黄历", era.getBaseInfo().getValue());
         map.put("节气", solarTerm.getDetails());
         map.put("月相", moonPhase.getDetails());
-        map.put("儒略历", julian.getBaseInfo().getValue());
+        map.put("儒略历", julian.getBaseInfo().getValue() + " " + julian.getConstellation());
         map.put("回历", islamic.getBaseInfo().getValue());
         map.put("节假日", holiday.getBaseInfo().getValue());
         map.put("经度", timeZoneDTO.getCoordinates().getLongitudeStr());
@@ -198,7 +198,7 @@ public class TestDrivenRefactoring {
         map.put("生肖", almanacDTO.getLunar().getZodiac());
         map.put("节日", almanacDTO.getHoliday().getLunarHolidays());
         map.put("假日", almanacDTO.getHoliday().getCalendarHolidays());
-        map.put("其他节日", almanacDTO.getHoliday().getSolarTermHolidays());
+        map.put("其他节日", almanacDTO.getHoliday().getShuJiu());
         map.put("经度", almanacDTO.getTimeZoneDTO().getCoordinates().getLongitudeStr());
         map.put("纬度", almanacDTO.getTimeZoneDTO().getCoordinates().getLatitudeStr());
         map.put("时区", almanacDTO.getTimeZoneDTO().getTimeZone());

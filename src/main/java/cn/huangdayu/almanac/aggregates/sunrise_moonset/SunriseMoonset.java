@@ -59,7 +59,7 @@ public class SunriseMoonset extends AbstractAlmanac {
 
     @Override
     public InfoDTO getBaseInfo() {
-        return new InfoDTO("日出日落", "sunriseMoonset", sunRiseTime + " " + sunSetTime);
+        return new InfoDTO("日出月落", "sunriseMoonset", sunRiseTime + " " + moonSetTime);
     }
 
     @Override

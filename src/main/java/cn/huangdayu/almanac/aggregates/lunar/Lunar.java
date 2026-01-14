@@ -185,17 +185,12 @@ public class Lunar extends AbstractAlmanac {
         list.add(new InfoDTO("农历月","month",month));
         list.add(new InfoDTO("农历日","day",day));
         list.add(new InfoDTO("农历时","time",time));
-        list.add(new InfoDTO("月天数","days",daysOfMonth + ""));
-        list.add(new InfoDTO("闰月","leapMonth",leapMonth + ""));
-        list.add(new InfoDTO("闰年","leapYear",leapYear + ""));
-        list.add(new InfoDTO("农历年","yearChronology",yearChronology + ""));
-        list.add(new InfoDTO("月数","monthChronologySum",monthChronologySum + ""));
-        list.add(new InfoDTO("农历几月","monthChronology",monthChronology + ""));
-        list.add(new InfoDTO("生肖","zodiac",zodiac));
-        list.add(new InfoDTO("年号","yearName",yearName));
+        list.add(new InfoDTO("是否闰月","leapMonth",leapMonth + ""));
+        list.add(new InfoDTO("是否闰年","leapYear",leapYear + ""));
+        list.add(new InfoDTO("农历生肖","zodiac",zodiac));
+        list.add(new InfoDTO("皇帝年号","yearName",yearName));
         list.add(new InfoDTO("黄帝纪年","kingChronology",kingChronology + ""));
-        list.add(new InfoDTO("皇帝纪年","kingChronologyName",kingChronologyName));
-
+        list.add(new InfoDTO("开元纪年","kingChronologyName",kingChronologyName));
         return list;
     }
 
