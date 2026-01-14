@@ -204,7 +204,7 @@ public class TestDrivenRefactoring {
         map.put("生肖", almanacDTO.getLunar().getZodiac());
         map.put("节日", almanacDTO.getHoliday().getLunarHolidays());
         map.put("假日", almanacDTO.getHoliday().getCalendarHolidays());
-        map.put("其他节日", almanacDTO.getHoliday().getShuJiu());
+        map.put("其他节日", almanacDTO.getHoliday().getSolarTermHolidays());
         map.put("经度", almanacDTO.getTimeZoneDTO().getCoordinates().getLongitudeStr());
         map.put("纬度", almanacDTO.getTimeZoneDTO().getCoordinates().getLatitudeStr());
         map.put("时区", almanacDTO.getTimeZoneDTO().getTimeZone());

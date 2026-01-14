@@ -154,7 +154,7 @@ public class AnnalsUtils {
      * 计算农历节日
      *
      */
-    public static String getCalendarHolidays(Lunar lunar, SolarTerm solarTerm) {
+    public static String getCalendarHolidays(Lunar lunar) {
         String calendarHolidays = "";
         // 按农历日期查找重量点节假日
         String date = lunar.getMonth() + (lunar.getMonth().length() < 2 ? "月" : "") + lunar.getDay();
@@ -163,9 +163,6 @@ public class AnnalsUtils {
             if (fun == null || Boolean.TRUE.equals(fun.apply(lunar))) {
                 calendarHolidays = holidayMap.getOrDefault(date, "");
             }
-        }
-        if (solarTerm.getName() != null && !"".equals(solarTerm.getName())) {
-            calendarHolidays += " " + solarTerm.getName() + " ";
         }
         return calendarHolidays;
     }

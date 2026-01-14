@@ -18,9 +18,9 @@ public class Holiday extends AbstractAlmanac {
 
     public Holiday(TimeZoneDTO timeZoneDTO, Lunar lunar, SolarTerm solarTerm, Era era) {
         // 计算农历节日
-        this.lunarHolidays = AnnalsUtils.getCalendarHolidays(lunar, solarTerm);
+        this.lunarHolidays = AnnalsUtils.getCalendarHolidays(lunar);
         // 计算节气伏梅
-        this.shuJiu = AnnalsUtils.getSolarTermHolidays(solarTerm, era);
+        this.solarTermHolidays = AnnalsUtils.getSolarTermHolidays(solarTerm, era);
         // 计算公历节日
         this.calendarHolidays = FestivalHolidayUtils.getCalendarHolidays(timeZoneDTO);
     }
@@ -41,7 +41,7 @@ public class Holiday extends AbstractAlmanac {
     /**
      * 数九日
      */
-    private String shuJiu;
+    private String solarTermHolidays;
     /**
      * 放假日子(可用于日期数字置红)
      */
@@ -49,7 +49,7 @@ public class Holiday extends AbstractAlmanac {
 
     @Override
     public InfoDTO getBaseInfo() {
-        return new InfoDTO("节假日", "Holiday", calendarHolidays + " " + lunarHolidays + " " + shuJiu);
+        return new InfoDTO("节假日", "Holiday", calendarHolidays + " " + lunarHolidays + " " + solarTermHolidays);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class Holiday extends AbstractAlmanac {
         LinkedList<InfoDTO> list = new LinkedList<>();
         list.add(new InfoDTO("公历节日", "calendarHolidays", calendarHolidays));
         list.add(new InfoDTO("农历节日", "lunarHolidays", lunarHolidays));
-        list.add(new InfoDTO("数九寒天", "solarTermHolidays", shuJiu));
+        list.add(new InfoDTO("数九伏梅", "solarTermHolidays", solarTermHolidays));
         list.add(new InfoDTO("是否放假", "holiday", holiday + ""));
         return list;
     }
@@ -78,12 +78,12 @@ public class Holiday extends AbstractAlmanac {
         this.lunarHolidays = lunarHolidays;
     }
 
-    public String getShuJiu() {
-        return shuJiu;
+    public String getSolarTermHolidays() {
+        return solarTermHolidays;
     }
 
-    public void setShuJiu(String shuJiu) {
-        this.shuJiu = shuJiu;
+    public void setSolarTermHolidays(String solarTermHolidays) {
+        this.solarTermHolidays = solarTermHolidays;
     }
 
     public boolean isHoliday() {
