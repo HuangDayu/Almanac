@@ -59,20 +59,20 @@ public class SunriseMoonset extends AbstractAlmanac {
 
     @Override
     public InfoDTO getBaseInfo() {
-        return new InfoDTO("日出月落", "sunriseMoonset", sunRiseTime + " " + moonSetTime);
+        return new InfoDTO("日出月落", "SunriseMoonset", sunRiseTime + " " + moonSetTime);
     }
 
     @Override
     public LinkedList<InfoDTO> getAllInfo() {
         LinkedList<InfoDTO> list = new LinkedList<>();
-        list.add(new InfoDTO("天亮", "dawn", dawnTime));
-        list.add(new InfoDTO("日出", "sunRise", sunRiseTime));
-        list.add(new InfoDTO("日中", "midDay", midDayTime));
-        list.add(new InfoDTO("日落", "sunSet", sunSetTime));
-        list.add(new InfoDTO("天黑", "dark", darkTime));
-        list.add(new InfoDTO("月出", "moonRise", moonRiseTime));
-        list.add(new InfoDTO("月中", "moonMiddle", moonMiddleTime));
-        list.add(new InfoDTO("月落", "moonSet", moonSetTime));
+        list.add(new InfoDTO("天亮", "dawnTime", dawnTime));
+        list.add(new InfoDTO("日出", "sunRiseTime", sunRiseTime));
+        list.add(new InfoDTO("日中", "midDayTime", midDayTime));
+        list.add(new InfoDTO("日落", "sunSetTime", sunSetTime));
+        list.add(new InfoDTO("天黑", "darkTime", darkTime));
+        list.add(new InfoDTO("月出", "moonRiseTime", moonRiseTime));
+        list.add(new InfoDTO("月中", "moonMiddleTime", moonMiddleTime));
+        list.add(new InfoDTO("月落", "moonSetTime", moonSetTime));
         list.add(new InfoDTO("昼长", "diurnalTime", diurnalTime));
         list.add(new InfoDTO("夜长", "nightTime", nightTime));
         return list;
