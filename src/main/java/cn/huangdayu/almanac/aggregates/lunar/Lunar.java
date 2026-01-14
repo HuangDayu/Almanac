@@ -2,9 +2,12 @@ package cn.huangdayu.almanac.aggregates.lunar;
 
 import cn.huangdayu.almanac.aggregates.AbstractAlmanac;
 import cn.huangdayu.almanac.aggregates.qishuo.QiShuo;
+import cn.huangdayu.almanac.dto.InfoDTO;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
 import cn.huangdayu.almanac.utils.AnnalsUtils;
 import cn.huangdayu.almanac.utils.ConstantsUtils;
+
+import java.util.LinkedList;
 
 /**
  * 农历，阴历，以 [正月初一] 作为新年的第一天
@@ -92,7 +95,7 @@ public class Lunar extends AbstractAlmanac {
         // 相对于1998年12月7(大雪)的月数,900000为正数基数
         value = mk + (int) Math.floor((qiShuo.getZhongQi()[12] + 390) / 365.2422) * 12 + 900000;
         this.setMonthChronologySum(value);
-        // 农历纪月
+        // 农历几月
         this.setMonthChronology(value % 12);
     }
 
@@ -102,20 +105,20 @@ public class Lunar extends AbstractAlmanac {
      */
     private int monthOffset;
     /**
-     * 干支年
+     * 年
      */
     private String year;
     /**
-     * 农历月名称
+     * 月
      */
     private String month;
     /**
-     * 农历日名称
+     * 日
      */
     private String day;
 
     /**
-     * 农历时
+     * 时
      */
     private String time;
     /**
@@ -149,7 +152,7 @@ public class Lunar extends AbstractAlmanac {
     public int monthChronologySum;
 
     /**
-     * 农历月,农历纪月
+     * 农历月,农历几月
      */
     private int monthChronology;
 
@@ -170,8 +173,30 @@ public class Lunar extends AbstractAlmanac {
 
 
     @Override
-    public String getInfo() {
-        return year + zodiac + "年" + month + (month.length() < 2 ? "月" : "") + day + time;
+    public InfoDTO getBaseInfo() {
+        return new InfoDTO("农历", "Lunar", year + zodiac + "年" + month + (month.length() < 2 ? "月" : "") + day + time);
+    }
+
+
+    @Override
+    public LinkedList<InfoDTO> getAllInfo() {
+        LinkedList<InfoDTO> list = new LinkedList<>();
+        list.add(new InfoDTO("农历年","year",year));
+        list.add(new InfoDTO("农历月","month",month));
+        list.add(new InfoDTO("农历日","day",day));
+        list.add(new InfoDTO("农历时","time",time));
+        list.add(new InfoDTO("月天数","days",daysOfMonth + ""));
+        list.add(new InfoDTO("闰月","leapMonth",leapMonth + ""));
+        list.add(new InfoDTO("闰年","leapYear",leapYear + ""));
+        list.add(new InfoDTO("农历年","yearChronology",yearChronology + ""));
+        list.add(new InfoDTO("月数","monthChronologySum",monthChronologySum + ""));
+        list.add(new InfoDTO("农历几月","monthChronology",monthChronology + ""));
+        list.add(new InfoDTO("生肖","zodiac",zodiac));
+        list.add(new InfoDTO("年号","yearName",yearName));
+        list.add(new InfoDTO("黄帝纪年","kingChronology",kingChronology + ""));
+        list.add(new InfoDTO("皇帝纪年","kingChronologyName",kingChronologyName));
+
+        return list;
     }
 
     public int getMonthOffset() {

@@ -1,6 +1,9 @@
 package cn.huangdayu.almanac.aggregates.islamic;
 
 import cn.huangdayu.almanac.aggregates.AbstractAlmanac;
+import cn.huangdayu.almanac.dto.InfoDTO;
+
+import java.util.LinkedList;
 
 /**
  * 回历
@@ -41,8 +44,17 @@ public class Islamic extends AbstractAlmanac {
     private int day;
 
     @Override
-    public String getInfo() {
-        return year + "年" + month + "月" + day + "日";
+    public InfoDTO getBaseInfo() {
+        return new InfoDTO("回历", "Islamic", year + "年" + month + "月" + day + "日");
+    }
+
+    @Override
+    public LinkedList<InfoDTO> getAllInfo() {
+        LinkedList<InfoDTO> list = new LinkedList<>();
+        list.add(new InfoDTO("回历年", "year", year + ""));
+        list.add(new InfoDTO("回历月", "month", month + ""));
+        list.add(new InfoDTO("回历日", "day", day + ""));
+        return list;
     }
 
 

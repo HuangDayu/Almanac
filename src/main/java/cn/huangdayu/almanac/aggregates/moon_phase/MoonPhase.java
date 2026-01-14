@@ -3,11 +3,13 @@ package cn.huangdayu.almanac.aggregates.moon_phase;
 import cn.huangdayu.almanac.aggregates.AbstractAlmanac;
 import cn.huangdayu.almanac.aggregates.astronomical.Astronomical;
 import cn.huangdayu.almanac.aggregates.julian.Julian;
+import cn.huangdayu.almanac.dto.InfoDTO;
 import cn.huangdayu.almanac.utils.AnnalsUtils;
 import cn.huangdayu.almanac.utils.CommonUtils;
 import cn.huangdayu.almanac.utils.JulianCalendarUtils;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -52,18 +54,26 @@ public class MoonPhase extends AbstractAlmanac {
      * 月相名称
      */
     private String name;
+    /**
+     * 月相时刻(儒略日)
+     */
     private Integer julianDay;
+    /**
+     * 相离天数
+     */
     private Integer afterDay;
     /**
      * 月相时间串
      */
     private String dateTime;
-    private String desc;
     /**
      * 月相时刻(儒略日)
      */
     private double julianTime;
 
+    /**
+     * 下一个月相
+     */
     private List<MoonPhase> next;
 
     public MoonPhase getNextOne() {
@@ -76,12 +86,22 @@ public class MoonPhase extends AbstractAlmanac {
     }
 
     public String getDetails() {
-        return name != null ? getInfo() + (afterDay != 0 ? " 至今" + afterDay + "天" : " 今天") : getNextOne().getDetails();
+        return name != null ? name + " " + dateTime + (afterDay != 0 ? " " + afterDay + "天" + (afterDay > 0 ? "后" : " 前") : " 今天") : getNextOne().getDetails();
     }
 
     @Override
-    public String getInfo() {
-        return name != null ? name + " " + dateTime : getNextOne().getInfo();
+    public InfoDTO getBaseInfo() {
+        return name != null ? new InfoDTO("月相", "MoonPhase", name + " " + dateTime) : getNextOne().getBaseInfo();
+    }
+
+    @Override
+    public LinkedList<InfoDTO> getAllInfo() {
+        LinkedList<InfoDTO> list = new LinkedList<>();
+        list.add(new InfoDTO("月相名称", "moonPhase", name));
+        list.add(new InfoDTO("月相时间", "dateTime", dateTime));
+        list.add(new InfoDTO("月相间隔", "afterDay", afterDay + ""));
+        list.add(new InfoDTO("下个月相", "nextMoonPhase", getNextOne().getDetails()));
+        return list;
     }
 
 
@@ -123,14 +143,6 @@ public class MoonPhase extends AbstractAlmanac {
 
     public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
     }
 
     public double getJulianTime() {

@@ -2,8 +2,11 @@ package cn.huangdayu.almanac.aggregates.era;
 
 import cn.huangdayu.almanac.aggregates.AbstractAlmanac;
 import cn.huangdayu.almanac.aggregates.lunar.Lunar;
+import cn.huangdayu.almanac.dto.InfoDTO;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
 import cn.huangdayu.almanac.utils.AnnalsUtils;
+
+import java.util.LinkedList;
 
 /**
  * 黄历，天干地支，以 [立春]  作为新年的第一天
@@ -48,8 +51,18 @@ public class Era extends AbstractAlmanac {
     private String time;
 
     @Override
-    public String getInfo() {
-        return year + "年" + month + "月" + day + "日" + time + "时";
+    public InfoDTO getBaseInfo() {
+        return new InfoDTO("黄历", "Era", year + "年" + month + "月" + day + "日" + time + "时");
+    }
+
+    @Override
+    public LinkedList<InfoDTO> getAllInfo() {
+        LinkedList<InfoDTO> list = new LinkedList<>();
+        list.add(new InfoDTO("干支年", "year", year));
+        list.add(new InfoDTO("干支月", "month", month));
+        list.add(new InfoDTO("干支日", "day", day));
+        list.add(new InfoDTO("干支时", "time", time));
+        return list;
     }
 
     public String getYear() {

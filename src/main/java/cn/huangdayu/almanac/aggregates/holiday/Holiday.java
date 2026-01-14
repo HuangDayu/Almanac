@@ -4,9 +4,12 @@ import cn.huangdayu.almanac.aggregates.AbstractAlmanac;
 import cn.huangdayu.almanac.aggregates.era.Era;
 import cn.huangdayu.almanac.aggregates.lunar.Lunar;
 import cn.huangdayu.almanac.aggregates.solar_term.SolarTerm;
+import cn.huangdayu.almanac.dto.InfoDTO;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
 import cn.huangdayu.almanac.utils.AnnalsUtils;
 import cn.huangdayu.almanac.utils.FestivalHolidayUtils;
+
+import java.util.LinkedList;
 
 /**
  * @author huangdayu create at 2021/1/21 11:11
@@ -22,9 +25,9 @@ public class Holiday extends AbstractAlmanac {
         this.calendarHolidays = FestivalHolidayUtils.getCalendarHolidays(timeZoneDTO);
     }
 
-    public Holiday(String lunarHolidays, int flag) {
+    public Holiday(String lunarHolidays, boolean holiday) {
         this.lunarHolidays = lunarHolidays;
-        this.flag = flag;
+        this.holiday = holiday;
     }
 
     /**
@@ -42,11 +45,21 @@ public class Holiday extends AbstractAlmanac {
     /**
      * 放假日子(可用于日期数字置红)
      */
-    private int flag;
+    private boolean holiday;
 
     @Override
-    public String getInfo() {
-        return calendarHolidays + " " + lunarHolidays + " " + solarTermHolidays;
+    public InfoDTO getBaseInfo() {
+        return new InfoDTO("节假日", "Holiday", calendarHolidays + " " + lunarHolidays + " " + solarTermHolidays);
+    }
+
+    @Override
+    public LinkedList<InfoDTO> getAllInfo() {
+        LinkedList<InfoDTO> list = new LinkedList<>();
+        list.add(new InfoDTO("公历节日", "calendarHolidays", calendarHolidays));
+        list.add(new InfoDTO("农历节日", "lunarHolidays", lunarHolidays));
+        list.add(new InfoDTO("当前节气", "solarTermHolidays", solarTermHolidays));
+        list.add(new InfoDTO("是否放假", "holiday", holiday + ""));
+        return list;
     }
 
     public String getCalendarHolidays() {
@@ -73,12 +86,12 @@ public class Holiday extends AbstractAlmanac {
         this.solarTermHolidays = solarTermHolidays;
     }
 
-    public int getFlag() {
-        return flag;
+    public boolean isHoliday() {
+        return holiday;
     }
 
-    public void setFlag(int flag) {
-        this.flag = flag;
+    public void setHoliday(boolean holiday) {
+        this.holiday = holiday;
     }
 }
 // Expected : | `节假日` |   一九第9天  |  『二九』   |   三九第3天  |  『二九』   |  『三九』   |

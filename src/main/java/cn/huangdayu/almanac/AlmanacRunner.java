@@ -9,9 +9,8 @@ import java.util.GregorianCalendar;
  */
 public class AlmanacRunner {
     public static void main(String[] args) {
-        AlmanacApp almanacApp = new AlmanacApp(new TimeZoneDTO("广东省", "徐闻县", new GregorianCalendar()));
-
-        almanacApp.dayCalendar().toMap().forEach((k, v) -> System.out.println(k + " : " + v));
+        AlmanacService almanacService = new AlmanacService(new TimeZoneDTO("广东省", "徐闻县", new GregorianCalendar()));
+        almanacService.dayCalendar().getAllInfo().forEach((k, v) -> System.out.println(k + " : " + v));
 
     }
 }

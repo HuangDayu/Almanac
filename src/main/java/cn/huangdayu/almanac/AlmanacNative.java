@@ -1,6 +1,5 @@
 package cn.huangdayu.almanac;
 
-import cn.huangdayu.almanac.dto.AlmanacDTO;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
 import cn.huangdayu.almanac.utils.AlmanacUtils;
 import com.alibaba.fastjson.JSON;
@@ -10,7 +9,6 @@ import org.graalvm.nativeimage.c.type.CCharPointer;
 import org.graalvm.nativeimage.c.type.CTypeConversion;
 
 import java.util.GregorianCalendar;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
@@ -19,14 +17,14 @@ import java.util.function.Function;
 public class AlmanacNative {
 
     public static void main(String[] args) {
-        AlmanacApp almanacApp = new AlmanacApp(new TimeZoneDTO("广东省", "徐闻县", new GregorianCalendar()));
-        almanacApp.dayCalendar().toMap().forEach((k, v) -> System.out.println(k + " : " + v));
+        AlmanacService almanacApp = new AlmanacService(new TimeZoneDTO("广东省", "徐闻县", new GregorianCalendar()));
+        almanacApp.dayCalendar().getAllInfo().forEach((k, v) -> System.out.println(k + " : " + v));
     }
 
     @CEntryPoint(name = "printlnCalendar")
     public static void printlnCalendar(IsolateThread isolateThread) {
         AlmanacUtils.ofDay(new TimeZoneDTO("广东省", "徐闻县", new GregorianCalendar()))
-                .toMap().forEach((k, v) -> System.out.println(k + " : " + v));
+                .getAllInfo().forEach((k, v) -> System.out.println(k + " : " + v));
     }
 
     @CEntryPoint(name = "defaultCalendar")

@@ -3,12 +3,14 @@ package cn.huangdayu.almanac.aggregates.solar_term;
 import cn.huangdayu.almanac.aggregates.AbstractAlmanac;
 import cn.huangdayu.almanac.aggregates.astronomical.Astronomical;
 import cn.huangdayu.almanac.aggregates.qishuo.QiShuo;
+import cn.huangdayu.almanac.dto.InfoDTO;
 import cn.huangdayu.almanac.utils.AnnalsUtils;
 import cn.huangdayu.almanac.utils.CommonUtils;
 import cn.huangdayu.almanac.utils.ConstantsUtils;
 import cn.huangdayu.almanac.utils.JulianCalendarUtils;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -59,10 +61,25 @@ public class SolarTerm extends AbstractAlmanac {
     }
 
     private Integer index;
+    /**
+     * 节气名称
+     */
     private String name;
+    /**
+     * 节气时刻(儒略日)
+     */
     private Integer julianDay;
+    /**
+     * 相离天数
+     */
     private Integer afterDay;
+    /**
+     * 节气时间串
+     */
     private String dateTime;
+    /**
+     * 节气描述
+     */
     private String desc;
     /**
      * 节气时刻(儒略日)
@@ -91,12 +108,22 @@ public class SolarTerm extends AbstractAlmanac {
     }
 
     public String getDetails() {
-        return name != null ? getInfo() + (afterDay != 0 ? " 至今" + afterDay + "天" : " 今天") : getNextOne().getDetails();
+        return name != null ? name + " " + dateTime + (afterDay != 0 ? " " + afterDay + "天" + (afterDay > 0 ? "后" : " 前") : " 今天") : getNextOne().getDetails();
     }
 
     @Override
-    public String getInfo() {
-        return name != null ? name + " " + dateTime : getNextOne().getInfo();
+    public InfoDTO getBaseInfo() {
+        return name != null ? new InfoDTO("节气", "SolarTerm", name + " " + dateTime) : getNextOne().getBaseInfo();
+    }
+
+    @Override
+    public LinkedList<InfoDTO> getAllInfo() {
+        LinkedList<InfoDTO> list = new LinkedList<>();
+        list.add(new InfoDTO("节气名称", "solarTerm", name));
+        list.add(new InfoDTO("节气时间", "dateTime", dateTime));
+        list.add(new InfoDTO("节气间隔", "afterDay", afterDay + ""));
+        list.add(new InfoDTO("下个节气", "nextSolarTerm", getNextOne().getDetails()));
+        return list;
     }
 
 

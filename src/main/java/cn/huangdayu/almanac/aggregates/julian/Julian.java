@@ -2,9 +2,12 @@ package cn.huangdayu.almanac.aggregates.julian;
 
 import cn.huangdayu.almanac.aggregates.AbstractAlmanac;
 import cn.huangdayu.almanac.aggregates.qishuo.QiShuo;
+import cn.huangdayu.almanac.dto.InfoDTO;
 import cn.huangdayu.almanac.utils.AnnalsUtils;
 import cn.huangdayu.almanac.utils.CommonUtils;
 import cn.huangdayu.almanac.utils.JulianCalendarUtils;
+
+import java.util.LinkedList;
 
 /**
  * 儒略日
@@ -55,6 +58,9 @@ public class Julian extends AbstractAlmanac {
      */
     private int weekFirstDayOfMonth;
 
+    /**
+     * 儒略日
+     */
     private Integer days;
 
     /**
@@ -63,8 +69,19 @@ public class Julian extends AbstractAlmanac {
     private String constellation;
 
     @Override
-    public String getInfo() {
-        return getDays() + " " + getConstellation();
+    public InfoDTO getBaseInfo() {
+        return new InfoDTO("儒略日", "Julian", getDays() + " " + getConstellation());
+    }
+
+    @Override
+    public LinkedList<InfoDTO> getAllInfo() {
+        LinkedList<InfoDTO> list = new LinkedList<>();
+        list.add(new InfoDTO("儒略日", "days", days + ""));
+        list.add(new InfoDTO("星座", "constellation", constellation));
+        list.add(new InfoDTO("月初", "firstJulianDayOfMonth", firstJulianDayOfMonth + ""));
+        list.add(new InfoDTO("月天数", "numberDayOfMonth", numberDayOfMonth + ""));
+        list.add(new InfoDTO("星期", "weekFirstDayOfMonth", weekFirstDayOfMonth + ""));
+        return list;
     }
 
     public int getFirstJulianDayOfMonth() {

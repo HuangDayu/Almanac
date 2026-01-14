@@ -1,6 +1,7 @@
 package cn.huangdayu.almanac.aggregates.astronomical;
 
 import cn.huangdayu.almanac.aggregates.AbstractAlmanac;
+import cn.huangdayu.almanac.dto.InfoDTO;
 import cn.huangdayu.almanac.utils.AstronomicalUtils;
 import cn.huangdayu.almanac.utils.CommonUtils;
 
@@ -35,8 +36,8 @@ public class Astronomical extends AbstractAlmanac {
     private double lunarRetina;
 
     @Override
-    public String getInfo() {
-        return solarRetina + " " + lunarRetina;
+    public InfoDTO getBaseInfo() {
+        return new InfoDTO("天文历", "Astronomical", solarRetina + " " + lunarRetina);
     }
 
     public double getSolarRetina() {

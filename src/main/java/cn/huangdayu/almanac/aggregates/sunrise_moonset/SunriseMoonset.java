@@ -1,8 +1,11 @@
 package cn.huangdayu.almanac.aggregates.sunrise_moonset;
 
 import cn.huangdayu.almanac.aggregates.AbstractAlmanac;
+import cn.huangdayu.almanac.dto.InfoDTO;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
 import cn.huangdayu.almanac.utils.SunMoonUtils;
+
+import java.util.LinkedList;
 
 /**
  * @author huangdayu create at 2021/1/21 11:08
@@ -12,6 +15,7 @@ public class SunriseMoonset extends AbstractAlmanac {
     public SunriseMoonset(TimeZoneDTO timeZoneDTO) {
         SunMoonUtils.init(timeZoneDTO, this);
     }
+
     /**
      * 日出
      */
@@ -54,8 +58,24 @@ public class SunriseMoonset extends AbstractAlmanac {
     private String moonMiddleTime;
 
     @Override
-    public String getInfo() {
-        return sunRiseTime + " " + sunSetTime;
+    public InfoDTO getBaseInfo() {
+        return new InfoDTO("日出日落", "sunriseMoonset", sunRiseTime + " " + sunSetTime);
+    }
+
+    @Override
+    public LinkedList<InfoDTO> getAllInfo() {
+        LinkedList<InfoDTO> list = new LinkedList<>();
+        list.add(new InfoDTO("天亮", "dawn", dawnTime));
+        list.add(new InfoDTO("日出", "sunRise", sunRiseTime));
+        list.add(new InfoDTO("日中", "midDay", midDayTime));
+        list.add(new InfoDTO("日落", "sunSet", sunSetTime));
+        list.add(new InfoDTO("天黑", "dark", darkTime));
+        list.add(new InfoDTO("月出", "moonRise", moonRiseTime));
+        list.add(new InfoDTO("月中", "moonMiddle", moonMiddleTime));
+        list.add(new InfoDTO("月落", "moonSet", moonSetTime));
+        list.add(new InfoDTO("昼长", "diurnalTime", diurnalTime));
+        list.add(new InfoDTO("夜长", "nightTime", nightTime));
+        return list;
     }
 
     public String getSunRiseTime() {

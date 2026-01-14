@@ -102,7 +102,7 @@ public class AlmanacUtils {
             // 计算月相
             MoonPhase moonPhase = new MoonPhase(julianDayForToday, julianOfMonth, astronomical);
 
-            almanacDTOS[i] = new AlmanacDTO(lunar, era, holiday, islamic, julian, solarTermDTO, sunriseMoonset, timeZoneForToday, moonPhase);
+            almanacDTOS[i] = new AlmanacDTO(timeZoneForToday, lunar, era, holiday, islamic, julian, solarTermDTO, sunriseMoonset, moonPhase);
         }
         return almanacDTOS;
     }
