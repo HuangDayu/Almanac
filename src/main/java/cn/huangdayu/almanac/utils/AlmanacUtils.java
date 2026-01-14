@@ -94,7 +94,7 @@ public class AlmanacUtils {
             // 计算节气
             SolarTerm solarTermDTO = new SolarTerm(julianDayForToday, qiShuo, astronomical);
             // 计算黄历 (天干地支，干支纪年以【立春】定年首)
-            Era era = new Era(julianDayForToday, lunar, timeZoneForToday);
+            Era era = new Era(julianDayForToday, qiShuo, timeZoneForToday);
             // 计算星座和儒略日
             Julian julian = new Julian(julianDayForToday, qiShuo);
             // 计算节假日
