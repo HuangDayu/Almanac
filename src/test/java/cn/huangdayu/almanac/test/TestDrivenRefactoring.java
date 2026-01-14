@@ -2,6 +2,7 @@ package cn.huangdayu.almanac.test;
 
 import cn.huangdayu.almanac.AlmanacService;
 import cn.huangdayu.almanac.dto.AlmanacDTO;
+import cn.huangdayu.almanac.dto.CoordinatesDTO;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
 import cn.huangdayu.almanac.utils.AlmanacUtils;
 import org.junit.Assert;
@@ -25,11 +26,11 @@ public class TestDrivenRefactoring {
     };
 
     TimeZoneDTO[] timeZoneDTOS2 = {
-            new TimeZoneDTO(110.16d, 20.33d, "-211-1-1 11:10:10"),
-            new TimeZoneDTO(110.35d, 21.26d, "1-1-1 11:10:10"),
-            new TimeZoneDTO(110.16d, 20.33d, "1995-08-12 11:10:10"),
-            new TimeZoneDTO(110.16d, 20.33d, "2018-11-01 11:06:48"),
-            new TimeZoneDTO(113.26d, 23.13d, "2021-10-11 11:10:10"),
+            new TimeZoneDTO(new CoordinatesDTO("广东省", "徐闻县", 110.1666667d, 20.3333332d), "-211-1-1 11:10:10"),
+            new TimeZoneDTO(new CoordinatesDTO("广东省", "湛江市", 110.3500000d, 21.2666667d), "1-1-1 11:10:10"),
+            new TimeZoneDTO(new CoordinatesDTO("广东省", "徐闻县", 110.1666667d, 20.3333332d), "1995-08-12 11:10:10"),
+            new TimeZoneDTO(new CoordinatesDTO("广东省", "徐闻县", 110.1666667d, 20.3333332d), "2018-11-01 11:06:48"),
+            new TimeZoneDTO(new CoordinatesDTO("广东省", "广州市", 113.2666667d, 23.1333332d), "2021-10-11 11:10:10"),
     };
 
     @Test

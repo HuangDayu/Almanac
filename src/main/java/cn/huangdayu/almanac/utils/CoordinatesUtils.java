@@ -57,6 +57,10 @@ public class CoordinatesUtils {
         throw new AlmanacException("地址输入错误,地址只能到县级。请确保地址：" + province + area + " 是正确的。", null);
     }
 
+    public static String getPortName(double latitude, double longitude) {
+        return getPortName(PropertiesUtils.getLatitudeProperties(), PropertiesUtils.getLongitudeProperties(), latitude, longitude);
+    }
+
     public static String getPortName(Properties properLat, Properties properLong, double latitude, double longitude) {
         // getProperties(setStr(setTwoPointDouble(x),setTwoPointDouble(y)))
         double x = getTwoPointDouble(latitude);
@@ -101,8 +105,6 @@ public class CoordinatesUtils {
     }
 
 
-
-
     /****
      * 解密经纬度坐标
      *
@@ -142,7 +144,7 @@ public class CoordinatesUtils {
         return jwd.toString();
     }
 
-    public static String getTimeZone(GregorianCalendar gregorianCalendar){
+    public static String getTimeZone(GregorianCalendar gregorianCalendar) {
         String format = DateTimeUtils.formatDateByFormat(gregorianCalendar, "Z");// +0800
         if (format != null && format.length() > 0) {
             String value = format.substring(1, 3);
@@ -155,7 +157,7 @@ public class CoordinatesUtils {
             if (format.contains("-")) {
                 return format + " 西" + ConstantsUtils.TIMEZONE[i - 1] + "区";
             } else {
-                return  format + " 东" + ConstantsUtils.TIMEZONE[i - 1] + "区";
+                return format + " 东" + ConstantsUtils.TIMEZONE[i - 1] + "区";
             }
         }
         return null;

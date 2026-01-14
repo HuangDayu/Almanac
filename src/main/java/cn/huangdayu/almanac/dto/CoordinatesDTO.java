@@ -15,15 +15,11 @@ import static cn.huangdayu.almanac.utils.CommonUtils.setStringPointDouble;
 public class CoordinatesDTO {
 
     public CoordinatesDTO(String province, String area) {
-        this.province = province;
-        this.area = area;
-        double[] coordinates = CoordinatesUtils.decodeCoordinatesByArea(this.province, this.area);
-        this.longitudeValue = coordinates[0];
-        this.latitudeValue = coordinates[1];
-        this.portName = CoordinatesUtils.getPortName(PropertiesUtils.getLatitudeProperties(), PropertiesUtils.getLongitudeProperties(), this.latitudeValue, this.longitudeValue);
-        this.position = province.replaceAll("省", "") + " " + area.replaceAll("[市区县镇乡]", "");
-        this.longitudeStr = setStringPointDouble(this.longitudeValue, true);
-        this.latitudeStr = setStringPointDouble(this.latitudeValue, false);
+        this(province, area, CoordinatesUtils.decodeCoordinatesByArea(province, area));
+    }
+
+    public CoordinatesDTO(String province, String area, double[] coordinates) {
+        this(province, area, coordinates[0], coordinates[1]);
     }
 
     public CoordinatesDTO(double longitude, double latitude) {
@@ -40,10 +36,21 @@ public class CoordinatesDTO {
                     this.position = areas[0] + " " + areas[i].replaceAll(code, "");
                     this.province = areas[0];
                     this.area = areas[i].replaceAll(code, "");
-                    this.portName = CoordinatesUtils.getPortName(PropertiesUtils.getLatitudeProperties(), PropertiesUtils.getLongitudeProperties(), this.latitudeValue, this.longitudeValue);
+                    this.portName = CoordinatesUtils.getPortName(this.latitudeValue, this.longitudeValue);
                 }
             }
         }
+    }
+
+    public CoordinatesDTO(String province, String area, double longitude, double latitude) {
+        this.longitudeValue = longitude;
+        this.latitudeValue = latitude;
+        this.longitudeStr = setStringPointDouble(this.longitudeValue, true);
+        this.latitudeStr = setStringPointDouble(this.latitudeValue, false);
+        this.portName = CoordinatesUtils.getPortName(this.latitudeValue, this.longitudeValue);
+        this.position = province.replaceAll("省", "") + " " + area.replaceAll("[市区县镇乡]", "");
+        this.province = province;
+        this.area = area;
     }
 
     private static String encode(String spd) {
