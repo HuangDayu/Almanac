@@ -47,7 +47,7 @@ public class AlmanacDTO {
         allAlmanac.addAll(List.of(lunar, era, solarTerm, holiday, islamic, julian, sunriseMoonset, moonPhase));
     }
 
-    public Map<String, String> getAllInfo() {
+    public LinkedHashMap<String, String> getAllInfo() {
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
         allAlmanac.forEach(allAlmanac -> {
             map.put(allAlmanac.getBaseInfo().getCnName(), allAlmanac.getBaseInfo().getValue());
