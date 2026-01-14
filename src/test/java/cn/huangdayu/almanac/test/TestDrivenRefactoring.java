@@ -15,6 +15,7 @@ import cn.huangdayu.almanac.utils.AlmanacUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.GregorianCalendar;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -65,7 +66,12 @@ public class TestDrivenRefactoring {
 
     @Test
     public void testPrintln() {
-        new Println(timeZoneDTOS2, true).println();
+        TimeZoneDTO[] timeZoneDTOS3 = new TimeZoneDTO[6];
+        for (int i = 0; i < timeZoneDTOS2.length; i++) {
+            timeZoneDTOS3[i] = new TimeZoneDTO(timeZoneDTOS2[i]);
+        }
+        timeZoneDTOS3[5] = new TimeZoneDTO(new CoordinatesDTO("广东省", "广州市", 113.2666667d, 23.1333332d), new GregorianCalendar());
+        new Println(timeZoneDTOS3, true).println();
     }
 
     private static final String TEXT =
