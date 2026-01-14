@@ -78,6 +78,7 @@ gradlew
 gradlew.bat
 node_modules
 build
+.kotlin
 
 src/main/cangjie
 src/main/javascript

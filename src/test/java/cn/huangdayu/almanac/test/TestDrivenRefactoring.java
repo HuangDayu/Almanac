@@ -36,10 +36,6 @@ public class TestDrivenRefactoring {
     @Test
     public void tdd() {
         test(timeZoneDTOS);
-    }
-
-    @Test
-    public void tdd2() {
         test(timeZoneDTOS2);
     }
 
