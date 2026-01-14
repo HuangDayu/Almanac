@@ -90,7 +90,7 @@ public class AlmanacUtils {
             // 计算回历
             Islamic islamic = new Islamic(julianDayForToday);
             // 计算农历（农历纪年以【正月初一】定年首）
-            Lunar lunar = new Lunar(timeZoneForToday, julianDayForToday, qiShuo);
+            Lunar lunar = new Lunar(julianDayForToday, qiShuo, timeZoneForToday);
             // 计算节气
             SolarTerm solarTermDTO = new SolarTerm(julianDayForToday, qiShuo, astronomical);
             // 计算黄历 (天干地支，干支纪年以【立春】定年首)

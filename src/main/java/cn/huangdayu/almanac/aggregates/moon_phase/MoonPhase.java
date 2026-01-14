@@ -24,14 +24,14 @@ public class MoonPhase extends AbstractAlmanac {
 
     public MoonPhase(int julianDayForToday, Julian julianOfMonth, Astronomical astronomical) {
         List<MoonPhase> moonPhasesList = new ArrayList<>();
-        int julianDays = julianOfMonth.getFirstJulianDayOfMonth() + julianOfMonth.getNumberDayOfMonth();
+        int julianDaysForLastDayOfMonth = julianOfMonth.getFirstJulianDayOfMonth() + julianOfMonth.getNumberDayOfMonth();
         double moonLon = astronomical.getLunarRetina();
         for (int j = 0; j < julianOfMonth.getNumberDayOfMonth(); j++) {
             double moonLonValue = AnnalsUtils.so_accurate(moonLon);
             julianDay = (int) Math.floor(moonLonValue + 0.5);
             int xn = (int) Math.floor(moonLon / CommonUtils.PI_2 * 4 + 4000000.01) % 4;
             moonLon += CommonUtils.PI_2 / 4;
-            if (julianDay < julianOfMonth.getFirstJulianDayOfMonth() || julianDay >= julianDays) {
+            if (julianDay < julianOfMonth.getFirstJulianDayOfMonth() || julianDay >= julianDaysForLastDayOfMonth) {
                 continue;
             }
             julianDay = CommonUtils.JULIAN_FOR_2000 + julianDay;

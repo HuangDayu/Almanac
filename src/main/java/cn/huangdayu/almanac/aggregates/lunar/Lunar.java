@@ -16,7 +16,7 @@ import java.util.LinkedList;
  */
 public class Lunar extends AbstractAlmanac {
 
-    public Lunar(TimeZoneDTO timeZoneDTO, int julianDayForToday, QiShuo qiShuo) {
+    public Lunar(int julianDayForToday, QiShuo qiShuo, TimeZoneDTO timeZoneDTO) {
         //------------------------------------农历排月序计算------------------------------------//
 
         // 农历所在月的序数
@@ -150,16 +150,16 @@ public class Lunar extends AbstractAlmanac {
     @Override
     public LinkedList<InfoDTO> getAllInfo() {
         LinkedList<InfoDTO> list = new LinkedList<>();
-        list.add(new InfoDTO("农历年","year",year));
-        list.add(new InfoDTO("农历月","month",month));
-        list.add(new InfoDTO("农历日","day",day));
-        list.add(new InfoDTO("农历时","time",time));
-        list.add(new InfoDTO("是否闰月","leapMonth",leapMonth + ""));
-        list.add(new InfoDTO("是否闰年","leapYear",leapYear + ""));
-        list.add(new InfoDTO("农历生肖","zodiac",zodiac));
-        list.add(new InfoDTO("皇帝年号","yearName",yearName));
-        list.add(new InfoDTO("黄帝纪年","kingChronology",kingChronology + ""));
-        list.add(new InfoDTO("开元纪年","kingChronologyName",kingChronologyName));
+        list.add(new InfoDTO("农历年", "year", year));
+        list.add(new InfoDTO("农历月", "month", month));
+        list.add(new InfoDTO("农历日", "day", day));
+        list.add(new InfoDTO("农历时", "time", time));
+        list.add(new InfoDTO("是否闰月", "leapMonth", leapMonth + ""));
+        list.add(new InfoDTO("是否闰年", "leapYear", leapYear + ""));
+        list.add(new InfoDTO("农历生肖", "zodiac", zodiac));
+        list.add(new InfoDTO("皇帝年号", "yearName", yearName));
+        list.add(new InfoDTO("黄帝纪年", "kingChronology", kingChronology + ""));
+        list.add(new InfoDTO("开元纪年", "kingChronologyName", kingChronologyName));
         return list;
     }
 
@@ -242,7 +242,6 @@ public class Lunar extends AbstractAlmanac {
     public void setKingChronology(int kingChronology) {
         this.kingChronology = kingChronology;
     }
-
 
 
     public String getZodiac() {
