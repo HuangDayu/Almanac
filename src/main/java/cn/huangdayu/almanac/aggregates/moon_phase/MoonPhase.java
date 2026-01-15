@@ -86,7 +86,7 @@ public class MoonPhase extends AbstractAlmanac {
     }
 
     public String getDetails() {
-        return name != null ? name + " " + dateTime + (afterDay != 0 ? " " + afterDay + "天" + (afterDay > 0 ? "后" : " 前") : " 今天") : getNextOne().getDetails();
+        return name != null ? name + " " + dateTime + " " + (afterDay == 0 ? "今天" : afterDay > 0 ? afterDay + "天后" : -afterDay + "天前") : getNextOne().getDetails();
     }
 
     @Override
@@ -101,6 +101,10 @@ public class MoonPhase extends AbstractAlmanac {
         list.add(new InfoDTO("月相时间", "dateTime", dateTime));
         list.add(new InfoDTO("月相间隔", "afterDay", afterDay + ""));
         list.add(new InfoDTO("下个月相", "nextMoonPhase", getNextOne().getDetails()));
+        for (int i = 0; i < next.size(); i++) {
+            MoonPhase moonPhase = next.get(i);
+            list.add(new InfoDTO("月相" + moonPhase.getName(), "moonPhase" + i, moonPhase.getDetails()));
+        }
         return list;
     }
 

@@ -86,6 +86,9 @@ public class SolarTerm extends AbstractAlmanac {
      */
     private double julianTime;
 
+    /**
+     * 接下来的节气
+     */
     private List<SolarTerm> next;
 
     public SolarTerm getNextOne() {
@@ -108,7 +111,7 @@ public class SolarTerm extends AbstractAlmanac {
     }
 
     public String getDetails() {
-        return name != null ? name + " " + dateTime + (afterDay != 0 ? " " + afterDay + "天" + (afterDay > 0 ? "后" : " 前") : " 今天") : getNextOne().getDetails();
+        return name != null ? name + " " + dateTime + " " + (afterDay == 0 ? "今天" : afterDay > 0 ? afterDay + "天后" : -afterDay + "天前") : getNextOne().getDetails();
     }
 
     @Override
@@ -123,6 +126,10 @@ public class SolarTerm extends AbstractAlmanac {
         list.add(new InfoDTO("节气时间", "dateTime", dateTime));
         list.add(new InfoDTO("节气间隔", "afterDay", afterDay + ""));
         list.add(new InfoDTO("下个节气", "nextSolarTerm", getNextOne().getDetails()));
+        for (int i = 0; i < next.size(); i++) {
+            SolarTerm solarTerm = next.get(i);
+            list.add(new InfoDTO("节气" + solarTerm.getName(), "solarTerm" + i, solarTerm.getDetails()));
+        }
         return list;
     }
 
