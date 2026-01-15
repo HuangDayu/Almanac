@@ -1,5 +1,6 @@
 package cn.huangdayu.almanac.test;
 
+import cn.huangdayu.almanac.Almanac;
 import cn.huangdayu.almanac.aggregates.era.Era;
 import cn.huangdayu.almanac.aggregates.holiday.Holiday;
 import cn.huangdayu.almanac.aggregates.islamic.Islamic;
@@ -11,7 +12,6 @@ import cn.huangdayu.almanac.aggregates.sunrise_moonset.SunriseMoonset;
 import cn.huangdayu.almanac.dto.AlmanacDTO;
 import cn.huangdayu.almanac.dto.CoordinatesDTO;
 import cn.huangdayu.almanac.dto.TimeZoneDTO;
-import cn.huangdayu.almanac.utils.AlmanacUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -44,6 +44,11 @@ public class TestDrivenRefactoring {
     public void tdd() {
         test(timeZoneDTOS);
         test(timeZoneDTOS2);
+    }
+
+    @Test
+    public void printlnAllInfo() {
+        new Println(new TimeZoneDTO("广东省", "徐闻县", new GregorianCalendar())).println();
     }
 
     public void test(TimeZoneDTO[] timeZoneDTOS) {
@@ -110,19 +115,33 @@ public class TestDrivenRefactoring {
 
         private final Map<String, String> MAP = new LinkedHashMap<>();
 
-        private final TimeZoneDTO[] timeZoneDTOS;
-        private final boolean allInfos;
 
         public Println(TimeZoneDTO[] timeZoneDTOS, boolean allInfos) {
-            this.timeZoneDTOS = timeZoneDTOS;
-            this.allInfos = allInfos;
             for (TimeZoneDTO timeZoneDTO : timeZoneDTOS) {
-                AlmanacDTO almanacDTO = AlmanacUtils.ofDay(timeZoneDTO);
+                AlmanacDTO almanacDTO = new Almanac(timeZoneDTO).dayAlmanac();
                 Map<String, String> allInfo = allInfos ? almanacDTO.getAllInfo() : toMap(almanacDTO);
                 for (Map.Entry<String, String> entry : allInfo.entrySet()) {
                     handler(entry.getKey(), entry.getValue());
                 }
             }
+        }
+
+        public Println(TimeZoneDTO timeZoneDTO) {
+            // 构造历法对象
+            Almanac almanac = new Almanac(timeZoneDTO);
+            // 获取当天的历法信息
+            almanac.dayAlmanac().getAllInfo().forEach((k, v) -> handler(k, v));
+            // 获取当月的历法信息
+            for (AlmanacDTO almanacDTO : almanac.monthAlmanac()) {
+                almanacDTO.getAllInfo().forEach((k, v) -> handler(k, v));
+            }
+            // 获取当年的历法信息
+            for (AlmanacDTO[] almanacDTOS : almanac.yearAlmanac()) {
+                for (AlmanacDTO almanacDTO : almanacDTOS) {
+                    almanacDTO.getAllInfo().forEach((k, v) -> handler(k, v));
+                }
+            }
+
         }
 
         public void println() {
