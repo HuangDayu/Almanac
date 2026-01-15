@@ -13,7 +13,7 @@
 
 本项目学习[寿星天文历](http://www.nongli.net/sxwnl/)和[日梭万年历](https://www.nongli114.com/rili/)，包括但不限皇历、生辰八字、日出月落、农历、黄历、干支、节气、月相、经纬度、节假日、伊斯兰历、儒略历、天文历、回历、西历等日历数据和天文数据的计算，支持年、月、日的计算范围。
 
-本项目部分源码源于开源，所以也完全开源，无授权许可，禁止商用。
+本项目部分源码源于开源（包括核心算法），我在此基础之上做了修修补补，所以也完全开源，但本项目仅供用于学习，无授权许可，禁止商用。
 
 
 
@@ -34,40 +34,10 @@
 ### 代码示例
 
 ```java
-
-/**
- * 日历
- *
- * @param timeZoneDTO
- * @return
- */
-AlmanacUtils.ofDay(new TimeZoneDTO("广东省","徐闻县",Calendar.getInstance()));
-
-/**
- * 月历
- *
- * @param timeZoneDTO
- * @return
- */
-AlmanacUtils.ofMonth(new TimeZoneDTO("广东省","徐闻县",Calendar.getInstance()));
-
-/**
- * 集成抽象类的用法
- */
-public class AlmanacApp extends Almanac {
-
+public class AlmanacRunner {
     public static void main(String[] args) {
-        Almanac almanac = new AlmanacApp();
-        AlmanacDTO almanacDTO = almanac.ofYear()[7][11];
-        TestUtils.pakMap(almanacDTO);
-        for (Map.Entry<String, String> entry : TestUtils.MAP.entrySet()) {
-            System.out.println(entry.getKey() + entry.getValue());
-        }
-    }
-
-    @Override
-    public TimeZoneDTO initTimeZone() {
-        return new TimeZoneDTO("广东省","徐闻县", "2021-01-29 11:13:29");
+        AlmanacService almanacService = new AlmanacService(new TimeZoneDTO("广东省", "徐闻县", new GregorianCalendar()));
+        almanacService.dayCalendar().getAllInfo().forEach((k, v) -> System.out.println(k + " : " + v));
     }
 }
 ```
@@ -137,13 +107,12 @@ public class AlmanacApp extends Almanac {
 
 ### 不足之处
 
-- 算法并不完全准确，个别数据进度不高
-- 时间无法进入公元前
-- 天文历信息不足，如缺失方位、赤纬、时角、黄经、黄纬、潮汐、太阳高度角、地球直射位置、地球远日点、地球近日点、日食月食等
+- 算法并不完全准确，个别数据精度不高，与寿星寿星天文历算法有差异，可能相差十几秒。
+- 天文历信息不足，如缺失方位、赤纬、时角、黄经、黄纬、潮汐、太阳高度角、地球直射位置、地球远日点、地球近日点、日食月食等。
 
 ## 相关文档 
 
-### 参考文献
+### 参考文献（核心算法来源）
 
 - [寿星天文历Java封装整理版](https://blog.csdn.net/wangpeng047/article/details/38559591)
 - [寿星万年历---java算法实现-csdn](https://blog.csdn.net/lxslove/article/details/6083396)
@@ -151,15 +120,17 @@ public class AlmanacApp extends Almanac {
 - [根据经纬度计算日出、日落、中天、天亮、天黑和昼长时间](http://www.cnblogs.com/hanoi/archive/2012/07/04/2576325.html)  
 - [日历相关的算法](https://fancyerii.github.io/2019/03/27/calendar/)
 
-### 在线工具
-
-- [儒略日数和日干支计算器](https://ytliu0.github.io/ChineseCalendar/Julian_simp.html)
-
 ### 相关开源
 
-- [time4j](http://time4j.net/)
-- [icu4j](https://mvnrepository.com/artifact/com.ibm.icu/icu4j)
-- [lunar-java](https://github.com/6tail/lunar-java)
+- [寿星天文历 sxwnl](https://github.com/sxwnl/sxwnl) （寿星天文历(万年历)5.10 原版源码）
+- [lunar-java](https://github.com/6tail/lunar-java) （非常推荐，作者支持了多种语言）
+- [ChineseCalendar](https://github.com/ytliu0/ChineseCalendar) （公历与农历之间的转换工具 ）
+
+
+### 在线工具
+
+- [寿星天文历](https://sx.qaiu.top/)
+- [日历计算器](https://ytliu0.github.io/ChineseCalendar/Julian_simp.html)
 
 ### 日历文献
 
